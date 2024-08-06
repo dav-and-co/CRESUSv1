@@ -1,0 +1,39 @@
+{% block metatitle %}
+    Cresus Accueil
+{% endblock %}
+
+{% block maint %}
+
+<section class="accueil">
+    <div class="immArriere">
+        <img src="public/img/mainsdecalees.jpg" alt="solidarité">
+    </div>
+    <article>
+        <div class="textArriere">
+            <p>Vous avez besoin de conseils pour votre budget,
+                vous rencontrez des difficultés financières, vous n'êtes plus en mesure de régler l'ensemble de vos charges et de vos dettes, vous avez besoin d'un microcrédit, ...</p>
+            <p>Des bénévoles accompagnants de CRESUS  vous accueillent, vous écoutent, vous informent et peuvent vous accompagner.
+                Ils recherchent avec vous les solutions les plus adaptées à vos difficultés financières, sociales et juridiques</p>
+            <div id="bouton">
+                <a href="{{ path("noustrouver") }}"> Nous contacter</a>
+            </div>
+        </div>
+
+    </article>
+</section>
+<section class="solutions">
+    <h1 >Nos solutions concrètes pour vous aider</h1>
+    <div class="lessolutions">
+        {% for typedemande in typedemandes %}
+        <div class='activite'>
+            <div>
+                <img src="{{ asset(typedemande.imgPetit) }}" alt="{{ typedemande.libelleExterne }}">
+            </div>
+            <a href="{{ asset(typedemande.chemin) }}"> <{{ typedemande.libelleExterne }}> </a>
+        </div>
+        <?php } ?>
+    </div>
+    </section>
+
+
+{% endblock %}
