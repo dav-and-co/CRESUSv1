@@ -6,48 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRESUS Gironde</title>
-    <link rel="shortcut icon" href="../public/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" src="{{ asset('img/favicon.ico') }}" type="image/x-icon">
     <meta name="description" content="Mission reconnue d'utilité publique. Accompagnement budgétaire des personnes en difficultés financières - Lutte contre le surendettement - Micro-crédit."/>
     <meta name="author" content="Daviatte Claude"/>
-    <link rel="stylesheet" href="../public/intStyle.css">
+    <link rel="stylesheet" href="{{ asset('style/interneStyle.css') }}">
     <!-- bibliothèque fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-{#
-vérifie si des messages flashes ont été enregistrés par un controleur. Si oui, on les affiche
-#}
-{% for message in app.flashes('success') %}
-    <div class="success-message">
-        {{ message }}
-    </div>
-{% endfor %}
-
-
-{% for message in app.flashes('error') %}
-    <div class="error-message">
-        {{ message }}
-    </div>
-{% endfor %}
-
-{% block body %}{% endblock %}
-
 <header>
     <!-- création de la nav commune au site gd public -->
     <nav>
         <ul>
-            <li><a href="#top"> <img src="../assets/img/CRESUS-logo.png" alt="logo de l association crésus"></a></li>
-            <li><a href="#nous">Qui sommes nous</a></li>
-            <li><a href="#nousTrouver">Nous contacter</a></li>
-            <li><a href=" http://localhost/projet_cd/views/action.php">Nos actions</a></li>
-            <li><a href="#Vous aider">Vous aider</a></li>
-            <li><a href="#connexion">deconnexion</a></li>
+            <li><a href="#top"> <img src="{{ asset('img/CRESUS-logo.png') }}" alt="logo de l association crésus"></a></li>
+            <li><a >1</a></li>
+            <li><a href="{{ path("listbenevoles") }}">gestion benevole</a></li>
+            <li><a href="{{ path("app_logout") }}">Déconnexion</a></li>
         </ul>
     </nav>
 </header>
 
 <main>
+    {#
+    vérifie si des messages flashes ont été enregistrés par un controleur. Si oui, on les affiche
+    #}
+    {% for message in app.flashes('success') %}
+        <div class="success-message">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+
+    {% for message in app.flashes('error') %}
+        <div class="error-message">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% block body %}{% endblock %}
 
 
 {% block main %}
@@ -57,7 +54,7 @@ vérifie si des messages flashes ont été enregistrés par un controleur. Si ou
 
 <footer>
     <div class="left">
-        <a class="t20" href="#top"> <img src="../assets/img/CRESUS-logo.png" alt="logo de l association crésus"></a>
+        <a class="t20" href="#top"> <img src="{{ asset('img/CRESUS-logo.png') }}" alt="logo de l association crésus"></a>
         <article>
             <h4><span id="gras">CRESUS </span> Gironde</h4>
             <p>Siège social :</p>
@@ -66,7 +63,7 @@ vérifie si des messages flashes ont été enregistrés par un controleur. Si ou
             <p>Mail : cresusgironde@laposte.fr</p>
         </article>
         <div class="t10">
-            <img src="../assets/img/pcb.png" alt="Point Conseil Budget">
+            <img src="{{ asset('img/pcb.png') }}" alt="Point Conseil Budget">
         </div>
     </div>
     <div class="t20">

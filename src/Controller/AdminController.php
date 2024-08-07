@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Controller\admin;
+namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ArticleType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminUserController extends AbstractController
+class AdminController extends AbstractController
 {
-
-    #[Route('/admin/users/insert', 'admin_insert_user')]
+    // création d'un nouveau benevole
+//-----------------------------------------------------------------------------------------------------------
+    #[Route('/admin/user/insert', 'admin_insert_user')]
     public function insertAdmin(UserPasswordHasherInterface $passwordHasher, Request $request, EntityManagerInterface $entityManager)
     {
 
@@ -59,4 +62,62 @@ class AdminUserController extends AbstractController
         }
 
         return $this->render('admin/page/user/insert_user.html.twig');
-    }<?php
+    }
+
+//-----------------------------------------------------------------------------------------------------------
+    // liste des benevoles
+    #[Route('/admin/benevoles', name: 'listbenevoles')]
+    public function GdPublicArticles(UserRepository $UserRepository, Request $request)
+    {
+        $tri = $request->query->get('tri');
+        $ordre = $request->query->get('ordre');
+
+        if (!$tri) {
+            $tri = 'username';
+            $ordre = 'DESC';
+        }
+
+        // récupère tous les articles en BDD triés par ASC ou DESC
+        $benevoles = $UserRepository->findBy([], [$tri => $ordre]);
+
+        return $this->render('interne/page/listBenevoles.html.twig', [
+            'benevoles' => $benevoles
+        ]);
+    }
+
+    //-----------------------------------------------------------------------------------------------------------
+    // modification d'un bénévole
+    #[Route('/admin/benevole/update/{id}', 'updatebenevole')]
+    public function updateBenevole(int $id, Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository)
+    {
+        $benevole = $userRepository->find($id);
+
+        $benevoleCreateForm = $this->createForm(ArticleType::class, $benevole);
+
+        $benevoleCreateForm->handleRequest($request);
+
+        if ($benevoleCreateForm->isSubmitted() && $benevoleCreateForm->isValid()) {
+            $entityManager->persist($benevole);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'article enregistré');
+        }
+
+        $benevoleCreateFormView = $benevoleCreateForm->createView();
+
+        return $this->render('admin/page/update_article.html.twig', [
+            'benevoleForm' => $benevoleCreateFormView
+        ]);
+
+
+
+
+
+
+
+
+
+
+}
+
+

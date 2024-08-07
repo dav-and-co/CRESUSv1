@@ -152,14 +152,14 @@ class TypeDemande
         return $this;
     }
 
-    public function getImgPtetit(): ?string
+    public function getImgPetit(): ?string
     {
-        return $this->imgPtetit;
+        return $this->imgPetit;
     }
 
-    public function setImgPtetit(?string $imgPtetit): static
+    public function setImgPetit(?string $imgPetit): static
     {
-        $this->imgPtetit = $imgPtetit;
+        $this->imgPetit = $imgPetit;
 
         return $this;
     }

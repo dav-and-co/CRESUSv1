@@ -8,7 +8,7 @@ header {
     width: 100%;
     height: 40vh;
     background-color: #5e6e99;
-    background-image: url('img/fondcresus1.jpg');
+    background-image: url('../../public/img/fondcresus1.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-blend-mode :luminosity ;
@@ -119,9 +119,6 @@ main {
         border-radius: 500px;
         }
     }
-}
-.lorem{
-    color:red;
 }
 
 .solutions{

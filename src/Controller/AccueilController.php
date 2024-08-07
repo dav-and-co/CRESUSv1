@@ -5,7 +5,7 @@
 declare(strict_types=1);
 
 // on crée un namespace qui permet d'identifier le chemin afin d'utiliser la classe actuelle
-namespace App\Controller\gdPublic;
+namespace App\Controller;
 
 // on appelle le chemin (namespace) des classes utilisées et symfony fera le require de ces classes
 
@@ -23,14 +23,14 @@ class AccueilController extends AbstractController
     // l'url est appelée et éxécute automatiquement la méthode définie sous la route
 
     // function qui récupère et affiche les types d'accompagnement de l'association
-    #[Route('/accueil', name: 'Accueil')]
+    #[Route('/', name: 'Accueil')]
     public function gpAccueil(TypeDemandeRepository $TypeDemandeRepository): response
     {
         // récupère tous les articles en BDD
         $typedemande = $TypeDemandeRepository->findAll();
 
         return $this->render('gdpublic/page/Accueil.html.twig', [
-            'typedemande' => $typedemande
+            'typedemandes' => $typedemande
         ]);
     }
 //-----------------------------------------------------------------------------------------------------------
@@ -43,8 +43,6 @@ class AccueilController extends AbstractController
     public function noustrouver(): response
     {
 
-        return $this->render('gdpublic/page/Noustrouver.html.twig', [
-            'typedemande' => $typedemande
-        ]);
+        return $this->render('gdpublic/page/Noustrouver.html.twig');
     }
 }

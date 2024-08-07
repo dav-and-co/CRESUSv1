@@ -5,7 +5,7 @@
 declare(strict_types=1);
 
 // on crée un namespace qui permet d'identifier le chemin afin d'utiliser la classe actuelle
-namespace App\Controller\interne;
+namespace App\Controller;
 
 // on appelle le chemin (namespace) des classes utilisées et symfony fera le require de ces classes
 
@@ -23,12 +23,10 @@ class BenevoleController extends AbstractController
 
     // function qui récupère et affiche les types d'accompagnement de l'association
     #[Route('/benevole/Accueil', name: 'benevoleAccueil')]
-    public function gpAccueil(TypeDemandeRepository $TypeDemandeRepository): response
+    public function benevoleaccueil(): response
     {
 
-        return $this->render('gdpublic/page/Accueil.html.twig', [
-            'typedemande' => $typedemande
-        ]);
+        return $this->render('interne/page/benevole.html.twig');
     }
 
 }
