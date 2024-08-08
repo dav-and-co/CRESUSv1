@@ -96,6 +96,12 @@ class Demande
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'demande')]
     private Collection $users;
 
+    /**
+     * @var Collection<int, RendezVous>
+     */
+    #[ORM\OneToMany(targetEntity: RendezVous::class, mappedBy: 'demande')]
+    private Collection $RendezVous;
+
     public function __construct()
     {
         $this->revenus = new ArrayCollection();
@@ -104,6 +110,7 @@ class Demande
         $this->beneficiaires = new ArrayCollection();
         $this->historiqueAvcts = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->RendezVous = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -448,6 +455,36 @@ class Demande
     {
         if ($this->users->removeElement($user)) {
             $user->removeDemande($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RendezVous>
+     */
+    public function getRendezVous(): Collection
+    {
+        return $this->RendezVous;
+    }
+
+    public function addRendezVou(RendezVous $rendezVou): static
+    {
+        if (!$this->RendezVous->contains($rendezVou)) {
+            $this->RendezVous->add($rendezVou);
+            $rendezVou->setDemande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRendezVou(RendezVous $rendezVou): static
+    {
+        if ($this->RendezVous->removeElement($rendezVou)) {
+            // set the owning side to null (unless already changed)
+            if ($rendezVou->getDemande() === $this) {
+                $rendezVou->setDemande(null);
+            }
         }
 
         return $this;

@@ -63,10 +63,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Demande::class, inversedBy: 'users')]
     private Collection $demande;
 
+    /**
+     * @var Collection<int, Permanence>
+     */
+    #[ORM\ManyToMany(targetEntity: Permanence::class, inversedBy: 'users')]
+    private Collection $permanences;
+
+    /**
+     * @var Collection<int, RendezVous>
+     */
+    #[ORM\OneToMany(targetEntity: RendezVous::class, mappedBy: 'user')]
+    private Collection $rendezVouses;
+
     public function __construct()
     {
         $this->connexions = new ArrayCollection();
         $this->demande = new ArrayCollection();
+        $this->permanences = new ArrayCollection();
+        $this->rendezVouses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -204,12 +218,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isActif(): ?bool
+
+    public function getIsActif(): ?bool
     {
         return $this->isActif;
     }
 
-    public function setActif(bool $isActif): static
+    public function setIsActif(bool $isActif): static
     {
         $this->isActif = $isActif;
 
@@ -266,6 +281,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeDemande(Demande $demande): static
     {
         $this->demande->removeElement($demande);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Permanence>
+     */
+    public function getPermanences(): Collection
+    {
+        return $this->permanences;
+    }
+
+    public function addPermanence(Permanence $permanence): static
+    {
+        if (!$this->permanences->contains($permanence)) {
+            $this->permanences->add($permanence);
+        }
+
+        return $this;
+    }
+
+    public function removePermanence(Permanence $permanence): static
+    {
+        $this->permanences->removeElement($permanence);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RendezVous>
+     */
+    public function getRendezVouses(): Collection
+    {
+        return $this->rendezVouses;
+    }
+
+    public function addRendezVouse(RendezVous $rendezVouse): static
+    {
+        if (!$this->rendezVouses->contains($rendezVouse)) {
+            $this->rendezVouses->add($rendezVouse);
+            $rendezVouse->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRendezVouse(RendezVous $rendezVouse): static
+    {
+        if ($this->rendezVouses->removeElement($rendezVouse)) {
+            // set the owning side to null (unless already changed)
+            if ($rendezVouse->getUser() === $this) {
+                $rendezVouse->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -45,9 +45,16 @@ class Site
     #[ORM\OneToMany(targetEntity: Permanence::class, mappedBy: 'site')]
     private Collection $permanences;
 
+    /**
+     * @var Collection<int, RendezVous>
+     */
+    #[ORM\OneToMany(targetEntity: RendezVous::class, mappedBy: 'Site')]
+    private Collection $rendezVous;
+
     public function __construct()
     {
         $this->permanences = new ArrayCollection();
+        $this->rendezVous = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -175,6 +182,36 @@ class Site
             // set the owning side to null (unless already changed)
             if ($permanence->getSite() === $this) {
                 $permanence->setSite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RendezVous>
+     */
+    public function getRendezVous(): Collection
+    {
+        return $this->rendezVous;
+    }
+
+    public function addRendezVou(RendezVous $rendezVou): static
+    {
+        if (!$this->rendezVous->contains($rendezVou)) {
+            $this->rendezVous->add($rendezVou);
+            $rendezVou->setSite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRendezVou(RendezVous $rendezVou): static
+    {
+        if ($this->rendezVous->removeElement($rendezVou)) {
+            // set the owning side to null (unless already changed)
+            if ($rendezVou->getSite() === $this) {
+                $rendezVou->setSite(null);
             }
         }
 

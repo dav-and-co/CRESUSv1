@@ -47,7 +47,7 @@ class AdminController extends AbstractController
                 $user->setTelPerso($telPerso);
                 $user->setTelAssoc($telAssoc);
                 $user->setMailPerso($mailPerso);
-                $user->setActif($isActif);
+                $user->setIsActif($isActif);
 
 
                 $entityManager->persist($user);
@@ -88,19 +88,34 @@ class AdminController extends AbstractController
     //-----------------------------------------------------------------------------------------------------------
     // modification d'un bénévole
     #[Route('/admin/benevole/update/{id}', 'updatebenevole')]
-    public function updateBenevole(int $id, Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository)
+    public function updateBenevole(int $id, Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository,UserPasswordHasherInterface $passwordHasher)
     {
         $benevole = $userRepository->find($id);
+        $oldMdp = $benevole->getPassword();
 
         $benevoleCreateForm = $this->createForm(UserType::class, $benevole);
 
         $benevoleCreateForm->handleRequest($request);
 
         if ($benevoleCreateForm->isSubmitted() && $benevoleCreateForm->isValid()) {
-            $entityManager->persist($benevole);
-            $entityManager->flush();
 
-            $this->addFlash('success', 'article enregistré');
+            $password = $benevoleCreateForm->get('password')->getData();
+
+                if ($password) {
+                    $hashedPassword = $passwordHasher->hashPassword(
+                        $benevole,
+                        $password,
+                    );
+
+                    $benevole->setPassword($hashedPassword);
+                } else {
+                    $benevole->setPassword( $oldMdp);
+                }
+
+                $entityManager->persist($benevole);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'modification du bénévole enregistrée');
         }
 
         $benevoleCreateFormView = $benevoleCreateForm->createView();
