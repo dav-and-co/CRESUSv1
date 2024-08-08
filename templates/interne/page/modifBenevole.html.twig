@@ -1,77 +1,15 @@
 {% extends 'interne/partial/intBase.html.twig' %}
 
 {% block metatitle %}
-    admin : les benevoles
+    admin : modification benevole
 {% endblock %}
 
 {% block main %}
 
 
-    <h1 class="h1"> Liste des BENEVOLES </h1>
-    <section class="admin-article-table">
-        <table class="admin-list-articles">
-            <tr>
-                <td> nom utilisateur <a href ="{{ path( 'listbenevoles')}}?tri=username&ordre=ASC">
-                        <i class="fa-solid fa-chevron-up"></i></a>
-                    <a href ="{{ path( 'listbenevoles')}}?tri=username&ordre=DESC">
-                        <i class="fa-solid fa-chevron-down"></i></a>
-                </td>
-                <td> nom  <a href ="{{ path( 'listbenevoles')}}?tri=nomUser&ordre=ASC">
-                        <i class="fa-solid fa-chevron-up"></i></a>
-                    <a href ="{{ path( 'listbenevoles')}}?tri=nomUser&ordre=DESC">
-                        <i class="fa-solid fa-chevron-down"></i></a>
-                </td>
-                <td> prénom <a href ="{{ path( 'listbenevoles')}}?tri=prenomUser&ordre=ASC">
-                        <i class="fa-solid fa-chevron-up"></i></a>
-                    <a href ="{{ path( 'listbenevoles')}}?tri=prenomUser&ordre=DESC">
-                        <i class="fa-solid fa-chevron-down"></i></a>
-                </td>
-                <td> Droits  </td>
-                <td> tél perso  <a href ="{{ path( 'listbenevoles')}}?tri=telPerso&ordre=ASC">
-                        <i class="fa-solid fa-chevron-up"></i></a>
-                    <a href ="{{ path( 'listbenevoles')}}?tri=telPerso&ordre=DESC">
-                        <i class="fa-solid fa-chevron-down"></i></a>
-                </td>
-                <td> mail Perso  <a href ="{{ path( 'listbenevoles')}}?tri=mailPerso&ordre=ASC">
-                        <i class="fa-solid fa-chevron-up"></i></a>
-                    <a href ="{{ path( 'listbenevoles')}}?tri=mailPerso&ordre=DESC">
-                        <i class="fa-solid fa-chevron-down"></i></a>
-                </td>
-                <td> tél Assoc  <a href ="{{ path( 'listbenevoles')}}?tri=telAssoc&ordre=ASC">
-                        <i class="fa-solid fa-chevron-up"></i></a>
-                    <a href ="{{ path( 'listbenevoles')}}?tri=telAssoc&ordre=DESC">
-                        <i class="fa-solid fa-chevron-down"></i></a>
-                </td>
-                <td>Actif</td>
-                <td>actions</td>
-            </tr>
+        <h1> Mettre à jour un benevole </h1>
 
-            {% for benevole in benevoles %}
-                <tr>
-                        <td>{{ benevole.username }}</td>
-                    <td>{{ benevole.nomUser }}</td>
-                    <td>{{ benevole.prenomUser }}</td>
-                    <td>
-                        {% for role in benevole.roles %}
-                        {{ role }}
-                        {% endfor %}
-                    </td>
-                    <td>{{ benevole.telPerso }}</td>
-                    <td>{{ benevole.mailPerso }}</td>
-                    <td>{{ benevole.telAssoc }}</td>
-                    <td>
-                        {% if benevole.isActif %}
-                            <p>Oui</p>
-                        {% else %}
-                            <p>Non</p>
-                        {% endif %}
-                    </td>
-                    <td> <a href ="{{ path('updatebenevole',{id: article.id})}}">modifier</a> test</td>
-                </tr>
-            {% endfor %}
-        </table>
-    </section>
-
+        {{ form(benevoleForm) }}
 
 
 {% endblock %}

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -48,6 +50,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?bool $isActif = null;
+
+    /**
+     * @var Collection<int, Connexion>
+     */
+    #[ORM\OneToMany(targetEntity: Connexion::class, mappedBy: 'user')]
+    private Collection $connexions;
+
+    /**
+     * @var Collection<int, Demande>
+     */
+    #[ORM\ManyToMany(targetEntity: Demande::class, inversedBy: 'users')]
+    private Collection $demande;
+
+    public function __construct()
+    {
+        $this->connexions = new ArrayCollection();
+        $this->demande = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -192,6 +212,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActif(bool $isActif): static
     {
         $this->isActif = $isActif;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Connexion>
+     */
+    public function getConnexions(): Collection
+    {
+        return $this->connexions;
+    }
+
+    public function addConnexion(Connexion $connexion): static
+    {
+        if (!$this->connexions->contains($connexion)) {
+            $this->connexions->add($connexion);
+            $connexion->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConnexion(Connexion $connexion): static
+    {
+        if ($this->connexions->removeElement($connexion)) {
+            // set the owning side to null (unless already changed)
+            if ($connexion->getUser() === $this) {
+                $connexion->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Demande>
+     */
+    public function getDemande(): Collection
+    {
+        return $this->demande;
+    }
+
+    public function addDemande(Demande $demande): static
+    {
+        if (!$this->demande->contains($demande)) {
+            $this->demande->add($demande);
+        }
+
+        return $this;
+    }
+
+    public function removeDemande(Demande $demande): static
+    {
+        $this->demande->removeElement($demande);
 
         return $this;
     }

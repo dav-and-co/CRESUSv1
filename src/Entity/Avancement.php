@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AvancementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AvancementRepository::class)]
@@ -19,6 +21,17 @@ class Avancement
     #[ORM\ManyToOne(inversedBy: 'avancements')]
     #[ORM\JoinColumn(nullable: false)]
     private ?TypeDemande $type_demande = null;
+
+    /**
+     * @var Collection<int, HistoriqueAvct>
+     */
+    #[ORM\OneToMany(targetEntity: HistoriqueAvct::class, mappedBy: 'avancement')]
+    private Collection $historiqueAvcts;
+
+    public function __construct()
+    {
+        $this->historiqueAvcts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -45,6 +58,36 @@ class Avancement
     public function setTypeDemande(?TypeDemande $type_demande): static
     {
         $this->type_demande = $type_demande;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HistoriqueAvct>
+     */
+    public function getHistoriqueAvcts(): Collection
+    {
+        return $this->historiqueAvcts;
+    }
+
+    public function addHistoriqueAvct(HistoriqueAvct $historiqueAvct): static
+    {
+        if (!$this->historiqueAvcts->contains($historiqueAvct)) {
+            $this->historiqueAvcts->add($historiqueAvct);
+            $historiqueAvct->setAvancement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoriqueAvct(HistoriqueAvct $historiqueAvct): static
+    {
+        if ($this->historiqueAvcts->removeElement($historiqueAvct)) {
+            // set the owning side to null (unless already changed)
+            if ($historiqueAvct->getAvancement() === $this) {
+                $historiqueAvct->setAvancement(null);
+            }
+        }
 
         return $this;
     }

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\ArticleType;
+use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -92,7 +92,7 @@ class AdminController extends AbstractController
     {
         $benevole = $userRepository->find($id);
 
-        $benevoleCreateForm = $this->createForm(ArticleType::class, $benevole);
+        $benevoleCreateForm = $this->createForm(UserType::class, $benevole);
 
         $benevoleCreateForm->handleRequest($request);
 
@@ -105,9 +105,10 @@ class AdminController extends AbstractController
 
         $benevoleCreateFormView = $benevoleCreateForm->createView();
 
-        return $this->render('admin/page/update_article.html.twig', [
+        return $this->render('interne/page/modifBenevole.html.twig', [
             'benevoleForm' => $benevoleCreateFormView
         ]);
+    }
 
 
 

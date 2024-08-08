@@ -78,11 +78,32 @@ class Demande
     #[ORM\OneToMany(targetEntity: Dette::class, mappedBy: 'demande')]
     private Collection $dettes;
 
+    /**
+     * @var Collection<int, Beneficiaire>
+     */
+    #[ORM\ManyToMany(targetEntity: Beneficiaire::class, mappedBy: 'demandes')]
+    private Collection $beneficiaires;
+
+    /**
+     * @var Collection<int, HistoriqueAvct>
+     */
+    #[ORM\OneToMany(targetEntity: HistoriqueAvct::class, mappedBy: 'demande')]
+    private Collection $historiqueAvcts;
+
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'demande')]
+    private Collection $users;
+
     public function __construct()
     {
         $this->revenus = new ArrayCollection();
         $this->charges = new ArrayCollection();
         $this->dettes = new ArrayCollection();
+        $this->beneficiaires = new ArrayCollection();
+        $this->historiqueAvcts = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -343,6 +364,90 @@ class Demande
             if ($dette->getDemande() === $this) {
                 $dette->setDemande(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Beneficiaire>
+     */
+    public function getBeneficiaires(): Collection
+    {
+        return $this->beneficiaires;
+    }
+
+    public function addBeneficiaire(Beneficiaire $beneficiaire): static
+    {
+        if (!$this->beneficiaires->contains($beneficiaire)) {
+            $this->beneficiaires->add($beneficiaire);
+            $beneficiaire->addDemande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBeneficiaire(Beneficiaire $beneficiaire): static
+    {
+        if ($this->beneficiaires->removeElement($beneficiaire)) {
+            $beneficiaire->removeDemande($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HistoriqueAvct>
+     */
+    public function getHistoriqueAvcts(): Collection
+    {
+        return $this->historiqueAvcts;
+    }
+
+    public function addHistoriqueAvct(HistoriqueAvct $historiqueAvct): static
+    {
+        if (!$this->historiqueAvcts->contains($historiqueAvct)) {
+            $this->historiqueAvcts->add($historiqueAvct);
+            $historiqueAvct->setDemande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoriqueAvct(HistoriqueAvct $historiqueAvct): static
+    {
+        if ($this->historiqueAvcts->removeElement($historiqueAvct)) {
+            // set the owning side to null (unless already changed)
+            if ($historiqueAvct->getDemande() === $this) {
+                $historiqueAvct->setDemande(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addDemande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeDemande($this);
         }
 
         return $this;

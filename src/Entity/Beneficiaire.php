@@ -58,11 +58,18 @@ class Beneficiaire
     #[ORM\OneToMany(targetEntity: Dette::class, mappedBy: 'titulaire_principal')]
     private Collection $dettes;
 
+    /**
+     * @var Collection<int, Demande>
+     */
+    #[ORM\ManyToMany(targetEntity: Demande::class, inversedBy: 'beneficiaires')]
+    private Collection $demandes;
+
     public function __construct()
     {
         $this->revenus = new ArrayCollection();
         $this->charges = new ArrayCollection();
         $this->dettes = new ArrayCollection();
+        $this->demandes = new ArrayCollection();
        }
 
     public function getId(): ?int
@@ -252,6 +259,30 @@ class Beneficiaire
                 $dette->setTitulairePrincipal(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Demande>
+     */
+    public function getDemandes(): Collection
+    {
+        return $this->demandes;
+    }
+
+    public function addDemande(Demande $demande): static
+    {
+        if (!$this->demandes->contains($demande)) {
+            $this->demandes->add($demande);
+        }
+
+        return $this;
+    }
+
+    public function removeDemande(Demande $demande): static
+    {
+        $this->demandes->removeElement($demande);
 
         return $this;
     }
