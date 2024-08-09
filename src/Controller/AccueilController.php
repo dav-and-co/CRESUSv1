@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccueilController extends AbstractController
 {
 //-----------------------------------------------------------------------------------------------------------
-    // localhost/CresusV1/public/Accueil
+    // localhost/CresusV1/public/
 
     // l'url est appelée et éxécute automatiquement la méthode définie sous la route
 

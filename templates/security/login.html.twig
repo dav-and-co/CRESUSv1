@@ -7,6 +7,9 @@
         {% if error %}
             <div class="alert alert-danger">Erreur de nom ou de mot de passe</div>
         {% endif %}
+        {% if error1 %}
+            <div class="alert alert-danger">Merci de contacter un administrateur</div>
+        {% endif %}
 
         {% if app.user %}
             <div class="mb-3">

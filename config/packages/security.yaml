@@ -42,6 +42,7 @@ security:
          - { path: ^/benevole, roles: ROLE_BENEVOLE }
 
 
+
 when@test:
     security:
         password_hashers:
