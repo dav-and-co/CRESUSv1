@@ -19,13 +19,22 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
         $clientIp = $request->getClientIp();
-
         $error1 = null;
 
         // Vérifier si l'adresse IP est autorisée
         // cherche s'il y a un enregistrement dans la table ip qui correspond à l'id PC de la requete
         if (!$this->ipPcRepository->findOneBy(['identifiant_PC' => $clientIp])) {
+
+            $lastUsername = null;
+            $error = null;
             $error1 = 'Accès refusé. Merci de contacter un administrateur.';
+
+            return $this->render('security/login.html.twig', [
+                'last_username' => $lastUsername,
+                'error' => $error,
+                'error1' => $error1,
+            ]);
+
         }
 
         // get the login error if there is one
@@ -40,6 +49,9 @@ class SecurityController extends AbstractController
             'error' => $error,
             'error1' => $error1,
         ]);
+
+
+
     }
 
     #[Route(path: '/logout', name: 'app_logout')]

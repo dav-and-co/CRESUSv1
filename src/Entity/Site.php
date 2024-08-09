@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SiteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SiteRepository::class)]
@@ -33,7 +34,7 @@ class Site
     #[ORM\Column(length: 255)]
     private ?string $ville_site = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $carte_site = null;
 
     #[ORM\Column]
@@ -50,6 +51,9 @@ class Site
      */
     #[ORM\OneToMany(targetEntity: RendezVous::class, mappedBy: 'Site')]
     private Collection $rendezVous;
+
+    #[ORM\Column(length: 255)]
+    private ?string $telSite = null;
 
     public function __construct()
     {
@@ -214,6 +218,18 @@ class Site
                 $rendezVou->setSite(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTelSite(): ?string
+    {
+        return $this->telSite;
+    }
+
+    public function setTelSite(string $telSite): static
+    {
+        $this->telSite = $telSite;
 
         return $this;
     }

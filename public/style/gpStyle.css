@@ -189,3 +189,25 @@ footer{
         padding:5px;
     }
 }
+.msgerreur{
+    text-align: center;
+    color: crimson;
+    font-size: 20px;
+}
+.contact{
+    display: flex;
+    width: 90%;
+    margin: auto;
+}
+.divcontact{
+    width: 45%;
+}
+
+.h1gdpublic{
+    font-family: 'roboto',sans-serif;
+    font-weight : bold;
+    font-size: 1.6rem;
+    color: #E8B436;
+    text-align: center;
+    padding: 20px;
+}

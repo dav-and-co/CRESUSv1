@@ -26,7 +26,7 @@ class BenevoleController extends AbstractController
     public function benevoleaccueil(): response
     {
 
-        return $this->render('interne/page/benevole.html.twig');
+        return $this->render('interne/page/AccueilBenevole.html.twig');
     }
 
 }

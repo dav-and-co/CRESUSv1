@@ -231,3 +231,9 @@ tr{
 td{
     padding: 10px;
 }
+.msgerreur{
+    text-align: center;
+    color: crimson;
+    font-size: 20px;
+}
+

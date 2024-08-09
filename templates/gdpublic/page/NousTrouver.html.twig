@@ -6,36 +6,21 @@
 
 {% block main %}
 
-    <section class="accueil">
-        <div class="immArriere">
-            <img src="{{ asset('img/mainsdecalees.jpg') }}" alt="solidarité">
-        </div>
-        <article>
-            <div class="textArriere">
-                <p>Vous avez besoin de conseils pour votre budget,
-                    vous rencontrez des difficultés financières, vous n'êtes plus en mesure de régler l'ensemble de vos charges et de vos dettes, vous avez besoin d'un microcrédit, ...</p>
-                <p>Des bénévoles accompagnants de CRESUS  vous accueillent, vous écoutent, vous informent et peuvent vous accompagner.
-                    Ils recherchent avec vous les solutions les plus adaptées à vos difficultés financières, sociales et juridiques</p>
-                <div id="bouton">
-                    <a href="{{ path("noustrouver") }}"> Nous contacter</a>
-                </div>
-            </div>
 
-        </article>
-    </section>
-    <section class="solutions">
-        <h1 >Nos solutions concrètes pour vous aider</h1>
-        <div class="lessolutions">
-            {% for typedemande in typedemandes %}
-                <div class='activite'>
-                    <div>
-                        <img src="{{typedemande.imgPetit}}" alt="{{typedemande.libelleExterne}}"/>
-                    </div>
-                    <a href="{{typedemande.chemin}}"> {{typedemande.libelleExterne}} </a>
-                </div>
-            {% endfor %}
+        <h1 class="h1gdpublic"> Demande de contact ou de rendez-vous</h1>
+    <section class="contact">
+        <div class="divcontact">
+<h2>Nos permanences</h2>
+
+
+        </div>
+        <div class="divcontact">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2843.046164212191!2d-0.24896342288599713!3d44.55515937107371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd556d8c6d640eab%3A0xceda34917aae11c1!2sPl.%20l&#39;Horloge%2C%2033210%20Langon!5e0!3m2!1sfr!2sfr!4v1723193397381!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+
         </div>
     </section>
+
 
 
 {% endblock %}

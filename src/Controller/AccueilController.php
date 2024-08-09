@@ -9,8 +9,10 @@ namespace App\Controller;
 
 // on appelle le chemin (namespace) des classes utilisées et symfony fera le require de ces classes
 
+use App\Repository\SiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\TypeDemandeRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -40,9 +42,11 @@ class AccueilController extends AbstractController
 
     // function qui récupère et affiche les types d'accompagnement de l'association
     #[Route('/noustrouver', name: 'noustrouver')]
-    public function noustrouver(): response
+    public function noustrouver(siteRepository $siteRepository, Request $request): response
     {
+        // recupère les sites classés par ordre alpha
+        $site = $siteRepository->findBy([], ['nom_site' => 'ASC']);
 
-        return $this->render('gdpublic/page/Noustrouver.html.twig');
+        return $this->render('gdpublic/page/NousTrouver.html.twig');
     }
 }

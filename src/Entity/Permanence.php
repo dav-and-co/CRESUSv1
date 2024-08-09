@@ -19,11 +19,11 @@ class Permanence
     #[ORM\Column(length: 255)]
     private ?string $jour = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $horaire_debut = null;
+    #[ORM\Column(length: 255)]
+    private ?string $horaire_debut = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $horaire_fin = null;
+    #[ORM\Column(length: 255)]
+    private ?string $horaire_fin = null;
 
     #[ORM\ManyToOne(inversedBy: 'permanences')]
     #[ORM\JoinColumn(nullable: false)]
