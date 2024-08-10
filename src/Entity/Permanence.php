@@ -19,12 +19,6 @@ class Permanence
     #[ORM\Column(length: 255)]
     private ?string $jour = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $horaire_debut = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $horaire_fin = null;
-
     #[ORM\ManyToOne(inversedBy: 'permanences')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Site $site = null;
@@ -57,29 +51,6 @@ class Permanence
         return $this;
     }
 
-    public function getHoraireDebut(): ?\DateTimeInterface
-    {
-        return $this->horaire_debut;
-    }
-
-    public function setHoraireDebut(\DateTimeInterface $horaire_debut): static
-    {
-        $this->horaire_debut = $horaire_debut;
-
-        return $this;
-    }
-
-    public function getHoraireFin(): ?\DateTimeInterface
-    {
-        return $this->horaire_fin;
-    }
-
-    public function setHoraireFin(\DateTimeInterface $horaire_fin): static
-    {
-        $this->horaire_fin = $horaire_fin;
-
-        return $this;
-    }
 
     public function getSite(): ?Site
     {
