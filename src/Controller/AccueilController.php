@@ -10,11 +10,12 @@ namespace App\Controller;
 // on appelle le chemin (namespace) des classes utilisées et symfony fera le require de ces classes
 
 use App\Repository\SiteRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\TypeDemandeRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 // on étend la class AbstractController qui permet d'utiliser des fonctions utilitaires pour les controllers (twig etc)
 class AccueilController extends AbstractController
@@ -42,11 +43,23 @@ class AccueilController extends AbstractController
 
     // function qui récupère et affiche les types d'accompagnement de l'association
     #[Route('/noustrouver', name: 'noustrouver')]
-    public function noustrouver(siteRepository $siteRepository, Request $request): response
+    public function noustrouver(SiteRepository $siteRepository, Request $request): Response
     {
-        // recupère les sites classés par ordre alpha
-        $site = $siteRepository->findBy([], ['nom_site' => 'ASC']);
+        // Récupére tous les sites actifs par ordre alpha
+        $sites = $siteRepository->findBy(['is_actif' => true], ['nom_site' => 'ASC']);
 
-        return $this->render('gdpublic/page/NousTrouver.html.twig');
+        // Récupére l'identifiant du site sélectionné dans le formulaire twig
+        $selectedSiteId = $request->get('site');
+
+        // Trouve les détails du site sélectionné, s'il existe
+        $selectedSite = null;
+        if ($selectedSiteId) {
+            $selectedSite = $siteRepository->find($selectedSiteId);
+        }
+
+        return $this->render('gdpublic/page/NousTrouver.html.twig', [
+            'sites' => $sites,
+            'selectedSite' => $selectedSite,
+        ]);
     }
 }

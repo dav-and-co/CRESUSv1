@@ -196,14 +196,91 @@ footer{
 }
 .contact{
     display: flex;
-    width: 90%;
+    width: 95%;
     margin: auto;
-}
-.divcontact{
-    width: 45%;
-}
+    font-family: Arial, sans-serif;
+    background-color: #E2EEF2;
+    padding: 20px;
+    color: #333;
+    & .divcontact {
+        width: 50%;
+    }
+    & h2, h3 {
+        color: #444;
+    }
 
-.h1gdpublic{
+    & h1{
+        font-family: 'roboto',sans-serif;
+        font-weight : bold;
+        font-size: 1.6rem;
+        color: #E8B436;
+        text-align: center;
+        padding: 20px;
+    }
+
+    & select, button {
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #FFFFFF;
+    }
+
+    & button {
+        cursor: pointer;
+        background-color: #444;
+        color: #FFFFFF;
+        transition: background-color 0.3s ease;
+    }
+
+    & button:hover {
+        background-color: #333;
+    }
+
+    & form {
+        background-color: #FFFFFF;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    & ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    & li {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    & li:last-child {
+        border-bottom: none;
+    }
+
+    & strong {
+        color: #333;
+    }
+
+    & p, div {
+        margin-bottom: 10px;
+    }
+
+    & .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #FFFFFF;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    & .map-container {
+        margin-top: 20px;
+        align-items: center;
+    }
+}
+.h1contact{
     font-family: 'roboto',sans-serif;
     font-weight : bold;
     font-size: 1.6rem;
@@ -211,3 +288,4 @@ footer{
     text-align: center;
     padding: 20px;
 }
+

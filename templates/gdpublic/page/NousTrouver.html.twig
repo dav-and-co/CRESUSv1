@@ -6,21 +6,56 @@
 
 {% block main %}
 
+<h1 class="h1contact"> Demande de contact ou de rendez-vous </h1>
+<section class="contact">
+    <div class="container divcontact">
+        <h2>Sélectionnez un site</h2>
 
-        <h1 class="h1gdpublic"> Demande de contact ou de rendez-vous</h1>
-    <section class="contact">
-        <div class="divcontact">
-<h2>Nos permanences</h2>
+        <form method="get" action="{{ path('noustrouver') }}">
+            <label for="site">Choisissez un site :</label>
+            <select name="site" id="site">
+                <option value="">--Sélectionnez un site--</option>
+                {% for site in sites %}
+                    <option value="{{ site.id }}" {% if selectedSite is not null and site.id == selectedSite.id %}selected{% endif %}>
+                        {{ site.nomSite }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Voir les détails</button>
+        </form>
 
+        {% if selectedSite is not null %}
+             <h2>Détails du site sélectionné</h2>
+             <p><strong>Immeuble :</strong> {{ selectedSite.intituleSite }}</p>
+             <p><strong>Adresse :</strong> {{ selectedSite.adresse1Site }}</p>
+             <p><strong>Adresse :</strong> {{ selectedSite.adresse2Site }}</p>
+             <p><strong>Code Postal :</strong> {{ selectedSite.cpSite }}</p>
+             <p><strong>Ville :</strong> {{ selectedSite.villeSite }}</p>
+             <p><strong>Téléphone :</strong> {{ selectedSite.telSite }}</p>
+             <p><strong>Actif :</strong> {{ selectedSite.isActif ? 'Oui' : 'Non' }}</p>
 
-        </div>
-        <div class="divcontact">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2843.046164212191!2d-0.24896342288599713!3d44.55515937107371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd556d8c6d640eab%3A0xceda34917aae11c1!2sPl.%20l&#39;Horloge%2C%2033210%20Langon!5e0!3m2!1sfr!2sfr!4v1723193397381!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-
-        </div>
-    </section>
-
-
+            <h3>Permanences</h3>
+            <ul>
+                {% for permanence in selectedSite.permanences %}
+                    <li>
+                        <strong>Jour :</strong> {{ permanence.jour }}<br>
+                        {#<strong>Horaires :</strong> {{ permanence.horaireDebut }} - {{ permanence.horaireFin }}#}
+                    </li>
+                {% else %}
+                    <li>Aucune permanence disponible pour ce site.</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Aucun site sélectionné.</p>
+        {% endif %}
+    </div>
+    <div class="map-container divcontact">
+        {% if selectedSite  is not null %}
+            {{ selectedSite.carteSite|raw}}
+        {% else %}
+            <p>Aucun site sélectionné.</p>
+        {% endif %}
+    </div>
+</section>
 
 {% endblock %}
