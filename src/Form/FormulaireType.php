@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Formulaire;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -46,6 +47,11 @@ class FormulaireType extends AbstractType
                 'label' => 'Message',
                 'required' => false,
             ])
+            ->add('isGdpr', CheckboxType::class, [
+                'label' => 'J\'accepte les conditions GDPR',
+                'mapped' => true,
+            ])
+
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer la demande',
             ]);

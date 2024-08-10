@@ -15,14 +15,15 @@ class Formulaire
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotNull(['message' => 'ne doit pas être nul'])]
+    #[Assert\NotNull(['message' => 'le nom ne doit pas être nul'])]
     private ?string $nom_demandeur = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotNull(['message' => 'ne doit pas être nul'])]
+    #[Assert\NotNull(['message' => 'le prénom ne doit pas être nul'])]
     private ?string $prenom_demandeur = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Email(message: 'L\'adresse e-mail n\'est pas valide.')]
     private ?string $mail_demandeur = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -33,7 +34,7 @@ class Formulaire
     private ?string $permanence_demandeur = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotNull(['message' => 'ne doit pas être nul'])]
+    #[Assert\NotNull(['message' => 'Merci de préciser votre besoin'])]
     private ?string $besoin_demandeur = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -41,6 +42,10 @@ class Formulaire
 
     #[ORM\Column]
     private ?bool $is_traite = null;
+
+    #[ORM\Column]
+    #[Assert\IsTrue(['message' => 'Vous devez accepter les conditions GDPR.'])]
+    private ?bool $isGdpr = null;
 
     public function getId(): ?int
     {
@@ -131,14 +136,24 @@ class Formulaire
         return $this;
     }
 
-    public function isTraite(): ?bool
+     public function getIsTraite(): ?bool
     {
         return $this->is_traite;
     }
-
-    public function setTraite(bool $is_traite): static
+    public function setisTraite(bool $is_traite): static
     {
         $this->is_traite = $is_traite;
+
+        return $this;
+    }
+
+    public function getIsGdpr(): ?bool
+    {
+        return $this->isGdpr;
+    }
+    public function setIsGdpr(bool $isGdpr): static
+    {
+        $this->isGdpr = $isGdpr;
 
         return $this;
     }

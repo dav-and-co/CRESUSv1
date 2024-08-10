@@ -64,7 +64,7 @@ class AccueilController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // affecte la valeur non à `is_traite`
-            $formulaire->setTraite(false);
+            $formulaire->setisTraite(false);
             // affecte la valeur du site choisi
             if ($selectedSite) {
                 $formulaire->setPermanenceDemandeur($selectedSite->getNomSite());

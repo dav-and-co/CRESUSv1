@@ -21,7 +21,7 @@
                 </option>
                 {% endfor %}
             </select>
-            <button type="submit">Voir les détails</button>
+            <button type="submit">Continuer avec ce site</button>
         </form>
 
         <!-- Détails du site sélectionné -->
@@ -32,19 +32,16 @@
              <p><strong>Ville :</strong> {{ selectedSite.villeSite }}</p>
              <p><strong>Téléphone :</strong> {{ selectedSite.telSite }}</p>
 
-            <h3>Permanences</h3>
+            <h3>Jours de permanences</h3>
             <ul>
                 {% for permanence in selectedSite.permanences %}
                     <li>
-                        <strong>Jour :</strong> {{ permanence.jour }}<br>
-                        {#<strong>Horaires :</strong> {{ permanence.horaireDebut }} - {{ permanence.horaireFin }}#}
+                        {{ permanence.jour }}<br>
                     </li>
                 {% else %}
                     <li>Aucune permanence disponible pour ce site.</li>
                 {% endfor %}
             </ul>
-        {% else %}
-            <p>Aucun site sélectionné.</p>
         {% endif %}
     </div>
     <div class="map-container divcontact">
@@ -97,11 +94,33 @@
         </div>
     </div>
     <div class="form-group">
+        {{ form_row(form.isGdpr) }}
+        {{ form_errors(form.isGdpr) }}
+    </div>
+    <div class="form-group">
         {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-primary'} }) }}
     </div>
+    <p>Nous collectons les données en conformité avec le Règlement (UE) 2016/679, la directive (UE) 2016/80 du 27 avril 2016 et les dispositions de la loi n°2004-801 du 6 août 2004 relative à la protection des personnes et modifiant la loi n° 78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés. Vos données ne seront traitées que dans le cadre du traitement de votre demande uniquement par l'association CRESUS Gironde.</p>
+    </div>
+    <div class="form-group">
     {{ form_end(form) }}
     {% endif %}
-
 </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('demandeur-form');
+            const gdprCheckbox = document.getElementById('form_gdprAccepted');
+
+            form.addEventListener('submit', function(event) {
+                if (!gdprCheckbox.checked) {
+                    event.preventDefault(); // Empêche la soumission du formulaire
+                    alert('Vous devez accepter les conditions GDPR pour envoyer la demande.');
+                }
+            });
+        });
+    </script>
+
+
 
 {% endblock %}
