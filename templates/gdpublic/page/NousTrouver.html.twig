@@ -1,7 +1,7 @@
 {% extends 'gdPublic/partial/gpBase.html.twig' %}
 
 {% block metatitle %}
-    Cresus Accueil
+    Cresus RDV
 {% endblock %}
 
 {% block main %}
@@ -26,14 +26,14 @@
 
         <!-- Détails du site sélectionné -->
         {% if selectedSite is not null %}
-             <p><strong>Immeuble :</strong> {{ selectedSite.intituleSite }}</p>
-             <p><strong>Adresse :</strong> {{ selectedSite.adresse1Site }}</p>
-             <p><strong>Code Postal :</strong> {{ selectedSite.cpSite }}</p>
-             <p><strong>Ville :</strong> {{ selectedSite.villeSite }}</p>
-             <p><strong>Téléphone :</strong> {{ selectedSite.telSite }}</p>
-
-            <h3>Jours de permanences</h3>
-            <ul>
+            <p><strong>Immeuble :</strong> {{ selectedSite.intituleSite }}</p>
+            <p><strong>Adresse :</strong> {{ selectedSite.adresse1Site }}</p>
+            <p><strong>Code Postal :</strong> {{ selectedSite.cpSite }}</p>
+            <p><strong>Ville :</strong> {{ selectedSite.villeSite }}</p>
+            <br>
+            <p><strong>Téléphone :</strong> {{ selectedSite.telSite }}</p>
+            <h4>Jours de permanences</h4>
+            <ul >
                 {% for permanence in selectedSite.permanences %}
                     <li>
                         {{ permanence.jour }}<br>
@@ -52,60 +52,67 @@
         {% endif %}
     </div>
 </section>
-<section class="container">
-    {% if selectedSite %}
+
+{% if selectedSite %}
+    <section class="contact container">
     <!-- Formulaire de saisie (affiché uniquement si un site est sélectionné) -->
-    <h2>Formulaire de Saisie</h2>
-    {{ form_start(form) }}
-    <div class="form-container">
-        <div class="form-column">
-            <div class="form-group">
-                {{ form_label(form.nom_demandeur) }}
-                {{ form_widget(form.nom_demandeur) }}
-                {{ form_errors(form.nom_demandeur) }}
+        <div class="form-container">
+            <h2>Merci de compléter ce formulaire pour que nous puissions vous contacter</h2>
+
+            {{ form_start(form) }}
+            <div class="form-container">
+                <div class="form-column">
+                    <div class="form-group">
+                        {{ form_label(form.nom_demandeur) }}
+                        {{ form_widget(form.nom_demandeur) }}
+                        {{ form_errors(form.nom_demandeur) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.telephone_demandeur) }}
+                        {{ form_widget(form.telephone_demandeur) }}
+                        {{ form_errors(form.telephone_demandeur) }}
+
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.besoin_demandeur) }}
+                        {{ form_widget(form.besoin_demandeur) }}
+                        {{ form_errors(form.besoin_demandeur) }}
+                    </div>
+                </div>
+                <div class="form-column">
+                    <div class="form-group">
+                        {{ form_label(form.prenom_demandeur) }}
+                        {{ form_widget(form.prenom_demandeur) }}
+                        {{ form_errors(form.prenom_demandeur) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.mail_demandeur) }}
+                        {{ form_widget(form.mail_demandeur) }}
+                        {{ form_errors(form.mail_demandeur) }}
+
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.description_besoin) }}
+                        {{ form_widget(form.description_besoin) }}
+                        {{ form_errors(form.description_besoin) }}
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                {{ form_label(form.prenom_demandeur) }}
-                {{ form_widget(form.prenom_demandeur) }}
-                {{ form_errors(form.prenom_demandeur) }}
+                {{ form_row(form.isGdpr) }}
+                {{ form_errors(form.isGdpr) }}
             </div>
             <div class="form-group">
-                {{ form_label(form.mail_demandeur) }}
-                {{ form_widget(form.mail_demandeur) }}
-                {{ form_errors(form.mail_demandeur) }}
+                {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-primary'} }) }}
             </div>
+            <div>
+                <p class="petitp">Politique de Confidentialité : Nous collectons les données en conformité avec le Règlement (UE) 2016/679, la directive (UE) 2016/80 du 27 avril 2016 et les dispositions de la loi n°2004-801 du 6 août 2004 relative à la protection des personnes et modifiant la loi n° 78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés. Vos données ne seront traitées que dans le cadre du traitement de votre demande par l'association CRESUS Gironde ou ses partenaires. Conformément à la Loi « Informatique et Libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier en contactant : cresusgironde@laposte.fr</p>
+            </div>
+            {{ form_end(form) }}
         </div>
-        <div class="form-column">
-            <div class="form-group">
-                {{ form_label(form.telephone_demandeur) }}
-                {{ form_widget(form.telephone_demandeur) }}
-                {{ form_errors(form.telephone_demandeur) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.besoin_demandeur) }}
-                {{ form_widget(form.besoin_demandeur) }}
-                {{ form_errors(form.besoin_demandeur) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.description_besoin) }}
-                {{ form_widget(form.description_besoin) }}
-                {{ form_errors(form.description_besoin) }}
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        {{ form_row(form.isGdpr) }}
-        {{ form_errors(form.isGdpr) }}
-    </div>
-    <div class="form-group">
-        {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-primary'} }) }}
-    </div>
-    <p>Nous collectons les données en conformité avec le Règlement (UE) 2016/679, la directive (UE) 2016/80 du 27 avril 2016 et les dispositions de la loi n°2004-801 du 6 août 2004 relative à la protection des personnes et modifiant la loi n° 78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés. Vos données ne seront traitées que dans le cadre du traitement de votre demande uniquement par l'association CRESUS Gironde.</p>
-    </div>
-    <div class="form-group">
-    {{ form_end(form) }}
-    {% endif %}
-</section>
+    </section>
+{% endif %}
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

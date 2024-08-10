@@ -48,7 +48,7 @@ class FormulaireType extends AbstractType
                 'required' => false,
             ])
             ->add('isGdpr', CheckboxType::class, [
-                'label' => 'J\'accepte les conditions GDPR',
+                'label' => 'Cochez pour accepter nos conditions (Politique de Confidentialité)',
                 'mapped' => true,
             ])
 

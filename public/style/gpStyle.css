@@ -15,56 +15,51 @@ header {
     background-position: top center;
     background-attachment: fixed;
     padding: 20px 0;
+
+    & nav {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: linear-gradient(to bottom, #E2EEF2, transparent);
+        z-index: 30;
+    }
+
+    & ul {
+        display: flex;
+        justify-content: space-around;
+        padding: 20px 50px;
+        list-style: none;
+        align-items: center;
+    }
+
+    & li {
+        margin: 0 50px;
+        max-width: 200px;
+    }
+    & li:first-of-type {
+        max-width: 100px;
+    }
+
+    & a {
+        font-family: 'roboto',sans-serif;
+        font-weight : bold;
+        font-size: 1.3rem;
+        color: black;
+        text-decoration: none;
+        transition: all .8s ease;
+        padding: 5px 8px;
+        border-radius: 5px;
+    }
+    & a:hover {
+        color: #E8B436;
+        background-color: #5E6E99;
+    }
 }
 
-nav {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: linear-gradient(to bottom, #E2EEF2, transparent);
-    z-index: 30;
-}
-
-ul {
-    display: flex;
-    justify-content: space-around;
-    padding: 20px 50px;
-    list-style: none;
-    align-items: center;
-}
-
-li {
-    margin: 0 50px;
-    max-width: 200px;
-}
-li:first-of-type {
-    max-width: 100px;
-}
-
-a {
-    font-family: 'roboto',sans-serif;
-    font-weight : bold;
-    font-size: 1.3rem;
-    color: black;
-    text-decoration: none;
-    transition: all .8s ease;
-    padding: 5px 8px;
-    border-radius: 5px;
-}
-a:hover {
-    color: #E8B436;
-    background-color: #5E6E99;
-}
-
-img {
-    width: 100%;
-    height :100%;
-    object-fit: cover;
-}
 
 main {
-    width: 90%;
+    width: 95%;
     margin: 20px auto;
 }
 
@@ -84,6 +79,7 @@ main {
         align-items: center;
         display: flex;
      }
+
      & .immArriere{
         height : 100%;
         width: 60%;
@@ -188,20 +184,32 @@ footer{
         font-family: 'roboto',sans-serif;
         padding:5px;
     }
+
+}
+.h1contact{
+    font-family: 'roboto',sans-serif;
+    font-weight : bold;
+    font-size: 1.6rem;
+    color: #E8B436;
+    text-align: center;
+    padding: 20px;
 }
 .contact{
     display: flex;
-    width: 95%;
-    margin: auto;
+    width: 100%;
+    margin: 20px 0;
     font-family: Arial, sans-serif;
     background-color: #E2EEF2;
     padding: 20px;
     color: #333;
+
     & .divcontact {
         width: 50%;
     }
+    & iframe{
+        width: 100%;
+    }
     & .container {
-        max-width: 900px;
         margin: 0 auto;
         padding: 20px;
         background-color: #FFFFFF;
@@ -209,9 +217,21 @@ footer{
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    & h2, h3 {
+    & h3 {
         color: #333;
         margin-bottom: 20px;
+    }
+
+    & h2 {
+        width: 100%;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    & h4{
+        text-decoration: underline;
+        margin :20px 0;
     }
 
     & form {
@@ -227,11 +247,15 @@ footer{
 
     & .form-column {
         flex: 1;
-        min-width: 250px; /* Ensure a minimum width for small screens */
+        min-width: 250px;
     }
 
     & .form-group {
         margin-bottom: 20px;
+    }
+
+    & .petitp{
+        font-size: 13px;
     }
 
     & label {
@@ -267,17 +291,19 @@ footer{
     }
 
     & button[type="submit"] {
+        width : 100%;
         padding: 10px 20px;
-        background-color: #E2EEF2;
+        margin-bottom: 20px;
+        background-color: #083847;
         border: none;
         border-radius: 4px;
-        color: #333;
+        color: white;
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
 
     & button[type="submit"]:hover {
-        background-color: #d0e4eb;
+        background-color: #155870;
     }
 
     & .site-details {
@@ -295,14 +321,7 @@ footer{
         margin-top: 20px;
     }
 }
-.h1contact{
-    font-family: 'roboto',sans-serif;
-    font-weight : bold;
-    font-size: 1.6rem;
-    color: #E8B436;
-    text-align: center;
-    padding: 20px;
-}
+
 .success-message {
     width: 100%;
     color: white;
@@ -320,3 +339,9 @@ footer{
     font-size: 20x;
     text-align: center;
 }
+& img {
+    width: 100%;
+    height :100%;
+    object-fit: cover;
+}
+
