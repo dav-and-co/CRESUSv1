@@ -201,7 +201,7 @@ footer{
 .error-message {
     width: 100%;
     color: white;
-    background-color: red;
+    background-color: crimson;
     padding: 20px;
     font-size: 20x;
     text-align: center;
@@ -230,10 +230,5 @@ tr{
 }
 td{
     padding: 10px;
-}
-.msgerreur{
-    text-align: center;
-    color: crimson;
-    font-size: 20px;
 }
 

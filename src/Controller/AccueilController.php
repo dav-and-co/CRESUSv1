@@ -9,8 +9,12 @@ namespace App\Controller;
 
 // on appelle le chemin (namespace) des classes utilisées et symfony fera le require de ces classes
 
+use App\Entity\Formulaire;
+use App\Entity\Site;
+use App\Form\FormulaireType;
 use App\Repository\SiteRepository;
 use App\Repository\TypeDemandeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,23 +47,43 @@ class AccueilController extends AbstractController
 
     // function qui récupère et affiche les types d'accompagnement de l'association
     #[Route('/noustrouver', name: 'noustrouver')]
-    public function noustrouver(SiteRepository $siteRepository, Request $request): Response
+    public function noustrouver(SiteRepository $siteRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         // Récupére tous les sites actifs par ordre alpha
         $sites = $siteRepository->findBy(['is_actif' => true], ['nom_site' => 'ASC']);
 
         // Récupére l'identifiant du site sélectionné dans le formulaire twig
-        $selectedSiteId = $request->get('site');
+        $siteId = $request->query->get('site');
+        $selectedSite = $siteId ? $siteRepository->find($siteId) : null;
 
-        // Trouve les détails du site sélectionné, s'il existe
-        $selectedSite = null;
-        if ($selectedSiteId) {
-            $selectedSite = $siteRepository->find($selectedSiteId);
+        // Création du formulaire
+        $formulaire = new Formulaire();
+        $form = $this->createForm(FormulaireType::class, $formulaire);
+
+        // Traitement de la requête du formulaire
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // affecte la valeur non à `is_traite`
+            $formulaire->setTraite(false);
+            // affecte la valeur du site choisi
+            if ($selectedSite) {
+                $formulaire->setPermanenceDemandeur($selectedSite->getNomSite());
+            }
+
+            $entityManager->persist($formulaire);
+            $entityManager->flush();
+
+            // Ajout d'un message de succès
+            $this->addFlash('success', 'Demande envoyée avec succès !');
+
+            // Redirection pour éviter la soumission multiple
+            return $this->redirectToRoute('noustrouver');
         }
 
         return $this->render('gdpublic/page/NousTrouver.html.twig', [
             'sites' => $sites,
             'selectedSite' => $selectedSite,
+            'form' => $form->createView(),
         ]);
     }
 }
