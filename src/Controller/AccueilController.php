@@ -93,7 +93,7 @@ class AccueilController extends AbstractController
 
     // function qui r affiche les informations du jeu Dilemme
     #[Route('/dilemme', name: 'Dilemme')]
-    public function gpAccueil(): response
+    public function gpDilemme(): response
     {
 
 
