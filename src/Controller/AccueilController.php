@@ -86,4 +86,18 @@ class AccueilController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    //-----------------------------------------------------------------------------------------------------------
+    // localhost/CresusV1/dilemme/
+
+    // l'url est appelée et éxécute automatiquement la méthode définie sous la route
+
+    // function qui r affiche les informations du jeu Dilemme
+    #[Route('/dilemme', name: 'Dilemme')]
+    public function gpAccueil(): response
+    {
+
+
+        return $this->render('gdpublic/page/Dilemme.html.twig' );
+    }
+//-----------------------------------------------------------------------------------------------------------
 }
