@@ -457,18 +457,17 @@ footer{
     }
 }
 
-.dilemme{
+.dilemme {
     background-color: #f0f3f9;
     padding: 20px;
     border-radius: 8px;
     color: #333;
-    font-family: 'roboto',sans-serif;
+    font-family: 'Roboto', sans-serif;
 
-
-    & .dilemme h2 {
-        color: #5E6E99;
+    & h2 {
+        color: #E8B436;
         font-size: 2rem;
-        margin-bottom: 20px;
+        margin: 40px 0;
         text-align: center;
     }
 
@@ -480,6 +479,7 @@ footer{
 
     & .features {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         margin-top: 40px;
         gap: 20px;
@@ -492,6 +492,8 @@ footer{
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         text-align: center;
         flex: 1;
+        min-width: 200px;
+        max-width: calc(33.33% - 13.33px);
         transition: transform 0.3s ease;
     }
 
@@ -515,18 +517,32 @@ footer{
         align-items: center;
         width: 100%;
         margin-bottom: 15px;
-
     }
 
     & .image-container img {
-        max-width: 40%;
+        max-width: 30%;
         height: auto;
     }
-    & h2 {
-        color: #E8B436;
-        font-size: 2rem;
-        margin-bottom: 20px;
+
+    /* Styles spécifiques pour le dernier paragraphe qui contient des informations supplémentaires */
+    & .final-features {
+        display: flex;
+        flex-direction: column; /* Réorganiser les éléments */
+        align-items: center;
         text-align: center;
+        margin-top: 20px;
+    }
+
+    & .final-features div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px 0;
+    }
+
+    & .final-features img {
+        max-width: 20%;
+        margin-right: 10px;
     }
 }
 
