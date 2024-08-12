@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: FormulaireRepository::class)]
 class Formulaire
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -49,6 +50,14 @@ class Formulaire
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $createdAt = null;
+
+
+    public function __construct()
+    {
+        // Initialisation du champ createdAt avec la date actuelle en utilisant DateTimeImmutable
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
 
     public function getId(): ?int
     {
@@ -165,7 +174,6 @@ class Formulaire
     {
         return $this->createdAt;
     }
-
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
