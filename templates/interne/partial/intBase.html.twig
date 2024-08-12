@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRESUS Gironde</title>
-    <link rel="shortcut icon" src="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
     <meta name="description" content="Mission reconnue d'utilité publique. Accompagnement budgétaire des personnes en difficultés financières - Lutte contre le surendettement - Micro-crédit."/>
     <meta name="author" content="Daviatte Claude"/>
     <link rel="stylesheet" href="{{ asset('style/interneStyle.css') }}">
@@ -19,10 +19,12 @@
     <!-- création de la nav commune au site gd public -->
     <nav>
         <ul>
-            <li><a href="#top"> <img src="{{ asset('img/CRESUS-logo.png') }}" alt="logo de l association crésus"></a></li>
-            <li><a >1</a></li>
-            <li><a href="{{ path("listbenevoles") }}">gestion benevole</a></li>
-            <li><a href="{{ path("app_logout") }}">Déconnexion</a></li>
+            <li class="firstli"><a href="{{ path("Accueil") }}"> <img src="{{ asset('img/CRESUS-logo.png') }}" alt="logo de l association crésus"></a></li>
+            <li><a class="headnav">Permanences</a></li>
+            <li><a class="headnav">bénéficiaires</a></li>
+            <li><a class="headnav">Formulaires internet</a></li>
+            <li><a class="headnav" href="{{ path("listbenevoles") }}">Gestion benevole</a></li>
+            <li><a class="headnav" href="{{ path("app_logout") }}">Déconnexion</a></li>
         </ul>
     </nav>
 </header>

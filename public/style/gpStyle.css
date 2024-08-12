@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
 }
 
 header {
@@ -35,14 +37,15 @@ header {
 
     & li {
         position: relative;
-        margin: 0 50px;
+
         max-width: 200px;
     }
-    & li:first-of-type {
+    & .firstli {
         max-width: 100px;
+        min-width: 80px;
     }
 
-    & a {
+    & .headnav {
         font-family: 'roboto',sans-serif;
         font-weight : bold;
         font-size: 1rem;
@@ -52,7 +55,7 @@ header {
         padding: 5px 8px;
         border-radius: 5px;
     }
-    & a:hover {
+    & .headnav:hover {
         color: #E8B436;
         background-color: #5E6E99;
     }
@@ -190,6 +193,10 @@ main {
         font-weight : bold;
         font-size: 1.6rem;
         color: #E8B436;
+    }
+    .tailleimg{
+        max-width: 60px;
+        min-width:40px;
     }
 }
 footer{
@@ -444,7 +451,7 @@ footer{
         transition: background-color 0.3s ease;
     }
 
-    & .submit-button:hover {
+    & .submit-button{
         background-color: #0056b3;
     }
 }

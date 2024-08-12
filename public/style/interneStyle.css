@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
 }
 
 header {
@@ -37,21 +39,21 @@ li {
     margin: 0 50px;
     max-width: 200px;
 }
-li:first-of-type {
+& .firstli {
     max-width: 100px;
 }
 
-a {
+& .headnav {
     font-family: 'roboto',sans-serif;
     font-weight : bold;
-    font-size: 1.3rem;
+    font-size: 1rem;
     color: black;
     text-decoration: none;
-    transition: all .8s ease;
+    transition: all .3s ease;
     padding: 5px 8px;
     border-radius: 5px;
 }
-a:hover {
+& .headnav:hover {
     color: #E8B436;
     background-color: #5E6E99;
 }
