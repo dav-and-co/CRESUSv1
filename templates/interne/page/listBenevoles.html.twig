@@ -6,7 +6,6 @@
 
 {% block main %}
 
-
     <h1 class="h1"> Liste des BENEVOLES </h1>
     <section class="admin-article-table">
         <table class="admin-list-articles">
@@ -70,7 +69,9 @@
                 </tr>
             {% endfor %}
         </table>
-        <a href="{{ path('admin_insert_user')}}">Ajouter un bénévole</a>
+        <div class="bouton">
+            <a href="{{ path('admin_insert_user')}}">Ajouter un bénévole</a>
+        </div>
     </section>
 
 

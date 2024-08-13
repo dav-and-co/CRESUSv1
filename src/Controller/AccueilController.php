@@ -113,4 +113,18 @@ class AccueilController extends AbstractController
         return $this->render('gdpublic/page/Microcredit.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
+// localhost/CresusV1/PCB/
+
+    // l'url est appelée et éxécute automatiquement la méthode définie sous la route
+
+    // function qui r affiche les informations du microcrédit
+    #[Route('/PCB', name: 'PCB')]
+    public function gpPCB(): response
+    {
+
+
+        return $this->render('gdpublic/page/PCB.html.twig' );
+    }
+//-----------------------------------------------------------------------------------------------------------
+
 }

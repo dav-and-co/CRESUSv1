@@ -234,3 +234,21 @@ td{
     padding: 10px;
 }
 
+& .bouton{
+    margin-top: 20px;
+    padding : 20px 20px 30px 20px;
+    display: flex;
+    justify-content: center;
+    height: 7rem;
+    & a{
+        font-family: 'roboto',sans-serif;
+        font-weight : bold;
+        font-size: 1.3rem;
+        color: #E8B436;
+        background-color: #29487d;
+        padding : 15px 15px;
+        box-shadow: 5px 3px 10px -1px #ffffff;
+        border-radius: 500px;
+    }
+}
+
