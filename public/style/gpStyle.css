@@ -471,7 +471,22 @@ footer{
         text-align: center;
     }
 
-    & .content-wrapper {
+    & .title-list{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40px;
+    }
+
+    & .title-icon{
+        width : 15%;
+    }
+
+    & .title-img{
+        width : 100%;
+        height: auto;
+    }
+
+    & .content {
         max-width: 800px;
         margin: 0 auto;
         line-height: 1.6;
@@ -523,26 +538,57 @@ footer{
         max-width: 30%;
         height: auto;
     }
-
-    /* Styles spécifiques pour le dernier paragraphe qui contient des informations supplémentaires */
-    & .final-features {
+    & .troisieme-article {
         display: flex;
-        flex-direction: column; /* Réorganiser les éléments */
+        flex-direction: column;
         align-items: center;
+        padding: 20px;
+        background-color: #3263b5;
+        border-radius: 8px;
+        width: 70%;
+        margin: 20px auto;
+    }
+
+    & .ateliers-content {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    & .ateliers-description {
+        flex-basis: 60%;
+        padding-right: 20px;
+    }
+
+    & .ateliers-details {
+        flex-basis: 40%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    & .detail {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    & .detail img {
+        width: 40px;
+        height: auto;
+    }
+
+    & .troisieme-article h2 {
+        color: #E8B436;
+        font-size: 2rem;
+        margin-bottom: 20px;
         text-align: center;
-        margin-top: 20px;
     }
-
-    & .final-features div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 10px 0;
-    }
-
-    & .final-features img {
-        max-width: 20%;
-        margin-right: 10px;
+    & .troisieme-article p {
+        color: white;
+        font-size: 15px;
+        margin: 5px 0;
+        text-align: left;
     }
 }
 
