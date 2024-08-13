@@ -117,13 +117,26 @@ class AccueilController extends AbstractController
 
     // l'url est appelée et éxécute automatiquement la méthode définie sous la route
 
-    // function qui r affiche les informations du microcrédit
+    // function qui r affiche les informations du point conseil budget
     #[Route('/PCB', name: 'PCB')]
     public function gpPCB(): response
     {
 
 
         return $this->render('gdpublic/page/PCB.html.twig' );
+    }
+//-----------------------------------------------------------------------------------------------------------
+// localhost/CresusV1/surendettement/
+
+    // l'url est appelée et éxécute automatiquement la méthode définie sous la route
+
+    // function qui r affiche les informations du surendettement
+    #[Route('/surendettement', name: 'Surendettement')]
+    public function gpSurendettement(): response
+    {
+
+
+        return $this->render('gdpublic/page/Surendettement.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
 

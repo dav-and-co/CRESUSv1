@@ -1,0 +1,142 @@
+{% extends 'gdPublic/partial/gpBase.html.twig' %}
+
+{% block metatitle %}
+    Cresus Accueil
+{% endblock %}
+
+{% block main %}
+
+    <section class="surendettement">
+        <div class="title-container">
+            <ul class="title-list">
+                <li class="title-icon"><img src="{{ asset('img/picto-surendettement.png') }}" alt="picto surendettement" class="title-img1" /></li>
+                <li><h2>LE  SURENDETTEMENT</h2></li>
+                <li class="title-icon"><img src="{{ asset('img/surendettement3.jpeg') }}" alt="picto surendettement" class="title-img2" /></li>
+            </ul>
+        </div>
+        <div>
+            <article>
+                <h4> Vous ne parvenez plus à faire face à vos dettes et voulez déposer une demande de traitement de votre situation de surendettement ?</h4>
+                <h4> Cette procédure est gratuite et mise en œuvre par la Banque de France .</h4>
+                <br>
+                <h4> Voici des réponses à vos questions sur le surendettement .</h4>
+            </article>
+        </div>
+        <div class="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <article>
+                        <h3 >Qui peut être concerné par le surendettement ?</h3>
+                        <div >
+                            <p> Tout le monde peut être concerné par le surendettement.</p>
+                            <br>
+                            <p> les causes peuvent être multiples : </p>
+                            <ul>
+                                <li>licenciement,</li>
+                                <li>divorce / séparation,</li>
+                                <li>passage à la retraite,</li>
+                                <li>baisse des ressources,</li>
+                                <li>un endettement important,</li>
+                                <li>licenciement,</li>
+                            </ul>
+                            <p>  et ce quelque soient vos revenus,  faibles ou élevés !</p>
+                        </div>
+                        <br>
+                        <p class="jaune"> Quelqu'en soit la raison, si vous êtes de bonne foi, vous pouvez déposer un dossier de surendettement. </p>
+                    </article>
+                </div>
+                <div class="carousel-item">
+                    <article>
+                        <h3>Quelles sont les conditions pour déposer un dossier de surendettement ?</h3>
+                        <div>
+                            <p> Vous pouvez déposer un dossier de surendettement si vous remplissez les conditions suivantes :</p>
+                            <ul>
+                                <li>vous êtes un particulier,</li>
+                                <li>vous n’êtes plus en mesure de payer vos charges et de rembourser vos dettes personnelles,</li>
+                                <li>vous êtes domicilié en France, que vous soyez français ou étranger.</li>
+                            </ul>
+                            <br>
+                            <p> Point particulier des artisans, commerçants, agriculteurs ou une personnes exerçant une profession indépendante.</p>
+                            <p> Vous relevez des procédures collectives régies par le Code du Commerce et ne pouvez déposer de dossier de surendettement.
+                                <a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F32095" target="_blank" rel="noopener">En savoir +</a></p>
+                        </div>
+                    </article>
+                </div>
+                <div class="carousel-item">
+                    <article>
+                        <h3 >Comment déposer un dossier de surendettement ? ?</h3>
+                        <div >
+                            <p>Vous pouvez le faire par vous même en allant sur le&nbsp; <a href="https://particuliers.banque-france.fr/surendettement/deposer-un-dossier-de-surendettement"><strong>site internet de la Banque de France</strong></a></p>
+                            <p> Nous pouvons aussi le faire ensemble dans nos permanences, nous vous accueillons pour vous écouter, vous conseiller et vous aider dans la constitution de votre dossier.</p>
+                            <br>
+                            <div class="bouton">
+                                <a href="{{ path("noustrouver") }}"> Nous contacter</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="carousel-item">
+                    <article>
+                        <h3 >Que se passe t'il lorsque mon dossier de surendettement est déposé ?</h3>
+                        <div>
+                            <p> Dans l’attente de la décision de recevabilité vous devez continuer à régler vos dettes dans la mesure de vos possibilités.</p>
+                            <p> Vous ne devez pas aggraver votre endettement en souscrivant de nouveaux crédits, ni vendre certains de vos biens au profit d’un créancier.</p>
+                            <p> La Banque de France va vous envoyer des courriers relatifs au traitement de votre dossier, en particulier les courriers en recommandé avec accusé de réception. Il est important d'en prendre connaissance.</p>
+                            <p> Dans le cas où Crésus Gironde vous a aidé à constituer le dossier, nous vous appellerons pour expliquer ces courriers.</p>
+                            <br>
+                            <p> A noter : dès le dépôt de votre dossier et durant toute la procédure, vous êtes inscrit au Fichier national des Incidents de remboursement des Crédits aux Particuliers (FICP) qui peut être consulté par tous les établissements accordant des crédits.</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="carousel-item">
+                    <article>
+                        <h3>Que se passe t'il lorsque mon dossier de surendettement est recevable ?</h3>
+                        <div>
+                            <p> La commission va d’abord étudier votre dossier pour décider si vous êtes en situation de surendettement et si vous pouvez bénéficier de la procédure de traitement du surendettement des particuliers, votre dossier sera alors recevable.</p>
+                            <p> A partir du moment où votre dossier est recevable, nous n'avez plus à payer vos dettes et crédits jusque la fin de l'étude de votre dossier</p>
+                            <p> Si votre dossier est recevable la commission de surendettement va rechercher la solution la plus adaptée, en fonction de la gravité de votre situation financière :</p>
+                            <p> Si votre situation permet de régler toutes vos dettes :</p>
+                            <ul>
+                                <li>la commission va rechercher un accord amiable entre vous et vos créanciers afin de mettre en place un plan de remboursement pouvant comporter des rééchelonnements, des reports, des mesures de réduction des taux d’intérêt.</li>
+                                <li>si aucun accord amiable ne peut être trouvé, la commission peut alors, si vous le souhaitez, imposer à vous-même et à vos créanciers des mesures de traitement de votre surendettement. Certaines mesures peuvent être recommandées par la commission (effacement partiel par exemple) mais devront être validées par un juge.</li>
+                            </ul>
+                            <p> Si votre situation est susceptible de s’améliorer ou ne permet de régler qu’une partie de vos dettes :</p>
+                            <ul>
+                                <li>la commission imposera directement à vous-même et à vos créanciers ou recommandera au juge les mesures de traitement adaptées.</li>
+                            </ul>
+                            <p> Si votre situation est compromise : la commission peut orienter votre dossier vers une procédure de rétablissement personnel :</p>
+                            <ul>
+                                <li>sans liquidation judiciaire si vous ne disposez que de meubles nécessaires à la vie courante, ou des biens non professionnels indispensables à l’exercice de votre activité professionnelle. Dans ce cas, vos dettes (à l’exception de celles exclues en application de l’article L.333-1 du code de la consommation) peuvent être effacées après validation par un juge.</li>
+                                <li>avec liquidation judiciaire si vous possédez un patrimoine qui peut être vendu, et avec votre accord, c’est un juge qui traitera votre dossier : celui-ci peut alors effacer vos dettes (sauf exception citée précédemment) après avoir fait procéder à la vente de vos biens, à l’exception des meubles nécessaires à la vie courante ou des biens non professionnels indispensables à l’exercice de votre activité professionnelle.</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+                <div class="carousel-item">
+                    <article>
+                        <h3>Vous avez besoin d'aide ?</h3>
+                        <div>
+                            <p> Un référent Crésus Gironde  </p>
+                            <br>
+                            <p> effectue un ou plusieurs points avec vous constituer un dossier conforme</p>
+                            <p> et vous accompagne jusqu'à l'envoi du dossier de surendettement.</p>
+                            <br>
+                            <p> Il sera aussi présent à vos côtés pendant toute la procédure.</p>
+                            <div class="bouton">
+                                <a href="{{ path("noustrouver") }}"> Nous contacter</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-control prev">❮</button>
+                <button class="carousel-control next">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- lien js -->
+    <script src="JS/surendettement.js"></script>
+
+{% endblock %}
