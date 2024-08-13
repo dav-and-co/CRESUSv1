@@ -14,9 +14,9 @@
             <div class="textArriere">
                 <p>Vous avez besoin de conseils pour votre budget,
                     vous rencontrez des difficultés financières, vous n'êtes plus en mesure de régler l'ensemble de vos charges et de vos dettes, vous avez besoin d'un microcrédit, ...</p>
-                <p>Des bénévoles accompagnants de CRESUS  vous accueillent, vous écoutent, vous informent et peuvent vous accompagner.
+                <p>Des bénévoles de CRESUS  vous accueillent, vous écoutent, vous informent et peuvent vous accompagner.
                     Ils recherchent avec vous les solutions les plus adaptées à vos difficultés financières, sociales et juridiques</p>
-                <div id="bouton">
+                <div class="bouton">
                     <a href="{{ path("noustrouver") }}"> Nous contacter</a>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div>
                     <img class="tailleimg" src="{{typedemande.imgPetit}}" alt="{{typedemande.libelleExterne}}"/>
                 </div>
-                <a href="{{typedemande.chemin}}"> {{typedemande.libelleExterne}} </a>
+                <a href={{typedemande.chemin}}> {{typedemande.libelleExterne}} </a>
             </div>
             {% endfor %}
         </div>

@@ -100,4 +100,17 @@ class AccueilController extends AbstractController
         return $this->render('gdpublic/page/Dilemme.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
+// localhost/CresusV1/Microcredit/
+
+    // l'url est appelée et éxécute automatiquement la méthode définie sous la route
+
+    // function qui r affiche les informations du microcrédit
+    #[Route('/microcredit', name: 'Microcredit')]
+    public function gpMicroCredit(): response
+    {
+
+
+        return $this->render('gdpublic/page/Microcredit.html.twig' );
+    }
+//-----------------------------------------------------------------------------------------------------------
 }

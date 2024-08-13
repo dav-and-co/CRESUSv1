@@ -1,0 +1,86 @@
+{% extends 'gdPublic/partial/gpBase.html.twig' %}
+
+{% block metatitle %}
+    Cresus Accueil
+{% endblock %}
+
+{% block main %}
+
+    <section class="microcredit">
+        <div class="title-container">
+            <ul class="title-list">
+                <li class="title-icon"><img src="{{ asset('img/picto-surendettement.png') }}" alt="picto désendettement" class="title-img" /></li>
+                <li><h2>MICROCREDIT PERSONNEL</h2></li>
+                <li class="title-icon"><img src="{{ asset('img/picto-micro-credit.png') }}" alt="picto mirocrédit" class="title-img" /></li>
+            </ul>
+        </div>
+        <article>
+            <div class="content">
+                <p>Le microcrédit personnel est un crédit destiné aux personnes exclues du système bancaire classique : faibles revenus, situation professionnelle fragile, interdit bancaire, ...</p>
+                <br>
+                <p>Il sert à réaliser un projet personnel destiné à améliorer la situation de l'emprunteur. Dans le cadre de ce projet personnel, le microcrédit peut être utilisé pour acheter des biens ou services.</p>
+            </div>
+        </article>
+        <article>
+            <h3 class="toggle">À qui sert-il ?</h3>
+            <div class="content hidden">
+                <p> Il s’agit d’un crédit personnel accordé aux personnes qui n’ont pas accès au crédit bancaire classique pour financer un projet en lien avec l’insertion sociale et professionnelle.</p>
+                <br>
+                <p> Il n'y a pas de conditions de revenus définies, il faut que les dépenses mensuelles du bénéficiaire ne dépassent pas celles de ses ressources et qu’il dispose d’un reste à vivre suffisant pour payer le remboursement du crédit chaque mois.</p>
+            </div>
+            <h3 class="toggle">De quoi s'agit-il ?</h3>
+            <div class="content hidden">
+                <p> Le microcrédit personnel est par exemple fréquemment utilisé pour l'achat ou la réparation d'un véhicule, nécessaire à l'exercice d'une activité professionnelle.</p>
+                <br>
+                <p> Ainsi, il peut résoudre un problème de mobilité : permis de conduire, achat ou réparation d’une voiture, d’un scooter...</p>
+                <p> ou accéder à un logement : frais d’agence, dépôt de garantie, équipement ménager et mobilier de première nécessité...</p>
+                <p> ou  pour suivre une formation ou passer son permis de conduire</p>
+                <p> ou encore pour régler des frais de santé comme des lunettes, un appareil auditif, des soins dentaires...</p>
+                <br>
+                <p> Il ne peut pas servir pour des rachats de crédits, combler des découverts bancaires ou régler des retards (loyer ou impayés).</p>
+            </div>
+            <h3 class="toggle">Montant et durée des crédits ?</h3>
+            <div class="content hidden">
+                <p> Les sommes empruntées sont généralement faibles et adaptées à vos revenus.</p>
+                <p> Elles sont comprises entre 300 € et 8000 €.</p>
+                <br>
+                <p> Les prêts sont remboursables sur des durées de 6 à 84 mois.</p>
+            </div>
+            <h3 class="toggle">Coût du crédit ?</h3>
+            <div class="content hidden">
+                <p> Le taux du crédit est fixé par le prêteur.</p>
+                <br>
+                <p> Il est généralement situé entre 1,5 et 4% et il n'a pas de frais de dossier.</p>
+            </div>
+            <h3 class="toggle">Quels justificatifs fournir ?</h3>
+            <div class="content hidden">
+                <p> La copie pièce d’identité recto verso en cours de validité (titulaire & conjoint) ou titre de séjour couvrant la durée du prêt,</p>
+                <p> Les extraits bancaires mensuels (de tous vos comptes bancaires) des trois derniers mois complets,</p>
+                <p> Les ustificatifs des revenus des 3 derniers mois (fiche de paie, indemnités pôle-emploi,...),</p>
+                <p> La copie des prestations sociales reçues (Attestation allocations familiales, logement, RSA, ...),</p>
+                <p> La copie du dernier avis d’imposition ou de non-imposition sur les revenus,</p>
+                <p> Un relevé d’identité bancaire du demandeur ou du compte-joint,</p>
+                <p> Un justificatif de domicile de moins de 6 mois,</p>
+                <p> Les justificatifs du projet : devis, description et estimation des dépenses,</p>
+                <br>
+                <p> Et éventuellement des documents complémentaires selon les situations (Plan de redressement de la Banque de France, ...).</p>
+            </div>
+            <h3 class="toggle">Démarches</h3>
+            <div class="content hidden">
+                <p> Le référent CRÉSUS Gironde effectue </p>
+                <br>
+                <p> effectue un ou des  points avec le demandeur sur sa situation budgétaire et son besoin</p>
+                <p> l'accompagne dans l’élaboration de sa demande de prêt.</p>
+                <br>
+                <p> Il sera aussi présent à ses côtés en cas de difficultés pendant toute la période de remboursement.</p>
+                <div class="bouton">
+                    <a href="{{ path("noustrouver") }}"> Nous contacter</a>
+                </div>
+            </div>
+        </article>
+
+    </section>
+
+    <!-- lien js -->
+    <script src="JS/microcredit.js"></script>
+{% endblock %}
