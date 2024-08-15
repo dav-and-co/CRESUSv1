@@ -668,6 +668,39 @@ footer{
             border-radius: 500px;
         }
     }
+
+    h3.toggle {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    h3.toggle .chevrons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-left: 10px; /* Ajuste l'espacement entre le texte et les chevrons */
+    }
+
+    h3.toggle .chevron {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;  /* Ajuste la taille */
+        height: 20px; /* Ajuste la taille */
+        cursor: pointer; /* Change le curseur pour indiquer que c'est cliquable */
+    }
+
+    h3.toggle .chevron img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    h3.toggle .chevron[data-direction="up"] {
+        display: none; /* Masque le chevron haut par défaut */
+    }
 }
 
 .PCB {
@@ -925,6 +958,7 @@ footer{
     & .dot.active {
         background-color: #717171;
     }
+
 
 }
 
