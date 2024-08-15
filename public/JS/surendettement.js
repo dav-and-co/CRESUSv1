@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const carouselInner = document.querySelector('.carousel-inner');
     const carouselItems = document.querySelectorAll('.carousel-item');
+    const dots = document.querySelectorAll('.dot');
     const totalItems = carouselItems.length;
     let currentIndex = 0;
 
@@ -14,8 +15,19 @@ document.addEventListener('DOMContentLoaded', function () {
         updateCarousel();
     });
 
+    dots.forEach(dot => {
+        dot.addEventListener('click', function () {
+            currentIndex = parseInt(dot.getAttribute('data-index'));
+            updateCarousel();
+        });
+    });
+
     function updateCarousel() {
         const offset = -currentIndex * 100;
         carouselInner.style.transform = `translateX(${offset}%)`;
+
+        // Mise à jour des points actifs
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[currentIndex].classList.add('active');
     }
 });

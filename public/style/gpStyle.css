@@ -3,8 +3,8 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    list-style: none;
-    font-family: 'Arial', sans-serif;
+    list-style-type:none;
+    font-family: 'arial', sans-serif;
 }
 
 
@@ -34,7 +34,6 @@ header {
         display: flex;
         justify-content: space-around;
         padding: 20px 50px;
-        list-style: none;
         align-items: center;
     }
 
@@ -769,7 +768,7 @@ footer{
     max-width: 90%;
     margin: 40px auto;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #f0f3f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 
@@ -778,6 +777,9 @@ footer{
         justify-content: space-between;
         align-items: center;
         margin-top: 40px;
+        & li{
+        list-style-type:none;
+        }
     }
 
     & .title-icon{
@@ -786,12 +788,13 @@ footer{
     }
 
     & .title-img1{
-        width : 80%;
+        width : 40%;
+        %;
         height: auto;
     }
 
     & .title-img2{
-        width : 100%;
+        width : 80%;
         height: auto;
     }
 
@@ -810,6 +813,7 @@ footer{
         overflow: hidden;
         width: 100%;
         border-radius: 10px;
+        margin-top: 30px;
     }
 
     & .carousel-inner {
@@ -820,19 +824,27 @@ footer{
     & .carousel-item {
         min-width: 100%;
         box-sizing: border-box;
-        padding: 30px;
-        background: #5E6E99;
-        color: #fff;
-        border-radius: 10px;
+        padding: 10px 50px;
+        background: #d2deec;
+        color: black;
+        border-radius: 50px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+
+    }
+
+    & li{
+        list-style-type:square;
+        margin-left: 30px;
     }
 
     & .carousel-item h3 {
         color: #E8B436;
-        margin-bottom: 10px;
+        margin:0 10px 20px 10px;
+        text-align: center;
+        font-size: 1.8rem;
     }
 
     & .carousel-item p, .carousel-item ul {
@@ -858,7 +870,7 @@ footer{
         padding: 10px 20px;
         cursor: pointer;
         pointer-events: auto;
-        border-radius: 50%;
+        border-radius: 20%;
         transition: background-color 0.3s;
     }
 
@@ -867,7 +879,7 @@ footer{
     }
     & .bouton {
         margin-top: 20px;
-        padding: 20px 20px 30px 20px;
+        padding: 20px 20px 35px 20px;
         display: flex;
         justify-content: center;
         height: 7rem;
@@ -881,17 +893,38 @@ footer{
             box-shadow: 5px 3px 10px -1px #ffffff;
             border-radius: 500px;
         }
-
-        & .bouton a:hover {
-            background-color: #dca828;
-        }
     }
 
     & .jaune{
-        color: #E8B436;
+        color: #3263b5;
         font-weight: bold;
     }
+    & .ital{
+        font-style:italic;
+    }
+    & .carousel-pagination {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        gap: 10px;
+    }
 
+    & .dot {
+        height: 12px;
+        width: 12px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    & .dot.active {
+        background-color: #717171;
+    }
 
 }
 
