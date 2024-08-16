@@ -113,7 +113,7 @@ main {
 .accueil {
     position: relative;
     margin: 20px 0;
-    height : 60vh;
+    height : 70vh;
     & article {
         height : 100%;
         position :absolute;
@@ -121,9 +121,9 @@ main {
         width:100%;
         background-color: #5E6E99;
         clip-path: polygon(55% 0, 100% 0, 100% 100%, 8% 100%);
-        flex-direction: row;
+        flex-direction: column;
         justify-content: flex-end;
-        align-items: center;
+        align-items: flex-end;
         display: flex;
      }
 
@@ -134,15 +134,40 @@ main {
         left: 0;
     }
     & .textArriere{
-        height: 100%;
         overflow-y: auto;
         padding : 20px;
-        width:45%;  
-        font-weight : bold;
-        font-size: 1.3rem;
-        color: white;
+        width:45%;
+        & h4{
+            font-size: 1.2rem;
+            color: #E8B436;
+            margin: 10px 0;
+        }
+        & li{
+            color: white;
+            list-style-type:circle;
+            font-size: 12px;
+        }
+
+    }
+    & .textArriere2{
+        padding : 20px;
+        width:70%;
+        & h1{
+            font-size: 1.6rem;
+            color: #E8B436;
+            margin: 20px 0;
+            text-align: center;
+        }
+        & p{
+            color: white;
+            font-size: 16px;
+            font-weight : bold;
+            line-height: 1.5;
+            text-align: center;
+        }
         & p{
             padding : 20px 20px 40px 20px;
+            font-size: 0.8rem;
         }
         & .bouton{
             padding : 20px 20px 30px 20px;
@@ -151,13 +176,13 @@ main {
             height: 7rem;
         }
         & a{
-        font-weight : bold;
-        font-size: 1.6rem;
-        color: black;
-        background-color: #E2EEF2;
-        padding : 15px 15px;
-        box-shadow: 5px 3px 10px -1px #ffffff;
-        border-radius: 500px;
+            font-weight : bold;
+            font-size: 1.6rem;
+            color: black;
+            background-color: #E2EEF2;
+            padding : 15px 15px;
+            box-shadow: 5px 3px 10px -1px #ffffff;
+            border-radius: 500px;
         }
     }
 }
