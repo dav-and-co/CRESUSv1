@@ -664,9 +664,14 @@ footer{
             color: #E8B436;
             background-color: #29487d;
             padding : 15px 15px;
-            box-shadow: 5px 3px 10px -1px #ffffff;
+            box-shadow: 5px 3px 10px -1px #000000;
             border-radius: 500px;
         }
+    }
+
+    .bouton  a:hover {
+        color:#29487d ;
+        background-color: #E8B436;
     }
 
     h3.toggle {
@@ -790,9 +795,13 @@ footer{
             color: #E8B436;
             background-color: #29487d;
             padding: 15px 15px;
-            box-shadow: 5px 3px 10px -1px #ffffff;
+            box-shadow: 5px 3px 10px -1px #000000;
             border-radius: 500px;
         }
+    }
+    .bouton  a:hover {
+        color:#29487d ;
+        background-color: #E8B436;
     }
 }
 
@@ -922,9 +931,14 @@ footer{
             color: #E8B436;
             background-color: #29487d;
             padding: 15px 15px;
-            box-shadow: 5px 3px 10px -1px #ffffff;
+            box-shadow: 5px 3px 10px -1px #000000;
             border-radius: 500px;
         }
+    }
+
+    .bouton  a:hover {
+        color:#29487d ;
+        background-color: #E8B436;
     }
 
     & .jaune{
@@ -967,7 +981,7 @@ footer{
     margin: 0 auto;
 
     h1 {
-        color: #29487d;
+        color: #E8B436;
         text-align: center;
         font-size: 1.8em;
         margin-bottom: 20px;
@@ -982,15 +996,14 @@ footer{
             font-size: 1em;
         }
 
-        h3 {
-            text-align: center;
-            font-weight: bold;
-            color: #29487d;
+        h4 {
+            color: #E8B436;
             margin-top: 30px;
         }
     }
 
     .columns {
+        margin: 20px 0;
         display: flex;
         justify-content: space-between;
     }
@@ -1023,7 +1036,13 @@ footer{
     .align-container {
         display: flex;
         justify-content: center;
+        transition: transform 0.3s ease;
     }
+
+    .align-container:hover {
+        transform: translateY(-5px);
+    }
+
 
     .image-text {
         display: flex;
@@ -1042,17 +1061,64 @@ footer{
         font-weight: bold;
         font-size: 1em;
         line-height: 1.6;
+        text-align: center;
+
     }
 
     .image-text a:hover {
         text-decoration: underline;
-    }
+     }
 
-    .vert{
-        border: forestgreen;
+    .bvert{
+        border: 2px solid #67B869;
+        border-radius: 8px;
+    }
+    .bbleu{
+        border: 2px solid #5E9CC8;
+        border-radius: 8px;
+    }
+    .borange{
+        border: 2px solid #FBA154;
+        border-radius: 8px;
+    }
+    .brouge{
+        border: 2px solid #DE6366;
         border-radius: 8px;
     }
 
+    .vert{
+        color: #67B869;
+    }
+    .bleu{
+        color: #5E9CC8;
+    }
+    .orange{
+        color: #FBA154;
+    }
+    .rouge{
+        color: #DE6366;
+    }
+
+    & .bouton{
+        margin-top: 20px;
+        padding : 20px 20px 35px 20px;
+        display: flex;
+        justify-content: center;
+        height: 7rem;
+        & a{
+            font-weight : bold;
+            font-size: 1.3rem;
+            color: #E8B436;
+            background-color: #29487d;
+            padding : 15px 15px;
+            box-shadow: 5px 3px 10px -1px #000000;
+            border-radius: 500px;
+        }
+    }
+    .bouton  a:hover {
+        color:#29487d ;
+        background-color: #E8B436;
+    }
 
 }
 

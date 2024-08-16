@@ -14,21 +14,21 @@
 
             <p>Crésus Gironde vous reçoit individuellement dans l’une de ses permanences, exclusivement sur Rendez Vous. Un bénévole expérimenté réalise avec vous un diagnostic de votre situation financière et vous aide à trouver une ou des solutions.</p>
 
-            <h3>TOUTES NOS INTERVENTIONS SONT GRATUITES ET CONFIDENTIELLES</h3>
+            <h4>TOUTES NOS INTERVENTIONS SONT GRATUITES ET CONFIDENTIELLES</h4>
         </div>
 
         <div class="columns">
             <div class="column">
-                <div class="align-container">
-                    <div class="image-text vert">
+                <div class="align-container bvert">
+                    <div class="image-text">
                         <img src="{{ asset('img/dilemme.png') }}" alt="jeu éducation financière Dilemme">
                         <a href="{{ path("Dilemme") }}">Une initiation budgétaire ludique et éducative :<span class="vert"> le jeu DILEMME</span></a>
                     </div>
                 </div>
-                <div class="align-container">
+                <div class="align-container bbleu">
                     <div class="image-text">
                         <img src="{{ asset('img/picto-micro-credit.png') }}" alt="picto microcrédit">
-                        <a href="{{ path("Microcredit") }}">Financer un projet d'insertion avec un microcrédit</a>
+                        <a href="{{ path("Microcredit") }}">Financer un projet d'insertion avec un <span class="bleu">Microcrédit</span></a>
                     </div>
                 </div>
             </div>
@@ -38,19 +38,22 @@
             </div>
 
             <div class="column">
-                <div class="align-container">
+                <div class="align-container borange">
                     <div class="image-text">
-                        <a href="{{ path("PCB") }}">Un accompagnement pour améliorer et optimiser votre budget</a>
+                        <a href="{{ path("PCB") }}">Un accompagnement pour améliorer et <span class="orange">optimiser votre budget</span></a>
                         <img src="{{ asset('img/pcb.png') }}" alt="point conseil budget">
                     </div>
                 </div>
-                <div class="align-container">
+                <div class="align-container brouge">
                     <div class="image-text">
-                        <a href="{{ path("Surendettement") }}"><b>Surendetté ?</b>, nos conseils et aides pour constituer votre dossier</a>
+                        <a href="{{ path("Surendettement") }}"><span class="rouge">Surendetté ?</span>, nos conseils et aides pour constituer votre dossier</a>
                         <img src="{{ asset('img/picto-surendettement.png') }}" alt="picto surendettement">
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="bouton">
+            <a href="{{ path("noustrouver") }}"> Nous contacter</a>
         </div>
 
     </section>
