@@ -91,7 +91,7 @@ class AccueilController extends AbstractController
 
     // l'url est appelée et éxécute automatiquement la méthode définie sous la route
 
-    // function qui r affiche les informations du jeu Dilemme
+    // function qui affiche les informations du jeu Dilemme
     #[Route('/dilemme', name: 'Dilemme')]
     public function gpDilemme(): response
     {
@@ -104,7 +104,7 @@ class AccueilController extends AbstractController
 
     // l'url est appelée et éxécute automatiquement la méthode définie sous la route
 
-    // function qui r affiche les informations du microcrédit
+    // function qui affiche les informations du microcrédit
     #[Route('/microcredit', name: 'Microcredit')]
     public function gpMicroCredit(): response
     {
@@ -117,7 +117,7 @@ class AccueilController extends AbstractController
 
     // l'url est appelée et éxécute automatiquement la méthode définie sous la route
 
-    // function qui r affiche les informations du point conseil budget
+    // function qui affiche les informations du point conseil budget
     #[Route('/PCB', name: 'PCB')]
     public function gpPCB(): response
     {
@@ -130,13 +130,26 @@ class AccueilController extends AbstractController
 
     // l'url est appelée et éxécute automatiquement la méthode définie sous la route
 
-    // function qui r affiche les informations du surendettement
+    // function qui affiche les informations du surendettement
     #[Route('/surendettement', name: 'Surendettement')]
     public function gpSurendettement(): response
     {
 
 
         return $this->render('gdpublic/page/Surendettement.html.twig' );
+    }
+//-----------------------------------------------------------------------------------------------------------
+// localhost/CresusV1/aider/
+
+    // l'url est appelée et éxécute automatiquement la méthode définie sous la route
+
+    // function qui affiche les informations du surendettement
+    #[Route('/aider', name: 'Aider')]
+    public function gpAider(): response
+    {
+
+
+        return $this->render('gdpublic/page/Aider.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
 
