@@ -1,0 +1,100 @@
+.microcredit {
+  background-color: $fondPagesColor;
+  color: $textNoirColor;
+  max-width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+  & .title-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+  }
+
+  & .title-icon{
+    width : 10%;
+    padding: 0 15px;
+  }
+
+  & .title-img{
+    width : 100%;
+    height: auto;
+  }
+
+  & .title-container h2 {
+    color: $textJauneColor;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+  }
+
+  & .toggle {
+    font-size: 1.5em;
+    color:$textBleuColor;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #adbdf3;
+    border-left: 5px solid $textBleuColor;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  & .toggle:hover {
+    background-color: #e0e7ee;
+    color: #29487d;
+  }
+
+  & .content {
+    display: none;
+    padding: 10px 20px 20px;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  & .contentnonhidden{
+    padding: 10px 20px 20px;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  & .souligne{
+    font-weight: bold ;
+
+  }
+
+  h3.toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  h3.toggle .chevrons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  h3.toggle .chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  h3.toggle .chevron img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  h3.toggle .chevron[data-direction="up"] {
+    display: none;
+  }
+}

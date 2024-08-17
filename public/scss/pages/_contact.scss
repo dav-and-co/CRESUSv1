@@ -1,0 +1,126 @@
+.contact{
+  display: flex;
+  width: 100%;
+  margin: 20px 0;
+  background-color: $fondNavColor;
+  padding: 20px;
+  color: #333;
+
+  & .divcontact {
+    width: 50%;
+  }
+  & iframe{
+    width: 100%;
+  }
+  & .container {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  & h3 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  & h2 {
+    width: 100%;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  & h4{
+    text-decoration: underline;
+    margin :20px 0;
+  }
+
+  & form {
+    margin-top: 30px;
+  }
+
+  & .form-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  & .form-column {
+    flex: 1;
+    min-width: 250px;
+  }
+
+  & .form-group {
+    margin-bottom: 20px;
+  }
+
+  & .petitp{
+    font-size: 13px;
+  }
+
+  & label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  & input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #E2EEF2;
+    border-radius: 4px;
+    background-color: #F9F9F9;
+    transition: border-color 0.3s ease;
+  }
+
+  & input[type="text"]:focus,
+  input[type="email"]:focus,
+  textarea:focus {
+    border-color: #bcd9e1;
+  }
+
+  & select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid $fondNavColor;
+    border-radius: 4px;
+    background-color: $fondPagesColor;
+  }
+
+  & button[type="submit"] {
+    width : 100%;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    background-color: #083847;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  & button[type="submit"]:hover {
+    background-color: #155870;
+  }
+
+  & .site-details {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #E2EEF2;
+    border-radius: 4px;
+  }
+
+  & .site-details p {
+    margin: 5px 0;
+  }
+
+  & .site-details h3 {
+    margin-top: 20px;
+  }
+}
