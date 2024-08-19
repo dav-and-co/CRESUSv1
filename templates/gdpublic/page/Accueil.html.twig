@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block main %}
-
+<div class="landingpage">
     <section class="accueil">
-        <div class="immArriere">
-            <img src="{{ asset('img/mainsdecalees.jpg') }}" alt="solidarité">
+        <div>
+            <img src="{{ asset('img/mainsdecalees.jpg') }}" alt="solidarité" id="immArriere">
         </div>
         <article>
             <div class="textArriere">
@@ -57,6 +57,6 @@
             {% endfor %}
         </div>
     </section>
-
+</div>
 
 {% endblock %}
