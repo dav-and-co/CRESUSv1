@@ -1,0 +1,54 @@
+{% extends 'interne/partial/intBase.html.twig' %}
+
+{% block metatitle %}
+    bénévoles : les formulaires
+{% endblock %}
+
+{% block main %}
+
+    <h1 class="h1"> Liste des formulaires à traiter</h1>
+
+    <h3 > Afficher la liste de tous les formulaires</h3>
+<table id="table">
+
+    <thead>
+    <tr>
+        <td> Date de création</td>
+        <td> permanence</td>
+        <td> Nom</td>
+        <td> Prénom</td>
+        <td> Numéro de tél</td>
+        <td> adresse mail</td>
+        <td> Besoin</td>
+        <td> Commentaires</td>
+        <td> Action</td>
+    </tr>
+     </thead>
+
+    <tbody>
+    {% for formulaire in formulaires %}
+        <tr>
+            <td>{{ formulaire.createdAt|date('Y-m-d H:i') }}</td>
+            <td>{{ formulaire.permanence_demandeur }}</td>
+            <td>{{ formulaire.nom_demandeur }}</td>
+            <td>{{ formulaire.prenom_demandeur }}</td>
+            <td>{{ formulaire.telephone_demandeur }}</td>
+            <td>{{ formulaire.mail_demandeur }}</td>
+            <td>{{ formulaire.besoin_demandeur }}</td>
+            <td>{{ formulaire.description_besoin }}</td>
+            <td> <a href ="{{ path('updatebenevole',{id: formulaire.id})}}"><i class="fa-solid fa-file-pen colori"></i></a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.1.4/js/dataTables.min.js"></script>
+    <script>
+      let table = new DataTable("#table");
+    </script>
+{% endblock %}
