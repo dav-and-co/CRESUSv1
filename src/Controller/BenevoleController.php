@@ -9,8 +9,8 @@ namespace App\Controller;
 
 // on appelle le chemin (namespace) des classes utilisées et symfony fera le require de ces classes
 
-use App\Form\FormulaireType;
 use App\Entity\Formulaire;
+use App\Form\FormulaireType;
 use App\Repository\FormulaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,13 +35,18 @@ class BenevoleController extends AbstractController
     }
 
 //-----------------------------------------------------------------------------------------------------------
-    // lecture et modif formulaires
+    // lecture formulaires
     #[Route('/admin/benevole/formulaires', 'formulaires')]
-    public function readforms(FormulaireRepository $FormulaireRepository, Request $request)
+    public function readforms(FormulaireRepository $FormulaireRepository)
     {
+        $selecteur = 'is_traite';
+        $valeur = false;
+        $tri = 'createdAt';
+        $ordre = 'ASC';
 
-        // récupère tous les articles en BDD triés par ASC ou DESC
-        $formulaires = $FormulaireRepository->findBy([], ["createdAt"=> "DESC"]);
+        // récupère tous les articles en BDD non traités et triés par date de création croissant
+        $formulaires = $FormulaireRepository->findBy([$selecteur => $valeur], [$tri => $ordre]);
+
 
         return $this->render('interne/page/listFormulaires.html.twig', [
             'formulaires' =>  $formulaires

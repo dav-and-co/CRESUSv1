@@ -44,12 +44,9 @@ class AdminController extends AbstractController
 
         $userCreateFormView = $userCreateForm->createView();
 
-
         return $this->render('interne/page/insertBenevole.html.twig', [
             'benevoleForm' => $userCreateFormView
         ]);
-
-
     }
 
 //-----------------------------------------------------------------------------------------------------------
