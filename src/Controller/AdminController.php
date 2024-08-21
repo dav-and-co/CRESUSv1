@@ -16,7 +16,7 @@ class AdminController extends AbstractController
     // création d'un nouveau benevole
 //-----------------------------------------------------------------------------------------------------------
     #[Route('/admin/user/insert', 'admin_insert_user')]
-    public function insertAdmin(UserPasswordHasherInterface $passwordHasher, Request $request, EntityManagerInterface $entityManager)
+    public function insertBenevole(UserPasswordHasherInterface $passwordHasher, Request $request, EntityManagerInterface $entityManager)
     {
 
         $user = new User();
@@ -52,14 +52,14 @@ class AdminController extends AbstractController
 //-----------------------------------------------------------------------------------------------------------
     // liste des benevoles
     #[Route('/admin/benevoles', name: 'listbenevoles')]
-    public function GdPublicArticles(UserRepository $UserRepository, Request $request)
+    public function listBenevoles(UserRepository $UserRepository, Request $request)
     {
         $tri = $request->query->get('tri');
         $ordre = $request->query->get('ordre');
 
         if (!$tri) {
             $tri = 'username';
-            $ordre = 'DESC';
+            $ordre = 'ASC';
         }
 
         // récupère tous les articles en BDD triés par ASC ou DESC
@@ -106,7 +106,8 @@ class AdminController extends AbstractController
         $benevoleModifFormView = $benevoleModifForm->createView();
 
         return $this->render('interne/page/modifBenevole.html.twig', [
-            'benevoleForm' => $benevoleModifFormView
+            'benevoleForm' => $benevoleModifFormView,
+            'username' => $benevole->getUsername()
         ]);
     }
 //-----------------------------------------------------------------------------------------------------------

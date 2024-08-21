@@ -1,28 +1,24 @@
 {% extends 'interne/partial/intBase.html.twig' %}
 
 {% block metatitle %}
-    admin : les bénévoles
+    admin les bénévoles
 {% endblock %}
 
 {% block main %}
 
     <h1 class="h1"> Liste des BENEVOLES </h1>
-
     <section class="admin-ben-table">
         <div class="addben">
             <a href="{{ path('admin_insert_user')}}"><i class="fa-solid fa-user-plus tailleiAddBen" > <span>Ajouter un bénévole</span></i></a>
         </div>
-
         <table class="tableBen">
             <thead>
                 <tr>
-
                     <th class="w-auto bg-warning"> nom utilisateur <a href ="{{ path( 'listbenevoles')}}?tri=username&ordre=ASC">
                             <i class="fa-solid fa-chevron-up"></i></a>
                         <a href ="{{ path( 'listbenevoles')}}?tri=username&ordre=DESC">
                             <i class="fa-solid fa-chevron-down"></i></a>
                     </th>
-
                     <th class="w-auto bg-warning"> nom bénévole <a href ="{{ path( 'listbenevoles')}}?tri=nomUser&ordre=ASC">
                             <i class="fa-solid fa-chevron-up"></i></a>
                         <a href ="{{ path( 'listbenevoles')}}?tri=nomUser&ordre=DESC">
@@ -54,7 +50,7 @@
                         <a href ="{{ path( 'listbenevoles')}}?tri=isActif&ordre=DESC">
                             <i class="fa-solid fa-chevron-down"></i></a>
                     </th>
-                    <th class="w-auto bg-warning">actions</th>
+                    <th class="w-auto bg-warning">action</th>
                 </tr>
             </thead>
             <tbody>

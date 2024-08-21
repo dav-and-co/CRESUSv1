@@ -1,16 +1,78 @@
 {% extends 'interne/partial/intBase.html.twig' %}
 
 {% block metatitle %}
-    admin : modification benevole
+    admin modification benevole
 {% endblock %}
 
 {% block main %}
 
-    <section class="tailleben">
-        <h1> Mettre à jour un benevole </h1>
+<div class="container mt-5">
 
-        {{ form(benevoleForm) }}
+    <h1 class="text-danger">MODIFICATION DU BENEVOLE  {{ username }}</h1>
 
-    </section>
+    {# Affichage du formulaire #}
+    {{ form_start(benevoleForm) }}
+    <div class="form-group">
+        {{ form_label(benevoleForm.username) }}
+        {{ form_widget(benevoleForm.username, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_errors(benevoleForm.username) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(benevoleForm.roles) }}
+        {{ form_widget(benevoleForm.roles, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_errors(benevoleForm.roles) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(benevoleForm.password) }}
+        {{ form_widget(benevoleForm.password, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_errors(benevoleForm.password) }}
+        <small class="form-text text-muted">Laissez vide pour conserver l'ancien mot de passe.</small>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(benevoleForm.nomUser) }}
+        {{ form_widget(benevoleForm.nomUser, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_errors(benevoleForm.nomUser) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(benevoleForm.prenomUser) }}
+        {{ form_widget(benevoleForm.prenomUser, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_errors(benevoleForm.prenomUser) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(benevoleForm.telPerso) }}
+        {{ form_widget(benevoleForm.telPerso, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_errors(benevoleForm.telPerso) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(benevoleForm.telAssoc) }}
+        {{ form_widget(benevoleForm.telAssoc, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_errors(benevoleForm.telAssoc) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(benevoleForm.mailPerso) }}
+        {{ form_widget(benevoleForm.mailPerso, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_errors(benevoleForm.mailPerso) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(benevoleForm.isActif) }}
+        {{ form_widget(benevoleForm.isActif, { 'attr': {'class': 'form-check-input'} }) }}
+        {{ form_errors(benevoleForm.isActif) }}
+    </div>
+
+    <div class="form-group mt-3">
+        {{ form_widget(benevoleForm.validation, { 'attr': {'class': 'btn btn-primary'} }) }}
+    </div>
+
+    {{ form_end(benevoleForm) }}
+
+</div>
 
 {% endblock %}

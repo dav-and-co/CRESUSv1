@@ -1,7 +1,7 @@
 {% extends 'gdPublic/partial/gpBase.html.twig' %}
 
 {% block metatitle %}
-    Cresus RDV
+    - RDV
 {% endblock %}
 
 {% block main %}
@@ -10,17 +10,20 @@
 <section class="contact">
     <div class="container divcontact">
         <h2>Sélectionnez un site</h2>
-
+        <!-- envoi du choix du site via un get - id du site -->
         <form method="get" action="{{ path('noustrouver') }}">
             <label for="site">Choisissez un site :</label>
+            <!-- select : menu déroulant -->
             <select name="site" id="site">
                 <option value="">--Sélectionnez un site--</option>
+                # affichage nom des sites #
                 {% for site in sites %}
                 <option value="{{ site.id }}" {% if selectedSite and site.id == selectedSite.id %}selected{% endif %}>
                     {{ site.nomSite }}
                 </option>
                 {% endfor %}
             </select>
+            # bouton de soumission #
             <button type="submit">Continuer avec ce site</button>
         </form>
 

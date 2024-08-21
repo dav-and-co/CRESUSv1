@@ -126,6 +126,15 @@ footer{
     font-size: 20x;
     text-align: center;
 }
+/*                            message erreur 403                */
+
+.msgerreur{
+    text-align: center;
+    color: crimson;
+    font-size: 40x;
+}
+
+
 /*                            liste des bénévoles                */
 .h1{
     padding: 25px;
@@ -138,7 +147,7 @@ footer{
     justify-content: center;
 }
 
-/* ajout d'un bénévole */
+/*                          ajout d'un bénévole                   */
 .addben{
     display: flex;
     justify-content: center;
@@ -170,4 +179,6 @@ tableBen {
     table-layout: fixed;
     width: 90%;
 }
+
+
 
