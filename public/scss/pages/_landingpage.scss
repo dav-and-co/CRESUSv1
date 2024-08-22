@@ -60,6 +60,10 @@
       text-align: center;
     }
   }
+  & .bouton a{
+    background-color: white!important;
+    box-shadow: 5px 3px 10px -1px white;
+  }
 }
 
 .solutions {
@@ -98,4 +102,6 @@
     max-width: 60px;
     min-width: 40px;
   }
+
+
 }

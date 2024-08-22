@@ -1,14 +1,9 @@
 header {
   width: 100%;
-  height: 50vh;
+  height: 12vh;
   background-color: $fondAccueilColor;
-  background-image: url('../../public/img/fondcresus1.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-blend-mode :luminosity ;
-  background-position: top center;
-  background-attachment: fixed;
   padding: 20px 0;
+
 
   & nav {
     width: 100%;
@@ -30,67 +25,29 @@ header {
     position: relative;
     max-width: 200px;
   }
+
   & .firstli {
     max-width: 100px;
     min-width: 80px;
   }
 
   & .headnav {
-    font-family: 'roboto',sans-serif;
-    font-weight : bold;
+    font-family: 'roboto', sans-serif;
+    font-weight: bold;
     font-size: 1rem;
     color: black;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all .3s ease;
     padding: 5px 8px;
     border-radius: 5px;
   }
+
   & .headnav:hover {
     color: $textJauneColor;
     background-color: $fondAccueilColor;
   }
-  & .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    border-radius: 5px;
-    width: 150px;
-    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    padding: 5px 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    opacity: 0;
-    transform: translateY(5px);
-  }
-
-  & .dropdown-menu li {
-    padding: 3px 5px;
-    line-height: 0.8;
-    justify-content: left;
-  }
-
-  & .dropdown-menu li a {
-    color: #333;
-    font-size: 0.85rem;
-    padding: 5px ;
-    text-decoration: none;
-    display: block;
-    transition: color 0.3s ease;
-  }
-
-  & .dropdown-menu li a:hover {
-    color: $textJauneColor;
-    background-color: $fondPagesColor;
-  }
-
-  & .dropdown:hover .dropdown-menu {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
+
 footer{
   background-color: $footerColor;
   display: flex;

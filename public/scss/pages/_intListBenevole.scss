@@ -1,0 +1,45 @@
+/*                            liste des bénévoles                */
+.h1{
+  padding: 25px;
+  color: darkblue;
+}
+
+.admin-ben-table{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+tr:nth-of-type(even){
+  background-color: #ddd!important;
+}
+
+tableBen {
+  table-layout: fixed;
+  width: 90%;
+}
+
+/*                          ajout d'un bénévole                   */
+.addben{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.addben span{
+  color:black;
+  font-family: Arial;
+  font-size:1.2rem;
+  font-weight: 400;
+}
+
+.tailleiAddBen{
+  font-size:2rem;
+  color : #42c304;
+}
+
+/* modif d'un bénévole */
+.coloriUpBen{
+  font-size:20px;
+  color :#42c304;
+}
+
