@@ -6,11 +6,17 @@
 
 {% block main %}
 
-    <h1 class="h1"> Liste des formulaires à traiter</h1>
-    <h3 > Afficher la liste de tous les formulaires</h3>
+    <div>
+        {% if isTraite %}
+            <h1 class="text-success"> Liste des formulaires déjà traités</h1>
+            <a href="{{ path('formulaires', {'isTraite': 0}) }}" class="btn btn-primary">Afficher les formulaires non traités</a>
+        {% else %}
+            <h1 class="text-danger"> Liste des formulaires à traiter</h1>
+            <a href="{{ path('formulaires', {'isTraite': 1}) }}" class="btn btn-primary">Afficher les formulaires traités</a>
+        {% endif %}
+    </div>
 
     <table id="table">
-
         <thead>
             <tr>
                 <th> Date de création</th>
@@ -22,29 +28,33 @@
                 <th> Besoin</th>
                 <th> Commentaires</th>
                 <th> traité</th>
-                <th> Action</th>
+                <th> Modifier le statut</th>
             </tr>
          </thead>
-
         <tbody>
+
         {% for formulaire in formulaires %}
             <tr>
-                <td>{{ formulaire.createdAt|date('Y-m-d H:i') }}</td>
-                <td>{{ formulaire.permanence_demandeur }}</td>
-                <td>{{ formulaire.nom_demandeur }}</td>
-                <td>{{ formulaire.prenom_demandeur }}</td>
-                <td>{{ formulaire.telephone_demandeur }}</td>
-                <td>{{ formulaire.mail_demandeur }}</td>
-                <td>{{ formulaire.besoin_demandeur }}</td>
-                <td>{{ formulaire.description_besoin }}</td>
+                <td>{{ formulaire.createdAt|date('Y-m-d') }}</td>
+                <td>{{ formulaire.permanenceDemandeur }}</td>
+                <td>{{ formulaire.nomDemandeur }}</td>
+                <td>{{ formulaire.prenomDemandeur }}</td>
+                <td>{{ formulaire.telephoneDemandeur }}</td>
+                <td>{{ formulaire.mailDemandeur }}</td>
+                <td>{{ formulaire.besoinDemandeur }}</td>
+                <td>{{ formulaire.descriptionBesoin }}</td>
                 <td>
-                    {% if formulaire.is_traite %}
+                    {% if formulaire.isTraite %}
                         <p>Oui</p>
                     {% else %}
                         <p>Non</p>
                     {% endif %}
                 </td>
-                <td> <a href ="{{ path('updatebenevole',{id: formulaire.id})}}"><i class="fa-solid fa-file-pen colori"></i></a></td>
+                <td>
+                    <div class="text-center">
+                        <a href ="{{ path('traiter_formulaire',{id: formulaire.id})}}"><i class="fa-solid fa-file-pen" alt="bouton de changement de statut"></i></a>
+                    </div>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

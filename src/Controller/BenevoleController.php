@@ -36,8 +36,8 @@ class BenevoleController extends AbstractController
 
 //-----------------------------------------------------------------------------------------------------------
     // lecture formulaires
-    #[Route('/admin/benevole/formulaires', 'formulaires')]
-    public function readforms(FormulaireRepository $FormulaireRepository)
+    #[Route('/admin/benevole/formulaires/{isTraite}', 'formulaires', defaults: ['isTraite' => false])]
+    public function readforms(FormulaireRepository $FormulaireRepository, bool $isTraite = false)
     {
         $selecteur = 'is_traite';
         $valeur = false;
@@ -45,16 +45,36 @@ class BenevoleController extends AbstractController
         $ordre = 'ASC';
 
         // récupère tous les articles en BDD non traités et triés par date de création croissant
-        $formulaires = $FormulaireRepository->findBy([$selecteur => $valeur], [$tri => $ordre]);
+        $formulaires = $FormulaireRepository->findBy(['is_traite' => $isTraite], [$tri => $ordre]);
 
 
         return $this->render('interne/page/listFormulaires.html.twig', [
-            'formulaires' =>  $formulaires
+            'formulaires' =>  $formulaires,
+            'isTraite' => $isTraite
         ]);
     }
 
 
+//-----------------------------------------------------------------------------------------------------------
+// Modifier le statut 'isTraite'
+    #[Route('/admin/benevole/formulaire/traiter/{id}', 'traiter_formulaire')]
+    public function traiterFormulaire(FormulaireRepository $formulaireRepository, EntityManagerInterface $entityManager, int $id)
+    {
+        // Récupère le formulaire par son id
+        $formulaire = $formulaireRepository->find($id);
 
+        if ($formulaire) {
+            // Inverse le statut 'is_traite'
+            $formulaire->setIsTraite(!$formulaire->getIsTraite());
+
+            // Enregistre les modifications dans la base de données
+            $entityManager->persist($formulaire);
+            $entityManager->flush();
+        }
+
+        // Redirige vers la liste des formulaires
+        return $this->redirectToRoute('formulaires');
+    }
 
 
 
