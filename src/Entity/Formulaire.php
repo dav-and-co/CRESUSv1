@@ -16,26 +16,27 @@ class Formulaire
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotNull(['message' => 'le nom ne doit pas être nul'])]
+    #[Assert\NotNull(['message' => 'ne doit pas être nul'])]
     private ?string $nom_demandeur = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotNull(['message' => 'le prénom ne doit pas être nul'])]
+    #[Assert\NotNull(['message' => 'ne doit pas être nul'])]
     private ?string $prenom_demandeur = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     #[Assert\Email(message: 'L\'adresse e-mail n\'est pas valide.')]
+    #[Assert\NotNull(['message' => 'ne doit pas être nul'])]
     private ?string $mail_demandeur = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $telephone_demandeur = null;
+    #[ORM\Column(length: 255)]
+    #[Assert\NotNull(['message' => 'ne doit pas être nul'])]
+   private ?string $telephone_demandeur = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotNull(['message' => 'ne doit pas être nul'])]
     private ?string $permanence_demandeur = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotNull(['message' => 'Merci de préciser votre besoin'])]
     private ?string $besoin_demandeur = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]

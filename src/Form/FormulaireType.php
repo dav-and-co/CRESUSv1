@@ -28,11 +28,11 @@ class FormulaireType extends AbstractType
             ])
             ->add('mail_demandeur', EmailType::class, [
                 'label' => 'Votre email',
-                'required' => false,
+                'required' => true,
             ])
             ->add('telephone_demandeur', TextType::class, [
                 'label' => 'Votre téléphone',
-                'required' => false,
+                'required' => true,
             ])
             ->add('besoin_demandeur', ChoiceType::class, [
         "choices" => [

@@ -45,14 +45,14 @@ class AccueilController extends AbstractController
 
     // l'url est appelée et éxécute automatiquement la méthode définie sous la route
 
-    // function qui récupère et affiche les types d'accompagnement de l'association
+    // function qui permet une fois le site choisi, d'envoyer un formulaire de contact
     #[Route('/noustrouver', name: 'noustrouver')]
     public function noustrouver(SiteRepository $siteRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         // Récupére tous les sites actifs par ordre alpha
         $sites = $siteRepository->findBy(['is_actif' => true], ['nom_site' => 'ASC']);
 
-        // Récupére l'identifiant du site sélectionné dans le formulaire twig
+        // Récupére l'identifiant du site sélectionné dans le formulaire twig-get
         $siteId = $request->query->get('site');
         $selectedSite = $siteId ? $siteRepository->find($siteId) : null;
 
@@ -60,11 +60,23 @@ class AccueilController extends AbstractController
         $formulaire = new Formulaire();
         $form = $this->createForm(FormulaireType::class, $formulaire);
 
-        // Traitement de la requête du formulaire
+        // Traitement de la requête du formulaire-post
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
+
             // affecte la valeur non à `is_traite`
             $formulaire->setisTraite(false);
+
+            $nomDemandeur = strip_tags($formulaire->getNomDemandeur());
+            $formulaire->setNomDemandeur($nomDemandeur);
+            $prenomDemandeur = strip_tags($formulaire->getPrenomDemandeur());
+            $formulaire->setPrenomDemandeur($prenomDemandeur);
+            $telephoneDemandeur = strip_tags($formulaire->getTelephoneDemandeur());
+            $formulaire->setTelephoneDemandeur($telephoneDemandeur);
+            $descriptionBesoin = strip_tags($formulaire->getDescriptionBesoin());
+            $formulaire->setDescriptionBesoin($descriptionBesoin);
+
             // affecte la valeur du site choisi
             if ($selectedSite) {
                 $formulaire->setPermanenceDemandeur($selectedSite->getNomSite());

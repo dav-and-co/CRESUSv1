@@ -194,4 +194,41 @@ tableBen {
   color: #42c304;
 }
 
+.mentions {
+  margin: 100px;
+}
+.mentions .button-custom {
+  background-color: #3263b5;
+  color: #E8B436;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: fixed;
+  top: 55vh;
+  left: 20px;
+  z-index: 1000;
+}
+.mentions .button-custom:hover {
+  background-color: #E8B436;
+  color: #3263b5;
+}
+.mentions h1 {
+  text-align: center;
+  color: #3263b5;
+  padding: 20px;
+}
+.mentions h3 {
+  padding: 20px;
+  color: #3263b5;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
 /*# sourceMappingURL=interneStyle.css.map */
