@@ -14,12 +14,14 @@
 @import "partials/headerFooter";
 
 //pages
+@import "pages/landingpage";
+@import "pages/nous";
 @import "pages/aider";
-@import "pages/surendettement";
+@import "pages/dilemme";
 @import "pages/PCB";
 @import "pages/microcredit";
-@import "pages/dilemme";
-@import "pages/security";
+@import "pages/surendettement";
 @import "pages/contact";
-@import "pages/landingpage";
+@import "pages/security";
 @import "pages/mentions";
+

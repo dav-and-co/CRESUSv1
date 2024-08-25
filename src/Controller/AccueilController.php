@@ -164,5 +164,20 @@ class AccueilController extends AbstractController
         return $this->render('gdpublic/page/Aider.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
+// localhost/CresusV1/nous/
+
+    // l'url est appelée et éxécute automatiquement la méthode définie sous la route
+
+    // function qui affiche les informations du surendettement
+    #[Route('/nous', name: 'nous')]
+    public function gpNous(): response
+    {
+
+
+        return $this->render('gdpublic/page/Nous.html.twig' );
+    }
+
+
+
 
 }
