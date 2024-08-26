@@ -691,6 +691,9 @@ footer a {
   line-height: 1.6;
   margin-top: 10px;
 }
+.microcredit .content.active {
+  display: block;
+}
 .microcredit .contentnonhidden {
   padding: 10px 20px 20px;
   line-height: 1.6;
@@ -700,32 +703,27 @@ footer a {
   font-weight: bold;
   text-decoration: underline;
 }
-.microcredit h3.toggle {
+.microcredit .toggle h3 {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.microcredit h3.toggle .chevrons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.microcredit h3.toggle .chevron {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.microcredit .toggle h3 .chevron {
   width: 20px;
   height: 20px;
   cursor: pointer;
+  transition: 0.5s;
+  display: block;
+  transform: translateY(-30%);
+}
+.microcredit .chevron.active {
+  transform: rotate(-180deg) translateY(-10%) !important;
 }
 .microcredit h3.toggle .chevron img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-.microcredit h3.toggle .chevron[data-direction=up] {
-  display: none;
 }
 
 .surendettement {

@@ -137,7 +137,7 @@ class Beneficiaire
         return $this;
     }
 
-    public function getTelephoneBeneficiaire(): ?int
+    public function getTelephoneBeneficiaire(): ?string
     {
         return $this->telephone_beneficiaire;
     }

@@ -11,12 +11,16 @@ namespace App\Controller;
 
 use App\Entity\Formulaire;
 use App\Form\FormulaireType;
+use App\Entity\Beneficiaire;
+use App\Form\BeneficiaireType;
 use App\Repository\FormulaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 // on étend la class AbstractController qui permet d'utiliser des fonctions utilitaires pour les controllers (twig etc)
 class BenevoleController extends AbstractController
@@ -36,7 +40,7 @@ class BenevoleController extends AbstractController
 
 //-----------------------------------------------------------------------------------------------------------
     // lecture formulaires
-    #[Route('/admin/benevole/formulaires/{isTraite}', 'formulaires', defaults: ['isTraite' => false])]
+    #[Route('/benevole/formulaires/{isTraite}', 'formulaires', defaults: ['isTraite' => false])]
     public function readforms(FormulaireRepository $FormulaireRepository, bool $isTraite = false)
     {
         $selecteur = 'is_traite';
@@ -57,7 +61,7 @@ class BenevoleController extends AbstractController
 
 //-----------------------------------------------------------------------------------------------------------
 // Modifier le statut 'isTraite'
-    #[Route('/admin/benevole/formulaire/traiter/{id}', 'traiter_formulaire')]
+    #[Route('/benevole/formulaire/traiter/{id}', 'traiter_formulaire')]
     public function traiterFormulaire(FormulaireRepository $formulaireRepository, EntityManagerInterface $entityManager, int $id)
     {
         // Récupère le formulaire par son id
@@ -76,7 +80,63 @@ class BenevoleController extends AbstractController
         return $this->redirectToRoute('formulaires');
     }
 
+//--------------------------------------------------------------------------------------------------------------
 
+    #[Route('/benevole/rechercheBeneficiaire', name: 'RechercheBeneficiaire')]
+    public function rechercheBeneficiaire(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createFormBuilder()
+            ->add('nom', TextType::class, [
+                'required' => false,
+                'label' => 'Nom',
+                'attr' => ['placeholder' => 'Nom'],
+            ])
+            ->add('prenom', TextType::class, [
+                'required' => false,
+                'label' => 'Prénom',
+                'attr' => ['placeholder' => 'Prénom'],
+            ])
+            ->add('telephone', TextType::class, [
+                'required' => false,
+                'label' => 'Téléphone',
+                'attr' => ['placeholder' => 'Téléphone'],
+            ])
+             ->add('rechercher', SubmitType::class, ['label' => 'Rechercher'])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        $beneficiaires = [];
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            $queryBuilder = $entityManager->getRepository(Beneficiaire::class)->createQueryBuilder('b');
+
+            if ($data['nom']) {
+                $queryBuilder->andWhere('b.nom_beneficiaire LIKE :nom')
+                    ->setParameter('nom', '%' . $data['nom'] . '%');
+            }
+
+            if ($data['prenom']) {
+                $queryBuilder->andWhere('b.prenom_beneficiaire LIKE :prenom')
+                    ->setParameter('prenom', '%' . $data['prenom'] . '%');
+            }
+
+            if ($data['telephone']) {
+                $queryBuilder->andWhere('b.telephone_beneficiaire LIKE :telephone')
+                    ->setParameter('telephone', '%' . $data['telephone'] . '%');
+            }
+
+            $beneficiaires = $queryBuilder->getQuery()->getResult();
+
+        }
+
+        return $this->render('interne/page/RechercheBeneficiaire.html.twig', [
+            'form' => $form->createView(),
+            'beneficiaires' => $beneficiaires,
+        ]);
+    }
 
 }
 

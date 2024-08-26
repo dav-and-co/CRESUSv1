@@ -54,6 +54,10 @@
     margin-top: 10px;
   }
 
+  & .content.active{
+  display: block;
+}
+
   & .contentnonhidden{
     padding: 10px 20px 20px;
     line-height: 1.6;
@@ -66,26 +70,28 @@
 
   }
 
-  h3.toggle {
+ .toggle  h3{
     position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
-  h3.toggle .chevrons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 
-  h3.toggle .chevron {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+  .toggle h3 .chevron {
     width: 20px;
     height: 20px;
     cursor: pointer;
+    transition: 0.5s;
+    display: block;
+    transform: translateY(-30%);
+  }
+
+  .chevron.active{
+
+      transform: rotate(-180deg) translateY(-10%)!important;
+
   }
 
   h3.toggle .chevron img {
@@ -94,7 +100,4 @@
     object-fit: contain;
   }
 
-  h3.toggle .chevron[data-direction="up"] {
-    display: none;
-  }
 }

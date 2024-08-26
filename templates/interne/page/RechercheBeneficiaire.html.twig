@@ -1,0 +1,68 @@
+{# templates/beneficiaire/RechercheBeneficiaire.html.twig #}
+
+{% extends 'interne/partial/intBase.html.twig' %}
+
+{% block metatitle %}
+    - recherche beneficiaire
+{% endblock %}
+
+
+{% block main %}
+    <section class="recherche">
+
+        <h1>Recherche de Bénéficiaires</h1>
+
+        {{ form_start(form) }}
+        <div class="form-container">
+            <div class="form-group">
+                {{ form_label(form.nom) }}
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nom) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.prenom) }}
+                {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.prenom) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.telephone) }}
+                {{ form_widget(form.telephone, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.telephone) }}
+            </div>
+        </div>
+            <div class="form-group">
+                {{ form_widget(form.rechercher, {'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+        {{ form_end(form) }}
+    </section>
+
+    {% if beneficiaires is not empty %}
+        <h2>Résultats de la Recherche</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Téléphone</th>
+                <th>Email</th>
+                <th>Profession</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for beneficiaire in beneficiaires %}
+                <tr>
+                    <td>{{ beneficiaire.nomBeneficiaire }}</td>
+                    <td>{{ beneficiaire.prenomBeneficiaire }}</td>
+                    <td>{{ beneficiaire.telephoneBeneficiaire }}</td>
+                    <td>{{ beneficiaire.mailBeneficiaire }}</td>
+                    <td>{{ beneficiaire.professionBeneficiaire }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucun bénéficiaire trouvé.</p>
+    {% endif %}
+{% endblock %}

@@ -122,7 +122,7 @@ footer {
   align-items: center;
   padding: 20px;
   margin-top: 50px;
-  line-height: 1.1;
+  line-height: 1.5;
 }
 footer .left {
   color: white;
@@ -146,6 +146,9 @@ footer .t10 {
 footer a {
   color: white;
   padding: 5px;
+}
+footer p {
+  margin-bottom: 0;
 }
 
 /*                            liste des bénévoles                */
@@ -192,6 +195,24 @@ tableBen {
 .coloriUpBen {
   font-size: 20px;
   color: #42c304;
+}
+
+.recherche .form-container {
+  display: flex;
+  gap: 1rem;
+}
+.recherche .form-group {
+  flex: 1;
+}
+.recherche .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.recherche .form-group .form-control {
+  width: 100%;
+}
+.recherche .form-group button {
+  margin-top: 1rem;
 }
 
 .mentions {
