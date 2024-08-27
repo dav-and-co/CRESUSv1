@@ -8,3 +8,10 @@ window.addEventListener('scroll', () => {
         nav.style.backgroundColor = "transparent";
     }
 })
+
+let burger = document.querySelector('#hamb');
+let menu = document.querySelector('.nav');
+
+burger.addEventListener('click', () => {
+    menu.classList.toggle('active');
+})

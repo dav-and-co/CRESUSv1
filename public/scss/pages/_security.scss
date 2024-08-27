@@ -2,18 +2,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30vh;
+  height: 40vh;
   margin: 0;
   background-color: white;
 
-  & h1{
-    margin-bottom: 20px;
+  h1{
+    padding-top: 20px;
+    margin: 50px auto;
+
   }
-  & .msgerreur{
+  .msgerreur{
     color: crimson;
     font-size: 20px;
   }
-  & formlog {
+  formlog {
     width: 100%;
     padding: 20px;
     border: 1px solid #ccc;
@@ -21,19 +23,19 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: $fondPagesColor;
   }
-  & formelt {
+  formelt {
     display: flex;
     width: 100%;
     margin-bottom: 15px;
     align-items: stretch;
   }
 
-  & label {
+  label {
     margin-bottom: 5px;
     font-weight: bold;
   }
 
-  & input[type="text"],
+  input[type="text"],
   input[type="password"] {
     padding: 10px;
     font-size: 16px;
@@ -42,7 +44,7 @@
     width: 100%;
   }
 
-  & .submit-button {
+  .submit-button {
     margin-top: 20px;
     width: 100%;
     padding: 10px;
@@ -53,5 +55,10 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+  }
+}
+@media (max-width: 460px) {
+  .security {
+    height: 70vh;
   }
 }

@@ -72,6 +72,8 @@ class AccueilController extends AbstractController
             $formulaire->setNomDemandeur($nomDemandeur);
             $prenomDemandeur = strip_tags($formulaire->getPrenomDemandeur());
             $formulaire->setPrenomDemandeur($prenomDemandeur);
+            $mailDemandeur = strip_tags($formulaire->getMailDemandeur());
+            $formulaire->setMailDemandeur($mailDemandeur);
             $telephoneDemandeur = strip_tags($formulaire->getTelephoneDemandeur());
             $formulaire->setTelephoneDemandeur($telephoneDemandeur);
             $descriptionBesoin = strip_tags($formulaire->getDescriptionBesoin());

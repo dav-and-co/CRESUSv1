@@ -6,13 +6,13 @@
   padding: 20px;
   color: #333;
 
-  & .divcontact {
+  .divcontact {
     width: 50%;
   }
-  & iframe{
+  iframe{
     width: 100%;
   }
-  & .container {
+  .container {
     margin: 0 auto;
     padding: 20px;
     background-color: white;
@@ -20,55 +20,55 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
-  & h3 {
+  h3 {
     color: #333;
     margin-bottom: 20px;
   }
 
-  & h2 {
+  h2 {
     width: 100%;
     color: #333;
     margin-bottom: 20px;
     text-align: center;
   }
 
-  & h4{
+  h4{
     text-decoration: underline;
     margin :20px 0;
   }
 
-  & form {
+  form {
     margin-top: 30px;
   }
 
-  & .form-container {
+  .form-container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 20px;
   }
 
-  & .form-column {
+  .form-column {
     flex: 1;
     min-width: 250px;
   }
 
-  & .form-group {
+  .form-group {
     margin-bottom: 20px;
   }
 
-  & .petitp{
+  .petitp{
     font-size: 13px;
   }
 
-  & label {
+  label {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
     color: #333;
   }
 
-  & input[type="text"],
+  input[type="text"],
   input[type="email"],
   textarea {
     width: 100%;
@@ -79,13 +79,13 @@
     transition: border-color 0.3s ease;
   }
 
-  & input[type="text"]:focus,
+  input[type="text"]:focus,
   input[type="email"]:focus,
   textarea:focus {
     border-color: #bcd9e1;
   }
 
-  & select {
+  select {
     width: 100%;
     padding: 10px;
     border: 1px solid $fondNavColor;
@@ -93,7 +93,7 @@
     background-color: $fondPagesColor;
   }
 
-  & button[type="submit"] {
+  button[type="submit"] {
     width : 100%;
     padding: 10px 20px;
     margin-bottom: 20px;
@@ -105,22 +105,40 @@
     transition: background-color 0.3s ease;
   }
 
-  & button[type="submit"]:hover {
+  button[type="submit"]:hover {
     background-color: #155870;
   }
 
-  & .site-details {
+  .site-details {
     margin-top: 20px;
     padding: 15px;
     background-color: #E2EEF2;
     border-radius: 4px;
   }
 
-  & .site-details p {
+  .site-details p {
     margin: 5px 0;
   }
 
-  & .site-details h3 {
+  .site-details h3 {
     margin-top: 20px;
   }
 }
+
+@media (max-width: 460px) {
+  .contact {
+    display: block;
+  }
+
+  .divcontact {
+    width: 100%!important;
+    margin-bottom: 20px;
+  }
+
+  iframe {
+    width: 100%;
+    height: auto;
+  }
+}
+
+

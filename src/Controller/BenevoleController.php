@@ -14,6 +14,7 @@ use App\Form\FormulaireType;
 use App\Entity\Beneficiaire;
 use App\Form\BeneficiaireType;
 use App\Repository\FormulaireRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -117,7 +118,6 @@ class BenevoleController extends AbstractController
                 $queryBuilder->andWhere('b.nom_beneficiaire LIKE :nom')
                     ->setParameter('nom', '%' . $data['nom'] . '%');
             }
-
             if ($data['prenom']) {
                 $queryBuilder->andWhere('b.prenom_beneficiaire LIKE :prenom')
                     ->setParameter('prenom', '%' . $data['prenom'] . '%');
@@ -129,7 +129,6 @@ class BenevoleController extends AbstractController
             }
 
             $beneficiaires = $queryBuilder->getQuery()->getResult();
-
         }
 
         return $this->render('interne/page/RechercheBeneficiaire.html.twig', [

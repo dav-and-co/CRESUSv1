@@ -40,7 +40,7 @@
                 <td>{{ formulaire.nomDemandeur }}</td>
                 <td>{{ formulaire.prenomDemandeur }}</td>
                 <td>{{ formulaire.telephoneDemandeur }}</td>
-                <td>{{ formulaire.mailDemandeur }}</td>
+                <td>{{ formulaire.mailDemandeur|e('html') }}</td>
                 <td>{{ formulaire.besoinDemandeur }}</td>
                 <td>{{ formulaire.descriptionBesoin }}</td>
                 <td>

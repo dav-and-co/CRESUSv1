@@ -16,6 +16,18 @@ class BeneficiaireRepository extends ServiceEntityRepository
         parent::__construct($registry, Beneficiaire::class);
     }
 
+    public function findAllWithTypeProf()
+    {
+        return $this->createQueryBuilder('b')
+            ->leftJoin('b.libelle_prof', 'tp')
+            ->addSelect('tp')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
+
     //    /**
     //     * @return Beneficiaire[] Returns an array of Beneficiaire objects
     //     */
