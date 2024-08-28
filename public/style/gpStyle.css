@@ -916,6 +916,15 @@ footer a {
   object-fit: contain;
 }
 
+@media (max-width: 460px) {
+  .title-container h2 {
+    margin-bottom: 10px;
+    font-size: 1.8em !important;
+  }
+  .toggle {
+    font-size: 1.1em;
+  }
+}
 .surendettement {
   max-width: 90%;
   margin: 40px auto;
