@@ -110,11 +110,9 @@
       max-width: 60px;
       min-width: 40px;
     }
-
   }
 
-  @media (max-width: 480px) {
-
+  @media screen and (max-width: 480px) {
     .accueil {
       height: auto; /* Suppression de la hauteur fixe */
     }
@@ -126,7 +124,6 @@
 
     .accueil #immArriere {
       display: none;
-
     }
 
     .accueil .textArriere,
@@ -173,7 +170,7 @@
     }
   }
 
-  @media (min-width: 480px) and (max-width: 1024px) {
+  @media screen and (min-width: 480px) and (max-width: 1024px) {
     .solutions .lessolutions {
       flex-direction: column;
       align-items: center;

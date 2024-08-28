@@ -1,19 +1,19 @@
 .recherche{
-  & .form-container {
+ .form-container {
     display: flex;
     gap: 1rem;
   }
-  & .form-group {
+  .form-group {
     flex: 1;
   }
-  & .form-group label {
+  .form-group label {
     display: block;
     margin-bottom: 0.5rem;
   }
-  & .form-group .form-control {
+  .form-group .form-control {
     width: 100%;
   }
-  & .form-group button {
+  .form-group button {
     margin-top: 1rem;
   }
 }

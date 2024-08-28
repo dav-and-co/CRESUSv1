@@ -191,7 +191,7 @@ tableBen {
   color: #42c304;
 }
 
-/* modif d'un bénévole */
+/*                            modif d'un bénévole                     */
 .coloriUpBen {
   font-size: 20px;
   color: #42c304;
@@ -250,6 +250,15 @@ tableBen {
   color: #3263b5;
   text-decoration: underline;
   font-weight: bold;
+}
+
+@media screen and (max-width: 460px) {
+  .mentions {
+    margin: 10px;
+  }
+  button {
+    display: none !important;
+  }
 }
 
 /*# sourceMappingURL=interneStyle.css.map */

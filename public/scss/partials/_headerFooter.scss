@@ -30,6 +30,7 @@ header {
     position: relative;
     max-width: 200px;
   }
+
   .firstli {
     max-width: 100px;
     min-width: 80px;
@@ -45,10 +46,12 @@ header {
     padding: 5px 8px;
     border-radius: 5px;
   }
+
   .headnav:hover {
     color: $textJauneColor;
     background-color: $fondAccueilColor;
   }
+
   .dropdown-menu {
     display: none;
     position: absolute;
@@ -95,7 +98,9 @@ header {
     display: none;
     width:50px;
     padding: 0;
-    position: relative;
+    position: fixed;
+    top: 10px;
+    right: 10px;
     z-index: 3000;
   }
 
@@ -105,7 +110,7 @@ header {
     height:2px;
     background-color: #000;
   }
-  @media screen  and (max-width:768px) {
+  @media screen and (max-width:768px) {
     ul#hamb{
       display: block;
     }
@@ -157,19 +162,19 @@ footer{
     color: white;
     text-align: center;
   }
+
   .t10{
     width: 10%;
   }
+
   a{
     color: white;
     padding:5px;
   }
 
-  @media (max-width: 480px) {
+  @media screen and (max-width: 480px) {
   flex-direction: column;
   align-items: flex-start;
-
-
   .left {
       flex-direction: column;
       align-items: flex-start;

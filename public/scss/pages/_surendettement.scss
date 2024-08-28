@@ -7,34 +7,34 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 
-  & .title-list{
+  .title-list{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 40px;
-    & li{
+    li{
       list-style-type:none;
     }
   }
 
-  & .title-icon{
+  .title-icon{
     width : 20%;
     padding: 0 15px;
   }
 
-  & .title-img1{
+  .title-img1{
     width : 70%;
     height: auto;
   }
 
-  & .title-img2{
+  .title-img2{
     width : 80%;
     height: auto;
   }
 
-  & .title-container {
+  .title-container {
     margin-bottom: 30px;
-    & h2 {
+    h2 {
       color: $textJauneColor;
       text-align: center;
       margin-bottom: 30px;
@@ -42,7 +42,7 @@
     }
   }
 
-  & .carousel {
+  .carousel {
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -50,12 +50,12 @@
     margin-top: 30px;
   }
 
-  & .carousel-inner {
+  .carousel-inner {
     display: flex;
     transition: transform 0.5s ease-in-out;
   }
 
-  & .carousel-item {
+  .carousel-item {
     min-width: 100%;
     box-sizing: border-box;
     padding: 20px 50px;
@@ -69,24 +69,24 @@
 
   }
 
-  & li{
+  li{
     list-style-type:square;
     margin-left: 30px;
   }
 
-  & .carousel-item h3 {
+  .carousel-item h3 {
     color: $textJauneColor;
     margin:0 10px 20px 10px;
     text-align: center;
     font-size: 1.8rem;
   }
 
-  & .carousel-item p, .carousel-item ul {
+  .carousel-item p, .carousel-item ul {
     margin: 10px 0;
     line-height: 1.5;
   }
 
-  & .carousel-controls {
+  .carousel-controls {
     position: absolute;
     top: 50%;
     left: 0;
@@ -97,7 +97,7 @@
     pointer-events: none;
   }
 
-  & .carousel-control {
+  .carousel-control {
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     border: none;
@@ -108,18 +108,18 @@
     transition: background-color 0.3s;
   }
 
-  & .carousel-control:hover {
+  .carousel-control:hover {
     background-color: rgba(0, 0, 0, 0.8);
   }
 
-  & .jaune{
+  .jaune{
     color: $footerColor;
     font-weight: bold;
   }
-  & .ital{
+  .ital{
     font-style:italic;
   }
-  & .carousel-pagination {
+  .carousel-pagination {
     display: flex;
     justify-content: center;
     position: absolute;
@@ -129,7 +129,7 @@
     gap: 10px;
   }
 
-  & .dot {
+  .dot {
     height: 12px;
     width: 12px;
     background-color: #bbb;
@@ -139,7 +139,30 @@
     transition: background-color 0.3s;
   }
 
-  & .dot.active {
+  .dot.active {
     background-color: #717171;
   }
+
+  @media screen and (max-width: 768px) {
+    .title-list img{
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 460px) {
+
+    .title-container h2 {
+      font-size: 1.1em!important ;
+    }
+
+    .title-list{
+      display: block;
+    }
+
+    .carousel-item {
+      padding: 0!important ;
+    }
+  }
 }
+
+

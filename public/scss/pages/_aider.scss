@@ -55,10 +55,12 @@
     align-items: center;
     gap: 20px;
   }
+
   .image-container img {
     max-width: 100%;
     height: auto;
   }
+
   .align-container {
     display: flex;
     justify-content: center;
@@ -68,7 +70,6 @@
   .align-container:hover {
     transform: translateY(-5px);
   }
-
 
   .image-text {
     display: flex;
@@ -88,7 +89,6 @@
     font-size: 1em;
     line-height: 1.6;
     text-align: center;
-
   }
 
   .image-text a:hover {
@@ -124,62 +124,55 @@
   .rouge{
     color: #DE6366;
   }
-
-}
-
-@media (min-width: 461px) and (max-width: 1024px) {
-  .aider {
-    padding: 10px;
-    width: 100%;
-    margin: 0;
-  }
-  .column img,
-  .image-text img {
-    display: none;
-  }
-}
-
-@media (max-width: 460px) {
-  .aider {
-    padding: 10px;
-    width: 100%;
-    margin: 0;
+  @media  screen and (max-width: 1024px) {
+    .aider {
+      padding: 10px;
+      width: 100%;
+      margin: 0;
+    }
+    .column img,
+    .image-text img {
+      display: none;
+    }
   }
 
-  .columns {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
+  @media screen and (max-width: 460px) {
+    .columns {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
 
-  .column {
-    width: 100%!important;
-    display: flex;
-    flex-direction: row!important;
-    justify-content: space-between;
-    gap: 10px;
-  }
+    .column {
+      width: 100%!important;
+      display: flex;
+      flex-direction: row!important;
+      justify-content: space-between;
+      gap: 10px;
+    }
 
-  .align-container {
-    width: 100%!important;
-    box-sizing: border-box!important;
-  }
+    .align-container {
+      width: 100%!important;
+      box-sizing: border-box!important;
+    }
 
-  .image-container {
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
+    .image-container {
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
 
-  .column img,
-  .image-text img {
-    display: none;
-  }
+    .column img,
+    .image-text img {
+      display: none;
+    }
 
-  .image-text a {
-    font-size: 0.9em;
-    line-height: 1.4;
-    text-align: center;
+    .image-text a {
+      font-size: 0.9em;
+      line-height: 1.4;
+      text-align: center;
+    }
   }
 }
+

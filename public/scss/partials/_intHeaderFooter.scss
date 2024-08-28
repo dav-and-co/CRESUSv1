@@ -5,7 +5,7 @@ header {
   padding: 20px 0;
 
 
-  & nav {
+  nav {
     width: 100%;
     position: fixed;
     top: 0;
@@ -14,24 +14,24 @@ header {
     z-index: 30;
   }
 
-  & ul {
+  ul {
     display: flex;
     justify-content: space-around;
     padding: 20px 50px;
     align-items: center;
   }
 
-  & li {
+  li {
     position: relative;
     max-width: 200px;
   }
 
-  & .firstli {
+  .firstli {
     max-width: 100px;
     min-width: 80px;
   }
 
-  & .headnav {
+  .headnav {
     font-family: 'roboto', sans-serif;
     font-weight: bold;
     font-size: 1rem;
@@ -42,7 +42,7 @@ header {
     border-radius: 5px;
   }
 
-  & .headnav:hover {
+  .headnav:hover {
     color: $textJauneColor;
     background-color: $fondAccueilColor;
   }
@@ -57,30 +57,30 @@ footer{
   padding : 20px;
   margin-top: 50px;
   line-height: 1.5;
-  & .left{
+  .left{
     color: white;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     width: 25%;
-    & #gras{
+    #gras{
       font-weight: bold;
     }
   }
-  & .t20{
+  .t20{
     width: 20%;
     color: white;
     text-align: center;
   }
-  & .t10{
+  .t10{
     width: 10%;
   }
-  & a{
+  a{
     color: white;
     padding:5px;
   }
-  & p{
+  p{
     margin-bottom: 0;
   }
 }

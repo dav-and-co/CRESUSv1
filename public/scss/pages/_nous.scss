@@ -70,29 +70,31 @@
       color: $textJauneColor;
       font-weight: bold;
     }
+
+  @media screen and  (max-width: 768px) {
+    .content-row {
+      flex-direction: column;
+      margin: 0;
+    }
+
+    .image {
+      width: 100%;
+      padding: 10px 0;
+      order: -1;
+      text-align: center;
+    }
+
+    .image img {
+      max-width: 90%;
+      margin: 0 auto;
+    }
+
+    .text {
+      width: 100%;
+      padding: 10px 0;
+      text-align: center;
+    }
+  }
 }
 
-@media (max-width: 768px) {
-  .nous .content-row {
-    flex-direction: column;
-    margin: 0;
-  }
 
-  .nous .image {
-    width: 100%;
-    padding: 10px 0;
-    order: -1;
-    text-align: center;
-  }
-
-  .nous .image img {
-    max-width: 90%;
-    margin: 0 auto;
-  }
-
-  .nous .text {
-    width: 100%;
-    padding: 10px 0;
-    text-align: center;
-  }
-}

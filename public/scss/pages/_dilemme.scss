@@ -4,35 +4,35 @@
   border-radius: 8px;
   color: $textNoirColor;
 
-  & h2 {
+  h2 {
     color: #E8B436;
     font-size: 2rem;
     margin: 40px 0;
     text-align: center;
   }
 
-  & .title-list{
+  .title-list{
     display: flex;
     justify-content: space-between;
     margin-top: 40px;
   }
 
-  & .title-icon{
+  .title-icon{
     width : 15%;
   }
 
-  & .title-img{
+  .title-img{
     width : 100%;
     height: auto;
   }
 
-  & .content {
+  .content {
     max-width: 800px;
     margin: 0 auto;
     line-height: 1.6;
   }
 
-  & .features {
+  .features {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -40,7 +40,7 @@
     gap: 20px;
   }
 
-  & .feature {
+  .feature {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
@@ -52,21 +52,21 @@
     transition: transform 0.3s ease;
   }
 
-  & .feature:hover {
+  .feature:hover {
     transform: translateY(-5px);
   }
 
-  & .feature h3 {
+  .feature h3 {
     color: $fondAccueilColor;
     font-size: 1.5rem;
     margin: 15px 0;
   }
 
-  & .feature p {
+  .feature p {
     color: #666;
   }
 
-  & .image-container {
+  .image-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,11 +74,11 @@
     margin-bottom: 15px;
   }
 
-  & .image-container img {
+  .image-container img {
     max-width: 30%;
     height: auto;
   }
-  & .troisieme-article {
+  .troisieme-article {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -89,45 +89,65 @@
     margin: 20px auto;
   }
 
-  & .ateliers-content {
+  .ateliers-content {
     display: flex;
     justify-content: space-between;
     width: 100%;
   }
 
-  & .ateliers-description {
+  .ateliers-description {
     flex-basis: 60%;
     padding-right: 20px;
   }
 
-  & .ateliers-details {
+  .ateliers-details {
     flex-basis: 40%;
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
   }
 
-  & .detail {
+  .detail {
     display: flex;
     align-items: center;
     gap: 10px;
   }
 
-  & .detail img {
+  .detail img {
     width: 40px;
     height: auto;
   }
 
-  & .troisieme-article h2 {
+  .troisieme-article h2 {
     color: $textJauneColor;
     font-size: 2rem;
     margin-bottom: 20px;
     text-align: center;
   }
-  & .troisieme-article p {
+  .troisieme-article p {
     color: white;
     font-size: 15px;
     margin: 5px 0;
     text-align: left;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .troisieme-article {
+      width: 90%;
+    }
+  }
+
+  @media screen and (max-width: 460px) {
+    .title-icon img {
+      display: none;
+    }
+
+    .features {
+      justify-content: center;
+    }
+
+    .ateliers-content{
+      display: block;
+    }
   }
 }

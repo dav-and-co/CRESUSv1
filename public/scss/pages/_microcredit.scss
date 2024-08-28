@@ -6,7 +6,6 @@
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-
   .title-list{
     display: flex;
     justify-content: space-between;
@@ -67,7 +66,6 @@
   .souligne{
     font-weight: bold ;
     text-decoration: underline;
-
   }
 
  .toggle  h3{
@@ -76,8 +74,6 @@
     align-items: center;
     justify-content: space-between;
   }
-
-
 
   .toggle h3 .chevron {
     width: 20px;
@@ -89,9 +85,7 @@
   }
 
   .chevron.active{
-
       transform: rotate(-180deg) translateY(-10%)!important;
-
   }
 
   h3.toggle .chevron img {
@@ -99,16 +93,17 @@
     height: 100%;
     object-fit: contain;
   }
-
-}
-
-@media (max-width: 460px) {
-  .title-container h2 {
-    margin-bottom: 10px;
-    font-size: 1.8em!important;
+  @media screen and (max-width: 460px) {
+    .title-container h2 {
+      margin-bottom: 10px;
+      font-size: 1.8em!important;
+    }
+    .toggle {
+      font-size: 1.1em;
+    }
+    .bouton a {
+      font-size: 1em;
+    }
   }
-  .toggle {
-    font-size: 1.1em;
-  }
+ }
 
-}

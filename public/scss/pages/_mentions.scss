@@ -1,41 +1,49 @@
 .mentions {
   margin: 100px;
 
-
-    & .button-custom {
-      background-color: $textBleuColor;
-      color: $textJauneColor;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      position: fixed;
-      top: 55vh;
-      left: 20px;
-      z-index: 1000;
-    }
-
-    & .button-custom:hover {
-      background-color: $textJauneColor;
-      color: $textBleuColor;
-    }
-
-  & h1{
+  .button-custom {
+    background-color: $textBleuColor;
+    color: $textJauneColor;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
     text-align: center;
-    color: $textBleuColor;
-    padding : 20px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    position: fixed;
+    top: 55vh;
+    left: 20px;
+    z-index: 1000;
   }
 
-  & h3{
-   padding : 20px;
+  .button-custom:hover {
+    background-color: $textJauneColor;
+    color: $textBleuColor;
+  }
+
+  h1 {
+    text-align: center;
+    color: $textBleuColor;
+    padding: 20px;
+  }
+
+  h3 {
+    padding: 20px;
     color: $textBleuColor;
     text-decoration: underline;
     font-weight: bold;
   }
+}
+
+  @media screen and (max-width: 460px) {
+    .mentions {
+      margin: 10px;
+  }
+    button{
+      display: none!important;
+    }
 }

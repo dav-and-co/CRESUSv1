@@ -9,9 +9,11 @@
   .divcontact {
     width: 50%;
   }
+
   iframe{
     width: 100%;
   }
+
   .container {
     margin: 0 auto;
     padding: 20px;
@@ -125,9 +127,9 @@
   }
 }
 
-@media (max-width: 460px) {
+@media screen and (max-width: 460px) {
   .contact {
-    display: block;
+    display: block!important;
   }
 
   .divcontact {
@@ -140,5 +142,7 @@
     height: auto;
   }
 }
+
+
 
 
