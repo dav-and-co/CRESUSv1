@@ -7,10 +7,8 @@ declare(strict_types=1);
 // on crée un namespace qui permet d'identifier le chemin afin d'utiliser la classe actuelle
 namespace App\Controller;
 
-// on appelle le chemin (namespace) des classes utilisées et symfony fera le require de ces classes
-
+//Importation des classes nécessaires avec leurs namespaces pour pouvoir les utiliser
 use App\Entity\Formulaire;
-use App\Entity\Site;
 use App\Form\FormulaireType;
 use App\Repository\SiteRepository;
 use App\Repository\TypeDemandeRepository;
@@ -25,27 +23,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccueilController extends AbstractController
 {
 //-----------------------------------------------------------------------------------------------------------
-    // localhost/CresusV1/public/
+// localhost/CresusV1/public/
 
     // l'url est appelée et éxécute automatiquement la méthode définie sous la route
 
-    // function qui récupère et affiche les types d'accompagnement de l'association
+    // fonction qui récupère et affiche les types d'accompagnement de l'association
     #[Route('/', name: 'Accueil')]
     public function gpAccueil(TypeDemandeRepository $TypeDemandeRepository): response
     {
         // récupère tous les articles en BDD
         $typedemande = $TypeDemandeRepository->findAll();
 
+        // Rend la vue Twig en y passant données récupérées
         return $this->render('gdpublic/page/Accueil.html.twig', [
             'typedemandes' => $typedemande
         ]);
     }
 //-----------------------------------------------------------------------------------------------------------
-    // localhost/CresusV1/public/NousTrouver
+    // localhost/CresusV1/noustrouver
 
     // l'url est appelée et éxécute automatiquement la méthode définie sous la route
 
-    // function qui permet une fois le site choisi, d'envoyer un formulaire de contact
+    // fonction qui permet une fois le site choisi, d'afficher et d'envoyer un formulaire de contact
     #[Route('/noustrouver', name: 'noustrouver')]
     public function noustrouver(SiteRepository $siteRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -54,36 +53,39 @@ class AccueilController extends AbstractController
 
         // Récupére l'identifiant du site sélectionné dans le formulaire twig-get
         $siteId = $request->query->get('site');
+
+        // Si un identifiant est sélectionné, récupère le site correspondant, sinon null
         $selectedSite = $siteId ? $siteRepository->find($siteId) : null;
 
-        // Création du formulaire
+        // Création d'un nouvel objet Formulaire pour stocker les données du formulaire
         $formulaire = new Formulaire();
+        // Création du formulaire basé sur la classe FormulaireType et l'objet $formulaire
         $form = $this->createForm(FormulaireType::class, $formulaire);
 
-        // Traitement de la requête du formulaire-post
+        // Gère la requête POST si le formulaire a été soumis
         $form->handleRequest($request);
 
+        // Vérifie si le formulaire a été soumis et s'il est valide
         if ($form->isSubmitted() && $form->isValid()) {
 
             // affecte la valeur non à `is_traite`
             $formulaire->setisTraite(false);
 
-            $nomDemandeur = strip_tags($formulaire->getNomDemandeur());
-            $formulaire->setNomDemandeur($nomDemandeur);
-            $prenomDemandeur = strip_tags($formulaire->getPrenomDemandeur());
-            $formulaire->setPrenomDemandeur($prenomDemandeur);
-            $mailDemandeur = strip_tags($formulaire->getMailDemandeur());
-            $formulaire->setMailDemandeur($mailDemandeur);
-            $telephoneDemandeur = strip_tags($formulaire->getTelephoneDemandeur());
-            $formulaire->setTelephoneDemandeur($telephoneDemandeur);
-            $descriptionBesoin = strip_tags($formulaire->getDescriptionBesoin());
-            $formulaire->setDescriptionBesoin($descriptionBesoin);
+            // contrôle sanitaire des données saisies
+            $formulaire->setNomDemandeur(strip_tags($formulaire->getNomDemandeur()));
+            $formulaire->setPrenomDemandeur(strip_tags($formulaire->getPrenomDemandeur()));
+            $formulaire->setMailDemandeur(strip_tags($formulaire->getMailDemandeur()));
+            $formulaire->setTelephoneDemandeur(strip_tags($formulaire->getTelephoneDemandeur()));
+            if ($formulaire->getDescriptionBesoin()) {
+                $formulaire->setDescriptionBesoin(strip_tags($formulaire->getDescriptionBesoin()));
+            }
 
             // affecte la valeur du site choisi
             if ($selectedSite) {
                 $formulaire->setPermanenceDemandeur($selectedSite->getNomSite());
             }
 
+            //persite et sauvegarde les changements en base de données
             $entityManager->persist($formulaire);
             $entityManager->flush();
 
@@ -93,7 +95,7 @@ class AccueilController extends AbstractController
             // Redirection pour éviter la soumission multiple
             return $this->redirectToRoute('noustrouver');
         }
-
+        // affiche la vue Twig avec les paramètres
         return $this->render('gdpublic/page/NousTrouver.html.twig', [
             'sites' => $sites,
             'selectedSite' => $selectedSite,
@@ -110,7 +112,6 @@ class AccueilController extends AbstractController
     public function gpDilemme(): response
     {
 
-
         return $this->render('gdpublic/page/Dilemme.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
@@ -122,7 +123,6 @@ class AccueilController extends AbstractController
     #[Route('/microcredit', name: 'Microcredit')]
     public function gpMicroCredit(): response
     {
-
 
         return $this->render('gdpublic/page/Microcredit.html.twig' );
     }
@@ -136,7 +136,6 @@ class AccueilController extends AbstractController
     public function gpPCB(): response
     {
 
-
         return $this->render('gdpublic/page/PCB.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
@@ -149,7 +148,6 @@ class AccueilController extends AbstractController
     public function gpSurendettement(): response
     {
 
-
         return $this->render('gdpublic/page/Surendettement.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
@@ -161,8 +159,6 @@ class AccueilController extends AbstractController
     #[Route('/aider', name: 'Aider')]
     public function gpAider(): response
     {
-
-
         return $this->render('gdpublic/page/Aider.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
@@ -174,12 +170,7 @@ class AccueilController extends AbstractController
     #[Route('/nous', name: 'nous')]
     public function gpNous(): response
     {
-
-
         return $this->render('gdpublic/page/Nous.html.twig' );
     }
-
-
-
-
+//-----------------------------------------------------------------------------------------------------------
 }
