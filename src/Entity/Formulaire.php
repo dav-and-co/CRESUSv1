@@ -72,7 +72,7 @@ class Formulaire
 
     public function setNomDemandeur(string $nom_demandeur): static
     {
-        $this->nom_demandeur = $nom_demandeur;
+        $this->nom_demandeur = mb_strtoupper($nom_demandeur, 'UTF-8');
 
         return $this;
     }
@@ -84,7 +84,7 @@ class Formulaire
 
     public function setPrenomDemandeur(string $prenom_demandeur): static
     {
-        $this->prenom_demandeur = $prenom_demandeur;
+        $this->prenom_demandeur = mb_strtoupper($prenom_demandeur, 'UTF-8');
 
         return $this;
     }

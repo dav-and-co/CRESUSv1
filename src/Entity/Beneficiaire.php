@@ -96,7 +96,7 @@ class Beneficiaire
 
     public function setNomBeneficiaire(string $nom_beneficiaire): static
     {
-        $this->nom_beneficiaire = $nom_beneficiaire;
+        $this->nom_beneficiaire = mb_strtoupper($nom_beneficiaire, 'UTF-8');
 
         return $this;
     }
@@ -108,7 +108,7 @@ class Beneficiaire
 
     public function setPrenomBeneficiaire(string $prenom_beneficiaire): static
     {
-        $this->prenom_beneficiaire = $prenom_beneficiaire;
+        $this->prenom_beneficiaire = mb_strtoupper($prenom_beneficiaire, 'UTF-8');
 
         return $this;
     }

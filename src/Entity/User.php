@@ -165,7 +165,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setNomUser(string $nomUser): static
     {
-        $this->nomUser = $nomUser;
+        $this->nomUser = mb_strtoupper($nomUser, 'UTF-8');
 
         return $this;
     }
@@ -177,7 +177,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setPrenomUser(string $prenomUser): static
     {
-        $this->prenomUser = $prenomUser;
+        $this->prenomUser = mb_strtoupper($prenomUser, 'UTF-8');
 
         return $this;
     }
