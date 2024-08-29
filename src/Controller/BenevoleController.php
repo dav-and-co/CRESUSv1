@@ -14,7 +14,7 @@ use App\Form\FormulaireType;
 use App\Entity\Beneficiaire;
 use App\Form\BeneficiaireType;
 use App\Repository\FormulaireRepository;
-
+use App\Repository\DemandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -101,41 +101,115 @@ class BenevoleController extends AbstractController
                 'required' => false,
                 'label' => 'Téléphone',
                 'attr' => ['placeholder' => 'Téléphone'],
-            ])
-             ->add('rechercher', SubmitType::class, ['label' => 'Rechercher'])
-            ->getForm();
+        ])
+        ->add('rechercher', SubmitType::class, ['label' => 'Rechercher'])
+        ->getForm();
 
-        $form->handleRequest($request);
+    $form->handleRequest($request);
 
-        $beneficiaires = [];
+        // Initialisation des variables de tri avant le traitement du formulaire
+        $sort = $request->query->get('sort', 'nom');
+        $order = $request->query->get('order', 'asc');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
+    $beneficiaires = [];
 
-            $queryBuilder = $entityManager->getRepository(Beneficiaire::class)->createQueryBuilder('b');
+    if ($form->isSubmitted() && $form->isValid()|| $request->query->has('sort')) {
+        $data = $form->getData();
 
-            if ($data['nom']) {
-                $queryBuilder->andWhere('b.nom_beneficiaire LIKE :nom')
-                    ->setParameter('nom', '%' . $data['nom'] . '%');
-            }
-            if ($data['prenom']) {
-                $queryBuilder->andWhere('b.prenom_beneficiaire LIKE :prenom')
-                    ->setParameter('prenom', '%' . $data['prenom'] . '%');
-            }
+        // Construction de la requête pour obtenir les bénéficiaires
+        $queryBuilder = $entityManager->getRepository(Beneficiaire::class)->createQueryBuilder('b');
 
-            if ($data['telephone']) {
-                $queryBuilder->andWhere('b.telephone_beneficiaire LIKE :telephone')
-                    ->setParameter('telephone', '%' . $data['telephone'] . '%');
-            }
-
-            $beneficiaires = $queryBuilder->getQuery()->getResult();
+        // Appliquer les filtres en fonction des champs du formulaire
+        if (!empty($data['nom'])) {
+            $queryBuilder->andWhere('b.nom_beneficiaire LIKE :nom')
+                ->setParameter('nom', '%' . $data['nom'] . '%');
+        }
+        if (!empty($data['prenom'])) {
+            $queryBuilder->andWhere('b.prenom_beneficiaire LIKE :prenom')
+                ->setParameter('prenom', '%' . $data['prenom'] . '%');
+        }
+        if (!empty($data['telephone'])) {
+            $queryBuilder->andWhere('b.telephone_beneficiaire LIKE :telephone')
+                ->setParameter('telephone', '%' . $data['telephone'] . '%');
         }
 
-        return $this->render('interne/page/RechercheBeneficiaire.html.twig', [
-            'form' => $form->createView(),
-            'beneficiaires' => $beneficiaires,
+        // Appliquer le tri en fonction des paramètres
+        if (in_array($sort, ['nom', 'prenom', 'telephone']) && in_array($order, ['asc', 'desc'])) {
+            $sortField = match ($sort) {
+                'nom' => 'b.nom_beneficiaire',
+                'prenom' => 'b.prenom_beneficiaire',
+                'telephone' => 'b.telephone_beneficiaire',
+                default => 'b.nom_beneficiaire',
+            };
+            $queryBuilder->orderBy($sortField, $order);
+        }
+
+        // Jointure pour récupérer les demandes associées
+        $queryBuilder->leftJoin('b.demandes', 'd')
+            ->addSelect('d');
+
+        // Récupérer les résultats
+        $beneficiaires = $queryBuilder->getQuery()->getResult();
+        // dd($beneficiaires);
+    }
+
+    return $this->render('interne/page/RechercheBeneficiaire.html.twig', [
+        'form' => $form->createView(),
+        'beneficiaires' => $beneficiaires,
+        'sortField' => $sort,
+        'sortOrder' => $order,
+    ]);
+    }
+
+//--------------------------------------------------------------------------------------------------------------
+    #[Route('/benevole/insertBeneficiaire', name: 'insertBeneficiaire')]
+    public function insertBeneficiaire(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $beneficiaire = new Beneficiaire();
+
+        $beneficiaireCreateForm = $this->createForm(BeneficiaireType::class, $beneficiaire);
+        $beneficiaireCreateForm->handleRequest($request);
+
+        if ($beneficiaireCreateForm->isSubmitted() && $beneficiaireCreateForm->isValid()) {
+            $entityManager->persist($beneficiaire);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Bénéficiaire bien ajouté !');
+            return $this->redirectToRoute('insertBeneficiaire');
+        }
+        $beneficiaireCreateFormView = $beneficiaireCreateForm->createView();
+
+        return $this->render('interne/page/insertBeneficiaire.html.twig', [
+            'beneficiaireForm' => $beneficiaireCreateFormView
         ]);
     }
+
+//--------------------------------------------------------------------------------------------------------------
+
+    #[Route('/benevole/insertDemande/{id}', name: 'insertDemande')]
+    public function insertDemande(Request $request, EntityManagerInterface $entityManager, int $id): Response
+    {
+
+
+        return $this->render('interne/page/insertDemande.html.twig', [
+            'id'=>$id
+        ]);
+    }
+
+
+//--------------------------------------------------------------------------------------------------------------
+
+    #[Route('/benevole/modifDemande/{id}', name: 'modifDemande')]
+    public function modifDemande(Request $request, EntityManagerInterface $entityManager, int $id): Response
+    {
+
+
+        return $this->render('interne/page/modifDemande.html.twig', [
+            'id'=>$id
+        ]);
+    }
+
+
 
 }
 

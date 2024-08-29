@@ -16,6 +16,10 @@ class BeneficiaireRepository extends ServiceEntityRepository
         parent::__construct($registry, Beneficiaire::class);
     }
 
+
+    /**
+     * Récupère les libellés prof d'un bénéficiaire donné.
+     */
     public function findAllWithTypeProf()
     {
         return $this->createQueryBuilder('b')
@@ -25,6 +29,41 @@ class BeneficiaireRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Récupère toutes les demandes associées à un bénéficiaire donné.
+     */
+    public function findDemandesByBeneficiaire(Beneficiaire $beneficiaire)
+    {
+        return $this->createQueryBuilder('b')
+            ->leftJoin('b.demandes', 'd')
+            ->addSelect('d')
+            ->where('b.id = :beneficiaireId')
+            ->setParameter('beneficiaireId', $beneficiaire->getId())
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findBySearchCriteria($criteria, $sortField = 'nom', $sortOrder = 'asc')
+    {
+        $qb = $this->createQueryBuilder('b');
+
+        if ($criteria['nom']) {
+            $qb->andWhere('b.nomBeneficiaire LIKE :nom')
+                ->setParameter('nom', '%'.$criteria['nom'].'%');
+        }
+        if ($criteria['prenom']) {
+            $qb->andWhere('b.prenomBeneficiaire LIKE :prenom')
+                ->setParameter('prenom', '%'.$criteria['prenom'].'%');
+        }
+        if ($criteria['telephone']) {
+            $qb->andWhere('b.telephoneBeneficiaire LIKE :telephone')
+                ->setParameter('telephone', '%'.$criteria['telephone'].'%');
+        }
+
+        $qb->orderBy('b.' . $sortField, $sortOrder);
+
+        return $qb->getQuery()->getResult();
+    }
 
 
 

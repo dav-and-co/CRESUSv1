@@ -1,19 +1,28 @@
-.recherche{
- .form-container {
+.recherche {
+  .form-container {
     display: flex;
     gap: 1rem;
   }
+
   .form-group {
     flex: 1;
   }
+
   .form-group label {
     display: block;
     margin-bottom: 0.5rem;
   }
+
   .form-group .form-control {
     width: 100%;
   }
+
   .form-group button {
     margin-top: 1rem;
   }
+}
+
+ul {
+    margin-bottom: 0 !important;
+    padding-left: 0 !important;
 }

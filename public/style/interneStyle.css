@@ -215,6 +215,11 @@ tableBen {
   margin-top: 1rem;
 }
 
+ul {
+  margin-bottom: 0 !important;
+  padding-left: 0 !important;
+}
+
 .mentions {
   margin: 100px;
 }

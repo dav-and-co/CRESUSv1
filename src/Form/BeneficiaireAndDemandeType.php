@@ -8,13 +8,10 @@ use App\Entity\TypeProf;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BeneficiaireType extends AbstractType
+class BeneficiaireAndDemandeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -33,31 +30,26 @@ class BeneficiaireType extends AbstractType
             ->add('prenom_beneficiaire', null, [
                 'required' => true,
             ])
-            ->add('ddn_beneficiaire', DateType::class, [
+            ->add('ddn_beneficiaire', null, [
                 'widget' => 'single_text',
-                'format' => 'dd/MM/yyyy',
-                'html5' => false,
-                'attr' => [
-                    'placeholder' => 'jj/mm/aaaa',
-                ],
-                    'required' => false,
-            ])
-            ->add('mail_beneficiaire', EmailType::class, [
                 'required' => false,
             ])
-            ->add('telephone_beneficiaire', TextType::class, [
+            ->add('mail_beneficiaire', null, [
+                'required' => false,
+            ])
+            ->add('telephone_beneficiaire', null, [
                 'required' => false,
             ])
             ->add('profession_beneficiaire', null, [
                 'required' => false,
             ])
-            ->add('libelle_prof', EntityType::class, [
-                'class' => TypeProf::class,
-                'choice_label' => 'libelle_prof',
-                'placeholder' => 'Choisissez un type professionnel',
+            ->add('libelle_prof', null, [
                 'required' => false,
             ])
-            ;
+            ->add('demandes', null, [
+                'required' => false,
+                'multiple' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -10,7 +10,7 @@
 {% block main %}
     <section class="recherche">
 
-        <h1>Recherche de Bénéficiaires</h1>
+        <h1 class="text-success">Recherche de Bénéficiaires</h1>
 
         {{ form_start(form) }}
         <div class="form-container">
@@ -39,15 +39,47 @@
     </section>
 
     {% if beneficiaires is not empty %}
+        <div class="addben">
+            <a href="{{ path('insertBeneficiaire')}}"><i class="fa-solid fa-user-plus tailleiAddBen" > <span>Ajouter un bénéficiaire</span></i></a>
+        </div>
+
         <h2>Résultats de la Recherche</h2>
         <table class="table">
             <thead>
             <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Téléphone</th>
+                <th>
+                    <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'sort': 'nom', 'order': sortField == 'nom' and sortOrder == 'asc' ? 'desc' : 'asc'})) }}">
+                        Nom
+                        {% if sortField == 'nom' %}
+                            <i class="fa fa-sort-{{ sortOrder == 'asc' ? 'up' : 'down' }}"></i>
+                        {% else %}
+                            <i class="fa fa-sort"></i>
+                        {% endif %}
+                    </a>
+                </th>
+                <th>
+                    <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'sort': 'prenom', 'order': sortField == 'prenom' and sortOrder == 'asc' ? 'desc' : 'asc'})) }}">
+                        Prénom
+                        {% if sortField == 'prenom' %}
+                            <i class="fa fa-sort-{{ sortOrder == 'asc' ? 'up' : 'down' }}"></i>
+                        {% else %}
+                            <i class="fa fa-sort"></i>
+                        {% endif %}
+                    </a>
+                </th>
+                <th>
+                    <a href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'sort': 'telephone', 'order': sortField == 'telephone' and sortOrder == 'asc' ? 'desc' : 'asc'})) }}">
+                        Téléphone
+                        {% if sortField == 'telephone' %}
+                            <i class="fa fa-sort-{{ sortOrder == 'asc' ? 'up' : 'down' }}"></i>
+                        {% else %}
+                            <i class="fa fa-sort"></i>
+                        {% endif %}
+                    </a>
+                </th>
                 <th>Email</th>
-                <th>Profession</th>
+                <th>Demandes de la personne</th>
+                <th>Nouvelle Demande</th>
             </tr>
             </thead>
             <tbody>
@@ -57,12 +89,35 @@
                     <td>{{ beneficiaire.prenomBeneficiaire }}</td>
                     <td>{{ beneficiaire.telephoneBeneficiaire }}</td>
                     <td>{{ beneficiaire.mailBeneficiaire }}</td>
-                    <td>{{ beneficiaire.libelleProf.libelleProf }}</td>
+                    <td>
+                        <ul>
+                            {% for demande in beneficiaire.demandes %}
+                                <li>
+                                    <a href="{{ path('modifDemande', {'id': demande.id}) }}" class="btn btn-link">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    {{ demande.createdAt|date('d/m/Y') }} -
+                                    {{ demande.typeDemande.libelleDemande }} -
+                                    {{ demande.positionDemande.libellePosition }}
+                                </li>
+                            {% else %}
+                                <li>Aucune demande associée</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="{{ path('insertDemande', {'id': beneficiaire.id}) }}" class="btn btn-success">
+                            <i class="fa fa-plus-circle"></i> Demande
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     {% else %}
         <p>Aucun bénéficiaire trouvé.</p>
+        <div class="addben">
+            <a href="{{ path('insertBeneficiaire')}}"><i class="fa-solid fa-user-plus tailleiAddBen" > <span>Ajouter un bénéficiaire</span></i></a>
+        </div>
     {% endif %}
 {% endblock %}
