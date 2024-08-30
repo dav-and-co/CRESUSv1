@@ -10,6 +10,8 @@ namespace App\Controller;
 // Importation des classes nécessaires pour ce contrôleur
 use App\Entity\Beneficiaire;
 use App\Form\BeneficiaireType;
+use App\Form\DemandeType;
+use App\Repository\DemandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -141,7 +143,7 @@ class BeneficiaireController extends AbstractController
 
 //--------------------------------------------------------------------------------------------------------------
     #[Route('/benevole/insertDemande/{id}', name: 'insertDemande')]
-    public function insertDemande(Request $request, EntityManagerInterface $entityManager, int $id): Response
+    public function insertDemande(Request $request, int $id): Response
     {
 
 
@@ -152,9 +154,17 @@ class BeneficiaireController extends AbstractController
 
 //--------------------------------------------------------------------------------------------------------------
     #[Route('/benevole/modifDemande/{id}', name: 'modifDemande')]
-    public function modifDemande(Request $request, EntityManagerInterface $entityManager, int $id): Response
+    public function modifDemande(Request $request, EntityManagerInterface $entityManager, DemandeRepository $DemandeRepository, int $id): Response
     {
+        // Récupération du bénévole depuis la base de données en fonction de son ID - donnée poussée dans la route
+        $demande = $DemandeRepository->find($id);
 
+        // Création du formulaire de modification lié à l'entité User
+        $demandeModifForm = $this->createForm(DemandeType::class, $demande);
+
+
+        // Traitement de la requête HTTP
+        $demandeModifForm->handleRequest($request);
 
         return $this->render('interne/page/modifDemande.html.twig', [
             'id'=>$id

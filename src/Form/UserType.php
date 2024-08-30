@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class UserType extends AbstractType
 {
@@ -27,7 +28,18 @@ class UserType extends AbstractType
             ->add('password', textType::class, [
                 'required'   => false,
                 'data'=> null,
-                'mapped'    => false
+                'mapped'    => false,
+                'constraints' => [
+                    new Assert\NotBlank([
+                        'message' => 'Le mot de passe ne peut pas être vide.',
+                    ]),
+                    new Assert\Length([
+                        'min' => 8,
+                        'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
+                        'max' => 20,
+                        'maxMessage' => 'Le mot de passe ne peut pas contenir plus de {{ limit }} caractères.',
+                    ]),
+                ],
             ])
             ->add('nomUser')
             ->add('prenomUser')
