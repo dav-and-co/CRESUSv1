@@ -71,29 +71,28 @@
                         {{ form_errors(form.nom_demandeur) }}
                     </div>
                     <div class="form-group">
-                        {{ form_label(form.telephone_demandeur) }}
-                        {{ form_widget(form.telephone_demandeur) }}
-                        {{ form_errors(form.telephone_demandeur) }}
-
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.besoin_demandeur) }}
-                        {{ form_widget(form.besoin_demandeur) }}
-                        {{ form_errors(form.besoin_demandeur) }}
-                    </div>
-                </div>
-                <div class="form-column">
-                    <div class="form-group">
                         {{ form_label(form.prenom_demandeur) }}
                         {{ form_widget(form.prenom_demandeur) }}
                         {{ form_errors(form.prenom_demandeur) }}
                     </div>
                     <div class="form-group">
+                        {{ form_label(form.telephone_demandeur) }}
+                        {{ form_widget(form.telephone_demandeur) }}
+                        {{ form_errors(form.telephone_demandeur) }}
+                    </div>
+                    <div class="form-group">
                         {{ form_label(form.mail_demandeur) }}
                         {{ form_widget(form.mail_demandeur) }}
                         {{ form_errors(form.mail_demandeur) }}
-
                     </div>
+                </div>
+                <div class="form-column">
+                    <div class="form-group">
+                        {{ form_label(form.besoin_demandeur) }}
+                        {{ form_widget(form.besoin_demandeur) }}
+                        {{ form_errors(form.besoin_demandeur) }}
+                    </div>
+
                     <div class="form-group">
                         {{ form_label(form.description_besoin) }}
                         {{ form_widget(form.description_besoin) }}

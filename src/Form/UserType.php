@@ -22,7 +22,7 @@ class UserType extends AbstractType
                     'benevole' => 'ROLE_BENEVOLE'
                 ],
                 'multiple' => true,
-                'expanded' => true,
+                'required' => true,
             ])
             ->add('password', textType::class, [
                 'required'   => false,

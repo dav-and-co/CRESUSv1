@@ -96,8 +96,8 @@ header li {
   max-width: 200px;
 }
 header .firstli {
-  max-width: 100px;
-  min-width: 80px;
+  max-width: 180px;
+  min-width: 125px;
 }
 header .headnav {
   font-family: "roboto", sans-serif;
@@ -115,7 +115,7 @@ header .headnav:hover {
 }
 
 footer {
-  background-color: rgb(22, 70, 129);
+  background-color: #164681;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -261,7 +261,7 @@ tableBen {
   .mentions {
     margin: 10px;
   }
-  button {
+  #none {
     display: none !important;
   }
 }

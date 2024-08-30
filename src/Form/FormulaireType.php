@@ -46,10 +46,16 @@ class FormulaireType extends AbstractType
         ],
                 'label' => 'Votre Besoin',
                 'required' => true,
+                'multiple' => false,
+                'expanded' => true,
             ])
             ->add('description_besoin', TextareaType::class, [
                 'label' => 'Message',
                 'required' => false,
+                'attr' => [
+                    'placeholder' => 'entrez votre message',
+                    'rows'=> '6',
+                ],
             ])
             ->add('isGdpr', CheckboxType::class, [
                 'label' => 'Cochez pour accepter notre politique de Confidentialité',
