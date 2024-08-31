@@ -16,6 +16,19 @@ class DetteRepository extends ServiceEntityRepository
         parent::__construct($registry, Dette::class);
     }
 
+    /**
+     * Récupère toutes les dettes avec leurs types associés
+     */
+    public function findAllWithDetails(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->join('d.type_dette', 'td')
+            ->addSelect('td')
+            ->getQuery()
+            ->getResult();
+    }
+
+
     //    /**
     //     * @return Dette[] Returns an array of Dette objects
     //     */

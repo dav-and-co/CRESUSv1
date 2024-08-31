@@ -15,13 +15,13 @@ class TypeRevenu
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 200)]
     private ?string $libelle_revenu = null;
 
     /**
      * @var Collection<int, Revenu>
      */
-    #[ORM\OneToMany(targetEntity: Revenu::class, mappedBy: 'type_renevu')]
+    #[ORM\OneToMany(targetEntity: Revenu::class, mappedBy: 'type_revenu')]
     private Collection $revenus;
 
     public function __construct()

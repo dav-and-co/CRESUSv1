@@ -16,6 +16,16 @@ class RevenuRepository extends ServiceEntityRepository
         parent::__construct($registry, Revenu::class);
     }
 
+    public function findAllWithDetails(): array
+    {
+        return $this->createQueryBuilder('r')
+            ->join('r.type_revenu', 'tr')
+            ->addSelect('tr')
+            ->getQuery()
+            ->getResult();
+    }
+
+
     //    /**
     //     * @return Revenu[] Returns an array of Revenu objects
     //     */

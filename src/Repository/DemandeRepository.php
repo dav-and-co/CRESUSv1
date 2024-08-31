@@ -19,7 +19,7 @@ class DemandeRepository extends ServiceEntityRepository
 
     /**
      * Récupère l'origine associée à une demande donnée.
-     */
+
     public function findAllWithOrigine()
     {
         return $this->createQueryBuilder('b')
@@ -29,9 +29,9 @@ class DemandeRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    /**
+
      * Récupère la position associée à une demande donnée.
-     */
+
     public function findAllWithTypePosition()
     {
         return $this->createQueryBuilder('b')
@@ -41,9 +41,10 @@ class DemandeRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    /**
+
+
      * Récupère tous les bénéficiaires associés à une demande donnée.
-     */
+
     public function findBeneficiairesByDemande(Demande $demande)
     {
         return $this->createQueryBuilder('d')
@@ -55,9 +56,9 @@ class DemandeRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    /**
+
      * Récupère toutes les demandes avec les jointures nécessaires pour TypeDemande et PositionDemande.
-     */
+
     public function findAllWithDetails()
     {
         return $this->createQueryBuilder('d')
@@ -68,8 +69,36 @@ class DemandeRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+*/
 
-
+    public function findDemandeWithRelations(int $id)
+    {
+        return $this->createQueryBuilder('d')
+            ->leftJoin('d.type_demande', 'td')
+            ->addSelect('td')
+            ->leftJoin('d.position_demande', 'pd')
+            ->addSelect('pd')
+            ->leftJoin('d.origine', 'o')
+            ->addSelect('o')
+            ->leftJoin('d.revenus', 'r')
+            ->addSelect('r')
+            ->leftJoin('d.charges', 'c')
+            ->addSelect('c')
+            ->leftJoin('d.dettes', 'de')
+            ->addSelect('de')
+            ->leftJoin('d.beneficiaires', 'b')
+            ->addSelect('b')
+            ->leftJoin('d.historiqueAvcts', 'ha')
+            ->addSelect('ha')
+            ->leftJoin('d.users', 'u')
+            ->addSelect('u')
+            ->leftJoin('d.RendezVous', 'rv')
+            ->addSelect('rv')
+            ->where('d.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 
 
     //    /**
@@ -96,4 +125,5 @@ class DemandeRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
 }

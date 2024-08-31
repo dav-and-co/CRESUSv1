@@ -156,18 +156,14 @@ class BeneficiaireController extends AbstractController
     #[Route('/benevole/modifDemande/{id}', name: 'modifDemande')]
     public function modifDemande(Request $request, EntityManagerInterface $entityManager, DemandeRepository $DemandeRepository, int $id): Response
     {
-        // Récupération du bénévole depuis la base de données en fonction de son ID - donnée poussée dans la route
-        $demande = $DemandeRepository->find($id);
+            $demande = $DemandeRepository->findDemandeWithRelations($id);
 
-        // Création du formulaire de modification lié à l'entité User
-        $demandeModifForm = $this->createForm(DemandeType::class, $demande);
-
-
-        // Traitement de la requête HTTP
-        $demandeModifForm->handleRequest($request);
+            if (!$demande) {
+                throw $this->createNotFoundException('La demande n\'existe pas.');
+            }
 
         return $this->render('interne/page/modifDemande.html.twig', [
-            'id'=>$id
+            'demande' => $demande,
         ]);
     }
 

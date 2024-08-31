@@ -16,6 +16,19 @@ class ChargeRepository extends ServiceEntityRepository
         parent::__construct($registry, Charge::class);
     }
 
+    /**
+     * Récupère toutes les charges avec leurs types associés
+     */
+    public function findAllWithDetails(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.type_charge', 'tc')
+            ->addSelect('tc')
+            ->getQuery()
+            ->getResult();
+    }
+
+
     //    /**
     //     * @return Charge[] Returns an array of Charge objects
     //     */
