@@ -1,0 +1,79 @@
+.onedemande{
+    p{
+      font-size: 14px;
+    }
+    h1{
+      text-align: center;
+      color :$footerColor;
+      padding: 20px;
+    }
+    h3{
+      text-align: center;
+      color :$textJauneColor;
+      padding: 20px;
+    }
+    .affichage-groupe {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 40px;
+     padding: 30px 0;
+    }
+    .fondbleu{
+      background-color: $fondCarouselColor;
+    }
+    .affichage-detail {
+      justify-content: space-between;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      width: calc(33.333% - 20px);
+      box-sizing: border-box;
+    }
+  .affichage-detailbis {
+    justify-content: space-between;
+    width: calc(33.333% - 20px);
+  }
+  .affichage-fin {
+    width: 100%;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+  }
+
+
+    .titre{
+      color : $textJauneColor;
+      font-weight :bold;
+      align-content: center;
+      border : none;
+      background-color: $fondCarouselColor;
+      text-align: center;
+    }
+    .specdemande{
+      width: 30%;
+      line-height :0.8;
+    }
+    .fin{
+      p{
+        text-align: right;
+      }
+    }
+  h6{
+    color : $textJauneColor;
+    text-align: center;
+  }
+  .commentaires{
+    width: 100%;
+    min-height: 200px;
+    line-height :0.8;
+  }
+    span{
+      font-weight :bold;
+      color :$footerColor;
+    }
+}

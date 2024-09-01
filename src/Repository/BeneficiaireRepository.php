@@ -18,7 +18,7 @@ class BeneficiaireRepository extends ServiceEntityRepository
 
 
     /**
-     * Récupère les libellés prof d'un bénéficiaire donné.
+     * Récupère les libellés prof de tous les bénéficiaires
      */
     public function findAllWithTypeProf()
     {

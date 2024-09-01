@@ -93,7 +93,7 @@
                         <ul>
                             {% for demande in beneficiaire.demandes %}
                                 <li>
-                                    <a href="{{ path('modifDemande', {'id': demande.id}) }}" class="btn btn-link">
+                                    <a href="{{ path('affichageDemande', {'id': demande.id}) }}" class="btn btn-link">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                     {{ demande.createdAt|date('d/m/Y') }} -

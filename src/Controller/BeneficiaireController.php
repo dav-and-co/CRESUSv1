@@ -9,6 +9,7 @@ namespace App\Controller;
 
 // Importation des classes nécessaires pour ce contrôleur
 use App\Entity\Beneficiaire;
+use App\Entity\Demande;
 use App\Form\BeneficiaireType;
 use App\Form\DemandeType;
 use App\Repository\DemandeRepository;
@@ -153,17 +154,38 @@ class BeneficiaireController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
-    #[Route('/benevole/modifDemande/{id}', name: 'modifDemande')]
-    public function modifDemande(Request $request, EntityManagerInterface $entityManager, DemandeRepository $DemandeRepository, int $id): Response
+    #[Route('/benevole/affichageDemande/{id}', name: 'affichageDemande')]
+    public function affichDemande(Request $request, EntityManagerInterface $entityManager, DemandeRepository $DemandeRepository, int $id): Response
     {
-            $demande = $DemandeRepository->findDemandeWithRelations($id);
+        $demande = $DemandeRepository->findDemandeWithAllRelations($id);
 
-            if (!$demande) {
-                throw $this->createNotFoundException('La demande n\'existe pas.');
-            }
-
-        return $this->render('interne/page/modifDemande.html.twig', [
+        if (!$demande) {
+            throw $this->createNotFoundException('La demande n\'existe pas.');
+        }
+        return $this->render('interne/page/oneDemande.html.twig', [
             'demande' => $demande,
+        ]);
+    }
+
+//--------------------------------------------------------------------------------------------------------------
+    #[Route('/benevole/updateCommentaires/{id}', name: 'MAJcommentaires', methods: ['POST'])]
+    public function updateCommentaires(Request $request, EntityManagerInterface $entityManager, DemandeRepository $demandeRepository, int $id): Response
+    {
+        $demande = $demandeRepository->find($id);
+
+        if (!$demande) {
+            throw $this->createNotFoundException('La demande n\'existe pas.');
+        }
+
+        $commentaires = $request->request->get('commentaires');
+        $demande->setCommentaires($commentaires);
+
+        $entityManager->persist($demande);
+        $entityManager->flush();
+
+        // Rediriger vers la page de la demande après la mise à jour
+        return $this->redirectToRoute('affichageDemande', [
+            'id' => $id
         ]);
     }
 

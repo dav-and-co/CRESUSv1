@@ -1,0 +1,97 @@
+{# templates/beneficiaire/insertDemande.html.twig #}
+
+{% extends 'interne/partial/intBase.html.twig' %}
+
+{% block metatitle %}
+    - insert demande
+{% endblock %}
+
+
+{% block main %}
+
+<section class="onedemande">
+    <h1>Demande : <span>{{ demande.typeDemande.libelleDemande }} - {{ demande.positionDemande.libellePosition }}</span></h1>
+    <h5>Origine et date de la demande: {{ demande.origine.libelleOrigine }}  {{ demande.complementOrigine }} - {{ demande.createdAt|date('d/m/Y') }}</h5>
+    <h3>
+        {% if demande.beneficiaires|length == 1 %}
+            Bénéficiaire
+            <a href="{{ path('insertBeneficiaire', {id: demande.id}) }}" class="btn btn-success">+</a>
+        {% elseif demande.beneficiaires|length == 2 %}
+            Bénéficiaires
+{# <a href="{{ path('supprimer_beneficiaire', {id: demande.id}) }}" class="btn btn-danger">-</a>#}
+        {% endif %}
+    </h3>
+    <div class="affichage-groupe">
+        {% for beneficiaire in demande.beneficiaires %}
+        <div class="affichage-detail">
+                <p> <span>{{ beneficiaire.civiliteBeneficiaire }} {{ beneficiaire.nomBeneficiaire }} {{ beneficiaire.prenomBeneficiaire }},</span> date naissance {{ beneficiaire.ddnBeneficiaire|date('d/m/Y') }} <p>
+                <p> mail : <span>{{ beneficiaire.mailBeneficiaire }}</span> - tél : <span>{{ beneficiaire.telephoneBeneficiaire }} </span> </p>
+                <p>   {{  beneficiaire.libelleProf.libelleProf }} - profession : {{ beneficiaire.professionBeneficiaire }}  </p>
+            </div>
+        {% else %}
+            <li>Aucun bénéficiaire associé à cette demande.</li>
+        {% endfor %}
+    </div>
+       <div class="affichage-groupe fondbleu">
+           <div class="affichage-detail titre specdemande">
+                <h3> Données de la demande</h3>
+                <p>Cause : {{ demande.causeBesoin }}</p>
+           </div>
+            <div class="affichage-detail specdemande">
+                 <p><span>Adresse</span></p>
+                    <p>{{ demande.adresse1Demande }}</p>
+                    <p>{{ demande.adresse2Demande }}</p>
+                    <p>{{ demande.cpDemande }} {{ demande.villeDemande }}</p>
+            </div>
+            <div class="affichage-detail specdemande">
+                <p>Logement : {{ demande.situationLogt }}</p>
+                <p>enfants à charge : {{ demande.nbEnfant }}</p>
+                <p>patrimoine :{{ demande.patrimoine }}</p>
+            </div>
+           <div class="affichage-detail specdemande fin">
+               <h6>Revenus</h6>
+               {% for revenu in demande.revenus %}
+               <p>{{ revenu.typeRevenu.libelleRevenu }} : {{ revenu.montantMensuel }}  </p>
+                {% endfor %}
+           </div>
+           <div class="affichage-detail specdemande fin">
+               <h6>Charges</h6>
+               {% for charge in demande.charges %}
+                   <p>{{ charge.typeCharge.libelleCharge }} : {{ charge.montantMensuel }}  </p>
+               {% endfor %}
+           </div>
+           <div class="affichage-detail specdemande fin">
+               <h6> Dettes et crédits</h6>
+               {% for dette in demande.dettes %}
+                   <p>{{ dette.typeDette.libelledette }} - <span> {{ dette.organisme }} </span> </p>
+                   <p> mensualité : {{ dette.mensualite }} - montant du : {{ dette.montantDu }}  </p>
+               {% endfor %}
+           </div>
+       </div>
+    <div class="affichage-groupe fondbleu">
+        <div>
+              <form action="{{ path('MAJcommentaires', {id: demande.id}) }}" method="post">
+                     <textarea class="affichage-detail commentaires " name="commentaires" rows="5" cols="50" >{{ demande.commentaires }}</textarea>
+                    <button class="btn btn-primary" type="submit">Enregistrer les commentaires</button>
+              </form>
+        </div>
+        <div class="affichage-detailbis specdemande">
+            <div class="affichage-fin">
+                <h6> Evolution du dossier</h6>
+                {% for avancement in demande.historiqueAvcts %}
+                    <p> <span> {{ avancement.createdAt|date('d/m/Y') }} </span> - {{ avancement.avancement.libelleAvancement }} - {{ avancement.commentairesAvct }}</p>
+                {% endfor %}
+            </div>
+            <div  class="affichage-fin">
+                <h6> Historique des RDV</h6>
+                {% for rdv in demande.RendezVous %}
+                    <p> <span> {{ rdv.dateAt|date('d/m/Y') }} - {{ rdv.heureAt|date('H:i') }}</span> - {{ rdv.Site.nomSite }} </p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+{% endblock %}

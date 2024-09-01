@@ -220,6 +220,80 @@ tableBen {
   padding-left: 0 !important;
 }
 
+.onedemande p {
+  font-size: 14px;
+}
+.onedemande h1 {
+  text-align: center;
+  color: #164681;
+  padding: 20px;
+}
+.onedemande h3 {
+  text-align: center;
+  color: #E8B436;
+  padding: 20px;
+}
+.onedemande .affichage-groupe {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 40px;
+  padding: 30px 0;
+}
+.onedemande .fondbleu {
+  background-color: #f4f4f9;
+}
+.onedemande .affichage-detail {
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  width: calc(33.333% - 20px);
+  box-sizing: border-box;
+}
+.onedemande .affichage-detailbis {
+  justify-content: space-between;
+  width: calc(33.333% - 20px);
+}
+.onedemande .affichage-fin {
+  width: 100%;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+.onedemande .titre {
+  color: #E8B436;
+  font-weight: bold;
+  align-content: center;
+  border: none;
+  background-color: #f4f4f9;
+  text-align: center;
+}
+.onedemande .specdemande {
+  width: 30%;
+  line-height: 0.8;
+}
+.onedemande .fin p {
+  text-align: right;
+}
+.onedemande h6 {
+  color: #E8B436;
+  text-align: center;
+}
+.onedemande .commentaires {
+  width: 100%;
+  min-height: 200px;
+  line-height: 0.8;
+}
+.onedemande span {
+  font-weight: bold;
+  color: #164681;
+}
+
 .mentions {
   margin: 100px;
 }
