@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class BeneficiaireType extends AbstractType
 {
@@ -29,9 +31,19 @@ class BeneficiaireType extends AbstractType
             ])
             ->add('nom_beneficiaire', null, [
                 'required' => true,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Le nom est obligatoire.'
+                    ]),
+                ],
             ])
             ->add('prenom_beneficiaire', null, [
                 'required' => true,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Le prénom est obligatoire.'
+                    ]),
+                ],
             ])
             ->add('ddn_beneficiaire', DateType::class, [
                 'widget' => 'single_text',
@@ -43,7 +55,12 @@ class BeneficiaireType extends AbstractType
                     'required' => false,
             ])
             ->add('mail_beneficiaire', EmailType::class, [
-                'required' => false,
+                'required' => false, // Le champ est facultatif
+                'constraints' => [
+                    new Email([
+                        'message' => 'Le format de l\'email est invalide.',
+                    ]),
+                ],
             ])
             ->add('telephone_beneficiaire', TextType::class, [
                 'required' => false,

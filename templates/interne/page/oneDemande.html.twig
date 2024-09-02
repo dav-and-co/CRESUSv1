@@ -18,19 +18,34 @@
             <a href="{{ path('insertBeneficiaire', {id: demande.id}) }}" class="btn btn-success">+</a>
         {% elseif demande.beneficiaires|length == 2 %}
             Bénéficiaires
-{# <a href="{{ path('supprimer_beneficiaire', {id: demande.id}) }}" class="btn btn-danger">-</a>#}
         {% endif %}
     </h3>
     <div class="affichage-groupe">
-        {% for beneficiaire in demande.beneficiaires %}
-        <div class="affichage-detail">
-                <p> <span>{{ beneficiaire.civiliteBeneficiaire }} {{ beneficiaire.nomBeneficiaire }} {{ beneficiaire.prenomBeneficiaire }},</span> date naissance {{ beneficiaire.ddnBeneficiaire|date('d/m/Y') }} <p>
-                <p> mail : <span>{{ beneficiaire.mailBeneficiaire }}</span> - tél : <span>{{ beneficiaire.telephoneBeneficiaire }} </span> </p>
-                <p>   {{  beneficiaire.libelleProf.libelleProf }} - profession : {{ beneficiaire.professionBeneficiaire }}  </p>
-            </div>
-        {% else %}
-            <li>Aucun bénéficiaire associé à cette demande.</li>
-        {% endfor %}
+        {% if demande.beneficiaires|length == 1 %}
+            {% for beneficiaire in demande.beneficiaires %}
+            <div class="affichage-detail">
+                    <p> <span>{{ beneficiaire.civiliteBeneficiaire }} {{ beneficiaire.nomBeneficiaire }} {{ beneficiaire.prenomBeneficiaire }},</span> date naissance {{ beneficiaire.ddnBeneficiaire|date('d/m/Y') }} <p>
+                    <p> mail : <span>{{ beneficiaire.mailBeneficiaire }}</span> - tél : <span>{{ beneficiaire.telephoneBeneficiaire }} </span> </p>
+                    <p>   {{  beneficiaire.libelleProf.libelleProf }} - profession : {{ beneficiaire.professionBeneficiaire }}  </p>
+                </div>
+            {% endfor %}
+        {% elseif demande.beneficiaires|length == 2 %}
+            {% for beneficiaire in demande.beneficiaires %}
+                <div class="affichage-detail">
+                    <p>
+                        <span>{{ beneficiaire.civiliteBeneficiaire }} {{ beneficiaire.nomBeneficiaire }} {{ beneficiaire.prenomBeneficiaire }},</span>
+                        date naissance {{ beneficiaire.ddnBeneficiaire|date('d/m/Y') }}
+                        <a href="{{ path('removeBeneficiaireFromDemande', {demandeId: demande.id, beneficiaireId: beneficiaire.id}) }}"
+                           class="btn-remove-beneficiaire"
+                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce bénéficiaire de la demande ?');">
+                            <i class="fa fa-minus-circle"></i>
+                        </a>
+                    </p>
+                    <p> mail : <span>{{ beneficiaire.mailBeneficiaire }}</span> - tél : <span>{{ beneficiaire.telephoneBeneficiaire }} </span> </p>
+                    <p>{{ beneficiaire.libelleProf.libelleProf }} - profession : {{ beneficiaire.professionBeneficiaire }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
        <div class="affichage-groupe fondbleu">
            <div class="affichage-detail titre specdemande">

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\BeneficiaireRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -70,7 +71,8 @@ class Beneficiaire
         $this->charges = new ArrayCollection();
         $this->dettes = new ArrayCollection();
         $this->demandes = new ArrayCollection();
-       }
+    }
+
 
     public function getId(): ?int
     {
@@ -262,6 +264,8 @@ class Beneficiaire
 
         return $this;
     }
+
+
 
     /**
      * @return Collection<int, Demande>
