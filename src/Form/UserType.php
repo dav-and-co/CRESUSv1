@@ -30,10 +30,7 @@ class UserType extends AbstractType
                 'data'=> null,
                 'mapped'    => false,
                 'constraints' => [
-                    new Assert\NotBlank([
-                        'message' => 'Le mot de passe ne peut pas être vide.',
-                    ]),
-                    new Assert\Length([
+                   new Assert\Length([
                         'min' => 8,
                         'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
                         'max' => 20,

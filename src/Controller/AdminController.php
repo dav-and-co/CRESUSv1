@@ -18,7 +18,7 @@ class AdminController extends AbstractController
 
 //-----------------------------------------------------------------------------------------------------------
     // Route pour créer un nouveau bénévole (user) benevole
-    #[Route('/admin/user/insert', 'admin_insert_user')]
+    #[Route('/admin/benevole/insert', 'admin_insert_user')]
     public function insertBenevole(UserPasswordHasherInterface $passwordHasher, Request $request, EntityManagerInterface $entityManager)
     {
         // Création d'une nouvelle instance de l'entité User
@@ -62,7 +62,7 @@ class AdminController extends AbstractController
 
 //-----------------------------------------------------------------------------------------------------------
     // Route pour afficher la liste des bénévoles
-    #[Route('/admin/benevoles', name: 'listbenevoles')]
+    #[Route('/admin/benevole/liste', name: 'listbenevoles')]
     public function listBenevoles(UserRepository $UserRepository, Request $request)
     {
         // Récupération des paramètres de tri depuis la requête GET (si présents)

@@ -219,6 +219,9 @@ tableBen {
   margin-bottom: 0 !important;
   padding-left: 0 !important;
 }
+.table .btn {
+  margin-right: 10px;
+}
 
 .onedemande p {
   font-size: 14px;

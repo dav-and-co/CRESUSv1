@@ -15,8 +15,7 @@ use App\Entity\PositionDemande;
 use App\Entity\TypeDemande;
 use App\Entity\TypeProf;
 use App\Form\BeneficiaireType;
-use App\Form\DemandeType;
-use App\Repository\DemandeRepository;
+use App\Repository\BeneficiaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +30,7 @@ class BeneficiaireController extends AbstractController
 
 //-----------------------------------------------------------------------------------------------------------
     // Cette route est associée à la méthode rechercheBeneficiaire
-    #[Route('/benevole/rechercheBeneficiaire', name: 'RechercheBeneficiaire')]
+    #[Route('/benevole/beneficiaire/recherche', name: 'RechercheBeneficiaire')]
     public function rechercheBeneficiaire(Request $request, EntityManagerInterface $entityManager): Response
     {
         // Création d'un formulaire pour rechercher un bénéficiaire par nom, ou par prénom ou par téléphone
@@ -116,7 +115,7 @@ class BeneficiaireController extends AbstractController
 
 //--------------------------------------------------------------------------------------------------------------
 // Cette route est associée à la méthode de création du nouveau bénéficiaire
-    #[Route('/benevole/insertBeneficiaire', name: 'insertBeneficiaire')]
+    #[Route('/benevole/Beneficiaire/insert', name: 'insertBeneficiaire')]
     public function insertBeneficiaire(Request $request, EntityManagerInterface $entityManager): Response
     {
         // Création d'une nouvelle instance de Beneficiaire (entité)
@@ -244,104 +243,42 @@ class BeneficiaireController extends AbstractController
         ]);
     }
 
-
 //--------------------------------------------------------------------------------------------------------------
-    #[Route('/benevole/affichageDemande/{id}', name: 'affichageDemande')]
-    public function affichDemande(Request $request, EntityManagerInterface $entityManager, DemandeRepository $DemandeRepository, int $id): Response
+    // Route pour la modification d'un bénévole existant
+    #[Route('/admin/beneficiaire/update/{id}', 'updatebeneficiaire')]
+    public function updatebeneficiaire(int $id, Request $request, EntityManagerInterface $entityManager, BeneficiaireRepository $BeneficiaireRepository)
     {
-        $demande = $DemandeRepository->findDemandeWithAllRelations($id);
+        // Récupération du bénévole depuis la base de données en fonction de son ID - donnée poussée dans la route
+        $beneficiaire = $BeneficiaireRepository->find($id);
 
-        if (!$demande) {
-            throw $this->createNotFoundException('La demande n\'existe pas.');
+        // Création du formulaire de modification lié à l'entité User
+        $beneficiaireModifForm = $this->createForm(BeneficiaireType::class, $beneficiaire);
+
+        // Traitement de la requête HTTP
+        $beneficiaireModifForm->handleRequest($request);
+
+        // Vérification si le formulaire a été soumis et est valide
+        if ($beneficiaireModifForm->isSubmitted() &&  $beneficiaireModifForm->isValid()) {
+
+            // Persistance et sauvegarde des modifications en base de données
+            $entityManager->persist($beneficiaire);
+            $entityManager->flush();
+
+            // Ajout d'un message de succès dans la session
+            $this->addFlash('success', 'modification du bénéficiaire enregistrée');
+            return $this->redirectToRoute('RechercheBeneficiaire');
         }
-        return $this->render('interne/page/oneDemande.html.twig', [
-            'demande' => $demande,
+
+        $beneficiaireModifFormView = $beneficiaireModifForm->createView();
+
+        // affiche la vue Twig en y passant données récupérées
+        return $this->render('interne/page/modifBeneficiaire.html.twig', [
+            'beneficiaireForm' =>$beneficiaireModifFormView,
+            'nomBeneficiaire' => $beneficiaire->getNomBeneficiaire(),
         ]);
     }
 
-//--------------------------------------------------------------------------------------------------------------
-    #[Route('/benevole/updateCommentaires/{id}', name: 'MAJcommentaires', methods: ['POST'])]
-    public function updateCommentaires(Request $request, EntityManagerInterface $entityManager, DemandeRepository $demandeRepository, int $id): Response
-    {
-        $demande = $demandeRepository->find($id);
 
-        if (!$demande) {
-            throw $this->createNotFoundException('La demande n\'existe pas.');
-        }
 
-        $commentaires = $request->request->get('commentaires');
-        $demande->setCommentaires($commentaires);
-
-        $entityManager->persist($demande);
-        $entityManager->flush();
-
-        // Rediriger vers la page de la demande après la mise à jour
-        return $this->redirectToRoute('affichageDemande', [
-            'id' => $id
-        ]);
-    }
-
-//--------------------------------------------------------------------------------------------------------------
-// creation demande pour un bénéficiaire déjà existant - depuis la vue recherche beneficiaire
-    #[Route('/benevole/insertDemande/{id}', name: 'insertDemande')]
-    public function insertDemande(Request $request, EntityManagerInterface $entityManager, int $id): Response
-    {
-        // Récupére le bénéficiaire par son ID
-        $beneficiaire = $entityManager->getRepository(Beneficiaire::class)->find($id);
-
-        if (!$beneficiaire) {
-            throw $this->createNotFoundException('Le bénéficiaire n\'existe pas.');
-        }
-
-        // Associe les valeurs obligatoires
-        $typeDemande = $entityManager->getRepository(TypeDemande::class)->find(5);
-        $positionDemande = $entityManager->getRepository(PositionDemande::class)->find(1);
-        $origine = $entityManager->getRepository(Origine::class)->find(1);
-
-        // Crée une nouvelle demande
-        $demande = new Demande();
-        $demande->addBeneficiaire($beneficiaire);
-        $demande->setTypeDemande($typeDemande);
-        $demande->setOrigine($origine);
-        $demande->setPositionDemande($positionDemande);
-        // $demande->setTypeDemande($entityManager->getReference(TypeDemande::class, 5));
-        $demande->setCreatedAt(new \DateTimeImmutable());
-
-        // Persiste la demande
-        $entityManager->persist($demande);
-        $entityManager->flush();
-
-        // Redirige vers l'affichage de la demande
-        return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()
-        ]);
-    }
-
-//--------------------------------------------------------------------------------------------------------------
-
-    #[Route('/demande/removeBeneficiaireFromDemande/{demandeId}/{beneficiaireId}', name: 'removeBeneficiaireFromDemande')]
-    public function removeBeneficiaireFromDemande(int $demandeId, int $beneficiaireId, EntityManagerInterface $entityManager): Response
-    {
-        // Récupérer la demande
-        $demande = $entityManager->getRepository(Demande::class)->find($demandeId);
-
-        // Récupérer le bénéficiaire
-        $beneficiaire = $entityManager->getRepository(Beneficiaire::class)->find($beneficiaireId);
-
-        if (!$demande || !$beneficiaire) {
-            throw $this->createNotFoundException('La demande ou le bénéficiaire n\'existe pas.');
-        }
-
-        // Supprimer le bénéficiaire de la demande
-        $demande->removeBeneficiaire($beneficiaire);
-
-        // Persister les changements
-        $entityManager->persist($demande);
-        $entityManager->flush();
-
-        // Rediriger vers l'affichage de la demande
-        return $this->redirectToRoute('affichageDemande', ['id' => $demandeId]);
-    }
-
-//--------------------------------------------------------------------------------------------------------------
 
 }
