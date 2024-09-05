@@ -9,11 +9,17 @@ namespace App\Controller;
 
 // Importation des classes nécessaires pour ce contrôleur
 use App\Entity\Beneficiaire;
+use App\Entity\Charge;
 use App\Entity\Demande;
+use App\Entity\Dette;
 use App\Entity\Origine;
 use App\Entity\PositionDemande;
+use App\Entity\Revenu;
 use App\Entity\TypeDemande;
+use App\Form\ChargeType;
+use App\Form\DetteType;
 use App\Form\ModifDemandeType;
+use App\Form\RevenuType;
 use App\Repository\DemandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -53,7 +59,7 @@ class DemandeController extends AbstractController
         }
 
         // Associe les valeurs obligatoires
-        $typeDemande = $entityManager->getRepository(TypeDemande::class)->find(5);
+        $typeDemande = $entityManager->getRepository(TypeDemande::class)->find(1);
         $positionDemande = $entityManager->getRepository(PositionDemande::class)->find(1);
         $origine = $entityManager->getRepository(Origine::class)->find(1);
 
@@ -124,7 +130,131 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    #[Route('/benevole/demande/ajoutRevenu/{id}', name: 'insertRevenu')]
+    public function insertRevenu(Request $request, Demande $demande, EntityManagerInterface $entityManager, demandeRepository $demandeRepository,$id ): Response
+    {
+        $demande = $demandeRepository->find($id);
 
+        // Créer une nouvelle instance de Revenu
+        $revenu = new Revenu();
+        $revenu->setDemande($demande);
+
+        // Récupérer les bénéficiaires de la demande
+        $beneficiaires = $demande->getBeneficiaires()->toArray();;
+
+        // Créer le formulaire, en passant les bénéficiaires dans les options
+        $form = $this->createForm(RevenuType::class, $revenu, [
+            'beneficiaires' => $beneficiaires,
+        ]);
+
+        // Gérer la soumission du formulaire
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Associer le revenu à la demande (si besoin)
+            $revenu->setDemande($demande);
+
+            // Enregistrer le revenu dans la base de données
+            $entityManager->persist($revenu);
+            $entityManager->flush();
+
+            // Rediriger vers une autre page ou afficher un message de succès
+            return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()]);
+        }
+
+        // Afficher le formulaire
+        return $this->render('interne/page/insertRevenu.html.twig', [
+            'form' => $form->createView(),
+            'beneficiaires' => $beneficiaires,
+            'demande' => $demande,
+        ]);
+    }
+
+//--------------------------------------------------------------------------------------------------------------
+    #[Route('/benevole/demande/ajoutCharge/{id}', name: 'insertCharge')]
+    public function insertCharge(Request $request, Demande $demande, EntityManagerInterface $entityManager, demandeRepository $demandeRepository,$id ): Response
+    {
+        $demande = $demandeRepository->find($id);
+
+        // Créer une nouvelle instance de Charge
+        $charge = new Charge();
+        $charge->setDemande($demande);
+
+        // Récupérer les bénéficiaires de la demande
+        $beneficiaires = $demande->getBeneficiaires()->toArray();;
+
+        // Créer le formulaire, en passant les bénéficiaires dans les options
+        $form = $this->createForm(ChargeType::class, $charge, [
+            'beneficiaires' => $beneficiaires,
+        ]);
+
+        // Gérer la soumission du formulaire
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Associer le revenu à la demande (si besoin)
+            $charge->setDemande($demande);
+
+            // Enregistrer le revenu dans la base de données
+            $entityManager->persist($charge);
+            $entityManager->flush();
+
+            // Rediriger vers une autre page ou afficher un message de succès
+            return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()]);
+        }
+
+        // Afficher le formulaire
+        return $this->render('interne/page/insertCharge.html.twig', [
+            'form' => $form->createView(),
+            'beneficiaires' => $beneficiaires,
+            'demande' => $demande,
+        ]);
+    }
+
+//--------------------------------------------------------------------------------------------------------------
+    #[Route('/benevole/demande/ajoutDette/{id}', name: 'insertDette')]
+    public function insertDette(Request $request, Demande $demande, EntityManagerInterface $entityManager, demandeRepository $demandeRepository,$id ): Response
+    {
+        $demande = $demandeRepository->find($id);
+
+        // Créer une nouvelle instance de Dette
+        $dette = new Dette();
+        $dette->setDemande($demande);
+
+        // Récupérer les bénéficiaires de la demande
+        $beneficiaires = $demande->getBeneficiaires()->toArray();;
+
+        // Créer le formulaire, en passant les bénéficiaires dans les options
+        $form = $this->createForm(DetteType::class, $dette, [
+            'beneficiaires' => $beneficiaires,
+        ]);
+
+        // Gérer la soumission du formulaire
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Associer le revenu à la demande (si besoin)
+            $dette->setDemande($demande);
+
+            // Enregistrer le revenu dans la base de données
+            $entityManager->persist($dette);
+            $entityManager->flush();
+
+            // Rediriger vers une autre page ou afficher un message de succès
+            return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()]);
+        }
+
+        // Afficher le formulaire
+        return $this->render('interne/page/insertDette.html.twig', [
+            'form' => $form->createView(),
+            'beneficiaires' => $beneficiaires,
+            'demande' => $demande,
+        ]);
+    }
+
+
+
+//--------------------------------------------------------------------------------------------------------------
     #[Route('/benevole/modificationDemande/{id}', name: 'modif_demande')]
     public function edit(int $id, Request $request, EntityManagerInterface $entityManager): Response
     {

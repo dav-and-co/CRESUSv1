@@ -1,0 +1,40 @@
+{# templates/revenu/insertRevenu.html.twig #}
+
+{% extends 'interne/partial/intBase.html.twig' %}
+
+{% block title %}Ajouter un revenu{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un revenu pour la demande n°{{ demande.id }}</h1>
+
+    {{ form_start(form) }}
+    <div class="form-group col-md-3">
+        {{ form_label(form.type_dette) }}
+        {{ form_widget(form.type_dette, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.organisme) }}
+        {{ form_widget(form.organisme, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.titulaire_principal) }}
+        {{ form_widget(form.titulaire_principal, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.montant_initial) }}
+        {{ form_widget(form.montant_initial, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.mensualite) }}
+        {{ form_widget(form.mensualite, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.montant_du) }}
+        {{ form_widget(form.montant_du, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="d-flex justify-content-between mt-3">
+        <button class="btn btn-success">Ajouter</button>
+        <a href="{{ path('affichageDemande', {id: demande.id}) }}" class="btn btn-secondary">Annuler</a>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

@@ -267,7 +267,7 @@ tableBen {
   border-radius: 5px;
   padding: 10px;
   background-color: #f9f9f9;
-  width: calc(33.333% - 20px);
+  width: calc(45% - 20px);
   box-sizing: border-box;
 }
 .onedemande .affichage-detailbis {
@@ -295,6 +295,14 @@ tableBen {
   width: 30%;
   line-height: 0.8;
 }
+.onedemande .specdemande1 {
+  width: 20%;
+  line-height: 0.8;
+}
+.onedemande .specdemande2 {
+  width: 45%;
+  line-height: 0.8;
+}
 .onedemande .fin p {
   text-align: right;
 }
@@ -312,7 +320,7 @@ tableBen {
   color: #164681;
 }
 .onedemande .btn-remove-beneficiaire {
-  padding: 3px 6px;
+  padding: 3px 3px;
   font-size: 12px;
   background-color: #dc3545;
   color: white;
@@ -341,15 +349,19 @@ tableBen {
 }
 .onedemande .btn-over:hover::after {
   content: "Modification";
+  font-size: 12px;
   position: absolute;
   left: 100%;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #164681;
+  background-color: #3263b5;
   color: white;
   padding: 2px 6px;
   border-radius: 5px;
   white-space: nowrap;
+}
+.onedemande .ajout {
+  font-size: 10px;
 }
 
 .mentions {

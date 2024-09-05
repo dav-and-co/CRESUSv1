@@ -1,0 +1,28 @@
+{# templates/revenu/insertRevenu.html.twig #}
+
+{% extends 'interne/partial/intBase.html.twig' %}
+
+{% block title %}Ajouter un revenu{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un revenu pour la demande n°{{ demande.id }}</h1>
+
+    {{ form_start(form) }}
+    <div class="form-group col-md-3">
+        {{ form_label(form.type_revenu) }}
+        {{ form_widget(form.type_revenu, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.montant_mensuel) }}
+        {{ form_widget(form.montant_mensuel, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.beneficiaire) }}
+        {{ form_widget(form.beneficiaire, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="d-flex justify-content-between mt-3">
+        <button class="btn btn-success">Ajouter</button>
+        <a href="{{ path('affichageDemande', {id: demande.id}) }}" class="btn btn-secondary">Annuler</a>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
