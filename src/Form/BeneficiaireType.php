@@ -75,11 +75,7 @@ class BeneficiaireType extends AbstractType
                 'placeholder' => 'Choisissez un type professionnel',
                 'required' => false,
             ])
-            ->add('save', SubmitType::class, [
-                'label' => 'Enregistrer',
-                'attr' => ['class' => 'btn btn-primary'],
-            ])
-            ;
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

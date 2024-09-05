@@ -16,6 +16,7 @@ use App\Entity\TypeDemande;
 use App\Entity\TypeProf;
 use App\Form\BeneficiaireType;
 use App\Repository\BeneficiaireRepository;
+use App\Repository\DemandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -70,6 +71,7 @@ class BeneficiaireController extends AbstractController
 
             // Construction de la requête pour obtenir les bénéficiaires
             $queryBuilder = $entityManager->getRepository(Beneficiaire::class)->createQueryBuilder('b');
+
 
             // Application des filtres en fonction des champs du formulaire
             if (!empty($data['nom'])) {
@@ -265,7 +267,15 @@ class BeneficiaireController extends AbstractController
             $entityManager->flush();
 
             // Ajout d'un message de succès dans la session
-            $this->addFlash('success', 'modification du bénéficiaire enregistrée');
+            $this->addFlash('success', 'Demande enregistrée');
+
+            // Vérifie si l'URL de redirection est présente dans la requête
+            $redirectUrl = $request->query->get('redirect');
+            if ($redirectUrl) {
+                return $this->redirect($redirectUrl);
+            }
+
+            // Sinon, redirige vers une route par défaut (par exemple la liste des bénéficiaires)
             return $this->redirectToRoute('RechercheBeneficiaire');
         }
 
@@ -277,6 +287,8 @@ class BeneficiaireController extends AbstractController
             'nomBeneficiaire' => $beneficiaire->getNomBeneficiaire(),
         ]);
     }
+
+//--------------------------------------------------------------------------------------------------------------
 
 
 

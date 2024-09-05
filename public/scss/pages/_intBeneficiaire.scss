@@ -27,6 +27,23 @@
       padding-left: 0 !important;
   }
   .btn{
-    margin-right: 10px;
+    margin-right: 20px;
+  }
+
+  .btn-over {
+    position: relative;
+  }
+
+  .btn-over:hover::after {
+    content: "Modification";
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: $footerColor;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 5px;
+    white-space: nowrap;
   }
 }

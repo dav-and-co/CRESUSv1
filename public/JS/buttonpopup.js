@@ -1,5 +1,5 @@
-// stocke dans une variable les éléments qui ont pour classe "jsonclic" (boutons pour afficher popup)
-const ArticleButtons = document.querySelectorAll('.jsonclic');
+// stocke dans une variable les éléments qui ont pour classe "jsforclicpopup" (boutons pour afficher popup)
+const ArticleButtons = document.querySelectorAll('.jsforclicpopup');
 
 // pour chaque bouton de suppression trouvé
 ArticleButtons.forEach((ArticleButton)=> {

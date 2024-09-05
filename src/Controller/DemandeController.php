@@ -13,6 +13,7 @@ use App\Entity\Demande;
 use App\Entity\Origine;
 use App\Entity\PositionDemande;
 use App\Entity\TypeDemande;
+use App\Form\ModifDemandeType;
 use App\Repository\DemandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -123,6 +124,41 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+
+    #[Route('/benevole/modificationDemande/{id}', name: 'modif_demande')]
+    public function edit(int $id, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer l'entité Demande par son ID
+        $demande = $entityManager->getRepository(Demande::class)->find($id);
+
+
+        // Créer le formulaire en utilisant ModifDemandeType
+        $form = $this->createForm(ModifDemandeType::class, $demande);
+
+        // Gérer la requête (c'est ici que les données POST seront traitées)
+        $form->handleRequest($request);
+
+        // Vérifier si le formulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Persister les modifications dans la base de données
+            $entityManager->flush();
+
+            // Ajouter un message de succès
+            $this->addFlash('success', 'La demande a été modifiée avec succès.');
+
+            // Rediriger vers une autre route après le succès de l'édition
+            return $this->redirectToRoute('insert_demande', ['id' => $demande->getId()]);
+        }
+
+        // Rendre la vue du formulaire
+        return $this->render('modifDemande.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+//--------------------------------------------------------------------------------------------------------------
+
 
 
 }

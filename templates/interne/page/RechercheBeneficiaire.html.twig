@@ -109,7 +109,9 @@
                         <a href="{{ path('insertDemande', {'id': beneficiaire.id}) }}" class="btn btn-success">
                             <i class="fa fa-plus-circle"></i> Demande
                         </a>
-                        <a href ="{{ path('updatebeneficiaire',{id: beneficiaire.id})}}"><i class="fa-solid fa-file-pen coloriUpBen"></i></a>
+                        <a href="{{ path('updatebeneficiaire', {'id': beneficiaire.id}) }}" class="btn-over">
+                            <i class="fa-solid fa-file-pen fa-lg" style="color:#164681"></i>
+                        </a>
                     </td>
                 </tr>
             {% endfor %}
