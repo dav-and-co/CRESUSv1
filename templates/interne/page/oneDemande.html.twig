@@ -82,7 +82,13 @@
                    <a href="{{ path('insertRevenu', {id: demande.id}) }}" class="ajout btn btn-success"> <i class="fa-solid fa-plus circle" style="color: white;"></i></a>
                </h6>
                {% for revenu in demande.revenus %}
-               <p>{{ revenu.typeRevenu.libelleRevenu }} : {{ revenu.montantMensuel }}  </p>
+               <p>{{ revenu.typeRevenu.libelleRevenu }} :
+                   {{ revenu.montantMensuel }}
+                   <a href="{{ path('modif_demande', {id: demande.id}) }}" class="btn-over">
+                       <i class="fa-solid fa-file-pen fa-sm" style="color:#2a7cf6"></i>
+                   </a>
+
+               </p>
                 {% endfor %}
            </div>
            <div class="affichage-detail specdemande1 fin">
@@ -91,7 +97,12 @@
                    <a href="{{ path('insertCharge', {id: demande.id}) }}" class="ajout btn btn-success"> <i class="fa-solid fa-plus circle" style="color: white;"></i></a>
                </h6>
                {% for charge in demande.charges %}
-                   <p>{{ charge.typeCharge.libelleCharge }} : {{ charge.montantMensuel }}  </p>
+                   <p>{{ charge.typeCharge.libelleCharge }} :
+                       {{ charge.montantMensuel }}
+                       <a href="{{ path('modif_demande', {id: demande.id}) }}" class="btn-over">
+                           <i class="fa-solid fa-file-pen fa-sm" style="color:#2a7cf6"></i>
+                       </a>
+                   </p>
                {% endfor %}
            </div>
            <div class="affichage-detail specdemande2 fin">
@@ -104,6 +115,9 @@
                        <span> {{ dette.organisme }} </span>
                        mensualité : {{ dette.mensualite }} -
                        montant du : {{ dette.montantDu }}
+                       <a href="{{ path('modif_demande', {id: demande.id}) }}" class="btn-over">
+                           <i class="fa-solid fa-file-pen fa-sm" style="color:#2a7cf6"></i>
+                       </a>
                    </p>
                {% endfor %}
            </div>
@@ -117,13 +131,19 @@
         </div>
         <div class="affichage-detailbis specdemande">
             <div class="affichage-fin">
-                <h6> Evolution du dossier</h6>
+                <h6>
+                    Evolution du dossier
+                    <a href="{{ path('insertRevenu', {id: demande.id}) }}" class="ajout btn btn-success"> <i class="fa-solid fa-plus circle" style="color: white;"></i></a>
+                </h6>
                 {% for avancement in demande.historiqueAvcts %}
                     <p> <span> {{ avancement.createdAt|date('d/m/Y') }} </span> - {{ avancement.avancement.libelleAvancement }} - {{ avancement.commentairesAvct }}</p>
                 {% endfor %}
             </div>
             <div  class="affichage-fin">
-                <h6> Historique des RDV</h6>
+                <h6>
+                    Historique des RDV
+                    <a href="{{ path('insertRevenu', {id: demande.id}) }}" class="ajout btn btn-success"> <i class="fa-solid fa-plus circle" style="color: white;"></i></a>
+                </h6>
                 {% for rdv in demande.RendezVous %}
                     <p> <span> {{ rdv.dateAt|date('d/m/Y') }} - {{ rdv.heureAt|date('H:i') }}</span> - {{ rdv.Site.nomSite }} </p>
                 {% endfor %}

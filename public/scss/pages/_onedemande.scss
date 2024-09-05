@@ -79,7 +79,6 @@
   }
   .commentaires{
     width: 100%;
-    min-height: 200px;
     line-height :0.8;
   }
     span{
@@ -116,7 +115,6 @@
     white-space: nowrap;
   }
   .btn-over {
-    padding: 0 10px;
     position: relative;
   }
 
@@ -137,7 +135,9 @@
   .ajout{
     font-size: 10px;
   }
-
+a{
+  margin-left: 10px;
+}
 
 
 }

@@ -31,7 +31,7 @@ class Demande
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $ville_demande = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 250, nullable: true)]
     private ?string $situation_logt = null;
 
     #[ORM\Column(nullable: true)]
@@ -173,7 +173,7 @@ class Demande
 
     public function setVilleDemande(?string $ville_demande): static
     {
-        $this->ville_demande = $ville_demande;
+        $this->ville_demande = mb_strtoupper ($ville_demande, 'UTF-8');
 
         return $this;
     }

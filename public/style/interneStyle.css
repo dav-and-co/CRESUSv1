@@ -312,7 +312,6 @@ tableBen {
 }
 .onedemande .commentaires {
   width: 100%;
-  min-height: 200px;
   line-height: 0.8;
 }
 .onedemande span {
@@ -344,7 +343,6 @@ tableBen {
   white-space: nowrap;
 }
 .onedemande .btn-over {
-  padding: 0 10px;
   position: relative;
 }
 .onedemande .btn-over:hover::after {
@@ -362,6 +360,9 @@ tableBen {
 }
 .onedemande .ajout {
   font-size: 10px;
+}
+.onedemande a {
+  margin-left: 10px;
 }
 
 .mentions {
