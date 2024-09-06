@@ -84,12 +84,11 @@
                {% for revenu in demande.revenus %}
                <p>{{ revenu.typeRevenu.libelleRevenu }} :
                    {{ revenu.montantMensuel }}
-                   <a href="{{ path('modif_demande', {id: demande.id}) }}" class="btn-over">
+                   <a href="{{ path('modif_revenu', {id: revenu.id}) }}" class="btn-over">
                        <i class="fa-solid fa-file-pen fa-sm" style="color:#2a7cf6"></i>
                    </a>
-
                </p>
-                {% endfor %}
+                 {% endfor %}
            </div>
            <div class="affichage-detail specdemande1 fin">
                <h6>
@@ -99,7 +98,7 @@
                {% for charge in demande.charges %}
                    <p>{{ charge.typeCharge.libelleCharge }} :
                        {{ charge.montantMensuel }}
-                       <a href="{{ path('modif_demande', {id: demande.id}) }}" class="btn-over">
+                       <a href="{{ path('modif_charge', {id: charge.id}) }}" class="btn-over">
                            <i class="fa-solid fa-file-pen fa-sm" style="color:#2a7cf6"></i>
                        </a>
                    </p>
@@ -115,7 +114,7 @@
                        <span> {{ dette.organisme }} </span>
                        mensualité : {{ dette.mensualite }} -
                        montant du : {{ dette.montantDu }}
-                       <a href="{{ path('modif_demande', {id: demande.id}) }}" class="btn-over">
+                       <a href="{{ path('modif_dette', {id: dette.id}) }}" class="btn-over">
                            <i class="fa-solid fa-file-pen fa-sm" style="color:#2a7cf6"></i>
                        </a>
                    </p>

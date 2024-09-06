@@ -104,6 +104,7 @@ class Demande
 
     public function __construct()
     {
+        $this->typeDemande = new ArrayCollection();
         $this->revenus = new ArrayCollection();
         $this->charges = new ArrayCollection();
         $this->dettes = new ArrayCollection();

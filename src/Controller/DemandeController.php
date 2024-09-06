@@ -20,7 +20,10 @@ use App\Form\ChargeType;
 use App\Form\DetteType;
 use App\Form\ModifDemandeType;
 use App\Form\RevenuType;
+use App\Repository\ChargeRepository;
 use App\Repository\DemandeRepository;
+use App\Repository\DetteRepository;
+use App\Repository\RevenuRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -151,12 +154,22 @@ class DemandeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Associer le revenu à la demande (si besoin)
+            // Associer le revenu à la demande
             $revenu->setDemande($demande);
 
             // Enregistrer le revenu dans la base de données
             $entityManager->persist($revenu);
             $entityManager->flush();
+
+            // Si le bouton "Nouvelle saisie" est cliqué
+            if ($request->request->has('nouvelle_saisie')) {
+
+                // Ajouter un message flash pour informer l'utilisateur du succès
+                $this->addFlash('success', 'Votre saisie a été enregistrée. Vous pouvez maintenant en ajouter une nouvelle.');
+
+                // Rediriger vers la même page pour saisir un nouveau revenu
+                return $this->redirectToRoute('insertRevenu', ['id' => $demande->getId()]);
+            }
 
             // Rediriger vers une autre page ou afficher un message de succès
             return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()]);
@@ -199,6 +212,16 @@ class DemandeController extends AbstractController
             $entityManager->persist($charge);
             $entityManager->flush();
 
+            // Si le bouton "Nouvelle saisie" est cliqué
+            if ($request->request->has('nouvelle_saisie')) {
+
+                // Ajouter un message flash pour informer l'utilisateur du succès
+                $this->addFlash('success', 'Votre saisie a été enregistrée. Vous pouvez maintenant en ajouter une nouvelle.');
+
+                // Rediriger vers la même page pour saisir un nouveau revenu
+                return $this->redirectToRoute('insertCharge', ['id' => $demande->getId()]);
+            }
+
             // Rediriger vers une autre page ou afficher un message de succès
             return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()]);
         }
@@ -240,6 +263,17 @@ class DemandeController extends AbstractController
             $entityManager->persist($dette);
             $entityManager->flush();
 
+            // Si le bouton "Nouvelle saisie" est cliqué
+            if ($request->request->has('nouvelle_saisie')) {
+
+                // Ajouter un message flash pour informer l'utilisateur du succès
+                $this->addFlash('success', 'Votre saisie a été enregistrée. Vous pouvez maintenant en ajouter une nouvelle.');
+
+                // Rediriger vers la même page pour saisir un nouveau revenu
+                return $this->redirectToRoute('insertDette', ['id' => $demande->getId()]);
+            }
+
+
             // Rediriger vers une autre page ou afficher un message de succès
             return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()]);
         }
@@ -251,6 +285,173 @@ class DemandeController extends AbstractController
             'demande' => $demande,
         ]);
     }
+
+//--------------------------------------------------------------------------------------------------------------
+    #[Route('/benevole/demande/modifRevenu/{id}', name: 'modif_revenu')]
+    public function modifRevenu(Request $request, Revenu $revenu, EntityManagerInterface $entityManager, revenuRepository $revenuRepository, $id): Response
+    {
+        $revenu = $revenuRepository->find($id);
+
+        // Récupérer la demande liée au revenu
+        $demande = $revenu->getDemande();
+
+        // Récupérer les bénéficiaires de la demande
+        $beneficiaires = $demande->getBeneficiaires()->toArray();;
+
+        // Créer le formulaire, en passant les bénéficiaires dans les options
+        $form = $this->createForm(RevenuType::class, $revenu, [
+            'beneficiaires' => $beneficiaires,
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            // Rediriger après la modification
+            return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()]);
+        }
+
+        return $this->render('interne/page/insertRevenu.html.twig', [
+            'form' => $form->createView(),
+            'demande' => $demande,
+            'beneficiaires' => $beneficiaires,
+            'revenu' => $revenu,
+        ]);
+    }
+
+//--------------------------------------------------------------------------------------------------------------
+    #[Route('/benevole/demande/deleteRevenu/{id}', name: 'delete_revenu')]
+    public function deleteRevenu(Revenu $revenu, EntityManagerInterface $entityManager): Response
+    {
+        $demandeId = $revenu->getDemande()->getId();
+
+        $entityManager->remove($revenu);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('affichageDemande', ['id' => $demandeId]);
+    }
+
+//--------------------------------------------------------------------------------------------------------------
+    #[Route('/benevole/demande/modifcharge/{id}', name: 'modif_charge')]
+    public function modifCharge(Request $request, Charge $charge, EntityManagerInterface $entityManager, chargeRepository $chargeRepository, $id): Response
+    {
+        $charge = $chargeRepository->find($id);
+
+        // Récupérer la demande liée au revenu
+        $demande = $charge->getDemande();
+
+        // Récupérer les bénéficiaires de la demande
+        $beneficiaires = $demande->getBeneficiaires()->toArray();;
+
+        // Créer le formulaire, en passant les bénéficiaires dans les options
+        $form = $this->createForm(ChargeType::class, $charge, [
+            'beneficiaires' => $beneficiaires,
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            // Rediriger après la modification
+            return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()]);
+        }
+
+        return $this->render('interne/page/insertCharge.html.twig', [
+            'form' => $form->createView(),
+            'demande' => $demande,
+            'beneficiaires' => $beneficiaires,
+            'charge' => $charge,
+        ]);
+    }
+
+//--------------------------------------------------------------------------------------------------------------
+    #[Route('/benevole/demande/deleteCharge/{id}', name: 'delete_charge')]
+    public function deleteCharge(charge $charge, EntityManagerInterface $entityManager): Response
+    {
+        $demandeId = $charge->getDemande()->getId();
+
+        $entityManager->remove($charge);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('affichageDemande', ['id' => $demandeId]);
+    }
+
+
+//--------------------------------------------------------------------------------------------------------------
+    #[Route('/benevole/demande/modifdette/{id}', name: 'modif_dette')]
+    public function modifDette(Request $request, Dette $dette, EntityManagerInterface $entityManager, detteRepository $detteRepository, $id): Response
+    {
+        $dette = $detteRepository->find($id);
+
+        // Récupérer la demande liée au revenu
+        $demande = $dette->getDemande();
+
+        // Récupérer les bénéficiaires de la demande
+        $beneficiaires = $demande->getBeneficiaires()->toArray();;
+
+        // Créer le formulaire, en passant les bénéficiaires dans les options
+        $form = $this->createForm(DetteType::class, $dette, [
+            'beneficiaires' => $beneficiaires,
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            // Rediriger après la modification
+            return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()]);
+        }
+
+        return $this->render('interne/page/insertDette.html.twig', [
+            'form' => $form->createView(),
+            'demande' => $demande,
+            'beneficiaires' => $beneficiaires,
+            'dette' => $dette,
+        ]);
+    }
+
+//--------------------------------------------------------------------------------------------------------------
+    #[Route('/benevole/demande/deletedette/{id}', name: 'delete_dette')]
+    public function deleteDette(dette $dette, EntityManagerInterface $entityManager): Response
+    {
+        $demandeId = $dette->getDemande()->getId();
+
+        $entityManager->remove($dette);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('affichageDemande', ['id' => $demandeId]);
+    }
+
+//--------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

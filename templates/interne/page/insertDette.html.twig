@@ -1,11 +1,22 @@
-{# templates/revenu/insertRevenu.html.twig #}
 
 {% extends 'interne/partial/intBase.html.twig' %}
 
-{% block title %}Ajouter un revenu{% endblock %}
+{% block title %}
+    {% if dette.id is defined %}
+        Modifier une dette
+    {% else %}
+        Ajouter une dette
+    {% endif %}
+{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un revenu pour la demande n°{{ demande.id }}</h1>
+    <h1>
+        {% if dette.id is defined %}
+            <h1>Modifier une dette/crédit pour la demande n°{{ demande.id }}</h1>
+        {% else %}
+            <h1>Ajouter une dette/crédit pour la demande n°{{ demande.id }}</h1>
+        {% endif %}
+    </h1>
 
     {{ form_start(form) }}
     <div class="form-group col-md-3">
@@ -32,9 +43,23 @@
         {{ form_label(form.montant_du) }}
         {{ form_widget(form.montant_du, {'attr': {'class': 'form-control'}}) }}
     </div>
+
     <div class="d-flex justify-content-between mt-3">
-        <button class="btn btn-success">Ajouter</button>
+        <button class="btn btn-success">
+            {% if dette.id is defined %}
+                Modifier
+            {% else %}
+                Ajouter
+            {% endif %}
+        </button>
+        {% if dette.id is defined %}
+            <a href="{{ path('delete_dette', {id: dette.id}) }}" class="btn btn-danger">Supprimer</a>
+        {% else %}
+            <button class="btn btn-info" name="nouvelle_saisie" type="submit">Nouvelle saisie</button>
+        {% endif %}
+
         <a href="{{ path('affichageDemande', {id: demande.id}) }}" class="btn btn-secondary">Annuler</a>
     </div>
+
     {{ form_end(form) }}
 {% endblock %}
