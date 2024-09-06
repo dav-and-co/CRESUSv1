@@ -1,0 +1,20 @@
+
+{% extends 'interne/partial/intBase.html.twig' %}
+
+{% block title %}
+           Evolution demande
+  {% endblock %}
+
+{% block body %}
+    <h1>Ajouter un Avancement à la Demande</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+        <div class="d-flex justify-content-between mt-3">
+            <button class="btn btn-success">Ajouter</button>
+            <a href="{{ path('affichageDemande', {id: demande.id}) }}" class="btn btn-secondary">Annuler</a>
+        </div>
+
+    {{ form_end(form) }}
+{% endblock %}

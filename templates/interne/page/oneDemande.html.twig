@@ -132,7 +132,7 @@
             <div class="affichage-fin">
                 <h6>
                     Evolution du dossier
-                    <a href="{{ path('insertRevenu', {id: demande.id}) }}" class="ajout btn btn-success"> <i class="fa-solid fa-plus circle" style="color: white;"></i></a>
+                    <a href="{{ path('insert_evoldoss', {id: demande.id}) }}" class="ajout btn btn-success"> <i class="fa-solid fa-plus circle" style="color: white;"></i></a>
                 </h6>
                 {% for avancement in demande.historiqueAvcts %}
                     <p> <span> {{ avancement.createdAt|date('d/m/Y') }} </span> - {{ avancement.avancement.libelleAvancement }} - {{ avancement.commentairesAvct }}</p>

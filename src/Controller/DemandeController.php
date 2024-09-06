@@ -12,12 +12,14 @@ use App\Entity\Beneficiaire;
 use App\Entity\Charge;
 use App\Entity\Demande;
 use App\Entity\Dette;
+use App\Entity\HistoriqueAvct;
 use App\Entity\Origine;
 use App\Entity\PositionDemande;
 use App\Entity\Revenu;
 use App\Entity\TypeDemande;
 use App\Form\ChargeType;
 use App\Form\DetteType;
+use App\Form\HistoriqueAvctType;
 use App\Form\ModifDemandeType;
 use App\Form\RevenuType;
 use App\Repository\ChargeRepository;
@@ -426,25 +428,32 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    #[Route('/benevole/demande/insert-evoldoss/{id}', name: 'insert_evoldoss')]
+    public function insertEvoldoss(Demande $demande, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $historiqueAvct = new HistoriqueAvct();
+        $form = $this->createForm(HistoriqueAvctType::class, $historiqueAvct, [
+            'type_demande' => $demande->getTypeDemande(),
+        ]);
 
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $historiqueAvct->setDemande($demande);
+            $historiqueAvct->setCreatedAt(new \DateTimeImmutable());
+            $entityManager->persist($historiqueAvct);
+            $entityManager->flush();
 
+            $this->addFlash('success', 'L\'avancement a été ajouté.');
 
+            return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()]);
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return $this->render('interne/page/insertEvoldoss.html.twig', [
+            'form' => $form->createView(),
+            'demande' => $demande,
+        ]);
+    }
 
 
 
