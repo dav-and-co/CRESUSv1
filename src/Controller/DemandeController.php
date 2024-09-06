@@ -18,6 +18,7 @@ use App\Entity\PositionDemande;
 use App\Entity\Revenu;
 use App\Entity\TypeDemande;
 use App\Form\ChargeType;
+use App\Form\DemandeType;
 use App\Form\DetteType;
 use App\Form\HistoriqueAvctType;
 use App\Form\ModifDemandeType;
@@ -455,44 +456,26 @@ class DemandeController extends AbstractController
         ]);
     }
 
-
-
-
-
-
-
-
-
-
 //--------------------------------------------------------------------------------------------------------------
     #[Route('/benevole/modificationDemande/{id}', name: 'modif_demande')]
-    public function edit(int $id, Request $request, EntityManagerInterface $entityManager): Response
+
+        public function modifDemande(Demande $demande, Request $request, EntityManagerInterface $entityManager): Response
     {
-        // Récupérer l'entité Demande par son ID
-        $demande = $entityManager->getRepository(Demande::class)->find($id);
-
-
-        // Créer le formulaire en utilisant ModifDemandeType
+        // Créer le formulaire basé sur l'entité Demande
         $form = $this->createForm(ModifDemandeType::class, $demande);
-
-        // Gérer la requête (c'est ici que les données POST seront traitées)
         $form->handleRequest($request);
 
-        // Vérifier si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
-            // Persister les modifications dans la base de données
-            $entityManager->flush();
+            // Met à jour les données de la demande si bouton save
+                $entityManager->flush();
 
-            // Ajouter un message de succès
-            $this->addFlash('success', 'La demande a été modifiée avec succès.');
-
-            // Rediriger vers une autre route après le succès de l'édition
-            return $this->redirectToRoute('insert_demande', ['id' => $demande->getId()]);
+            // Redirige vers la vue
+            return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()]);
         }
 
-        // Rendre la vue du formulaire
-        return $this->render('modifDemande.html.twig', [
+        return $this->render('interne/page/modifDemande.html.twig', [
             'form' => $form->createView(),
+            'demande' => $demande,
         ]);
     }
 

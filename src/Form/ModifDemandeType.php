@@ -1,82 +1,82 @@
 <?php
 
+// src/Form/DemandeType.php
+
 namespace App\Form;
 
-use App\Entity\Beneficiaire;
 use App\Entity\Demande;
 use App\Entity\Origine;
 use App\Entity\PositionDemande;
 use App\Entity\TypeDemande;
-use App\Entity\User;
-use App\Entity\Revenu;
-use App\Entity\Charge;
-use App\Entity\Dette;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class ModifDemandeType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('adresse1_demande')
-            ->add('adresse2_demande')
-            ->add('cp_demande')
-            ->add('ville_demande')
-            ->add('situation_logt')
-            ->add('nb_enfant')
-            ->add('patrimoine')
-            ->add('complement_origine')
-            ->add('cause_besoin')
-            ->add('commentaires', TextareaType::class)
-
-            // Champ TypeDemande avec choix multiple
             ->add('type_demande', EntityType::class, [
                 'class' => TypeDemande::class,
-                'choice_label' => 'libelleDemande',
-                'multiple' => true,
-                'expanded' => true, // Pour afficher les choix sous forme de cases à cocher
+                'choice_label' => 'libelle_demande', // Le champ à afficher dans le select
+                'choice_value' => 'id',
             ])
-
-            // Champ Origine avec choix multiple
+            ->add('position_demande', EntityType::class, [
+                'class' => PositionDemande::class,
+                'choice_label' => 'libelle_position',
+                'choice_value' => 'id',
+            ])
             ->add('origine', EntityType::class, [
                 'class' => Origine::class,
-                'choice_label' => 'libelleOrigine',
-                'multiple' => true,
-                'expanded' => true,
+                'choice_label' => 'libelle_origine',
+                'choice_value' => 'id',
             ])
-
-            // Champ Revenu avec choix multiple
-            ->add('revenus', EntityType::class, [
-                'class' => Revenu::class,
-                'choice_label' => 'typeRevenu.libelleRevenu',
-                'multiple' => true,
-                'expanded' => true,
+            ->add('complement_origine', TextType::class, [
+                'label' => 'Complément Origine',
+                'required' => false,
             ])
-
-            // Champ Charge avec choix multiple
-            ->add('charges', EntityType::class, [
-                'class' => Charge::class,
-                'choice_label' => 'typeCharge.libelleCharge',
-                'multiple' => true,
-                'expanded' => true,
+            ->add('cause_besoin', TextType::class, [
+                'label' => 'Cause du Besoin',
+                'required' => false,
             ])
-
-            // Champ Dette avec choix multiple
-            ->add('dettes', EntityType::class, [
-                'class' => Dette::class,
-                'choice_label' => 'typeDette.libelleDette',
-                'multiple' => true,
-                'expanded' => true,
-            ]);
+            ->add('adresse1_demande', TextType::class, [
+                'label' => 'Adresse 1',
+                'required' => false,
+            ])
+            ->add('adresse2_demande', TextType::class, [
+                'label' => 'Adresse 2',
+                'required' => false,
+            ])
+            ->add('cp_demande', IntegerType::class, [
+                'label' => 'Code Postal',
+                'required' => false,
+            ])
+            ->add('ville_demande', TextType::class, [
+                'label' => 'Ville',
+                'required' => false,
+            ])
+            ->add('situation_logt', TextType::class, [
+                'label' => 'Situation Logement',
+                'required' => false,
+            ])
+            ->add('nb_enfant', IntegerType::class, [
+                'label' => 'Nombre d\'enfants',
+                'required' => false,
+            ])
+            ->add('patrimoine', TextType::class, [
+                'label' => 'Patrimoine',
+                'required' => false,
+            ])
+        ;
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Demande::class,
