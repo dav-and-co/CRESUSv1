@@ -87,7 +87,7 @@
                 <tr>
                     <td>{{ beneficiaire.nomBeneficiaire }}</td>
                     <td>{{ beneficiaire.prenomBeneficiaire }}</td>
-                    <td>{{ beneficiaire.telephoneBeneficiaire|default('')|format_phone_number }}</td>
+                    <td>{{ beneficiaire.telephoneBeneficiaire }}</td>
                     <td>{{ beneficiaire.mailBeneficiaire }}</td>
                     <td>
                         <ul>
@@ -109,7 +109,7 @@
                         <a href="{{ path('insertDemande', {'id': beneficiaire.id}) }}" class="btn btn-success">
                             <i class="fa fa-plus-circle"></i> Demande
                         </a>
-                        <a href="{{ path('updatebeneficiaire', {'id': beneficiaire.id}) }}" class="btn-over">
+                        <a href="{{ path('updatebeneficiaire', {'id': beneficiaire.id}) }}" class="btn btn-over">
                             <i class="fa-solid fa-file-pen fa-lg" style="color:#164681"></i>
                         </a>
                     </td>

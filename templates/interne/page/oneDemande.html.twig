@@ -35,7 +35,6 @@
                             <i class="fa-solid fa-file-pen fa-lg" style="color:#2a7cf6"></i>
                         </a>
                     </p>
-
                     <p> mail : <span>{{ beneficiaire.mailBeneficiaire }}</span> - tél : <span>{{ beneficiaire.telephoneBeneficiaire }} </span> </p>
                     <p>   {{  beneficiaire.libelleProf.libelleProf }} - profession : {{ beneficiaire.professionBeneficiaire }}  </p>
                 </div>
@@ -43,23 +42,31 @@
         {% elseif demande.beneficiaires|length == 2 %}
             {% for beneficiaire in demande.beneficiaires %}
                 <div class="affichage-detail">
-                    <p>
-                        <a href="{{ path('removeBeneficiaireFromDemande',{demandeId: demande.id, beneficiaireId: beneficiaire.id})}}"
-                           class="btn-remove-beneficiaire"
-                           onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce bénéficiaire de la demande ?');">
-                            <i class="fa fa-minus-circle"></i>
-                        </a>
-                        <span class="retrait">{{ beneficiaire.civiliteBeneficiaire }} {{ beneficiaire.nomBeneficiaire }} {{ beneficiaire.prenomBeneficiaire }},</span>
-                        né(e) le
-                        {% if beneficiaire.ddnBeneficiaire %}
-                            {{ beneficiaire.ddnBeneficiaire|date('d/m/Y') }}
-                        {% else %}
-                            Non renseigné
-                        {% endif %}
-                        <a href="{{ path('updatebeneficiaire', {'id': beneficiaire.id, 'redirect': app.request.uri}) }}" class="btn-over">
-                            <i class="fa-solid fa-file-pen fa-lg" style="color:#2a7cf6"></i>
-                        </a>
-                    </p>
+                    <div class="affich2benef">
+                        <i class="fa fa-minus-circle jsDeleteButton" style="color: #ea0505;"></i>
+                        <div class="overlay">
+                            <div class="jsDelete">
+                                <h4>Voulez vous vraiment supprimer le bénéficiaire de la demande ?</h4>
+                                <div class="flexButton">
+                                    <p><a href="{{ path('removeBeneficiaireFromDemande',{demandeId: demande.id, beneficiaireId: beneficiaire.id})}}">Supprimer</a></p>
+                                    <p><a href="{{ path('affichageDemande', {id: demande.id}) }}">Annuler</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            <span class="retrait">{{ beneficiaire.civiliteBeneficiaire }} {{ beneficiaire.nomBeneficiaire }} {{ beneficiaire.prenomBeneficiaire }},</span>
+                            né(e) le
+                            {% if beneficiaire.ddnBeneficiaire %}
+                                {{ beneficiaire.ddnBeneficiaire|date('d/m/Y') }}
+                            {% else %}
+                                Non renseigné
+                            {% endif %}
+                            <a href="{{ path('updatebeneficiaire', {'id': beneficiaire.id, 'redirect': app.request.uri}) }}" class="btn-over">
+                                <i class="fa-solid fa-file-pen fa-lg" style="color:#2a7cf6"></i>
+                            </a>
+                        </p>
+                    </div>
+
                     <p> mail : <span>{{ beneficiaire.mailBeneficiaire }}</span> - tél : <span>{{ beneficiaire.telephoneBeneficiaire }} </span> </p>
                     <p>{{ beneficiaire.libelleProf.libelleProf }} - profession : {{ beneficiaire.professionBeneficiaire }}</p>
                 </div>
@@ -164,5 +171,5 @@
 {% endblock %}
 
 {% block javascript %}
-<script src="JS/buttonpopup.js"></script>
+<script src="{{ asset('JS/buttonpopup.js') }}"></script>
 {% endblock %}

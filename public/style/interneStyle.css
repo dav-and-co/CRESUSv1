@@ -71,6 +71,13 @@ main {
   margin: 20px auto;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
 header {
   width: 100%;
   height: 12vh;
@@ -237,6 +244,21 @@ tableBen {
   border-radius: 5px;
   white-space: nowrap;
 }
+.table .btn-link {
+  position: relative;
+}
+.table .btn-link:hover::after {
+  content: "Affichage";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #164681;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
 
 .onedemande p {
   font-size: 14px;
@@ -363,6 +385,37 @@ tableBen {
 }
 .onedemande a {
   margin-left: 10px;
+}
+.onedemande .overlay {
+  display: none;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.66);
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  width: 100vw;
+  height: 100vh;
+}
+.onedemande .overlay .jsDelete {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: solid 1px black;
+  padding: 100px;
+  width: 50%;
+}
+.onedemande .overlay .flexButton {
+  display: flex;
+  justify-content: space-evenly;
+}
+.onedemande .jsDeleteButton {
+  color: rgba(0, 0, 0, 0.8);
+}
+.onedemande .affich2benef {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .mentions {

@@ -16,6 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -31,7 +32,7 @@ class AccueilController extends AbstractController
     #[Route('/', name: 'Accueil')]
     public function gpAccueil(TypeDemandeRepository $TypeDemandeRepository): response
     {
-        // récupère tous les articles en BDD
+         // récupère tous les articles en BDD
         $typedemande = $TypeDemandeRepository->findAll();
 
         // Rend la vue Twig en y passant données récupérées

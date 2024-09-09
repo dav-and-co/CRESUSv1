@@ -31,113 +31,140 @@
       width: calc(45% - 20px);
       box-sizing: border-box;
     }
-  .affichage-detailbis {
-    justify-content: space-between;
-    width: calc(33.333% - 20px);
-  }
-  .affichage-fin {
-    width: 100%;
-    justify-content: space-between;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    box-sizing: border-box;
-  }
+    .affichage-detailbis {
+      justify-content: space-between;
+      width: calc(33.333% - 20px);
+    }
+    .affichage-fin {
+      width: 100%;
+      justify-content: space-between;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      box-sizing: border-box;
+    }
 
+      .titre{
+        color : $textJauneColor;
+        font-weight :bold;
+        align-content: center;
+        border : none;
+        background-color: $fondCarouselColor;
+        text-align: center;
+      }
+      .specdemande{
+        width: 30%;
+        line-height :0.8;
+      }
 
-    .titre{
+      .specdemande1{
+        width: 20%;
+        line-height :0.8;
+      }
+      .specdemande2{
+         width: 45%;
+         line-height :0.8;
+       }
+
+      .fin{
+        p{
+          text-align: right;
+        }
+      }
+    h6{
       color : $textJauneColor;
-      font-weight :bold;
-      align-content: center;
-      border : none;
-      background-color: $fondCarouselColor;
       text-align: center;
     }
-    .specdemande{
-      width: 30%;
+    .commentaires{
+      width: 100%;
       line-height :0.8;
     }
-
-    .specdemande1{
-      width: 20%;
-      line-height :0.8;
+      span{
+        font-weight :bold;
+        color :$footerColor;
+      }
+    .btn-remove-beneficiaire {
+      padding: 3px 3px;
+      font-size: 12px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      position: relative;
     }
-    .specdemande2{
-       width: 45%;
-       line-height :0.8;
-     }
 
-    .fin{
-      p{
-        text-align: right;
+    .retrait{
+      padding-left: 10px;
+    }
+
+    .btn-remove-beneficiaire:hover::after {
+      content: "Suppression";
+      position: absolute;
+      right: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #dc3545;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+    .btn-over {
+      position: relative;
+    }
+
+    .btn-over:hover::after {
+      content: "Modification";
+      font-size: 12px;
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: $textBleuColor;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+
+    .ajout{
+      font-size: 10px;
+    }
+    a{
+      margin-left: 10px;
+    }
+    .overlay{
+      display: none;
+      position: fixed;
+      background-color: rgba(0, 0, 0, 0.66);
+      top: 0;
+      left: 0;
+      z-index: 2000;
+      width: 100vw;
+      height: 100vh;
+
+      .jsDelete{
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: white;
+        border: solid 1px black;
+        padding: 100px;
+        width: 50%;
+      }
+
+      .flexButton{
+        display: flex;
+        justify-content: space-evenly;
       }
     }
-  h6{
-    color : $textJauneColor;
-    text-align: center;
+    .jsDeleteButton{
+      color: rgba(0, 0, 0, 0.8);
+   }
+  .affich2benef{
+    display:flex;
+    justify-content: flex-start;
   }
-  .commentaires{
-    width: 100%;
-    line-height :0.8;
-  }
-    span{
-      font-weight :bold;
-      color :$footerColor;
-    }
-  .btn-remove-beneficiaire {
-    padding: 3px 3px;
-    font-size: 12px;
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    position: relative;
-  }
-
-  .retrait{
-    padding-left: 10px;
-  }
-
-  .btn-remove-beneficiaire i {
-  }
-
-  .btn-remove-beneficiaire:hover::after {
-    content: "Suppression";
-    position: absolute;
-    right: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: #dc3545;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 5px;
-    white-space: nowrap;
-  }
-  .btn-over {
-    position: relative;
-  }
-
-  .btn-over:hover::after {
-    content: "Modification";
-    font-size: 12px;
-    position: absolute;
-    left: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: $textBleuColor;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 5px;
-    white-space: nowrap;
-  }
-
-  .ajout{
-    font-size: 10px;
-  }
-a{
-  margin-left: 10px;
-}
-
-
 }

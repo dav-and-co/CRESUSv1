@@ -46,4 +46,21 @@
     border-radius: 5px;
     white-space: nowrap;
   }
+
+  .btn-link {
+    position: relative;
+  }
+
+  .btn-link:hover::after {
+    content: "Affichage";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: $footerColor;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 5px;
+    white-space: nowrap;
+  }
 }
