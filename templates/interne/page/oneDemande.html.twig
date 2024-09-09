@@ -25,7 +25,12 @@
             {% for beneficiaire in demande.beneficiaires %}
             <div class="affichage-detail">
                     <p> <span>{{ beneficiaire.civiliteBeneficiaire }} {{ beneficiaire.nomBeneficiaire }} {{ beneficiaire.prenomBeneficiaire }},</span>
-                        date naissance {{ beneficiaire.ddnBeneficiaire|date('d/m/Y') }}
+                        né(e) le
+                        {% if beneficiaire.ddnBeneficiaire %}
+                            {{ beneficiaire.ddnBeneficiaire|date('d/m/Y') }}
+                        {% else %}
+                            Non renseigné
+                        {% endif %}
                         <a href="{{ path('updatebeneficiaire', {'id': beneficiaire.id, 'redirect': app.request.uri}) }}" class="btn-over">
                             <i class="fa-solid fa-file-pen fa-lg" style="color:#2a7cf6"></i>
                         </a>
@@ -39,13 +44,18 @@
             {% for beneficiaire in demande.beneficiaires %}
                 <div class="affichage-detail">
                     <p>
-                        <a href="{{ path('removeBeneficiaireFromDemande', {demandeId: demande.id, beneficiaireId: beneficiaire.id}) }}"
+                        <a href="{{ path('removeBeneficiaireFromDemande',{demandeId: demande.id, beneficiaireId: beneficiaire.id})}}"
                            class="btn-remove-beneficiaire"
                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce bénéficiaire de la demande ?');">
                             <i class="fa fa-minus-circle"></i>
                         </a>
                         <span class="retrait">{{ beneficiaire.civiliteBeneficiaire }} {{ beneficiaire.nomBeneficiaire }} {{ beneficiaire.prenomBeneficiaire }},</span>
-                        date naissance {{ beneficiaire.ddnBeneficiaire|date('d/m/Y') }}
+                        né(e) le
+                        {% if beneficiaire.ddnBeneficiaire %}
+                            {{ beneficiaire.ddnBeneficiaire|date('d/m/Y') }}
+                        {% else %}
+                            Non renseigné
+                        {% endif %}
                         <a href="{{ path('updatebeneficiaire', {'id': beneficiaire.id, 'redirect': app.request.uri}) }}" class="btn-over">
                             <i class="fa-solid fa-file-pen fa-lg" style="color:#2a7cf6"></i>
                         </a>

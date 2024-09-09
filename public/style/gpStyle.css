@@ -269,7 +269,7 @@ footer a {
   background-color: #5E6E99;
   clip-path: polygon(55% 0, 100% 0, 100% 100%, 12% 100%);
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-evenly;
   align-items: flex-end;
   display: flex;
 }
@@ -292,7 +292,8 @@ footer a {
 .landingpage .accueil .textArriere li {
   color: white;
   list-style-type: circle;
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 1.5;
 }
 .landingpage .accueil .textArriere2 {
   padding: 20px;
@@ -1146,6 +1147,12 @@ footer a {
 }
 .contact .form-group {
   margin-bottom: 20px;
+}
+.contact .form-check {
+  display: flex;
+}
+.contact .form-check-label {
+  padding-left: 20px;
 }
 .contact .petitp {
   font-size: 13px;

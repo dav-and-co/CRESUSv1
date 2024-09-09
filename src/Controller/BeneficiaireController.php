@@ -147,7 +147,7 @@ class BeneficiaireController extends AbstractController
                 // Cas 1 : Création d'une demande avec un seul bénéficiaire
 
                 // Associe les valeurs obligatoires
-                $typeDemande = $entityManager->getRepository(TypeDemande::class)->find(5);
+                $typeDemande = $entityManager->getRepository(TypeDemande::class)->find(1);
                 $positionDemande = $entityManager->getRepository(PositionDemande::class)->find(1);
                 $origine = $entityManager->getRepository(Origine::class)->find(1);
 
@@ -215,7 +215,7 @@ class BeneficiaireController extends AbstractController
             $entityManager->flush();
 
             // Associe les valeurs obligatoires
-            $typeDemande = $entityManager->getRepository(TypeDemande::class)->find(5);
+            $typeDemande = $entityManager->getRepository(TypeDemande::class)->find(1);
             $positionDemande = $entityManager->getRepository(PositionDemande::class)->find(1);
             $origine = $entityManager->getRepository(Origine::class)->find(1);
 
@@ -261,6 +261,11 @@ class BeneficiaireController extends AbstractController
 
         // Vérification si le formulaire a été soumis et est valide
         if ($beneficiaireModifForm->isSubmitted() &&  $beneficiaireModifForm->isValid()) {
+
+            // Si la date de naissance est vide (par exemple une chaîne vide), on la met à null
+            if (!$beneficiaire->getDdnBeneficiaire()) {
+                $beneficiaire->setDdnBeneficiaire(null);
+            }
 
             // Persistance et sauvegarde des modifications en base de données
             $entityManager->persist($beneficiaire);

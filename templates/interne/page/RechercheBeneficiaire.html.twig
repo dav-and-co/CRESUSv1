@@ -27,7 +27,7 @@
             </div>
 
             <div class="form-group">
-                {{ form_label(form.telephone) }}
+                Téléphone - saisir le numéro sans espace
                 {{ form_widget(form.telephone, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.telephone) }}
             </div>
@@ -87,7 +87,7 @@
                 <tr>
                     <td>{{ beneficiaire.nomBeneficiaire }}</td>
                     <td>{{ beneficiaire.prenomBeneficiaire }}</td>
-                    <td>{{ beneficiaire.telephoneBeneficiaire }}</td>
+                    <td>{{ beneficiaire.telephoneBeneficiaire|default('')|format_phone_number }}</td>
                     <td>{{ beneficiaire.mailBeneficiaire }}</td>
                     <td>
                         <ul>

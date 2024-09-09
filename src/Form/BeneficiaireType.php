@@ -3,22 +3,31 @@
 namespace App\Form;
 
 use App\Entity\Beneficiaire;
-use App\Entity\Demande;
 use App\Entity\TypeProf;
+use App\Form\DataTransformer\PhoneNumberTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use App\Form\DataTransformer\NullToDateTimeTransformer;
 
 class BeneficiaireType extends AbstractType
 {
+    private $nullToDateTimeTransformer;
+    private $phoneNumberTransformer;
+
+    public function __construct(NullToDateTimeTransformer $nullToDateTimeTransformer, PhoneNumberTransformer $phoneNumberTransformer)
+    {
+        $this->nullToDateTimeTransformer = $nullToDateTimeTransformer;
+        $this->phoneNumberTransformer = $phoneNumberTransformer;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -54,9 +63,10 @@ class BeneficiaireType extends AbstractType
                     'placeholder' => 'jj/mm/aaaa',
                 ],
                     'required' => false,
+                    'invalid_message' => 'Veuillez entrer une date valide ou laisser vide.',
             ])
             ->add('mail_beneficiaire', EmailType::class, [
-                'required' => false, // Le champ est facultatif
+                'required' => false,
                 'constraints' => [
                     new Email([
                         'message' => 'Le format de l\'email est invalide.',
@@ -76,7 +86,13 @@ class BeneficiaireType extends AbstractType
                 'required' => false,
             ])
         ;
+        // Ajout du transformer au champ 'ddn_beneficiaire'
+        $builder->get('ddn_beneficiaire')->addModelTransformer($this->nullToDateTimeTransformer);
+        // Appliquer le transformer au champ téléphone
+        $builder->get('telephone_beneficiaire')->addModelTransformer($this->phoneNumberTransformer);
     }
+
+
 
     public function configureOptions(OptionsResolver $resolver): void
     {

@@ -47,6 +47,7 @@ class DemandeController extends AbstractController
         if (!$demande) {
             throw $this->createNotFoundException('La demande n\'existe pas.');
         }
+
         return $this->render('interne/page/oneDemande.html.twig', [
             'demande' => $demande,
         ]);
