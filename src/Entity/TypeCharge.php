@@ -24,6 +24,9 @@ class TypeCharge
     #[ORM\OneToMany(targetEntity: Charge::class, mappedBy: 'type_charge')]
     private Collection $charges;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isActif = null;
+
     public function __construct()
     {
         $this->charges = new ArrayCollection();
@@ -72,6 +75,18 @@ class TypeCharge
                 $charge->setTypeCharge(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isActif(): ?bool
+    {
+        return $this->isActif;
+    }
+
+    public function setActif(?bool $isActif): static
+    {
+        $this->isActif = $isActif;
 
         return $this;
     }

@@ -24,6 +24,9 @@ class TypeRevenu
     #[ORM\OneToMany(targetEntity: Revenu::class, mappedBy: 'type_revenu')]
     private Collection $revenus;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isActif = null;
+
     public function __construct()
     {
         $this->revenus = new ArrayCollection();
@@ -72,6 +75,18 @@ class TypeRevenu
                 $revenu->setTypeRevenu(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isActif(): ?bool
+    {
+        return $this->isActif;
+    }
+
+    public function setActif(?bool $isActif): static
+    {
+        $this->isActif = $isActif;
 
         return $this;
     }

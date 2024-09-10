@@ -24,6 +24,9 @@ class TypeDette
     #[ORM\OneToMany(targetEntity: Dette::class, mappedBy: 'type_dette')]
     private Collection $dettes;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isActif = null;
+
     public function __construct()
     {
         $this->dettes = new ArrayCollection();
@@ -72,6 +75,18 @@ class TypeDette
                 $dette->setTypeDette(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isActif(): ?bool
+    {
+        return $this->isActif;
+    }
+
+    public function setActif(?bool $isActif): static
+    {
+        $this->isActif = $isActif;
 
         return $this;
     }

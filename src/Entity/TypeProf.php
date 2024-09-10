@@ -24,6 +24,9 @@ class TypeProf
     #[ORM\OneToMany(targetEntity: Beneficiaire::class, mappedBy: 'libelle_prof')]
     private Collection $beneficiaires;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isActif = null;
+
     public function __construct()
     {
         $this->beneficiaires = new ArrayCollection();
@@ -72,6 +75,18 @@ class TypeProf
                 $beneficiaire->setLibelleProf(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isActif(): ?bool
+    {
+        return $this->isActif;
+    }
+
+    public function setActif(?bool $isActif): static
+    {
+        $this->isActif = $isActif;
 
         return $this;
     }

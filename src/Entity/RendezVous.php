@@ -31,6 +31,9 @@ class RendezVous
     #[ORM\JoinColumn(nullable: false)]
     private ?Site $Site = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isAnnule = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +95,18 @@ class RendezVous
     public function setSite(?Site $Site): static
     {
         $this->Site = $Site;
+
+        return $this;
+    }
+
+    public function isAnnule(): ?bool
+    {
+        return $this->isAnnule;
+    }
+
+    public function setAnnule(?bool $isAnnule): static
+    {
+        $this->isAnnule = $isAnnule;
 
         return $this;
     }

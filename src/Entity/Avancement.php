@@ -28,6 +28,9 @@ class Avancement
     #[ORM\OneToMany(targetEntity: HistoriqueAvct::class, mappedBy: 'avancement')]
     private Collection $historiqueAvcts;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isActif = null;
+
     public function __construct()
     {
         $this->historiqueAvcts = new ArrayCollection();
@@ -88,6 +91,18 @@ class Avancement
                 $historiqueAvct->setAvancement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isActif(): ?bool
+    {
+        return $this->isActif;
+    }
+
+    public function setActif(?bool $isActif): static
+    {
+        $this->isActif = $isActif;
 
         return $this;
     }

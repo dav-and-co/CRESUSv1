@@ -24,6 +24,9 @@ class Origine
     #[ORM\OneToMany(targetEntity: Demande::class, mappedBy: 'origine')]
     private Collection $demandes;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isActif = null;
+
     public function __construct()
     {
         $this->demandes = new ArrayCollection();
@@ -72,6 +75,18 @@ class Origine
                 $demande->setOrigine(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isActif(): ?bool
+    {
+        return $this->isActif;
+    }
+
+    public function setActif(?bool $isActif): static
+    {
+        $this->isActif = $isActif;
 
         return $this;
     }
