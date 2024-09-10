@@ -35,7 +35,11 @@
                             <i class="fa-solid fa-file-pen fa-lg" style="color:#2a7cf6"></i>
                         </a>
                     </p>
-                    <p> mail : <span>{{ beneficiaire.mailBeneficiaire }}</span> - tél : <span>{{ beneficiaire.telephoneBeneficiaire }} </span> </p>
+                    <p> mail : <span>{{ beneficiaire.mailBeneficiaire }}</span>
+                        - tél : <span>
+                        {% set formatted_phone = beneficiaire.telephoneBeneficiaire|slice(0, 2) ~ ' ' ~ beneficiaire.telephoneBeneficiaire|slice(2, 2) ~ ' ' ~ beneficiaire.telephoneBeneficiaire|slice(4, 2) ~ ' ' ~ beneficiaire.telephoneBeneficiaire|slice(6, 2) ~ ' ' ~ beneficiaire.telephoneBeneficiaire|slice(8, 2) %}
+                                {{ formatted_phone }}
+                    </span> </p>
                     <p>   {{  beneficiaire.libelleProf.libelleProf }} - profession : {{ beneficiaire.professionBeneficiaire }}  </p>
                 </div>
             {% endfor %}
@@ -43,7 +47,9 @@
             {% for beneficiaire in demande.beneficiaires %}
                 <div class="affichage-detail">
                     <div class="affich2benef">
-                        <i class="fa fa-minus-circle jsDeleteButton" style="color: #ea0505;"></i>
+                        <div class="jsDeleteButton btn-remove-beneficiaire">
+                            <i class="fa fa-minus-circle" style="color: #ea0505;"></i>
+                        </div>
                         <div class="overlay">
                             <div class="jsDelete">
                                 <h4>Voulez vous vraiment supprimer le bénéficiaire de la demande ?</h4>
@@ -67,7 +73,9 @@
                         </p>
                     </div>
 
-                    <p> mail : <span>{{ beneficiaire.mailBeneficiaire }}</span> - tél : <span>{{ beneficiaire.telephoneBeneficiaire }} </span> </p>
+                    <p> mail : <span>{{ beneficiaire.mailBeneficiaire }}</span>
+                        - tél : <span>{% set formatted_phone = beneficiaire.telephoneBeneficiaire|slice(0, 2) ~ ' ' ~ beneficiaire.telephoneBeneficiaire|slice(2, 2) ~ ' ' ~ beneficiaire.telephoneBeneficiaire|slice(4, 2) ~ ' ' ~ beneficiaire.telephoneBeneficiaire|slice(6, 2) ~ ' ' ~ beneficiaire.telephoneBeneficiaire|slice(8, 2) %}
+                            {{ formatted_phone }} </span> </p>
                     <p>{{ beneficiaire.libelleProf.libelleProf }} - profession : {{ beneficiaire.professionBeneficiaire }}</p>
                 </div>
             {% endfor %}
@@ -100,12 +108,13 @@
                </h6>
                {% for revenu in demande.revenus %}
                <p>{{ revenu.typeRevenu.libelleRevenu }} :
-                   {{ revenu.montantMensuel }}
+                   {{ revenu.montantMensuel|number_format(0, ',', ' ') }}
                    <a href="{{ path('modif_revenu', {id: revenu.id}) }}" class="btn-over">
                        <i class="fa-solid fa-file-pen fa-sm" style="color:#2a7cf6"></i>
                    </a>
                </p>
                  {% endfor %}
+               <p><strong>Total des revenus :</strong> {{ sommeRevenus|number_format(0, ',', ' ') }} €</p>
            </div>
            <div class="affichage-detail specdemande1 fin">
                <h6>
@@ -114,12 +123,13 @@
                </h6>
                {% for charge in demande.charges %}
                    <p>{{ charge.typeCharge.libelleCharge }} :
-                       {{ charge.montantMensuel }}
+                       {{ charge.montantMensuel|number_format(0, ',', ' ') }}
                        <a href="{{ path('modif_charge', {id: charge.id}) }}" class="btn-over">
                            <i class="fa-solid fa-file-pen fa-sm" style="color:#2a7cf6"></i>
                        </a>
                    </p>
-               {% endfor %}
+                 {% endfor %}
+               <p><strong>Total des revenus :</strong> {{ sommeCharges|number_format(0, ',', ' ') }} €</p>
            </div>
            <div class="affichage-detail specdemande2 fin">
                <h6>
@@ -129,13 +139,14 @@
                {% for dette in demande.dettes %}
                    <p>{{ dette.typeDette.libelledette }} -
                        <span> {{ dette.organisme }} </span>
-                       mensualité : {{ dette.mensualite }} -
-                       montant du : {{ dette.montantDu }}
+                       mensualité : {{ dette.mensualite|number_format(0, ',', ' ') }} -
+                       montant du : {{ dette.montantDu|number_format(0, ',', ' ') }}
                        <a href="{{ path('modif_dette', {id: dette.id}) }}" class="btn-over">
                            <i class="fa-solid fa-file-pen fa-sm" style="color:#2a7cf6"></i>
                        </a>
                    </p>
-               {% endfor %}
+                 {% endfor %}
+               <p><strong>Total des mensualités :</strong> {{ sommeMens|number_format(0, ',', ' ') }} € - <strong>Total dû :</strong> {{ sommeDettes|number_format(0, ',', ' ') }} € </p>
            </div>
        </div>
     <div class="affichage-groupe fondbleu">

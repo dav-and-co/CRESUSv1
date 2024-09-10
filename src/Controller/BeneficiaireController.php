@@ -136,6 +136,11 @@ class BeneficiaireController extends AbstractController
         // Si le formulaire est soumis et valide
         if ($beneficiaireCreateForm->isSubmitted() && $beneficiaireCreateForm->isValid()) {
 
+            // Transformation du numéro de téléphone avant enregistrement
+            $telephone = $beneficiaire->getTelephoneBeneficiaire();
+            $telephone = $this->formatPhoneNumber($telephone);
+            $beneficiaire->setTelephoneBeneficiaire($telephone);
+
             // persiste et enregistre l'objet en base de données
             $entityManager->persist($beneficiaire);
             $entityManager->flush();
@@ -210,6 +215,12 @@ class BeneficiaireController extends AbstractController
         $beneficiaireCreateForm->handleRequest($request);
 
         if ($beneficiaireCreateForm->isSubmitted() && $beneficiaireCreateForm->isValid()) {
+
+            // Transformation du numéro de téléphone avant enregistrement
+            $telephone = $secondBeneficiary->getTelephoneBeneficiaire();
+            $telephone = $this->formatPhoneNumber($telephone);
+            $secondBeneficiary->setTelephoneBeneficiaire($telephone);
+
             // Sauvegarder le second bénéficiaire
             $entityManager->persist($secondBeneficiary);
             $entityManager->flush();
@@ -262,6 +273,11 @@ class BeneficiaireController extends AbstractController
         // Vérification si le formulaire a été soumis et est valide
         if ($beneficiaireModifForm->isSubmitted() &&  $beneficiaireModifForm->isValid()) {
 
+            // Transformation du numéro de téléphone avant enregistrement
+            $telephone = $beneficiaire->getTelephoneBeneficiaire();
+            $telephone = $this->formatPhoneNumber($telephone);
+            $beneficiaire->setTelephoneBeneficiaire($telephone);
+
             // Si la date de naissance est vide (par exemple une chaîne vide), on la met à null
             if (!$beneficiaire->getDdnBeneficiaire()) {
                 $beneficiaire->setDdnBeneficiaire(null);
@@ -295,6 +311,31 @@ class BeneficiaireController extends AbstractController
 
 //--------------------------------------------------------------------------------------------------------------
 
+    /**
+     * Formate un numéro de téléphone selon les règles spécifiées.
+     * Remplace +33 par 0, ajoute un 0 au début si nécessaire et supprime les espaces.
+     */
+    private function formatPhoneNumber(?string $telephone): ?string
+    {
+        if ($telephone === null) {
+            return null;
+        }
+
+        // Supprimer les espaces
+        $telephone = str_replace(' ', '', $telephone);
+
+        // Remplacer +33 par 0 si le numéro commence par +33
+        if (str_starts_with($telephone, '+33')) {
+            $telephone = '0' . substr($telephone, 3);
+        }
+
+        // Ajouter un 0 au début si nécessaire
+        if (!str_starts_with($telephone, '0')) {
+            $telephone = '0' . $telephone;
+        }
+
+        return $telephone;
+    }
 
 
 

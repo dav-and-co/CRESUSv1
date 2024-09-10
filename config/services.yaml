@@ -16,6 +16,10 @@ services:
     App\Form\DataTransformer\NullToDateTimeTransformer:
         autowire: true
 
+    # Ajout du PhoneNumberTransformer
+    App\Form\DataTransformer\PhoneNumberTransformer:
+        public: true
+
     # déclaration pour reroutage des erreurs 404
     App\EventListener\ExceptionListener:
          tags:

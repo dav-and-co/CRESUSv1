@@ -144,7 +144,7 @@ class Beneficiaire
         return $this->telephone_beneficiaire;
     }
 
-    public function setTelephoneBeneficiaire(?int $telephone_beneficiaire): static
+    public function setTelephoneBeneficiaire(?string $telephone_beneficiaire): static
     {
         $this->telephone_beneficiaire = $telephone_beneficiaire;
 

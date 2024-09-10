@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Beneficiaire;
 use App\Entity\TypeProf;
 
+use App\Form\DataTransformer\PhoneNumberTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -19,11 +20,15 @@ use App\Form\DataTransformer\NullToDateTimeTransformer;
 
 class BeneficiaireType extends AbstractType
 {
+    // Déclaration des propriétés
     private $nullToDateTimeTransformer;
+    private $phoneNumberTransformer;
 
-    public function __construct(NullToDateTimeTransformer $nullToDateTimeTransformer )
+    // Constructeur avec injection des dépendances
+    public function __construct(NullToDateTimeTransformer $nullToDateTimeTransformer, PhoneNumberTransformer $phoneNumberTransformer)
     {
         $this->nullToDateTimeTransformer = $nullToDateTimeTransformer;
+        $this->phoneNumberTransformer = $phoneNumberTransformer;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -72,6 +77,12 @@ class BeneficiaireType extends AbstractType
                 ],
             ])
             ->add('telephone_beneficiaire', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'pattern' => '0[0-9]{1} [0-9]{2} [0-9]{2} [0-9]{2} [0-9]{2}',
+                    'title' => 'Format attendu : 0x xx xx xx xx',
+                    'placeholder' => '0x xx xx xx xx'
+                ],
                 'required' => false,
             ])
             ->add('profession_beneficiaire', null, [
@@ -85,8 +96,10 @@ class BeneficiaireType extends AbstractType
             ])
         ;
         // Ajout du transformer au champ 'ddn_beneficiaire'
-        $builder->get('ddn_beneficiaire')->addModelTransformer($this->nullToDateTimeTransformer);
-
+        $builder->get('ddn_beneficiaire')
+            ->addModelTransformer($this->nullToDateTimeTransformer);
+        $builder->get('telephone_beneficiaire')
+            ->addModelTransformer($this->phoneNumberTransformer);
     }
 
 

@@ -16,8 +16,8 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
-      gap: 40px;
-     padding: 30px 0;
+      gap: 20px;
+     padding: 20px 0;
     }
     .fondbleu{
       background-color: $fondCarouselColor;
@@ -84,15 +84,6 @@
         font-weight :bold;
         color :$footerColor;
       }
-    .btn-remove-beneficiaire {
-      padding: 3px 3px;
-      font-size: 12px;
-      background-color: #dc3545;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      position: relative;
-    }
 
     .retrait{
       padding-left: 10px;

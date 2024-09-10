@@ -39,6 +39,7 @@
     </section>
 
     {% if beneficiaires is not empty %}
+
         <div class="addben">
             <a href="{{ path('insertBeneficiaire')}}"><i class="fa-solid fa-user-plus tailleiAddBen" > <span>Ajouter un bénéficiaire</span></i></a>
         </div>
@@ -87,7 +88,10 @@
                 <tr>
                     <td>{{ beneficiaire.nomBeneficiaire }}</td>
                     <td>{{ beneficiaire.prenomBeneficiaire }}</td>
-                    <td>{{ beneficiaire.telephoneBeneficiaire }}</td>
+                    <td>
+                        {% set formatted_phone = beneficiaire.telephoneBeneficiaire|slice(0, 2) ~ ' ' ~ beneficiaire.telephoneBeneficiaire|slice(2, 2) ~ ' ' ~ beneficiaire.telephoneBeneficiaire|slice(4, 2) ~ ' ' ~ beneficiaire.telephoneBeneficiaire|slice(6, 2) ~ ' ' ~ beneficiaire.telephoneBeneficiaire|slice(8, 2) %}
+                        {{ formatted_phone }}
+                    </td>
                     <td>{{ beneficiaire.mailBeneficiaire }}</td>
                     <td>
                         <ul>

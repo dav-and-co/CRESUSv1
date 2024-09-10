@@ -48,8 +48,30 @@ class DemandeController extends AbstractController
             throw $this->createNotFoundException('La demande n\'existe pas.');
         }
 
+        // Calculer les sommes
+        $sommeRevenus = 0;
+        $sommeCharges = 0;
+        $sommeDettes = 0;
+        $sommeMens = 0;
+
+        foreach ($demande->getRevenus() as $revenu) {
+            $sommeRevenus += $revenu->getMontantMensuel();
+        }
+        foreach ($demande->getCharges() as $charge) {
+            $sommeCharges += $charge->getMontantMensuel();
+        }
+        foreach ($demande->getDettes() as $dette) {
+            $sommeDettes += $dette->getMontantDu();
+            $sommeMens += $dette->getMensualite();
+        }
+
+
         return $this->render('interne/page/oneDemande.html.twig', [
             'demande' => $demande,
+            'sommeRevenus' => $sommeRevenus,
+            'sommeCharges' => $sommeCharges,
+            'sommeDettes' => $sommeDettes,
+            'sommeMens' => $sommeMens,
         ]);
     }
 

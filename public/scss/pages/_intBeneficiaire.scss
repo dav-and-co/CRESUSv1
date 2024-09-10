@@ -3,20 +3,16 @@
     display: flex;
     gap: 1rem;
   }
-
   .form-group {
     flex: 1;
   }
-
   .form-group label {
     display: block;
     margin-bottom: 0.5rem;
   }
-
   .form-group .form-control {
     width: 100%;
   }
-
   .form-group button {
     margin-top: 1rem;
   }
@@ -29,11 +25,9 @@
   .btn{
     margin-right: 20px;
   }
-
   .btn-over {
     position: relative;
   }
-
   .btn-over:hover::after {
     content: "Modification";
     position: absolute;
@@ -46,11 +40,9 @@
     border-radius: 5px;
     white-space: nowrap;
   }
-
   .btn-link {
     position: relative;
   }
-
   .btn-link:hover::after {
     content: "Affichage";
     position: absolute;
