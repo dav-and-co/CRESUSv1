@@ -38,11 +38,11 @@
         {{ form_end(form) }}
     </section>
 
-    {% if beneficiaires is not empty %}
+    {% if form_submitted %}
 
-        <div class="addben">
-            <a href="{{ path('insertBeneficiaire')}}"><i class="fa-solid fa-user-plus tailleiAddBen" > <span>Ajouter un bénéficiaire</span></i></a>
-        </div>
+            <div class="addben">
+                <a href="{{ path('insertBeneficiaire')}}"><i class="fa-solid fa-user-plus tailleiAddBen" > <span>Ajouter un bénéficiaire</span></i></a>
+            </div>
 
         <h2>Résultats de la Recherche</h2>
         <table class="table">
@@ -123,8 +123,5 @@
         </table>
     {% else %}
         <p>Aucun bénéficiaire trouvé.</p>
-        <div class="addben">
-            <a href="{{ path('insertBeneficiaire')}}"><i class="fa-solid fa-user-plus tailleiAddBen" > <span>Ajouter un bénéficiaire</span></i></a>
-        </div>
     {% endif %}
 {% endblock %}

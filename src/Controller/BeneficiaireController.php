@@ -112,6 +112,7 @@ class BeneficiaireController extends AbstractController
             'beneficiaires' => $beneficiaires,
             'sortField' => $sort,
             'sortOrder' => $order,
+            'form_submitted' => $form->isSubmitted(),
         ]);
     }
 
