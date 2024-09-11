@@ -10,12 +10,12 @@
 {% block main %}
 
 <section class="onedemande">
-    <h1>Demande : <span>{{ demande.typeDemande.libelleDemande }} - {{ demande.positionDemande.libellePosition }}</span></h1>
+    <h1>Demande N°{{ demande.id }}: <span>{{ demande.typeDemande.libelleDemande }} - {{ demande.positionDemande.libellePosition }}</span></h1>
     <h5>Origine et date de la demande: {{ demande.origine.libelleOrigine }}  {{ demande.complementOrigine }} - {{ demande.createdAt|date('d/m/Y') }}</h5>
     <h3>
         {% if demande.beneficiaires|length == 1 %}
             Bénéficiaire
-            <a href="{{ path('insertBeneficiaire', {id: demande.id}) }}" class="btn btn-success">+</a>
+            <a href="{{ path('addbeneficiarydemande', {id: demande.id}) }}" class="btn btn-success">+</a>
         {% elseif demande.beneficiaires|length == 2 %}
             Bénéficiaires
         {% endif %}
@@ -48,7 +48,7 @@
                 <div class="affichage-detail">
                     <div class="affich2benef">
                         <div class="jsDeleteButton btn-remove-beneficiaire">
-                            <i class="fa fa-minus-circle" style="color: #ea0505;"></i>
+                            <i class="fa fa-minus-circle fa-xl" style="color: #d00b0b;"></i>
                         </div>
                         <div class="overlay">
                             <div class="jsDelete">

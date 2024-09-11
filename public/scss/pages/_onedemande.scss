@@ -89,13 +89,17 @@
       padding-left: 10px;
     }
 
+  .btn-remove-beneficiaire {
+    position: relative;
+  }
     .btn-remove-beneficiaire:hover::after {
       content: "Suppression";
       position: absolute;
       right: 100%;
-      top: 50%;
+      top: 25%;
       transform: translateY(-50%);
       background-color: #dc3545;
+      font-size: 12px;
       color: white;
       padding: 2px 6px;
       border-radius: 5px;

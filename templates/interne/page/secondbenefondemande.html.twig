@@ -1,21 +1,12 @@
 {% extends 'interne/partial/intBase.html.twig' %}
 
 {% block metatitle %}
-    - Créer un second bénéficiaire
+    - Ajouter un second bénéficiaire
 {% endblock %}
 
 {% block main %}
     <div class="container mt-5">
-        <h2 class="text-danger">AJOUT D'UN SECOND BENEFICIAIRE</h2>
-
-        <h4 class="text-success">Premier Bénéficiaire</h4>
-        <ul>
-            <li>{{ firstBeneficiary.civiliteBeneficiaire }} {{ firstBeneficiary.nomBeneficiaire }} {{ firstBeneficiary.prenomBeneficiaire }}</li>
-            <li>Date de naissance : {{ firstBeneficiary.ddnBeneficiaire|date('d/m/Y') }}</li>
-            <li>Email : {{ firstBeneficiary.mailBeneficiaire }}</li>
-        </ul>
-
-        <h4 class="text-success">Deuxième Bénéficiaire</h4>
+        <h2 class="text-danger">AJOUT D'UN SECOND BENEFICIAIRE SUR LA DEMANDE N°{{ demande.id }}</h2>
 
         {{ form_start(beneficiaireForm) }}
 
@@ -23,33 +14,31 @@
             <div class="col-md-3">
                 <div class="form-group">
                     {{ form_label(beneficiaireForm.civilite_beneficiaire) }}
-                    {{ form_widget(beneficiaireForm.civilite_beneficiaire, { 'attr': {'class': 'form-control', 'style': 'max-width: 100%;'} }) }}
+                    {{ form_widget(beneficiaireForm.civilite_beneficiaire, { 'attr': {'class': 'form-control'} }) }}
                     {{ form_errors(beneficiaireForm.civilite_beneficiaire) }}
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     {{ form_label(beneficiaireForm.nom_beneficiaire) }}
-                    {{ form_widget(beneficiaireForm.nom_beneficiaire, { 'attr': {'class': 'form-control', 'style': 'max-width: 100%;'} }) }}
+                    {{ form_widget(beneficiaireForm.nom_beneficiaire, { 'attr': {'class': 'form-control'} }) }}
                     {{ form_errors(beneficiaireForm.nom_beneficiaire) }}
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     {{ form_label(beneficiaireForm.prenom_beneficiaire) }}
-                    {{ form_widget(beneficiaireForm.prenom_beneficiaire, { 'attr': {'class': 'form-control', 'style': 'max-width: 100%;'} }) }}
+                    {{ form_widget(beneficiaireForm.prenom_beneficiaire, { 'attr': {'class': 'form-control'} }) }}
                     {{ form_errors(beneficiaireForm.prenom_beneficiaire) }}
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     {{ form_label(beneficiaireForm.ddn_beneficiaire) }}
-                    {{ form_widget(beneficiaireForm.ddn_beneficiaire, { 'attr': {'class': 'form-control', 'style': 'max-width: 100%;'} }) }}
+                    {{ form_widget(beneficiaireForm.ddn_beneficiaire, { 'attr': {'class': 'form-control'} }) }}
                     {{ form_errors(beneficiaireForm.ddn_beneficiaire) }}
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
                     {{ form_label(beneficiaireForm.mail_beneficiaire) }}
@@ -79,12 +68,11 @@
                 </div>
             </div>
         </div>
-
         <div class="d-flex justify-content-between mt-3">
-            <button type="submit" class="btn btn-primary" name="action" value="create_request">Création d'une demande</button>
+            <button type="submit" class="btn btn-primary">Ajouter le bénéficiaire</button>
 
-            <a href="{{ path('RechercheBeneficiaire') }}" class="btn btn-danger">
-                <i class="fa fa-times-circle"></i> Abandonner
+            <a href="{{ path('affichageDemande', {'id': demande.id}) }}" class="btn btn-danger">
+                <i class="fa fa-times-circle"></i> Retour à la demande
             </a>
         </div>
 

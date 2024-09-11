@@ -311,6 +311,60 @@ class BeneficiaireController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    #[Route('/benevole/demande/addbeneficiary/{id}', 'addbeneficiarydemande')]
+    public function addbeneficiarydemande(Request $request,  Demande $demande, EntityManagerInterface $entityManager, int $id): Response
+    {
+        // Créer un nouveau bénéficiaire
+        $beneficiaire = new Beneficiaire();
+
+        // Créer le formulaire pour le bénéficiaire
+        $form = $this->createForm(BeneficiaireType::class, $beneficiaire);
+        $form->handleRequest($request);
+
+        // Si le formulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Vérifie si le libelle_prof n'est pas saisi
+            if (empty($beneficiaire->getLibelleProf())) {
+                // Récupère l'objet TypeProf avec l'ID 1 depuis la base de données
+                $defaultTypeProf = $entityManager->getRepository(TypeProf::class)->find(1);
+
+                // Si trouvé, définit le libelle_prof à l'objet TypeProf récupéré
+                if ($defaultTypeProf !== null) {
+                    $beneficiaire->setLibelleProf($defaultTypeProf);
+                }
+            }
+
+            // Ajouter le nouveau bénéficiaire à la demande existante
+            $demande->addBeneficiaire($beneficiaire);
+
+            // Persister le bénéficiaire et la demande
+            $entityManager->persist($beneficiaire);
+            $entityManager->persist($demande);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()]);
+        }
+
+        return $this->render('interne/page/secondbenefondemande.html.twig', [
+            'beneficiaireForm' => $form->createView(),
+            'demande' => $demande,
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------
 
     /**
      * Formate un numéro de téléphone selon les règles spécifiées.
