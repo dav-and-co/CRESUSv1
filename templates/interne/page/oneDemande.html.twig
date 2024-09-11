@@ -15,7 +15,7 @@
     <h3>
         {% if demande.beneficiaires|length == 1 %}
             Bénéficiaire
-            <a href="{{ path('addbeneficiarydemande', {id: demande.id}) }}" class="btn btn-success">+</a>
+            <a href="{{ path('addbeneficiarydemande', {demandeId: demande.id}) }}" class="btn btn-success">+</a>
         {% elseif demande.beneficiaires|length == 2 %}
             Bénéficiaires
         {% endif %}

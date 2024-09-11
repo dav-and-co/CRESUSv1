@@ -311,48 +311,113 @@ class BeneficiaireController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
-    #[Route('/benevole/demande/addbeneficiary/{id}', 'addbeneficiarydemande')]
-    public function addbeneficiarydemande(Request $request,  Demande $demande, EntityManagerInterface $entityManager, int $id): Response
+    #[Route('/benevole/demande/addbeneficiary/{demandeId}', 'addbeneficiarydemande')]
+    public function addbeneficiarydemande(Request $request, EntityManagerInterface $entityManager,  int $demandeId): Response
     {
-        // Créer un nouveau bénéficiaire
-        $beneficiaire = new Beneficiaire();
+        // Récupération de la demande
+        $demande = $entityManager->getRepository(Demande::class)->find($demandeId);
 
-        // Créer le formulaire pour le bénéficiaire
-        $form = $this->createForm(BeneficiaireType::class, $beneficiaire);
-        $form->handleRequest($request);
+        if (!$demande) {
+            throw $this->createNotFoundException('Demande non trouvée.');
+        }
 
-        // Si le formulaire est soumis et valide
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Vérifie si le libelle_prof n'est pas saisi
-            if (empty($beneficiaire->getLibelleProf())) {
-                // Récupère l'objet TypeProf avec l'ID 1 depuis la base de données
-                $defaultTypeProf = $entityManager->getRepository(TypeProf::class)->find(1);
+        // Création des formulaires
+        $searchForm = $this->createFormBuilder()
+            ->add('nom', TextType::class, ['required' => false])
+            ->add('prenom', TextType::class, ['required' => false])
+            ->add('telephone', TextType::class, ['required' => false])
+            ->add('rechercher', SubmitType::class, ['label' => 'Rechercher'])
+            ->getForm();
 
-                // Si trouvé, définit le libelle_prof à l'objet TypeProf récupéré
-                if ($defaultTypeProf !== null) {
-                    $beneficiaire->setLibelleProf($defaultTypeProf);
-                }
+        $newBeneficiaryForm = $this->createForm(BeneficiaireType::class);
+
+        // Traitement des formulaires
+        $searchForm->handleRequest($request);
+        $beneficiaires = [];
+        $isSearchFormSubmitted = false;
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $data = $searchForm->getData();
+            $isSearchFormSubmitted = true;
+            $queryBuilder = $entityManager->getRepository(Beneficiaire::class)->createQueryBuilder('b');
+
+            if (!empty($data['nom'])) {
+                $queryBuilder->andWhere('b.nom_beneficiaire LIKE :nom')
+                    ->setParameter('nom', '%' . $data['nom'] . '%');
+            }
+            if (!empty($data['prenom'])) {
+                $queryBuilder->andWhere('b.prenom_beneficiaire LIKE :prenom')
+                    ->setParameter('prenom', '%' . $data['prenom'] . '%');
+            }
+            if (!empty($data['telephone'])) {
+                $queryBuilder->andWhere('b.telephone_beneficiaire LIKE :telephone')
+                    ->setParameter('telephone', '%' . $data['telephone'] . '%');
             }
 
-            // Ajouter le nouveau bénéficiaire à la demande existante
-            $demande->addBeneficiaire($beneficiaire);
+            $beneficiaires = $queryBuilder->getQuery()->getResult();
+        }
 
-            // Persister le bénéficiaire et la demande
+        $newBeneficiaryForm->handleRequest($request);
+
+        if ($newBeneficiaryForm->isSubmitted() && $newBeneficiaryForm->isValid()) {
+            $beneficiaire = $newBeneficiaryForm->getData();
+
+            // Si le libelle_prof est vide, définir une valeur par défaut
+            if (!$beneficiaire->getLibelleProf()) {
+                $defaultTypeProf = $entityManager->getRepository(TypeProf::class)->find(1);
+                $beneficiaire->setLibelleProf($defaultTypeProf);
+            }
+
             $entityManager->persist($beneficiaire);
-            $entityManager->persist($demande);
+            $entityManager->flush();
+
+            // Ajouter le bénéficiaire à la demande
+            $demande->addBeneficiaire($beneficiaire);
             $entityManager->flush();
 
             return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()]);
         }
 
         return $this->render('interne/page/secondbenefondemande.html.twig', [
-            'beneficiaireForm' => $form->createView(),
+            'searchForm' => $searchForm->createView(),
+            'beneficiaires' => $beneficiaires,
+            'newBeneficiaryForm' => $newBeneficiaryForm->createView(),
             'demande' => $demande,
+            'isSearchFormSubmitted' => $isSearchFormSubmitted,
         ]);
     }
 
+//--------------------------------------------------------------------------------------------------------------
+    #[Route('/benevole/demande/ajoutbenef/{demandeId}/{beneficiaireId}', 'ajouteneficairedemande')]
+    public function ajouterBeneficiaire(int $demandeId, int $beneficiaireId, DemandeRepository $demandeRepository, BeneficiaireRepository $beneficiaireRepository, EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer la demande par son ID
+        $demande = $demandeRepository->find($demandeId);
+        if (!$demande) {
+            throw $this->createNotFoundException('Demande non trouvée');
+        }
 
+        // Récupérer le bénéficiaire par son ID
+        $beneficiaire = $beneficiaireRepository->find($beneficiaireId);
+        if (!$beneficiaire) {
+            throw $this->createNotFoundException('Bénéficiaire non trouvé');
+        }
 
+        // Vérifier si le bénéficiaire n'est pas déjà associé à la demande
+        if (!$demande->getBeneficiaires()->contains($beneficiaire)) {
+            // Ajouter le bénéficiaire à la demande
+            $demande->addBeneficiaire($beneficiaire);
+            $entityManager->persist($demande);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Le bénéficiaire a été ajouté à la demande.');
+        } else {
+            $this->addFlash('warning', 'Le bénéficiaire est déjà associé à cette demande.');
+        }
+
+        // Rediriger vers la page de la demande après l'ajout
+        return $this->redirectToRoute('affichageDemande', ['id' => $demandeId]);
+    }
 
 
 

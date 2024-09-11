@@ -99,7 +99,7 @@
                             {% for demande in beneficiaire.demandes %}
                                 <li>
                                     <a href="{{ path('affichageDemande', {'id': demande.id}) }}" class="btn btn-link">
-                                        <i class="fa fa-eye"></i>
+                                        <i class="fa fa-eye fa-lg"></i>
                                     </a>
                                     {{ demande.createdAt|date('d/m/Y') }} -
                                     {{ demande.typeDemande.libelleDemande }} -
