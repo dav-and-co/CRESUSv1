@@ -21,10 +21,10 @@ class RevenuType extends AbstractType
                 'label' => 'Montant Mensuel',
             ])
             ->add('type_revenu', EntityType::class, [
-                //    'class' => TypeRevenu::class,
-                //     'choice_label' => 'id',
-                'class' => 'App\Entity\TypeRevenu',
+                'class' => TypeRevenu::class,
+                'choices' => $options['type_revenus'],
                 'choice_label' => 'libelleRevenu',
+                'choice_value' => 'id',
             ])
             ->add('beneficiaire', EntityType::class, [
                 'class' => Beneficiaire::class,
@@ -48,6 +48,7 @@ class RevenuType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Revenu::class,
             'beneficiaires' => [],
+            'type_revenus' => [],
         ]);
 
    // Déclarer les types autorisés pour l'option 'beneficiaires'

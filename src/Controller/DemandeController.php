@@ -27,6 +27,9 @@ use App\Repository\ChargeRepository;
 use App\Repository\DemandeRepository;
 use App\Repository\DetteRepository;
 use App\Repository\RevenuRepository;
+use App\Repository\TypeChargeRepository;
+use App\Repository\TypeDetteRepository;
+use App\Repository\TypeRevenuRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -160,7 +163,7 @@ class DemandeController extends AbstractController
 
 //--------------------------------------------------------------------------------------------------------------
     #[Route('/benevole/demande/ajoutRevenu/{id}', name: 'insertRevenu')]
-    public function insertRevenu(Request $request, Demande $demande, EntityManagerInterface $entityManager, demandeRepository $demandeRepository,$id ): Response
+    public function insertRevenu(Request $request, Demande $demande, EntityManagerInterface $entityManager, demandeRepository $demandeRepository, TypeRevenuRepository $typeRevenuRepository,$id ): Response
     {
         $demande = $demandeRepository->find($id);
 
@@ -168,12 +171,16 @@ class DemandeController extends AbstractController
         $revenu = new Revenu();
         $revenu->setDemande($demande);
 
+        // Récupérer les types de revenus actifs
+        $activeTypeRevenus = $typeRevenuRepository->findActiveTypeRevenus();
+
         // Récupérer les bénéficiaires de la demande
         $beneficiaires = $demande->getBeneficiaires()->toArray();;
 
         // Créer le formulaire, en passant les bénéficiaires dans les options
         $form = $this->createForm(RevenuType::class, $revenu, [
             'beneficiaires' => $beneficiaires,
+            'type_revenus' => $activeTypeRevenus,
         ]);
 
         // Gérer la soumission du formulaire
@@ -211,7 +218,7 @@ class DemandeController extends AbstractController
 
 //--------------------------------------------------------------------------------------------------------------
     #[Route('/benevole/demande/ajoutCharge/{id}', name: 'insertCharge')]
-    public function insertCharge(Request $request, Demande $demande, EntityManagerInterface $entityManager, demandeRepository $demandeRepository,$id ): Response
+    public function insertCharge(Request $request, Demande $demande, EntityManagerInterface $entityManager, demandeRepository $demandeRepository,TypeChargeRepository $typeChargeRepository,$id ): Response
     {
         $demande = $demandeRepository->find($id);
 
@@ -219,12 +226,16 @@ class DemandeController extends AbstractController
         $charge = new Charge();
         $charge->setDemande($demande);
 
+        // Récupérer les types de charges actifs
+        $activeTypeCharges = $typeChargeRepository->findActiveTypeCharges();
+
         // Récupérer les bénéficiaires de la demande
         $beneficiaires = $demande->getBeneficiaires()->toArray();;
 
         // Créer le formulaire, en passant les bénéficiaires dans les options
         $form = $this->createForm(ChargeType::class, $charge, [
             'beneficiaires' => $beneficiaires,
+            'type_charges' => $activeTypeCharges,
         ]);
 
         // Gérer la soumission du formulaire
@@ -262,7 +273,7 @@ class DemandeController extends AbstractController
 
 //--------------------------------------------------------------------------------------------------------------
     #[Route('/benevole/demande/ajoutDette/{id}', name: 'insertDette')]
-    public function insertDette(Request $request, Demande $demande, EntityManagerInterface $entityManager, demandeRepository $demandeRepository,$id ): Response
+    public function insertDette(Request $request, Demande $demande, EntityManagerInterface $entityManager, demandeRepository $demandeRepository,TypeDetteRepository $typeDetteRepository,$id ): Response
     {
         $demande = $demandeRepository->find($id);
 
@@ -270,12 +281,16 @@ class DemandeController extends AbstractController
         $dette = new Dette();
         $dette->setDemande($demande);
 
+        // Récupérer les types de charges actifs
+        $activeTypeDettes = $typeDetteRepository->findActiveTypeDettes();
+
         // Récupérer les bénéficiaires de la demande
         $beneficiaires = $demande->getBeneficiaires()->toArray();;
 
         // Créer le formulaire, en passant les bénéficiaires dans les options
         $form = $this->createForm(DetteType::class, $dette, [
             'beneficiaires' => $beneficiaires,
+            'type_dettes' => $activeTypeDettes,
         ]);
 
         // Gérer la soumission du formulaire
@@ -314,12 +329,15 @@ class DemandeController extends AbstractController
 
 //--------------------------------------------------------------------------------------------------------------
     #[Route('/benevole/demande/modifRevenu/{id}', name: 'modif_revenu')]
-    public function modifRevenu(Request $request, Revenu $revenu, EntityManagerInterface $entityManager, revenuRepository $revenuRepository, $id): Response
+    public function modifRevenu(Request $request, Revenu $revenu, EntityManagerInterface $entityManager, revenuRepository $revenuRepository,TypeRevenuRepository $typeRevenuRepository, $id): Response
     {
         $revenu = $revenuRepository->find($id);
 
         // Récupérer la demande liée au revenu
         $demande = $revenu->getDemande();
+
+        // Récupérer les types de revenus actifs
+        $activeTypeRevenus = $typeRevenuRepository->findActiveTypeRevenus();
 
         // Récupérer les bénéficiaires de la demande
         $beneficiaires = $demande->getBeneficiaires()->toArray();;
@@ -327,6 +345,7 @@ class DemandeController extends AbstractController
         // Créer le formulaire, en passant les bénéficiaires dans les options
         $form = $this->createForm(RevenuType::class, $revenu, [
             'beneficiaires' => $beneficiaires,
+            'type_revenus' => $activeTypeRevenus,
         ]);
 
         $form->handleRequest($request);
@@ -360,12 +379,15 @@ class DemandeController extends AbstractController
 
 //--------------------------------------------------------------------------------------------------------------
     #[Route('/benevole/demande/modifcharge/{id}', name: 'modif_charge')]
-    public function modifCharge(Request $request, Charge $charge, EntityManagerInterface $entityManager, chargeRepository $chargeRepository, $id): Response
+    public function modifCharge(Request $request, Charge $charge, EntityManagerInterface $entityManager, chargeRepository $chargeRepository, TypeChargeRepository $typeChargeRepository, $id): Response
     {
         $charge = $chargeRepository->find($id);
 
         // Récupérer la demande liée au revenu
         $demande = $charge->getDemande();
+
+        // Récupérer les types de charges actifs
+        $activeTypeCharges = $typeChargeRepository->findActiveTypeCharges();
 
         // Récupérer les bénéficiaires de la demande
         $beneficiaires = $demande->getBeneficiaires()->toArray();;
@@ -373,6 +395,7 @@ class DemandeController extends AbstractController
         // Créer le formulaire, en passant les bénéficiaires dans les options
         $form = $this->createForm(ChargeType::class, $charge, [
             'beneficiaires' => $beneficiaires,
+            'type_charges' => $activeTypeCharges,
         ]);
 
         $form->handleRequest($request);
@@ -407,12 +430,15 @@ class DemandeController extends AbstractController
 
 //--------------------------------------------------------------------------------------------------------------
     #[Route('/benevole/demande/modifdette/{id}', name: 'modif_dette')]
-    public function modifDette(Request $request, Dette $dette, EntityManagerInterface $entityManager, detteRepository $detteRepository, $id): Response
+    public function modifDette(Request $request, Dette $dette, EntityManagerInterface $entityManager, detteRepository $detteRepository, TypeDetteRepository $typeDetteRepository, $id): Response
     {
         $dette = $detteRepository->find($id);
 
         // Récupérer la demande liée au revenu
         $demande = $dette->getDemande();
+
+        // Récupérer les types de charges actifs
+        $activeTypeDettes = $typeDetteRepository->findActiveTypeDettes();
 
         // Récupérer les bénéficiaires de la demande
         $beneficiaires = $demande->getBeneficiaires()->toArray();;
@@ -420,6 +446,7 @@ class DemandeController extends AbstractController
         // Créer le formulaire, en passant les bénéficiaires dans les options
         $form = $this->createForm(DetteType::class, $dette, [
             'beneficiaires' => $beneficiaires,
+            'type_dettes' => $activeTypeDettes,
         ]);
 
         $form->handleRequest($request);

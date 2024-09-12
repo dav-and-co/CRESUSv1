@@ -40,10 +40,11 @@ class DetteType extends AbstractType
                 'placeholder' => 'Sélectionnez un bénéficiaire',
             ])
             ->add('type_dette', EntityType::class, [
-                //'class' => TypeDette::class,
-                //'choice_label' => 'id',
-                'class' => 'App\Entity\TypeDette',
+                'class' => TypeDette::class,
+                'choices' => $options['type_dettes'],
+                'placeholder' => 'Sélectionner un type de dette/crédit',
                 'choice_label' => 'libelleDette',
+                'choice_value' => 'id',
 
             ])
             // pas utile car repris depuis le contexte
@@ -59,6 +60,7 @@ class DetteType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Dette::class,
             'beneficiaires' => [],
+            'type_dettes' => [],
         ]);
 
         // Déclarer les types autorisés pour l'option 'beneficiaires'

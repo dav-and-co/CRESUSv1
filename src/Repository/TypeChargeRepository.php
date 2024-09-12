@@ -16,6 +16,15 @@ class TypeChargeRepository extends ServiceEntityRepository
         parent::__construct($registry, TypeCharge::class);
     }
 
+    public function findActiveTypeCharges(): array
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.isActif = :active')
+            ->setParameter('active', true)
+            ->getQuery()
+            ->getResult();
+    }
+
 
 
     //    /**

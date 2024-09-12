@@ -16,6 +16,15 @@ class TypeRevenuRepository extends ServiceEntityRepository
         parent::__construct($registry, TypeRevenu::class);
     }
 
+    public function findActiveTypeRevenus(): array
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.isActif = :active')
+            ->setParameter('active', true)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return TypeRevenu[] Returns an array of TypeRevenu objects
     //     */

@@ -15,7 +15,14 @@ class TypeDetteRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, TypeDette::class);
     }
-
+    public function findActiveTypeDettes(): array
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.isActif = :active')
+            ->setParameter('active', true)
+            ->getQuery()
+            ->getResult();
+    }
     //    /**
     //     * @return TypeDette[] Returns an array of TypeDette objects
     //     */

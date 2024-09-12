@@ -22,10 +22,11 @@ class ChargeType extends AbstractType
             ])
 
             ->add('type_charge', EntityType::class, [
-                //'class' => TypeCharge::class,
-                //'choice_label' => 'id',
-                'class' => 'App\Entity\TypeCharge',
+                'class' => TypeCharge::class,
+                'placeholder' => 'Sélectionner un type de charge',
+                'choices' => $options['type_charges'],
                 'choice_label' => 'libelleCharge',
+                'choice_value' => 'id',
 
             ])
             ->add('beneficiaire', EntityType::class, [
@@ -50,6 +51,7 @@ class ChargeType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Charge::class,
             'beneficiaires' => [],
+            'type_charges' => [],
         ]);
 
         // Déclarer les types autorisés pour l'option 'beneficiaires'
