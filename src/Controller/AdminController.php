@@ -17,7 +17,29 @@ class AdminController extends AbstractController
 {
 
 //-----------------------------------------------------------------------------------------------------------
-    // Route pour créer un nouveau bénévole (user) benevole
+    // affichage de la liste des bénévoles
+    #[Route('/admin/benevole/liste', name: 'listbenevoles')]
+    public function listBenevoles(UserRepository $UserRepository, Request $request)
+    {
+        // Récupération des paramètres de tri depuis la requête GET (si présents)
+        $tri = $request->query->get('tri');
+        $ordre = $request->query->get('ordre');
+        // Définition des valeurs par défaut si le tri n'est pas spécifié
+        if (!$tri) {
+            $tri = 'username';
+            $ordre = 'ASC';
+        }
+        // récupère tous les articles en BDD triés par ASC ou DESC
+        $benevoles = $UserRepository->findBy([], [$tri => $ordre]);
+
+        // affiche la vue Twig en y passant données récupérées
+        return $this->render('interne/page/listBenevoles.html.twig', [
+            'benevoles' => $benevoles
+        ]);
+    }
+
+//-----------------------------------------------------------------------------------------------------------
+    // création un nouveau bénévole (user)
     #[Route('/admin/benevole/insert', 'admin_insert_user')]
     public function insertBenevole(UserPasswordHasherInterface $passwordHasher, Request $request, EntityManagerInterface $entityManager)
     {
@@ -61,29 +83,7 @@ class AdminController extends AbstractController
     }
 
 //-----------------------------------------------------------------------------------------------------------
-    // Route pour afficher la liste des bénévoles
-    #[Route('/admin/benevole/liste', name: 'listbenevoles')]
-    public function listBenevoles(UserRepository $UserRepository, Request $request)
-    {
-        // Récupération des paramètres de tri depuis la requête GET (si présents)
-        $tri = $request->query->get('tri');
-        $ordre = $request->query->get('ordre');
-        // Définition des valeurs par défaut si le tri n'est pas spécifié
-        if (!$tri) {
-            $tri = 'username';
-            $ordre = 'ASC';
-        }
-        // récupère tous les articles en BDD triés par ASC ou DESC
-        $benevoles = $UserRepository->findBy([], [$tri => $ordre]);
-
-        // affiche la vue Twig en y passant données récupérées
-        return $this->render('interne/page/listBenevoles.html.twig', [
-            'benevoles' => $benevoles
-        ]);
-    }
-
-//-----------------------------------------------------------------------------------------------------------
-    // Route pour la modification d'un bénévole existant
+    // modification d'un bénévole existant
     #[Route('/admin/benevole/update/{id}', 'updatebenevole')]
     public function updateBenevole(int $id, Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository,UserPasswordHasherInterface $passwordHasher)
     {
@@ -130,6 +130,7 @@ class AdminController extends AbstractController
             'username' => $benevole->getUsername()
         ]);
     }
+
 //-----------------------------------------------------------------------------------------------------------
 
 }

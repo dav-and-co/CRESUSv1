@@ -24,6 +24,7 @@ class RevenuType extends AbstractType
                 'class' => TypeRevenu::class,
                 'choices' => $options['type_revenus'],
                 'choice_label' => 'libelleRevenu',
+                'placeholder' => 'Sélectionner un type de revenu',
                 'choice_value' => 'id',
             ])
             ->add('beneficiaire', EntityType::class, [

@@ -19,11 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class FormulaireController extends AbstractController
 {
 //-----------------------------------------------------------------------------------------------------------
-    // localhost/CresusV1/public/benevole/Accueil
-
-    // page provisoire post connexion - à voir comment elle va évoluer
-
-    // function qui récupère et affiche les types d'accompagnement de l'association
+// localhost/CresusV1/public/benevole/Accueil
+    // function qui récupère et affiche la page d'accueil une fois signé - évoluera en fonction des besoins
     #[Route('/benevole/Accueil', name: 'benevoleAccueil')]
     public function benevoleaccueil(): response
     {
@@ -32,13 +29,11 @@ class FormulaireController extends AbstractController
     }
 
 //-----------------------------------------------------------------------------------------------------------
-    // Cette méthode gère la lecture des formulaires avec un filtre basé sur le statut 'isTraite'
+    // Cette méthode gère la lecture et l'affichage des formulaires avec un filtre basé sur le statut 'isTraite'
     #[Route('/benevole/formulaires/{isTraite}', 'formulaires', defaults: ['isTraite' => false])]
     public function readforms(FormulaireRepository $FormulaireRepository, bool $isTraite = false): Response
     {
         // initialisation des variables de filtre et de tri
-        $selecteur = 'is_traite';
-        $valeur = false;
         $tri = 'createdAt';
         $ordre = 'ASC';
 
@@ -53,7 +48,7 @@ class FormulaireController extends AbstractController
     }
 
 //-----------------------------------------------------------------------------------------------------------
-// Modifier le statut 'isTraite' d'un formulaire spécifique passé par l'id dans le twig
+// Modifie le statut 'isTraite' d'un formulaire spécifique passé par l'id dans le twig
     #[Route('/benevole/formulaire/traiter/{id}', 'traiter_formulaire')]
     public function traiterFormulaire(FormulaireRepository $formulaireRepository, EntityManagerInterface $entityManager, int $id)
     {

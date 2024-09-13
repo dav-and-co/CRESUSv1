@@ -42,7 +42,7 @@ class SecurityController extends AbstractController
 
         // Vérifier si l'erreur est une instance de CustomUserMessageAccountStatusException
         if ($error instanceof CustomUserMessageAccountStatusException) {
-            $error1 = $error->getMessageKey();
+            $error1 = 'Accès refusé. Merci de contacter un administrateur.';
             $error = null;
         }
 

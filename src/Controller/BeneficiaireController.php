@@ -1,6 +1,5 @@
 <?php
 
-
 // permet de déclarer des types pour chacune des variables INT ...
 declare(strict_types=1);
 
@@ -30,7 +29,11 @@ class BeneficiaireController extends AbstractController
 {
 
 //-----------------------------------------------------------------------------------------------------------
-    // Cette route est associée à la méthode rechercheBeneficiaire
+    // permet la recherche d'un bénéficiaire et permettre l'initialisation
+    // de la création d'un nouveau bénéficiaire
+    // ou modification d'un bénéficiaire
+    // ou création d'une nouvelle demande sur un bénéficiaire existant
+    // ou afficher une demande spécifique
     #[Route('/benevole/beneficiaire/recherche', name: 'RechercheBeneficiaire')]
     public function rechercheBeneficiaire(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -117,7 +120,8 @@ class BeneficiaireController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
-// Cette route est associée à la méthode de création du nouveau bénéficiaire
+// création d'un nouveau bénéficiaire et s'il n'y a pas de 2e bénéficiaire à créer,
+    // création à minima de la demande avec ce bénéficiaire
     #[Route('/benevole/Beneficiaire/insert', name: 'insertBeneficiaire')]
     public function insertBeneficiaire(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -192,7 +196,8 @@ class BeneficiaireController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
-
+    //  suite création 1er beneficiaire, si choix est 2e beneficiciaire, saisie et enregistrement de ce 2e bénéficiaire et
+    // création à minima de la demande avec ces 2 bénéficiaires
     #[Route('/benevole/addSecondBeneficiaire/{firstBeneficiaryId}', name: 'addSecondBeneficiaire')]
     public function addSecondBeneficiaire(int $firstBeneficiaryId, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -258,8 +263,8 @@ class BeneficiaireController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
-    // Route pour la modification d'un bénévole existant
-    #[Route('/admin/beneficiaire/update/{id}', 'updatebeneficiaire')]
+    // modification d'un bénéficiaire existant
+    #[Route('/benevole/beneficiaire/update/{id}', 'updatebeneficiaire')]
     public function updatebeneficiaire(int $id, Request $request, EntityManagerInterface $entityManager, BeneficiaireRepository $BeneficiaireRepository)
     {
         // Récupération du bénévole depuis la base de données en fonction de son ID - donnée poussée dans la route
@@ -311,6 +316,10 @@ class BeneficiaireController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    // sur demande avec un bénéficiaire, demande d'ajout d'un nouveau bénéficiaire
+    // recherche si nouveau bénéficiaire dans base ,
+    // si oui, initialisation de l'ajout du bénéficiaire existant sur la demande
+    // si non, saisie des données du nouveau bénéficiaire, création du bénéficiaire et ajout à la demande
     #[Route('/benevole/demande/addbeneficiary/{demandeId}', 'addbeneficiarydemande')]
     public function addbeneficiarydemande(Request $request, EntityManagerInterface $entityManager,  int $demandeId): Response
     {
@@ -321,7 +330,7 @@ class BeneficiaireController extends AbstractController
             throw $this->createNotFoundException('Demande non trouvée.');
         }
 
-        // Création des formulaires
+        // Création du formulaire simplifié de recherche
         $searchForm = $this->createFormBuilder()
             ->add('nom', TextType::class, ['required' => false])
             ->add('prenom', TextType::class, ['required' => false])
@@ -368,6 +377,7 @@ class BeneficiaireController extends AbstractController
                 $beneficiaire->setLibelleProf($defaultTypeProf);
             }
 
+            // création du bénéficiaire
             $entityManager->persist($beneficiaire);
             $entityManager->flush();
 
@@ -388,6 +398,8 @@ class BeneficiaireController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+
+    // action d'ajout d'un bénéficiaire existant sur une demande existante
     #[Route('/benevole/demande/ajoutbenef/{demandeId}/{beneficiaireId}', 'ajouteneficairedemande')]
     public function ajouterBeneficiaire(int $demandeId, int $beneficiaireId, DemandeRepository $demandeRepository, BeneficiaireRepository $beneficiaireRepository, EntityManagerInterface $entityManager): Response
     {
@@ -430,7 +442,6 @@ class BeneficiaireController extends AbstractController
 
 
 //--------------------------------------------------------------------------------------------------------------
-
     /**
      * Formate un numéro de téléphone selon les règles spécifiées.
      * Remplace +33 par 0, ajoute un 0 au début si nécessaire et supprime les espaces.
@@ -440,20 +451,16 @@ class BeneficiaireController extends AbstractController
         if ($telephone === null) {
             return null;
         }
-
         // Supprimer les espaces
         $telephone = str_replace(' ', '', $telephone);
-
         // Remplacer +33 par 0 si le numéro commence par +33
         if (str_starts_with($telephone, '+33')) {
             $telephone = '0' . substr($telephone, 3);
         }
-
         // Ajouter un 0 au début si nécessaire
         if (!str_starts_with($telephone, '0')) {
             $telephone = '0' . $telephone;
         }
-
         return $telephone;
     }
 

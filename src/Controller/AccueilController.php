@@ -25,10 +25,7 @@ class AccueilController extends AbstractController
 {
 //-----------------------------------------------------------------------------------------------------------
 // localhost/CresusV1/public/
-
-    // l'url est appelée et éxécute automatiquement la méthode définie sous la route
-
-    // fonction qui récupère et affiche les types d'accompagnement de l'association
+    // fonction qui récupère et affiche la landingpage
     #[Route('/', name: 'Accueil')]
     public function gpAccueil(TypeDemandeRepository $TypeDemandeRepository): response
     {
@@ -40,11 +37,9 @@ class AccueilController extends AbstractController
             'typedemandes' => $typedemande
         ]);
     }
+
 //-----------------------------------------------------------------------------------------------------------
-    // localhost/CresusV1/noustrouver
-
-    // l'url est appelée et éxécute automatiquement la méthode définie sous la route
-
+// localhost/CresusV1/noustrouver
     // fonction qui permet une fois le site choisi, d'afficher et d'envoyer un formulaire de contact
     #[Route('/noustrouver', name: 'noustrouver')]
     public function noustrouver(SiteRepository $siteRepository, Request $request, EntityManagerInterface $entityManager): Response
@@ -103,71 +98,54 @@ class AccueilController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     //-----------------------------------------------------------------------------------------------------------
     // localhost/CresusV1/dilemme/
-
-    // l'url est appelée et éxécute automatiquement la méthode définie sous la route
 
     // function qui affiche les informations du jeu Dilemme
     #[Route('/dilemme', name: 'Dilemme')]
     public function gpDilemme(): response
     {
-
         return $this->render('gdpublic/page/Dilemme.html.twig' );
     }
+
 //-----------------------------------------------------------------------------------------------------------
 // localhost/CresusV1/Microcredit/
-
-    // l'url est appelée et éxécute automatiquement la méthode définie sous la route
-
     // function qui affiche les informations du microcrédit
     #[Route('/microcredit', name: 'Microcredit')]
     public function gpMicroCredit(): response
     {
-
         return $this->render('gdpublic/page/Microcredit.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
 // localhost/CresusV1/PCB/
-
-    // l'url est appelée et éxécute automatiquement la méthode définie sous la route
-
     // function qui affiche les informations du point conseil budget
     #[Route('/PCB', name: 'PCB')]
     public function gpPCB(): response
     {
-
         return $this->render('gdpublic/page/PCB.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
 // localhost/CresusV1/surendettement/
-
-    // l'url est appelée et éxécute automatiquement la méthode définie sous la route
-
     // function qui affiche les informations du surendettement
     #[Route('/surendettement', name: 'Surendettement')]
     public function gpSurendettement(): response
     {
-
         return $this->render('gdpublic/page/Surendettement.html.twig' );
     }
+
 //-----------------------------------------------------------------------------------------------------------
 // localhost/CresusV1/aider/
-
-    // l'url est appelée et éxécute automatiquement la méthode définie sous la route
-
-    // function qui affiche les informations du surendettement
+    // function qui affiche les informations des différents types d'aides de l'assocation
     #[Route('/aider', name: 'Aider')]
     public function gpAider(): response
     {
         return $this->render('gdpublic/page/Aider.html.twig' );
     }
+
 //-----------------------------------------------------------------------------------------------------------
 // localhost/CresusV1/nous/
-
-    // l'url est appelée et éxécute automatiquement la méthode définie sous la route
-
-    // function qui affiche les informations du surendettement
+    // function qui affiche les informations sur l'association
     #[Route('/nous', name: 'nous')]
     public function gpNous(): response
     {

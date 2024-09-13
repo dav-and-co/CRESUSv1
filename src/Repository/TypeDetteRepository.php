@@ -20,6 +20,7 @@ class TypeDetteRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('t')
             ->where('t.isActif = :active')
             ->setParameter('active', true)
+            ->orderBy('t.libelle_dette', 'ASC')
             ->getQuery()
             ->getResult();
     }

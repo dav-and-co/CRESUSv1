@@ -42,6 +42,7 @@ class DemandeController extends AbstractController
 {
 
 //--------------------------------------------------------------------------------------------------------------
+    // affiche une demande spécifique , après avoir calculé les totaux des revenus, charges et dettes
     #[Route('/benevole/demande/affichage/{id}', name: 'affichageDemande')]
     public function affichDemande(Request $request, EntityManagerInterface $entityManager, DemandeRepository $DemandeRepository, int $id): Response
     {
@@ -68,7 +69,6 @@ class DemandeController extends AbstractController
             $sommeMens += $dette->getMensualite();
         }
 
-
         return $this->render('interne/page/oneDemande.html.twig', [
             'demande' => $demande,
             'sommeRevenus' => $sommeRevenus,
@@ -90,7 +90,7 @@ class DemandeController extends AbstractController
             throw $this->createNotFoundException('Le bénéficiaire n\'existe pas.');
         }
 
-        // Associe les valeurs obligatoires
+        // Associe les valeurs obligatoires pour création à minima
         $typeDemande = $entityManager->getRepository(TypeDemande::class)->find(1);
         $positionDemande = $entityManager->getRepository(PositionDemande::class)->find(1);
         $origine = $entityManager->getRepository(Origine::class)->find(1);
@@ -101,7 +101,6 @@ class DemandeController extends AbstractController
         $demande->setTypeDemande($typeDemande);
         $demande->setOrigine($origine);
         $demande->setPositionDemande($positionDemande);
-        // $demande->setTypeDemande($entityManager->getReference(TypeDemande::class, 5));
         $demande->setCreatedAt(new \DateTimeImmutable());
 
         // Persiste la demande
@@ -114,7 +113,7 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
-
+    // suppression d'un bénéficiaire d'une demande - contrainte : la demande doit avoir 2 bénéficiaires
     #[Route('/benevole/demande/removeBeneficiaireFromDemande/{demandeId}/{beneficiaireId}', name: 'removeBeneficiaireFromDemande')]
     public function removeBeneficiaireFromDemande(int $demandeId, int $beneficiaireId, EntityManagerInterface $entityManager): Response
     {
@@ -140,6 +139,7 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    // enregistrement des commentaires depuis la vue de la demande
     #[Route('/benevole/demande/updateCommentaires/{id}', name: 'MAJcommentaires', methods: ['POST'])]
     public function updateCommentaires(Request $request, EntityManagerInterface $entityManager, DemandeRepository $demandeRepository, int $id): Response
     {
@@ -162,6 +162,7 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    // ajout d'un revenu sur une demande spécifique - affichage des types actifs
     #[Route('/benevole/demande/ajoutRevenu/{id}', name: 'insertRevenu')]
     public function insertRevenu(Request $request, Demande $demande, EntityManagerInterface $entityManager, demandeRepository $demandeRepository, TypeRevenuRepository $typeRevenuRepository,$id ): Response
     {
@@ -198,7 +199,7 @@ class DemandeController extends AbstractController
             if ($request->request->has('nouvelle_saisie')) {
 
                 // Ajouter un message flash pour informer l'utilisateur du succès
-                $this->addFlash('success', 'Votre saisie a été enregistrée. Vous pouvez maintenant en ajouter une nouvelle.');
+                $this->addFlash('success', 'Votre saisie a été enregistrée. Vous pouvez maintenant en ajouter un nouveau revenu.');
 
                 // Rediriger vers la même page pour saisir un nouveau revenu
                 return $this->redirectToRoute('insertRevenu', ['id' => $demande->getId()]);
@@ -217,6 +218,7 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    // ajout d'une charge sur une demande spécifique - affichage des types actifs
     #[Route('/benevole/demande/ajoutCharge/{id}', name: 'insertCharge')]
     public function insertCharge(Request $request, Demande $demande, EntityManagerInterface $entityManager, demandeRepository $demandeRepository,TypeChargeRepository $typeChargeRepository,$id ): Response
     {
@@ -253,7 +255,7 @@ class DemandeController extends AbstractController
             if ($request->request->has('nouvelle_saisie')) {
 
                 // Ajouter un message flash pour informer l'utilisateur du succès
-                $this->addFlash('success', 'Votre saisie a été enregistrée. Vous pouvez maintenant en ajouter une nouvelle.');
+                $this->addFlash('success', 'Votre saisie a été enregistrée. Vous pouvez maintenant ajouter une nouvelle charge.');
 
                 // Rediriger vers la même page pour saisir un nouveau revenu
                 return $this->redirectToRoute('insertCharge', ['id' => $demande->getId()]);
@@ -272,6 +274,7 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    // ajout d'une dette/crédit sur une demande spécifique - affichage des types actifs
     #[Route('/benevole/demande/ajoutDette/{id}', name: 'insertDette')]
     public function insertDette(Request $request, Demande $demande, EntityManagerInterface $entityManager, demandeRepository $demandeRepository,TypeDetteRepository $typeDetteRepository,$id ): Response
     {
@@ -308,12 +311,11 @@ class DemandeController extends AbstractController
             if ($request->request->has('nouvelle_saisie')) {
 
                 // Ajouter un message flash pour informer l'utilisateur du succès
-                $this->addFlash('success', 'Votre saisie a été enregistrée. Vous pouvez maintenant en ajouter une nouvelle.');
+                $this->addFlash('success', 'Votre saisie a été enregistrée. Vous pouvez maintenant ajouter une nouvelle dette/crédit.');
 
                 // Rediriger vers la même page pour saisir un nouveau revenu
                 return $this->redirectToRoute('insertDette', ['id' => $demande->getId()]);
             }
-
 
             // Rediriger vers une autre page ou afficher un message de succès
             return $this->redirectToRoute('affichageDemande', ['id' => $demande->getId()]);
@@ -328,6 +330,7 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    // modification d'un revenu sur une demande spécifique - affichage des types actifs
     #[Route('/benevole/demande/modifRevenu/{id}', name: 'modif_revenu')]
     public function modifRevenu(Request $request, Revenu $revenu, EntityManagerInterface $entityManager, revenuRepository $revenuRepository,TypeRevenuRepository $typeRevenuRepository, $id): Response
     {
@@ -366,9 +369,11 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    // suppression d'un revenu sur une demande spécifique
     #[Route('/benevole/demande/deleteRevenu/{id}', name: 'delete_revenu')]
     public function deleteRevenu(Revenu $revenu, EntityManagerInterface $entityManager): Response
     {
+        // permet de connaitre l'id de la demande concernée pour reroutage
         $demandeId = $revenu->getDemande()->getId();
 
         $entityManager->remove($revenu);
@@ -378,6 +383,7 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    // modification d'une charge sur une demande spécifique - affichage des types actifs
     #[Route('/benevole/demande/modifcharge/{id}', name: 'modif_charge')]
     public function modifCharge(Request $request, Charge $charge, EntityManagerInterface $entityManager, chargeRepository $chargeRepository, TypeChargeRepository $typeChargeRepository, $id): Response
     {
@@ -416,9 +422,11 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    // suppression d'une charge sur une demande spécifique
     #[Route('/benevole/demande/deleteCharge/{id}', name: 'delete_charge')]
     public function deleteCharge(charge $charge, EntityManagerInterface $entityManager): Response
     {
+        // permet de connaitre l'id de la demande concernée pour reroutage
         $demandeId = $charge->getDemande()->getId();
 
         $entityManager->remove($charge);
@@ -429,6 +437,7 @@ class DemandeController extends AbstractController
 
 
 //--------------------------------------------------------------------------------------------------------------
+    // modification d'une dette/crédit sur une demande spécifique - affichage des types actifs
     #[Route('/benevole/demande/modifdette/{id}', name: 'modif_dette')]
     public function modifDette(Request $request, Dette $dette, EntityManagerInterface $entityManager, detteRepository $detteRepository, TypeDetteRepository $typeDetteRepository, $id): Response
     {
@@ -467,9 +476,11 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    // suppression d'une dette/crédit sur une demande spécifique
     #[Route('/benevole/demande/deletedette/{id}', name: 'delete_dette')]
     public function deleteDette(dette $dette, EntityManagerInterface $entityManager): Response
     {
+        // permet de connaitre l'id de la demande concernée pour reroutage
         $demandeId = $dette->getDemande()->getId();
 
         $entityManager->remove($dette);
@@ -479,6 +490,7 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    // ajout d'un nouveau statut sur une demande - tient compte du type de demande
     #[Route('/benevole/demande/insert-evoldoss/{id}', name: 'insert_evoldoss')]
     public function insertEvoldoss(Demande $demande, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -507,6 +519,7 @@ class DemandeController extends AbstractController
     }
 
 //--------------------------------------------------------------------------------------------------------------
+    // modification des données d'une demande spécifique
     #[Route('/benevole/modificationDemande/{id}', name: 'modif_demande')]
 
         public function modifDemande(Demande $demande, Request $request, EntityManagerInterface $entityManager): Response
@@ -528,7 +541,6 @@ class DemandeController extends AbstractController
             'demande' => $demande,
         ]);
     }
-
 
 //--------------------------------------------------------------------------------------------------------------
 

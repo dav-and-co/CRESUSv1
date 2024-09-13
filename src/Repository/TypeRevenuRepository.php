@@ -21,6 +21,7 @@ class TypeRevenuRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('t')
             ->where('t.isActif = :active')
             ->setParameter('active', true)
+            ->orderBy('t.libelle_revenu', 'ASC')
             ->getQuery()
             ->getResult();
     }

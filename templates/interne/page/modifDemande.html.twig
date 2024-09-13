@@ -6,55 +6,88 @@
     <h1>Modifier la Demande</h1>
 
     {{ form_start(form) }}
-    <div class="form-group">
-        {{ form_label(form.type_demande) }}
-        {{ form_widget(form.type_demande, {'attr': {'class': 'form-control'}}) }}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_label(form.type_demande) }}
+                {{ form_widget(form.type_demande, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_label(form.position_demande) }}
+                {{ form_widget(form.position_demande, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        {{ form_label(form.position_demande) }}
-        {{ form_widget(form.position_demande, {'attr': {'class': 'form-control'}}) }}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_label(form.origine) }}
+                {{ form_widget(form.origine, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_label(form.complement_origine) }}
+                {{ form_widget(form.complement_origine, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        {{ form_label(form.origine) }}
-        {{ form_widget(form.origine, {'attr': {'class': 'form-control'}}) }}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_label(form.cause_besoin) }}
+                {{ form_widget(form.cause_besoin, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        {{ form_label(form.complement_origine) }}
-        {{ form_widget(form.complement_origine, {'attr': {'class': 'form-control'}}) }}
+    <div class="row">
+        <div class="col-md-3">
+             <div class="form-group">
+                {{ form_label(form.adresse1_demande) }}
+                {{ form_widget(form.adresse1_demande, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_label(form.adresse2_demande) }}
+                {{ form_widget(form.adresse2_demande, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_label(form.cp_demande) }}
+                {{ form_widget(form.cp_demande, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_label(form.ville_demande) }}
+                {{ form_widget(form.ville_demande, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        {{ form_label(form.cause_besoin) }}
-        {{ form_widget(form.cause_besoin, {'attr': {'class': 'form-control'}}) }}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_label(form.situation_logt) }}
+                {{ form_widget(form.situation_logt, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_label(form.nb_enfant) }}
+                {{ form_widget(form.nb_enfant, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_label(form.patrimoine) }}
+                {{ form_widget(form.patrimoine, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
     </div>
-     <div class="form-group">
-        {{ form_label(form.adresse1_demande) }}
-        {{ form_widget(form.adresse1_demande, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(form.adresse2_demande) }}
-        {{ form_widget(form.adresse2_demande, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(form.cp_demande) }}
-        {{ form_widget(form.cp_demande, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(form.ville_demande) }}
-        {{ form_widget(form.ville_demande, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(form.situation_logt) }}
-        {{ form_widget(form.situation_logt, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(form.nb_enfant) }}
-        {{ form_widget(form.nb_enfant, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="form-group">
-        {{ form_label(form.patrimoine) }}
-        {{ form_widget(form.patrimoine, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
     <div class="d-flex justify-content-between mt-3">
         <button class="btn btn-success">enregistrer</button>
         <a href="{{ path('affichageDemande', {id: demande.id}) }}" class="btn btn-secondary">Annuler</a>
