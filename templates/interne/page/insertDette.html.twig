@@ -28,6 +28,10 @@
         {{ form_widget(form.organisme, {'attr': {'class': 'form-control'}}) }}
     </div>
     <div class="form-group col-md-3">
+        {{ form_label(form.commentaires) }}
+        {{ form_widget(form.commentaires, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-3">
         {{ form_label(form.titulaire_principal) }}
         {{ form_widget(form.titulaire_principal, {'attr': {'class': 'form-control'}}) }}
     </div>

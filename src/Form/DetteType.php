@@ -47,6 +47,10 @@ class DetteType extends AbstractType
                 'choice_value' => 'id',
 
             ])
+            ->add('commentaires', null, [
+                'label' => 'commentaires',
+            ])
+
             // pas utile car repris depuis le contexte
            // ->add('demande', EntityType::class, [
             //    'class' => Demande::class,

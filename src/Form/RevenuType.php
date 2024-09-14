@@ -36,6 +36,13 @@ class RevenuType extends AbstractType
                 'choice_value' => 'id',
                 'placeholder' => 'Sélectionnez un bénéficiaire',
             ])
+
+            ->add('commentaires', null, [
+                'label' => 'commentaires',
+            ])
+
+
+
             // pas utile car repris depuis le contexte
             //->add('demande', EntityType::class, [
             //    'class' => Demande::class,

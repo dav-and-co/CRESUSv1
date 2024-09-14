@@ -27,6 +27,9 @@ class TypeCharge
     #[ORM\Column(nullable: true)]
     private ?bool $isActif = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isBDF = null;
+
     public function __construct()
     {
         $this->charges = new ArrayCollection();
@@ -87,6 +90,18 @@ class TypeCharge
     public function setActif(?bool $isActif): static
     {
         $this->isActif = $isActif;
+
+        return $this;
+    }
+
+    public function isBDF(): ?bool
+    {
+        return $this->isBDF;
+    }
+
+    public function setBDF(?bool $isBDF): static
+    {
+        $this->isBDF = $isBDF;
 
         return $this;
     }

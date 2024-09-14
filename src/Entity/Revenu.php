@@ -27,6 +27,9 @@ class Revenu
     #[ORM\ManyToOne(inversedBy: 'revenus')]
     private ?Demande $demande = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $commentaires = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class Revenu
     public function setDemande(?Demande $demande): static
     {
         $this->demande = $demande;
+
+        return $this;
+    }
+
+    public function getCommentaires(): ?string
+    {
+        return $this->commentaires;
+    }
+
+    public function setCommentaires(?string $commentaires): static
+    {
+        $this->commentaires = $commentaires;
 
         return $this;
     }

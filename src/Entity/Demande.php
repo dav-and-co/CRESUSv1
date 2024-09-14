@@ -102,6 +102,12 @@ class Demande
     #[ORM\OneToMany(targetEntity: RendezVous::class, mappedBy: 'demande')]
     private Collection $RendezVous;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $gardeAlternee = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $droitVisite = null;
+
     public function __construct()
     {
         $this->typeDemande = new ArrayCollection();
@@ -487,6 +493,30 @@ class Demande
                 $rendezVou->setDemande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGardeAlternee(): ?int
+    {
+        return $this->gardeAlternee;
+    }
+
+    public function setGardeAlternee(?int $gardeAlternee): static
+    {
+        $this->gardeAlternee = $gardeAlternee;
+
+        return $this;
+    }
+
+    public function getDroitVisite(): ?int
+    {
+        return $this->droitVisite;
+    }
+
+    public function setDroitVisite(?int $droitVisite): static
+    {
+        $this->droitVisite = $droitVisite;
 
         return $this;
     }

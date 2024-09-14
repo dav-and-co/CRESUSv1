@@ -27,6 +27,12 @@ class Charge
     #[ORM\ManyToOne(inversedBy: 'charges')]
     private ?Demande $demande = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $commentaires = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isBDF = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +82,30 @@ class Charge
     public function setDemande(?Demande $demande): static
     {
         $this->demande = $demande;
+
+        return $this;
+    }
+
+    public function getCommentaires(): ?string
+    {
+        return $this->commentaires;
+    }
+
+    public function setCommentaires(?string $commentaires): static
+    {
+        $this->commentaires = $commentaires;
+
+        return $this;
+    }
+
+    public function isBDF(): ?bool
+    {
+        return $this->isBDF;
+    }
+
+    public function setBDF(?bool $isBDF): static
+    {
+        $this->isBDF = $isBDF;
 
         return $this;
     }

@@ -27,6 +27,8 @@ class DemandeType extends AbstractType
             ->add('ville_demande')
             ->add('situation_logt')
             ->add('nb_enfant')
+            ->add('gardeAlternee')
+            ->add('droitVisite')
             ->add('patrimoine')
             ->add('complement_origine')
             ->add('cause_besoin')

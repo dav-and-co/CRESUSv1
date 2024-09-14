@@ -28,6 +28,10 @@
         {{ form_widget(form.montant_mensuel, {'attr': {'class': 'form-control'}}) }}
     </div>
     <div class="form-group col-md-3">
+        {{ form_label(form.commentaires) }}
+        {{ form_widget(form.commentaires, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-3">
         {{ form_label(form.beneficiaire) }}
         {{ form_widget(form.beneficiaire, {'attr': {'class': 'form-control'}}) }}
     </div>

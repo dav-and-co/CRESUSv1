@@ -95,11 +95,14 @@
                     <p>{{ demande.adresse1Demande }}</p>
                     <p>{{ demande.adresse2Demande }}</p>
                     <p>{{ demande.cpDemande }} {{ demande.villeDemande }}</p>
+
             </div>
             <div class="affichage-detail specdemande">
-                <p>Logement : {{ demande.situationLogt }}</p>
                 <p>enfants à charge : {{ demande.nbEnfant }}</p>
-                <p>patrimoine :{{ demande.patrimoine }}</p>
+                <p>enfants en garde alternée : {{ demande.gardeAlternee }}</p>
+                <p>enfants avec droit de visite : {{ demande.droitVisite }}</p>
+                <br>
+                <p>Logement : {{ demande.situationLogt }} -    patrimoine :{{ demande.patrimoine }}</p>
             </div>
            <div class="affichage-detail specdemande1 fin">
                <h6>
@@ -107,7 +110,7 @@
                    <a href="{{ path('insertRevenu', {id: demande.id}) }}" class="ajout btn btn-success"> <i class="fa-solid fa-plus circle" style="color: white;"></i></a>
                </h6>
                {% for revenu in demande.revenus %}
-               <p>{{ revenu.typeRevenu.libelleRevenu }} :
+               <p><strong>{{ revenu.typeRevenu.libelleRevenu }}</strong> - {{ revenu.commentaires }} :
                    {{ revenu.montantMensuel|number_format(0, ',', ' ') }}
                    <a href="{{ path('modif_revenu', {id: revenu.id}) }}" class="btn-over">
                        <i class="fa-solid fa-file-pen fa-sm" style="color:#2a7cf6"></i>
@@ -122,7 +125,7 @@
                    <a href="{{ path('insertCharge', {id: demande.id}) }}" class="ajout btn btn-success"> <i class="fa-solid fa-plus circle" style="color: white;"></i></a>
                </h6>
                {% for charge in demande.charges %}
-                   <p>{{ charge.typeCharge.libelleCharge }} :
+                   <p><strong>{{ charge.typeCharge.libelleCharge }}</strong> - {{ charge.commentaires }} :
                        {{ charge.montantMensuel|number_format(0, ',', ' ') }}
                        <a href="{{ path('modif_charge', {id: charge.id}) }}" class="btn-over">
                            <i class="fa-solid fa-file-pen fa-sm" style="color:#2a7cf6"></i>
@@ -138,7 +141,8 @@
                </h6>
                {% for dette in demande.dettes %}
                    <p>{{ dette.typeDette.libelledette }} -
-                       <span> {{ dette.organisme }} </span>
+                       <span> {{ dette.organisme }} </span> -
+                       {{ dette.commentaires }} -
                        mensualité : {{ dette.mensualite|number_format(0, ',', ' ') }} -
                        montant du : {{ dette.montantDu|number_format(0, ',', ' ') }}
                        <a href="{{ path('modif_dette', {id: dette.id}) }}" class="btn-over">

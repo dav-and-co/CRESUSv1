@@ -69,16 +69,31 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
-            <div class="form-group">
-                {{ form_label(form.situation_logt) }}
-                {{ form_widget(form.situation_logt, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
+
         <div class="col-md-3">
             <div class="form-group">
                 {{ form_label(form.nb_enfant) }}
                 {{ form_widget(form.nb_enfant, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_label(form.gardeAlternee) }}
+                {{ form_widget(form.gardeAlternee, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_label(form.droitVisite) }}
+                {{ form_widget(form.droitVisite, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                {{ form_label(form.situation_logt) }}
+                {{ form_widget(form.situation_logt, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
         <div class="col-md-3">

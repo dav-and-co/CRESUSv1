@@ -66,9 +66,20 @@ class ModifDemandeType extends AbstractType
                 'required' => false,
             ])
             ->add('nb_enfant', IntegerType::class, [
-                'label' => 'Nombre d\'enfants',
+                'label' => 'Nombre d\'enfants à charge',
                 'required' => false,
             ])
+            ->add('gardeAlternee', IntegerType::class, [
+                'label' => 'Nombre d\'enfants en garde alternée',
+                'required' => false,
+            ])
+            ->add('droitVisite', IntegerType::class, [
+                'label' => 'Nombre d\'enfants avec droit de visite',
+                'required' => false,
+            ])
+
+
+
             ->add('patrimoine', TextType::class, [
                 'label' => 'Patrimoine',
                 'required' => false,
