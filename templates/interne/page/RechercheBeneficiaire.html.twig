@@ -101,6 +101,7 @@
                                     <a href="{{ path('affichageDemande', {'id': demande.id}) }}" class="btn btn-link">
                                         <i class="fa fa-eye fa-lg"></i>
                                     </a>
+                                    {{ demande.id }} -
                                     {{ demande.createdAt|date('d/m/Y') }} -
                                     {{ demande.typeDemande.libelleDemande }} -
                                     {{ demande.positionDemande.libellePosition }}

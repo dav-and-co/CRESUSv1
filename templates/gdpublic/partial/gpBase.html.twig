@@ -2,21 +2,39 @@
 <html lang="fr">
 
 <head>
+    <!-- Définit l'encodage des caractères de la page en UTF-8, supportant les caractères internationaux -->
     <meta charset="UTF-8">
+
+    <!-- Indique à Internet Explorer d'utiliser la version la plus récente de son moteur de rendu -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Optimise la page pour les appareils mobiles en contrôlant la mise à l'échelle initiale -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le titre de la page affiché dans l'onglet du navigateur  -->
     <title>CRESUS-Gironde {% block metatitle %}{% endblock %}</title>
+
+    <!-- icône de raccourci qui s'affiche dans l'onglet du navigateur -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+
+    <!-- Fournit une brève description du site, ==> SEO (optimisation pour les moteurs de recherche) -->
     <meta name="description" content="Mission reconnue d'utilité publique. Accompagnement budgétaire des personnes en difficultés financières - Lutte contre le surendettement - Micro-crédit."/>
+
+    <!-- Auteur du site ou du document -->
     <meta name="author" content="Daviatte Claude"/>
+
+    <!-- Lien vers une feuille de style CSS locale pour styliser la page, utilisée ici via Twig -->
     <link rel="stylesheet" href="{{ asset('style/gpStyle.css') }}">
-    <!-- bibliothèque fontawesome -->
+
+    <!-- Lien vers une bibliothèque externe, FontAwesome, qui fournit des icônes, via un CDN (Content Delivery Network) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 
 <body>
 <header>
     <!-- création de la nav commune au site gd public -->
+    <!-- masqué sera affiché en responsive : hamburger -->
     <ul id="hamb">
         <li></li>
         <li></li>

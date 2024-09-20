@@ -55,6 +55,9 @@ class Site
     #[ORM\Column(length: 255)]
     private ?string $telSite = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $couleurSite = null;
+
     public function __construct()
     {
         $this->permanences = new ArrayCollection();
@@ -230,6 +233,18 @@ class Site
     public function setTelSite(string $telSite): static
     {
         $this->telSite = $telSite;
+
+        return $this;
+    }
+
+    public function getCouleurSite(): ?string
+    {
+        return $this->couleurSite;
+    }
+
+    public function setCouleurSite(?string $couleurSite): static
+    {
+        $this->couleurSite = $couleurSite;
 
         return $this;
     }
