@@ -201,7 +201,7 @@ tableBen {
 /*                            modif d'un bénévole                     */
 .coloriUpBen {
   font-size: 20px;
-  color: #42c304;
+  color: #0d6efd;
 }
 
 .recherche .form-container {
@@ -238,7 +238,7 @@ tableBen {
   left: 100%;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #164681;
+  background-color: #0d6efd;
   color: white;
   padding: 2px 8px;
   border-radius: 5px;

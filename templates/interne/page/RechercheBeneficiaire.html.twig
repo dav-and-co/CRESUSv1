@@ -99,7 +99,7 @@
                             {% for demande in beneficiaire.demandes %}
                                 <li>
                                     <a href="{{ path('affichageDemande', {'id': demande.id}) }}" class="btn btn-link">
-                                        <i class="fa fa-eye fa-lg"></i>
+                                        <i class="fa fa-eye fa-lg" style="color: #164681;"></i>
                                     </a>
                                     {{ demande.id }} -
                                     {{ demande.createdAt|date('d/m/Y') }} -
@@ -116,7 +116,7 @@
                             <i class="fa fa-plus-circle"></i> Demande
                         </a>
                         <a href="{{ path('updatebeneficiaire', {'id': beneficiaire.id}) }}" class="btn btn-over">
-                            <i class="fa-solid fa-file-pen fa-lg" style="color:#164681"></i>
+                            <i class="fa-solid fa-file-pen fa-lg" style="color: #0d6efd;"></i>
                         </a>
                     </td>
                 </tr>
