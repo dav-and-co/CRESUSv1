@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RendezVousRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RendezVousRepository::class)]
@@ -13,42 +14,29 @@ class RendezVous
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $dateAt = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $heureAt = null;
-
-    #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'RendezVous')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Demande $demande = null;
 
-    #[ORM\ManyToOne(inversedBy: 'rendezVous')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Site $Site = null;
+    #[ORM\ManyToOne(inversedBy: 'rendezVouses')]
+    private ?PermananceSite $idSite = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $isAnnule = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $statut = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $heure_end = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $commentaires = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getDateAt(): ?\DateTimeImmutable
-    {
-        return $this->dateAt;
-    }
-
-    public function setDateAt(\DateTimeImmutable $dateAt): static
-    {
-        $this->dateAt = $dateAt;
-
-        return $this;
     }
 
     public function getHeureAt(): ?\DateTimeImmutable
@@ -59,18 +47,6 @@ class RendezVous
     public function setHeureAt(\DateTimeImmutable $heureAt): static
     {
         $this->heureAt = $heureAt;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
 
         return $this;
     }
@@ -87,27 +63,52 @@ class RendezVous
         return $this;
     }
 
-    public function getSite(): ?Site
+    public function getIdSite(): ?PermananceSite
     {
-        return $this->Site;
+        return $this->idSite;
     }
 
-    public function setSite(?Site $Site): static
+    public function setIdSite(?PermananceSite $idSite): static
     {
-        $this->Site = $Site;
+        $this->idSite = $idSite;
 
         return $this;
     }
 
-    public function isAnnule(): ?bool
+    public function getStatut(): ?string
     {
-        return $this->isAnnule;
+        return $this->statut;
     }
 
-    public function setAnnule(?bool $isAnnule): static
+    public function setStatut(?string $statut): static
     {
-        $this->isAnnule = $isAnnule;
+        $this->statut = $statut;
 
         return $this;
     }
+
+    public function getHeureEnd(): ?\DateTimeInterface
+    {
+        return $this->heure_end;
+    }
+
+    public function setHeureEnd(?\DateTimeInterface $heure_end): static
+    {
+        $this->heure_end = $heure_end;
+
+        return $this;
+    }
+
+    public function getCommentaires(): ?string
+    {
+        return $this->commentaires;
+    }
+
+    public function setCommentaires(?string $commentaires): static
+    {
+        $this->commentaires = $commentaires;
+
+        return $this;
+    }
+
 }

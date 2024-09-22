@@ -72,15 +72,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, RendezVous>
      */
-    #[ORM\OneToMany(targetEntity: RendezVous::class, mappedBy: 'user')]
-    private Collection $rendezVouses;
 
     public function __construct()
     {
         $this->connexions = new ArrayCollection();
         $this->demande = new ArrayCollection();
         $this->permanences = new ArrayCollection();
-        $this->rendezVouses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -311,33 +308,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, RendezVous>
-     */
-    public function getRendezVouses(): Collection
-    {
-        return $this->rendezVouses;
-    }
-
-    public function addRendezVouse(RendezVous $rendezVouse): static
-    {
-        if (!$this->rendezVouses->contains($rendezVouse)) {
-            $this->rendezVouses->add($rendezVouse);
-            $rendezVouse->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRendezVouse(RendezVous $rendezVouse): static
-    {
-        if ($this->rendezVouses->removeElement($rendezVouse)) {
-            // set the owning side to null (unless already changed)
-            if ($rendezVouse->getUser() === $this) {
-                $rendezVouse->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 }

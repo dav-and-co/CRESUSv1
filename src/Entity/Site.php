@@ -49,8 +49,6 @@ class Site
     /**
      * @var Collection<int, RendezVous>
      */
-    #[ORM\OneToMany(targetEntity: RendezVous::class, mappedBy: 'Site')]
-    private Collection $rendezVous;
 
     #[ORM\Column(length: 255)]
     private ?string $telSite = null;
@@ -64,11 +62,17 @@ class Site
     #[ORM\OneToMany(targetEntity: Demande::class, mappedBy: 'siteInitial')]
     private Collection $demandes;
 
+    /**
+     * @var Collection<int, PermananceSite>
+     */
+    #[ORM\OneToMany(targetEntity: PermananceSite::class, mappedBy: 'idSite')]
+    private Collection $permananceSites;
+
     public function __construct()
     {
         $this->permanences = new ArrayCollection();
-        $this->rendezVous = new ArrayCollection();
         $this->demandes = new ArrayCollection();
+        $this->permananceSites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -202,35 +206,6 @@ class Site
         return $this;
     }
 
-    /**
-     * @return Collection<int, RendezVous>
-     */
-    public function getRendezVous(): Collection
-    {
-        return $this->rendezVous;
-    }
-
-    public function addRendezVou(RendezVous $rendezVou): static
-    {
-        if (!$this->rendezVous->contains($rendezVou)) {
-            $this->rendezVous->add($rendezVou);
-            $rendezVou->setSite($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRendezVou(RendezVous $rendezVou): static
-    {
-        if ($this->rendezVous->removeElement($rendezVou)) {
-            // set the owning side to null (unless already changed)
-            if ($rendezVou->getSite() === $this) {
-                $rendezVou->setSite(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getTelSite(): ?string
     {
@@ -280,6 +255,36 @@ class Site
             // set the owning side to null (unless already changed)
             if ($demande->getSiteInitial() === $this) {
                 $demande->setSiteInitial(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PermananceSite>
+     */
+    public function getPermananceSites(): Collection
+    {
+        return $this->permananceSites;
+    }
+
+    public function addPermananceSite(PermananceSite $permananceSite): static
+    {
+        if (!$this->permananceSites->contains($permananceSite)) {
+            $this->permananceSites->add($permananceSite);
+            $permananceSite->setIdSite($this);
+        }
+
+        return $this;
+    }
+
+    public function removePermananceSite(PermananceSite $permananceSite): static
+    {
+        if ($this->permananceSites->removeElement($permananceSite)) {
+            // set the owning side to null (unless already changed)
+            if ($permananceSite->getIdSite() === $this) {
+                $permananceSite->setIdSite(null);
             }
         }
 
