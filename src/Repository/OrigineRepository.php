@@ -15,7 +15,15 @@ class OrigineRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Origine::class);
     }
-
+    public function findActiveOrigine(): array
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.isActif = :active')
+            ->setParameter('active', true)
+            ->orderBy('t.libelle_origine', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
     //    /**
     //     * @return Origine[] Returns an array of Origine objects
     //     */

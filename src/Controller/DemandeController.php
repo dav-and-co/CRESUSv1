@@ -16,6 +16,7 @@ use App\Entity\HistoriqueAvct;
 use App\Entity\Origine;
 use App\Entity\PositionDemande;
 use App\Entity\Revenu;
+use App\Entity\Site;
 use App\Entity\TypeDemande;
 use App\Form\ChargeType;
 use App\Form\DemandeType;
@@ -26,15 +27,19 @@ use App\Form\RevenuType;
 use App\Repository\ChargeRepository;
 use App\Repository\DemandeRepository;
 use App\Repository\DetteRepository;
+use App\Repository\OrigineRepository;
 use App\Repository\RevenuRepository;
+use App\Repository\SiteRepository;
 use App\Repository\TypeChargeRepository;
 use App\Repository\TypeDetteRepository;
 use App\Repository\TypeRevenuRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 
 // La classe DemandeController hérite d'AbstractController, fournissant des méthodes utiles
@@ -42,7 +47,7 @@ class DemandeController extends AbstractController
 {
 
 //--------------------------------------------------------------------------------------------------------------
-    // affiche une demande spécifique , après avoir calculé les totaux des revenus, charges et dettes
+    // affiche une demande spécifique, après avoir calculé les totaux des revenus, charges et dettes
     #[Route('/benevole/demande/affichage/{id}', name: 'affichageDemande')]
     public function affichDemande(Request $request, EntityManagerInterface $entityManager, DemandeRepository $DemandeRepository, int $id): Response
     {
@@ -69,6 +74,8 @@ class DemandeController extends AbstractController
             $sommeMens += $dette->getMensualite();
         }
 
+    // dd($demande); affiche la demande etr arrête la méthode - contrôle de la demande
+
         return $this->render('interne/page/oneDemande.html.twig', [
             'demande' => $demande,
             'sommeRevenus' => $sommeRevenus,
@@ -81,7 +88,7 @@ class DemandeController extends AbstractController
 //--------------------------------------------------------------------------------------------------------------
 // creation demande pour un bénéficiaire déjà existant - depuis la vue recherche beneficiaire
     #[Route('/benevole/demande/insert/{id}', name: 'insertDemande')]
-    public function insertDemande(Request $request, EntityManagerInterface $entityManager, int $id): Response
+    public function insertDemande(Request $request, EntityManagerInterface $entityManager, int $id, Security $security): Response
     {
         // Récupére le bénéficiaire par son ID
         $beneficiaire = $entityManager->getRepository(Beneficiaire::class)->find($id);
@@ -94,10 +101,14 @@ class DemandeController extends AbstractController
         $typeDemande = $entityManager->getRepository(TypeDemande::class)->find(1);
         $positionDemande = $entityManager->getRepository(PositionDemande::class)->find(1);
         $origine = $entityManager->getRepository(Origine::class)->find(1);
+        $siteInitial = $entityManager->getRepository(Site::class)->find(2);
+        $user = $security->getUser();
 
         // Crée une nouvelle demande
         $demande = new Demande();
+        $demande->addUser($user);
         $demande->addBeneficiaire($beneficiaire);
+        $demande->setSiteInitial($siteInitial);
         $demande->setTypeDemande($typeDemande);
         $demande->setOrigine($origine);
         $demande->setPositionDemande($positionDemande);
@@ -522,10 +533,20 @@ class DemandeController extends AbstractController
     // modification des données d'une demande spécifique
     #[Route('/benevole/modificationDemande/{id}', name: 'modif_demande')]
 
-        public function modifDemande(Demande $demande, Request $request, EntityManagerInterface $entityManager): Response
+        public function modifDemande(Demande $demande, Request $request, EntityManagerInterface $entityManager, siteRepository $siteRepository, origineRepository $origineRepository): Response
     {
+        // Récupérer les sites actifs
+        $activeSite = $siteRepository->findActiveSite();
+
+        // Récupérer les origines actives
+        $activeOrigine = $origineRepository->findActiveOrigine();
+
         // Créer le formulaire basé sur l'entité Demande
-        $form = $this->createForm(ModifDemandeType::class, $demande);
+        $form = $this->createForm(ModifDemandeType::class, $demande,[
+            'origines' => $activeOrigine,
+            'sites' => $activeSite,
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

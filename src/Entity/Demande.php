@@ -108,6 +108,9 @@ class Demande
     #[ORM\Column(nullable: true)]
     private ?int $droitVisite = null;
 
+    #[ORM\ManyToOne(inversedBy: 'demandes')]
+    private ?Site $siteInitial = null;
+
     public function __construct()
     {
         $this->typeDemande = new ArrayCollection();
@@ -517,6 +520,18 @@ class Demande
     public function setDroitVisite(?int $droitVisite): static
     {
         $this->droitVisite = $droitVisite;
+
+        return $this;
+    }
+
+    public function getSiteInitial(): ?Site
+    {
+        return $this->siteInitial;
+    }
+
+    public function setSiteInitial(?Site $siteInitial): static
+    {
+        $this->siteInitial = $siteInitial;
 
         return $this;
     }

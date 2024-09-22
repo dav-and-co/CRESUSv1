@@ -1,12 +1,13 @@
 <?php
 
-// src/Form/DemandeType.php
+// src/Form/ModifDemandeType.php
 
 namespace App\Form;
 
 use App\Entity\Demande;
 use App\Entity\Origine;
 use App\Entity\PositionDemande;
+use App\Entity\Site;
 use App\Entity\TypeDemande;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -34,7 +35,14 @@ class ModifDemandeType extends AbstractType
             ])
             ->add('origine', EntityType::class, [
                 'class' => Origine::class,
+                'choices' => $options['origines'], // Liste des origines actives
                 'choice_label' => 'libelle_origine',
+                'choice_value' => 'id',
+            ])
+            ->add('siteInitial', EntityType::class, [
+                'class' => Site::class,
+                'choices' => $options['sites'], // Liste des sites actifs
+                'choice_label' => 'nom_site',
                 'choice_value' => 'id',
             ])
             ->add('complement_origine', TextType::class, [
@@ -77,20 +85,19 @@ class ModifDemandeType extends AbstractType
                 'label' => 'Nombre d\'enfants avec droit de visite',
                 'required' => false,
             ])
-
-
-
             ->add('patrimoine', TextType::class, [
                 'label' => 'Patrimoine',
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Demande::class,
+            'data_class' => Demande::class, // L'entité associée
         ]);
+
+        // Définir les options personnalisées "origines" et "sites"
+        $resolver->setRequired(['origines', 'sites']);
     }
 }

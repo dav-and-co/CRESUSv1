@@ -31,6 +31,8 @@ class DemandeRepository extends ServiceEntityRepository
             ->addSelect('tp')
             ->leftJoin('d.origine', 'o')
             ->addSelect('o')
+            ->leftJoin('d.siteInitial', 'sr')
+            ->addSelect('sr')
             ->leftJoin('d.type_demande', 'td')
             ->addSelect('td')
             ->leftJoin('d.position_demande', 'pd')
@@ -55,6 +57,8 @@ class DemandeRepository extends ServiceEntityRepository
             ->addSelect('rv')
             ->leftJoin('rv.Site', 'si')
             ->addSelect('si')
+            ->leftJoin('d.users', 'u')
+            ->addSelect('u')
 
             // Trier l'historique des avancements par date décroissante
             ->orderBy('ha.createdAt', 'DESC')

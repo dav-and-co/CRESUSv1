@@ -17,7 +17,7 @@ class Beneficiaire
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 25)]
     private ?string $civilite_beneficiaire = null;
 
     #[ORM\Column(length: 255)]

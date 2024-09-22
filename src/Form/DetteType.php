@@ -45,7 +45,6 @@ class DetteType extends AbstractType
                 'placeholder' => 'Sélectionner un type de dette/crédit',
                 'choice_label' => 'libelleDette',
                 'choice_value' => 'id',
-
             ])
             ->add('commentaires', null, [
                 'label' => 'commentaires',

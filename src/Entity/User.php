@@ -273,6 +273,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->demande->contains($demande)) {
             $this->demande->add($demande);
+
         }
 
         return $this;
@@ -281,6 +282,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeDemande(Demande $demande): static
     {
         $this->demande->removeElement($demande);
+
 
         return $this;
     }

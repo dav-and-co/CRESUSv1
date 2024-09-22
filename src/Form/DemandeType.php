@@ -45,6 +45,10 @@ class DemandeType extends AbstractType
                 'class' => Origine::class,
                 'choice_label' => 'id',
             ])
+            ->add('siteInitial', EntityType::class, [
+                'class' => Origine::class,
+                'choice_label' => 'id',
+            ])
             ->add('beneficiaires', EntityType::class, [
                 'class' => Beneficiaire::class,
                 'choice_label' => 'id',

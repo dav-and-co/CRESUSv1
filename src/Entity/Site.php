@@ -58,10 +58,17 @@ class Site
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $couleurSite = null;
 
+    /**
+     * @var Collection<int, Demande>
+     */
+    #[ORM\OneToMany(targetEntity: Demande::class, mappedBy: 'siteInitial')]
+    private Collection $demandes;
+
     public function __construct()
     {
         $this->permanences = new ArrayCollection();
         $this->rendezVous = new ArrayCollection();
+        $this->demandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -245,6 +252,36 @@ class Site
     public function setCouleurSite(?string $couleurSite): static
     {
         $this->couleurSite = $couleurSite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Demande>
+     */
+    public function getDemandes(): Collection
+    {
+        return $this->demandes;
+    }
+
+    public function addDemande(Demande $demande): static
+    {
+        if (!$this->demandes->contains($demande)) {
+            $this->demandes->add($demande);
+            $demande->setSiteInitial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemande(Demande $demande): static
+    {
+        if ($this->demandes->removeElement($demande)) {
+            // set the owning side to null (unless already changed)
+            if ($demande->getSiteInitial() === $this) {
+                $demande->setSiteInitial(null);
+            }
+        }
 
         return $this;
     }

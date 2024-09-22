@@ -11,6 +11,7 @@ use App\Entity\Beneficiaire;
 use App\Entity\Demande;
 use App\Entity\Origine;
 use App\Entity\PositionDemande;
+use App\Entity\Site;
 use App\Entity\TypeDemande;
 use App\Entity\TypeProf;
 use App\Form\BeneficiaireType;
@@ -18,6 +19,7 @@ use App\Repository\BeneficiaireRepository;
 use App\Repository\DemandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -123,7 +125,7 @@ class BeneficiaireController extends AbstractController
 // création d'un nouveau bénéficiaire et s'il n'y a pas de 2e bénéficiaire à créer,
     // création à minima de la demande avec ce bénéficiaire
     #[Route('/benevole/Beneficiaire/insert', name: 'insertBeneficiaire')]
-    public function insertBeneficiaire(Request $request, EntityManagerInterface $entityManager): Response
+    public function insertBeneficiaire(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
         // Création d'une nouvelle instance de Beneficiaire (entité)
         $beneficiaire = new Beneficiaire();
@@ -160,10 +162,14 @@ class BeneficiaireController extends AbstractController
                 $typeDemande = $entityManager->getRepository(TypeDemande::class)->find(1);
                 $positionDemande = $entityManager->getRepository(PositionDemande::class)->find(1);
                 $origine = $entityManager->getRepository(Origine::class)->find(1);
+                $siteInitial = $entityManager->getRepository(Site::class)->find(2);
+                $user = $security->getUser();
 
                 // Crée une nouvelle demande
                 $demande = new Demande();
+                $demande->addUser($user);
                 $demande->addBeneficiaire($beneficiaire);
+                $demande->setSiteInitial($siteInitial);
                 $demande->setTypeDemande($typeDemande);
                 $demande->setOrigine($origine);
                 $demande->setPositionDemande($positionDemande);
@@ -199,7 +205,7 @@ class BeneficiaireController extends AbstractController
     //  suite création 1er beneficiaire, si choix est 2e beneficiciaire, saisie et enregistrement de ce 2e bénéficiaire et
     // création à minima de la demande avec ces 2 bénéficiaires
     #[Route('/benevole/addSecondBeneficiaire/{firstBeneficiaryId}', name: 'addSecondBeneficiaire')]
-    public function addSecondBeneficiaire(int $firstBeneficiaryId, Request $request, EntityManagerInterface $entityManager): Response
+    public function addSecondBeneficiaire(int $firstBeneficiaryId, Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
         // Récupérer le premier bénéficiaire
         $firstBeneficiary = $entityManager->getRepository(Beneficiaire::class)->find($firstBeneficiaryId);
@@ -235,9 +241,13 @@ class BeneficiaireController extends AbstractController
             $typeDemande = $entityManager->getRepository(TypeDemande::class)->find(1);
             $positionDemande = $entityManager->getRepository(PositionDemande::class)->find(1);
             $origine = $entityManager->getRepository(Origine::class)->find(1);
+            $siteInitial = $entityManager->getRepository(Site::class)->find(2);
+            $user = $security->getUser();
 
             // Créer une demande et y associer les deux bénéficiaires
             $demande = new Demande();
+            $demande->addUser($user);
+            $demande->setSiteInitial($siteInitial);
             $demande->addBeneficiaire($firstBeneficiary);
             $demande->addBeneficiaire($secondBeneficiary);
             $demande->setTypeDemande($typeDemande);

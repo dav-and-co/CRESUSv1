@@ -16,6 +16,16 @@ class SiteRepository extends ServiceEntityRepository
         parent::__construct($registry, Site::class);
     }
 
+    public function findActiveSite(): array
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.is_actif = :active')
+            ->setParameter('active', true)
+            ->orderBy('t.nom_site', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Site[] Returns an array of Site objects
     //     */
