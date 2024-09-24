@@ -55,15 +55,15 @@ class DemandeRepository extends ServiceEntityRepository
             ->addSelect('av')
             ->leftJoin('d.RendezVous', 'rv')
             ->addSelect('rv')
-            ->leftJoin('rv.Site', 'si')
-            ->addSelect('si')
+            //->leftJoin('rv.Site', 'si')
+            //->addSelect('si')
             ->leftJoin('d.users', 'u')
             ->addSelect('u')
 
             // Trier l'historique des avancements par date décroissante
             ->orderBy('ha.createdAt', 'DESC')
             // Trier l'historique des rendez-vous par date décroissante
-            ->addOrderBy('rv.dateAt', 'DESC')
+            //->addOrderBy('rv.dateAt', 'DESC')
 
             ->where('d.id = :id')
             ->setParameter('id', $id)

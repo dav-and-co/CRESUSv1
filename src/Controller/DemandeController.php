@@ -27,6 +27,7 @@ use App\Form\RevenuType;
 use App\Repository\ChargeRepository;
 use App\Repository\DemandeRepository;
 use App\Repository\DetteRepository;
+use App\Repository\ForfaitsBDFRepository;
 use App\Repository\OrigineRepository;
 use App\Repository\RevenuRepository;
 use App\Repository\SiteRepository;
@@ -49,7 +50,7 @@ class DemandeController extends AbstractController
 //--------------------------------------------------------------------------------------------------------------
     // affiche une demande spécifique, après avoir calculé les totaux des revenus, charges et dettes
     #[Route('/benevole/demande/affichage/{id}', name: 'affichageDemande')]
-    public function affichDemande(Request $request, EntityManagerInterface $entityManager, DemandeRepository $DemandeRepository, int $id): Response
+    public function affichDemande(Request $request, EntityManagerInterface $entityManager, DemandeRepository $DemandeRepository, ForfaitsBDFRepository $forfaitsBDFRepository, int $id): Response
     {
         $demande = $DemandeRepository->findDemandeWithAllRelations($id);
 
@@ -62,19 +63,53 @@ class DemandeController extends AbstractController
         $sommeCharges = 0;
         $sommeDettes = 0;
         $sommeMens = 0;
+        $sommeChargesBDF = 0;
+        $budget = 0;
+
+
+        // Récupérer les valeurs  de la table ForfaitsBDF et de la composition de la demande
+        $base1 = $forfaitsBDFRepository->find(1)->getMontant();
+        $baseplus = $forfaitsBDFRepository->find(2)->getMontant();
+        $chauffage1 = $forfaitsBDFRepository->find(3)->getMontant();
+        $chauffageplus = $forfaitsBDFRepository->find(4)->getMontant();
+        $habitation1 = $forfaitsBDFRepository->find(5)->getMontant();
+        $habitationplus = $forfaitsBDFRepository->find(6)->getMontant();
+        $alterne = $forfaitsBDFRepository->find(7)->getMontant();
+        $visite = $forfaitsBDFRepository->find(8)->getMontant();
+
+
+        $nbBeneficiaires = count($demande->getBeneficiaires());
+        $nbEnfants = $demande->getNbEnfant() ?? 0;
+        $nbalterne = $demande->getGardeAlternee() ?? 0;
+        $nbvisite = $demande->getDroitVisite() ?? 0;
+
+        // Calculs
 
         foreach ($demande->getRevenus() as $revenu) {
             $sommeRevenus += $revenu->getMontantMensuel();
         }
         foreach ($demande->getCharges() as $charge) {
             $sommeCharges += $charge->getMontantMensuel();
+            // Si isBDF est true dans l'entité TypeCharge associée à la charge
+            if ($charge->getTypeCharge()->isBDF()) {
+                $sommeChargesBDF += $charge->getMontantMensuel();
+            }
         }
         foreach ($demande->getDettes() as $dette) {
             $sommeDettes += $dette->getMontantDu();
             $sommeMens += $dette->getMensualite();
         }
+        $forfaitBDF =  $sommeRevenus - $sommeChargesBDF - ($base1 + $chauffage1 + $habitation1 +(($baseplus + $chauffageplus + $habitationplus) * ($nbBeneficiaires + $nbEnfants - 1)) + $alterne * $nbalterne + $visite * $nbvisite) ;
+        if ($forfaitBDF<0) {
+            $forfaitBDF = 0;
+        }
+        $budget = $sommeRevenus - $sommeCharges - $sommeMens;
+        if ($budget<0) {
+            $budget = 0;
+        }
 
-    // dd($demande); affiche la demande etr arrête la méthode - contrôle de la demande
+        //  affiche la demande et arrête la méthode - contrôle de la demande
+        //  dd($demande);
 
         return $this->render('interne/page/oneDemande.html.twig', [
             'demande' => $demande,
@@ -82,6 +117,8 @@ class DemandeController extends AbstractController
             'sommeCharges' => $sommeCharges,
             'sommeDettes' => $sommeDettes,
             'sommeMens' => $sommeMens,
+            'forfaitBDF' => $forfaitBDF,
+            'budget' =>  $budget,
         ]);
     }
 

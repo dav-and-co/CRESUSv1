@@ -30,6 +30,9 @@ class TypeCharge
     #[ORM\Column(nullable: true)]
     private ?bool $isBDF = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $color = null;
+
     public function __construct()
     {
         $this->charges = new ArrayCollection();
@@ -102,6 +105,18 @@ class TypeCharge
     public function setBDF(?bool $isBDF): static
     {
         $this->isBDF = $isBDF;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): static
+    {
+        $this->color = $color;
 
         return $this;
     }

@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class FormulaireType extends AbstractType
 {
@@ -28,14 +29,18 @@ class FormulaireType extends AbstractType
                 'label' => 'Votre prénom',
                 'required' => true,
             ])
-            ->add('mail_demandeur', EmailType::class, [
+            ->add('mail_demandeur', null, [
                 'label' => 'Votre email',
                 'required' => true,
                 'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez entrer une adresse email.',
+                    ]),
                     new Email([
-                        'message' => 'Le format de l\'email est invalide.',
+                        'message' => 'L\'adresse email "{{ value }}" n\'est pas valide.',
                     ]),
                 ],
+                'invalid_message' => 'Adresse email invalide, veuillez vérifier.',
             ])
             ->add('telephone_demandeur', TelType::class, [
                 'attr' => [
