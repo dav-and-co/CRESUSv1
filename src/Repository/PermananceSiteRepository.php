@@ -16,6 +16,15 @@ class PermananceSiteRepository extends ServiceEntityRepository
         parent::__construct($registry, PermananceSite::class);
     }
 
+    public function findAllWithDetails(): array
+    {
+        return $this->createQueryBuilder('pesi')
+            ->join('pesi.idSite', 'sit')
+            ->addSelect('sit')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return PermananceSite[] Returns an array of PermananceSite objects
     //     */

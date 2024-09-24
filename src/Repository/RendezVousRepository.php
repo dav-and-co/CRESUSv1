@@ -16,6 +16,15 @@ class RendezVousRepository extends ServiceEntityRepository
         parent::__construct($registry, RendezVous::class);
     }
 
+    public function findAllWithDetails(): array
+    {
+        return $this->createQueryBuilder('rd')
+            ->join('rd.idSite', 'pesi')
+            ->addSelect('pei')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return RendezVous[] Returns an array of RendezVous objects
     //     */

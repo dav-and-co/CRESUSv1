@@ -55,8 +55,10 @@ class DemandeRepository extends ServiceEntityRepository
             ->addSelect('av')
             ->leftJoin('d.RendezVous', 'rv')
             ->addSelect('rv')
-            //->leftJoin('rv.Site', 'si')
-            //->addSelect('si')
+            ->leftJoin('rv.idSite', 'pesi')
+            ->addSelect('pesi')
+            ->leftJoin('pesi.idSite', 'sit')
+            ->addSelect('sit')
             ->leftJoin('d.users', 'u')
             ->addSelect('u')
 

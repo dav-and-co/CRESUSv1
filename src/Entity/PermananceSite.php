@@ -23,7 +23,7 @@ class PermananceSite
     private ?\DateTimeImmutable $heureAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $dateEnd = null;
+    private ?\DateTimeInterface $heureEnd = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $benevole1 = null;
@@ -80,14 +80,14 @@ class PermananceSite
         return $this;
     }
 
-    public function getDateEnd(): ?\DateTimeInterface
+    public function getHeureEnd(): ?\DateTimeInterface
     {
-        return $this->dateEnd;
+        return $this->heureEnd;
     }
 
-    public function setDateEnd(\DateTimeInterface $dateEnd): static
+    public function setHeureEnd(\DateTimeInterface $heureEnd): static
     {
-        $this->dateEnd = $dateEnd;
+        $this->heureEnd = $heureEnd;
 
         return $this;
     }
