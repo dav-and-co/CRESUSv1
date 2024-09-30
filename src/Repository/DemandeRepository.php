@@ -65,7 +65,8 @@ class DemandeRepository extends ServiceEntityRepository
             // Trier l'historique des avancements par date décroissante
             ->orderBy('ha.createdAt', 'DESC')
             // Trier l'historique des rendez-vous par date décroissante
-            //->addOrderBy('rv.dateAt', 'DESC')
+            ->addOrderBy('pesi.dateAt', 'DESC')
+            ->addOrderBy('rv.heureAt', 'DESC')
 
             ->where('d.id = :id')
             ->setParameter('id', $id)

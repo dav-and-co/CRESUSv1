@@ -338,7 +338,7 @@ tableBen {
 }
 .onedemande .commentaires {
   width: 100%;
-  line-height: 0.8;
+  line-height: 1.2;
 }
 .onedemande span {
   font-weight: bold;
@@ -415,6 +415,12 @@ tableBen {
 .onedemande .affich2benef {
   display: flex;
   justify-content: flex-start;
+}
+.onedemande .bdf {
+  color: red;
+}
+.onedemande .annule {
+  text-decoration: line-through;
 }
 
 .mentions {

@@ -21,9 +21,12 @@ class PermananceSiteRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('pesi')
             ->join('pesi.idSite', 'sit')
             ->addSelect('sit')
+            ->orderBy('pesi.dateAt', 'DESC')
             ->getQuery()
             ->getResult();
     }
+
+
 
     //    /**
     //     * @return PermananceSite[] Returns an array of PermananceSite objects

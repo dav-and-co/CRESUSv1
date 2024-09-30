@@ -1,0 +1,44 @@
+{% extends 'interne/partial/intBase.html.twig' %}
+
+{% block metatitle %}
+    rdv edit
+{% endblock %}
+
+{% block main %}
+
+    <h1>
+        Modifier le rendez vous de la demande
+    </h1>
+
+        {{ form_start(form) }}
+    <div class="form-group col-md-3">
+        {{ form_label(form.idSite) }}
+        {{ form_widget(form.idSite, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.heureAt) }}
+        {{ form_widget(form.heureAt, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.heureEnd) }}
+        {{ form_widget(form.heureEnd, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.statut) }}
+        {{ form_widget(form.statut, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.commentaires) }}
+        {{ form_widget(form.commentaires, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="d-flex justify-content-between mt-3">
+        <button class="btn btn-success">
+                Modifier
+        </button>
+
+    </div>
+
+        {{ form_end(form) }}
+
+
+{% endblock %}

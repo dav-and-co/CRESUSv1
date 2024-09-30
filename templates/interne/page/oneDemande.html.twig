@@ -167,7 +167,7 @@
         <div class="affichage-detail specdemande3">
             <h6>BUDGET </h6>
             <br>
-            <p>Mensualité retenue par BDF : <strong> {{ forfaitBDF|number_format(0, ',', ' ') }} €</strong></p>
+            <p class="bdf">Estimation mensualité BDF : <strong> {{ forfaitBDF|number_format(0, ',', ' ') }} €</strong></p>
             <p>Mensualités actuelles : <strong> {{ sommeMens|number_format(0, ',', ' ') }} €</strong></p>
             <p>Reste à vivre actuel : <strong> {{ budget|number_format(0, ',', ' ') }} €</strong></p>
         </div>
@@ -187,7 +187,15 @@
                     <a href="{{ path('insertRevenu', {id: demande.id}) }}" class="ajout btn btn-success"> <i class="fa-solid fa-plus circle" style="color: white;"></i></a>
                 </h6>
                 {% for rdv in demande.RendezVous %}
-
+                    {% if rdv.statut == 'annulé' %}
+                        <p class="annule"> <span> {{ rdv.idSite.dateAt|date('d/m/Y') }} </span> - {{ rdv.heureAt|date('H:i') }} / {{ rdv.heureEnd|date('H:i') }} : {{ rdv.idSite.idSite.nomSite }} - {{ rdv.commentaires }} </p>
+                    {% else%}
+                        <p> <span> {{ rdv.idSite.dateAt|date('d/m/Y') }} </span> - {{ rdv.heureAt|date('H:i') }} / {{ rdv.heureEnd|date('H:i') }} : {{ rdv.idSite.idSite.nomSite }} - {{ rdv.statut }} - {{ rdv.commentaires }}
+                            <a href="{{ path('edit_rendezvous', {id: rdv.id}) }}" class="btn-over">
+                                <i class="fa-solid fa-file-pen fa-sm" style="color:#2a7cf6"></i>
+                            </a>
+                        </p>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
