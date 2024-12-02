@@ -1,0 +1,91 @@
+.nousaider {
+  background-color: $fondPagesColor;
+  color: $textNoirColor;
+  max-width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .title-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+  }
+
+  .title-icon{
+    width : 40%;
+    padding: 0 15px;
+  }
+
+  .title-img{
+    width : 100%;
+    height: auto;
+  }
+
+  .title-container h1 {
+    color: $textJauneColor;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.2em;
+  }
+
+  .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    color: $textNoirColor;
+    background-color: $fondCarouselColor;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 100%;
+    margin: 40px auto;
+  }
+
+  .column {
+    flex: 1;
+    min-width: 280px;
+  }
+
+  h3 {
+    color: $textBleuColor;
+    font-size: 1.8rem;
+    border-bottom: 2px solid $textBleuColor;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+  }
+
+  div {
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  p {
+    margin-bottom: 10px;
+    text-align: justify;
+  }
+
+  p b {
+    color: $textBleuColor;
+    font-weight: bold;
+  }
+
+  .telephone{
+    font-size: 1.4rem;
+    color: $fondPagesColor;
+  }
+
+  @media screen and (max-width: 460px) {
+    .column {
+      min-width: 150px;
+    }
+    .bouton a {
+      font-size: 1em;
+    }
+    .title-icon img{
+      display: none;
+    }
+  }
+}

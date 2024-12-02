@@ -1371,5 +1371,84 @@ footer a {
     display: none !important;
   }
 }
+.nousaider {
+  background-color: #f0f3f9;
+  color: #333;
+  max-width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.nousaider .title-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+.nousaider .title-icon {
+  width: 40%;
+  padding: 0 15px;
+}
+.nousaider .title-img {
+  width: 100%;
+  height: auto;
+}
+.nousaider .title-container h1 {
+  color: #E8B436;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.2em;
+}
+.nousaider .flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: #333;
+  background-color: #aac7f4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  margin: 40px auto;
+}
+.nousaider .column {
+  flex: 1;
+  min-width: 280px;
+}
+.nousaider h3 {
+  color: #3263b5;
+  font-size: 1.8rem;
+  border-bottom: 2px solid #3263b5;
+  padding-bottom: 5px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+.nousaider div {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+.nousaider p {
+  margin-bottom: 10px;
+  text-align: justify;
+}
+.nousaider p b {
+  color: #3263b5;
+  font-weight: bold;
+}
+.nousaider .telephone {
+  font-size: 1.4rem;
+  color: #f0f3f9;
+}
+@media screen and (max-width: 460px) {
+  .nousaider .column {
+    min-width: 150px;
+  }
+  .nousaider .bouton a {
+    font-size: 1em;
+  }
+  .nousaider .title-icon img {
+    display: none;
+  }
+}
 
 /*# sourceMappingURL=gpStyle.css.map */
