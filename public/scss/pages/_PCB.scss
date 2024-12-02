@@ -23,7 +23,7 @@
     height: auto;
   }
 
-  .title-container h2 {
+  .title-container h2, .title-container h1 {
     color: $textJauneColor;
     text-align: center;
     margin-bottom: 30px;
@@ -64,6 +64,7 @@
 
   p {
     margin-bottom: 10px;
+    text-align: justify;
   }
 
   p b {

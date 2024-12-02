@@ -428,18 +428,17 @@ footer a {
 }
 .nous h3 {
   font-size: 24px;
-  margin: 10px;
+  margin: 15px;
   font-weight: bold;
   text-align: center;
 }
 .nous h4 {
   color: #ffffff;
-  margin: 20px;
-  text-align: center;
+  margin: 15px;
+  text-align: left;
   font-weight: bold;
 }
 .nous ul {
-  margin-left: 40px;
   line-height: 1.5;
 }
 .nous h5 {
@@ -447,14 +446,18 @@ footer a {
   margin: 40px;
   text-align: center;
   font-size: 20px;
-  text-decoration: underline;
 }
-.nous p, .nous h4, .nous li {
+.nous p {
+  color: #ffffff;
+  padding: 10px 0;
+  text-align: justify;
+}
+.nous h4, .nous li {
   color: #ffffff;
   padding: 10px 0;
 }
-.nous h2 {
-  margin: 60px 0;
+.nous h1, .nous h2 {
+  margin: 50px 0;
   text-align: center;
   font-size: 28px;
 }
@@ -528,6 +531,12 @@ footer a {
 .aider .content h4 {
   color: #E8B436;
   margin-top: 30px;
+  text-align: center;
+}
+.aider .destinataire {
+  color: #E8B436;
+  font-weight: bold;
+  font-size: 1.3em;
 }
 .aider .columns {
   margin: 20px 0;
@@ -584,6 +593,13 @@ footer a {
 }
 .aider .image-text a:hover {
   text-decoration: underline;
+}
+.aider .tel {
+  color: #3263b5;
+  font-weight: bold;
+  font-size: 1em;
+  line-height: 1.6;
+  text-align: center;
 }
 .aider .bvert {
   border: 2px solid #67B869;
@@ -664,7 +680,7 @@ footer a {
   border-radius: 8px;
   color: #333;
 }
-.dilemme h2 {
+.dilemme h2, .dilemme h1 {
   color: #E8B436;
   font-size: 2rem;
   margin: 40px 0;
@@ -745,6 +761,7 @@ footer a {
 .dilemme .ateliers-description {
   flex-basis: 60%;
   padding-right: 20px;
+  align-content: space-around;
 }
 .dilemme .ateliers-details {
   flex-basis: 40%;
@@ -760,6 +777,9 @@ footer a {
 .dilemme .detail img {
   width: 40px;
   height: auto;
+}
+.dilemme .jaune {
+  color: #E8B436;
 }
 .dilemme .troisieme-article h2 {
   color: #E8B436;
@@ -812,7 +832,7 @@ footer a {
   width: 100%;
   height: auto;
 }
-.PCB .title-container h2 {
+.PCB .title-container h2, .PCB .title-container h1 {
   color: #E8B436;
   text-align: center;
   margin-bottom: 30px;
@@ -823,7 +843,7 @@ footer a {
   flex-wrap: wrap;
   gap: 20px;
   color: #333;
-  background-color: #f4f4f9;
+  background-color: #aac7f4;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -848,6 +868,7 @@ footer a {
 }
 .PCB p {
   margin-bottom: 10px;
+  text-align: justify;
 }
 .PCB p b {
   color: #3263b5;
@@ -880,6 +901,10 @@ footer a {
   margin-top: 40px;
 }
 .microcredit .title-icon {
+  width: 20%;
+  padding: 0 15px;
+}
+.microcredit .title-icon1 {
   width: 10%;
   padding: 0 15px;
 }
@@ -887,7 +912,7 @@ footer a {
   width: 100%;
   height: auto;
 }
-.microcredit .title-container h2 {
+.microcredit .title-container h1 {
   color: #E8B436;
   text-align: center;
   margin-bottom: 30px;
@@ -921,9 +946,12 @@ footer a {
   line-height: 1.6;
   margin-top: 10px;
 }
+.microcredit p {
+  text-align: justify;
+}
 .microcredit .souligne {
   font-weight: bold;
-  text-decoration: underline;
+  color: #E8B436;
 }
 .microcredit .toggle h3 {
   position: relative;
@@ -992,11 +1020,14 @@ footer a {
 .surendettement .title-container {
   margin-bottom: 30px;
 }
-.surendettement .title-container h2 {
+.surendettement .title-container h1 {
   color: #E8B436;
   text-align: center;
   margin-bottom: 30px;
   font-size: 2.2em;
+}
+.surendettement .centre {
+  text-align: center;
 }
 .surendettement .carousel {
   position: relative;
@@ -1013,7 +1044,7 @@ footer a {
   min-width: 100%;
   box-sizing: border-box;
   padding: 20px 50px;
-  background: #f4f4f9;
+  background: #aac7f4;
   color: black;
   border-radius: 50px;
   display: flex;
@@ -1026,7 +1057,7 @@ footer a {
   margin-left: 30px;
 }
 .surendettement .carousel-item h3 {
-  color: #E8B436;
+  color: #164681;
   margin: 0 10px 20px 10px;
   text-align: center;
   font-size: 1.8rem;

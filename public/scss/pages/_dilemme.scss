@@ -4,7 +4,7 @@
   border-radius: 8px;
   color: $textNoirColor;
 
-  h2 {
+  h2, h1 {
     color: #E8B436;
     font-size: 2rem;
     margin: 40px 0;
@@ -98,6 +98,7 @@
   .ateliers-description {
     flex-basis: 60%;
     padding-right: 20px;
+    align-content: space-around;
   }
 
   .ateliers-details {
@@ -116,6 +117,10 @@
   .detail img {
     width: 40px;
     height: auto;
+  }
+
+  .jaune {
+    color: $textJauneColor;
   }
 
   .troisieme-article h2 {

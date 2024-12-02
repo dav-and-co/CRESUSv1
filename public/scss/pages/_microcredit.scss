@@ -14,6 +14,11 @@
   }
 
   .title-icon{
+    width : 20%;
+    padding: 0 15px;
+  }
+
+  .title-icon1{
     width : 10%;
     padding: 0 15px;
   }
@@ -23,7 +28,7 @@
     height: auto;
   }
 
-  .title-container h2 {
+  .title-container h1 {
     color: $textJauneColor;
     text-align: center;
     margin-bottom: 30px;
@@ -63,9 +68,13 @@
     margin-top: 10px;
   }
 
+  p {
+    text-align: justify;
+  }
+
   .souligne{
     font-weight: bold ;
-    text-decoration: underline;
+    color: $textJauneColor;
   }
 
  .toggle  h3{

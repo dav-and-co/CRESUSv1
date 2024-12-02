@@ -100,6 +100,16 @@ class AccueilController extends AbstractController
     }
 
     //-----------------------------------------------------------------------------------------------------------
+    // localhost/CresusV1/benevole/
+
+    // function qui affiche le html de demande de bénévoles
+    #[Route('/Benevole', name: 'Benevole')]
+    public function gpBenevole(): response
+    {
+        return $this->render('gdpublic/page/Benevole.html.twig' );
+    }
+
+    //-----------------------------------------------------------------------------------------------------------
     // localhost/CresusV1/dilemme/
 
     // function qui affiche les informations du jeu Dilemme

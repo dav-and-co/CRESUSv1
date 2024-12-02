@@ -53,9 +53,9 @@ class FormulaireType extends AbstractType
         "choices" => [
             'Accompagnement budgétaire' => 'PCB',
             'Demande de microcrédit' => 'microcrédit',
-            'surendettement' => 'surendettement'
+            'Surendettement' => 'surendettement'
         ],
-                'label' => 'Votre Besoin',
+                'label' => 'Votre besoin',
                 'required' => true,
                 'multiple' => false,
                 'expanded' => true,

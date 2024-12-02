@@ -1,0 +1,64 @@
+{% extends 'gdPublic/partial/gpBase.html.twig' %}
+
+{% block metatitle %}
+    - bénévole
+{% endblock %}
+
+{% block main %}
+
+    <section class="PCB">
+        <div class="title-container">
+            <ul class="title-list">
+                <li class="title-icon"><img src="{{ asset('img/benevole2.jpg') }}" alt="benevoles" class="title-img" /></li>
+                <li><h2>Rejoignez les équipes d'experts bénévoles de CRÉSUS Gironde</h2></li>
+                <li class="title-icon"><img src="{{ asset('img/benevole1.jpg') }}" alt="benevoles" class="title-img" /></li>
+            </ul>
+        </div>
+        <article>
+            <div class="content">
+                <p>Nous sommes très attachés à la diversité de nos bénévoles: si comptables, banquiers, financiers sont naturellement bienvenus, nous souhaitons accueillir aussi des personnes venant de tous milieux professionnels.</p>
+                <br>
+                <p>Car ils permettent d'enrichir les échanges avec nos bénéficiaires..</p>
+            </div>
+        </article>
+        <article class="flex-container">
+            <div class="column">
+                <h3 >Quelles sont les missions du bénévole ?</h3>
+                <div >
+                    <p> Les bénévoles ont pour mission <b>d’assurer les permanences</b> où sont accueillies les personnes en surendettement ou en difficulté financière. Il participe aussi à la vie de l’association et aux réunions organisées pour partager les expériences de chacun.</p>
+                    <p> Ces permanences se déroulent en moyenne une fois par semaine et sont réparties sur toute la Gironde.</p>
+                    <p> Le principe de fonctionnement de l’association est le travail en équipe. Dans les permanences, l'accueil et les entretiens se réalisent en <b>binôme</b>, afin de donner plus de richesse et de convivialité aux échanges.</p>
+
+                </div>
+                <h3 >Qui peut devenir bénévole ?</h3>
+                <div >
+                    <p> Toutes les personnes qui souhaitent donner de leur temps pour aider les autres</p>
+                    <br>
+                    <p> <b> La diversité des origines professionnelles :</b> est primordiale .</p>
+                    <p> <b> La bienveillance, la discrétion ainsi que vous rencontrez une situation financière difficile :</b> baisse de vos revenus ou augmentation de vos charges par exemple. Vous souhaitez anticiper un changement de situation familiale ou professionnelle.</p>
+                </div>
+            </div>
+            <div class="column">
+                <h3 >Pour qui ?</h3>
+                <div >
+                    <p> Le dispositif s’adresse à toutes les personnes qui souhaitent obtenir des conseils sur leur situation financière ou des informations générales.</p>
+
+                </div>
+                <h3 >Comment ?</h3>
+                <div >
+                    <p> Via des entretiens en présentiel, le référent Crésus</p>
+                    <p> - répond à vos questions,et peut vous conseiller</p>
+                    <p> - analyse avec vous vos charges pour les optimiser</p>
+                    <p> - identifie les aides dont vous pouvez bénéficier.</p>
+                    <br>
+                    <p> Il peut également réaliser un diagnostic complet de votre budget familial, et vous accompagner dans la durée pour que vous trouviez des solutions et reveniez à une situation maitrisée et mieux vécue.</p>
+                    <div class="bouton">
+                        <a href="{{ path("noustrouver") }}">Nous contacter</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+    </section>
+
+{% endblock %}

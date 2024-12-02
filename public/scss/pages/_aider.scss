@@ -25,7 +25,14 @@
     h4 {
       color: $textJauneColor;
       margin-top: 30px;
+      text-align: center;
     }
+  }
+
+  .destinataire{
+    color: $textJauneColor;
+    font-weight: bold;
+    font-size: 1.3em;
   }
 
   .columns {
@@ -93,6 +100,14 @@
 
   .image-text a:hover {
     text-decoration: underline;
+  }
+
+  .tel {
+    color: $textBleuColor;
+    font-weight: bold;
+    font-size: 1em;
+    line-height: 1.6;
+    text-align: center;
   }
 
   .bvert{

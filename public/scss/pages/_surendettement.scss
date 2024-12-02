@@ -34,12 +34,16 @@
 
   .title-container {
     margin-bottom: 30px;
-    h2 {
+    h1 {
       color: $textJauneColor;
       text-align: center;
       margin-bottom: 30px;
       font-size: 2.2em;
     }
+  }
+
+  .centre{
+    text-align: center;
   }
 
   .carousel {
@@ -75,7 +79,7 @@
   }
 
   .carousel-item h3 {
-    color: $textJauneColor;
+    color: $footerColor;
     margin:0 10px 20px 10px;
     text-align: center;
     font-size: 1.8rem;

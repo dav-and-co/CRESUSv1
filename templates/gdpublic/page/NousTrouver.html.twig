@@ -35,7 +35,7 @@
             <p><strong>Ville :</strong> {{ selectedSite.villeSite }}</p>
             <br>
             <p><strong>Téléphone :</strong> {{ selectedSite.telSite }}</p>
-            <h4>Jours de permanences</h4>
+            <h4>Permanences le </h4>
             <ul >
                 {% for permanence in selectedSite.permanences %}
                     <li>
@@ -60,7 +60,7 @@
     <section class="contact container">
     <!-- Formulaire de saisie (affiché uniquement si un site est sélectionné) -->
         <div class="form-container">
-            <h2>Merci de compléter ce formulaire pour que nous puissions vous contacter</h2>
+            <h2>Formulaire à compléter afin d'être recontacté</h2>
 
             {{ form_start(form) }}
             <div class="form-container">
@@ -110,7 +110,7 @@
                 {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-primary'} }) }}
             </div>
             <div>
-                <p class="petitp">Politique de Confidentialité : Les informations personnelles recueillies à partir de ce formulaire sont réservées au strict usage de Crésus Gironde qui s’engage, par des moyens techniques et organisationnels, à les protéger et à les sécuriser. Elles ne peuvent pas être communiquées à des tiers sans votre autorisation expresse. Elles font l’objet d’un traitement informatique afin de permettre à Crésus Gironde de prendre contact avec vous dans le cadre de votre demande.</p>
+                <p class="petitp">Politique de confidentialité : Les informations personnelles recueillies à partir de ce formulaire sont réservées au strict usage de Crésus Gironde qui s’engage, par des moyens techniques et organisationnels, à les protéger et à les sécuriser. Elles ne peuvent pas être communiquées à des tiers sans votre autorisation expresse. Elles font l’objet d’un traitement informatique afin de permettre à Crésus Gironde de prendre contact avec vous dans le cadre de votre demande.</p>
 
                 <p class="petitp"> Conformément à la Loi « Informatique et Libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier ou effacer en nous adressant un mail à l'adresse : cresusgironde@laposte.fr</p>
             </div>

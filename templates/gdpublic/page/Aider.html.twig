@@ -10,9 +10,8 @@
         <h1>Faisons le point de votre situation pour trouver des solutions</h1>
 
         <div class="content">
-            <p>Vous êtes un particulier et vous rencontrez des difficultés à faire face au règlement de vos charges, au remboursement de vos dettes, à gérer votre budget.</p>
-
-            <p>Crésus Gironde vous reçoit individuellement dans l’une de ses permanences, exclusivement sur Rendez Vous. Un bénévole expérimenté réalise avec vous un diagnostic de votre situation financière et vous aide à trouver une ou des solutions.</p>
+            <p>Vous êtes <span class="destinataire">un particulier</span> et vous rencontrez des difficultés à faire face au règlement de vos charges, au remboursement de vos dettes, à gérer votre budget.</p>
+            <p>Crésus Gironde vous reçoit individuellement dans l’une de ses permanences, exclusivement sur rendez-vous. Un bénévole expérimenté réalise avec vous un diagnostic de votre situation financière et vous aide à trouver une ou des solutions.</p>
 
             <h4>TOUTES NOS INTERVENTIONS SONT GRATUITES ET CONFIDENTIELLES</h4>
         </div>
@@ -21,14 +20,14 @@
             <div class="column">
                 <div class="align-container bvert">
                     <div class="image-text">
-                        <img src="{{ asset('img/dilemme.png') }}" alt="jeu éducation financière Dilemme">
-                        <a href="{{ path("Dilemme") }}">Une initiation budgétaire ludique et éducative :<span class="vert"> le jeu DILEMME</span></a>
+                        <img src="{{ asset('img/dd.webp') }}" alt="aide et conseil">
+                        <p class="tel">Des aides et conseils budgétaires par téléphone : <span class="vert">06.66.57.71.33</span></p>
                     </div>
                 </div>
                 <div class="align-container bbleu">
                     <div class="image-text">
                         <img src="{{ asset('img/picto-micro-credit.png') }}" alt="picto microcrédit">
-                        <a href="{{ path("Microcredit") }}">Financer un projet d'insertion avec un <span class="bleu">Microcrédit</span></a>
+                        <a href="{{ path("Microcredit") }}">Financer un projet d'insertion avec un <span class="orange">Microcrédit</span></a>
                     </div>
                 </div>
             </div>
@@ -40,23 +39,35 @@
             <div class="column">
                 <div class="align-container borange">
                     <div class="image-text">
-                        <a href="{{ path("PCB") }}">Un accompagnement pour améliorer et <span class="orange">optimiser votre budget</span></a>
+                        <a href="{{ path("PCB") }}">Un accompagnement pour améliorer et <span class="bleu">optimiser votre budget</span></a>
                         <img src="{{ asset('img/pcb.png') }}" alt="point conseil budget">
                     </div>
                 </div>
                 <div class="align-container brouge">
                     <div class="image-text">
-                        <a href="{{ path("Surendettement") }}"><span class="rouge">Surendetté ?</span>, nos conseils et aides pour constituer votre dossier</a>
+                        <a href="{{ path("Surendettement") }}"><span class="rouge">Surendetté ?</span> nos conseils et aides pour constituer votre dossier</a>
                         <img src="{{ asset('img/picto-surendettement.png') }}" alt="picto surendettement">
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="bouton">
             <a href="{{ path("noustrouver") }}"> Nous contacter</a>
         </div>
 
-    </section>
+        <div class="content">
+            <p>Vous êtes  <span class="destinataire">un établissement scolaire, un organisme de formation, une structure sociale ou une entreprise</span>  et vous êtes convaincu de l'importance de l’éducation budgétaire.</p>
+            <p>Vous avez la conviction que la prévention est une clé essentielle pour éviter l’exclusion financière, et souhaitez avoir de l'aide pour former votre public. </p>
+            <p>Crésus Gironde, au travers d'une approche ludique par un jeu de plateau, aborde les problématiques de gestion d'un budget et permet d'acquérir des savoirs essentiels.</p>
+            <div class="align-container bvert">
+                <div class="image-text">
+                    <img src="{{ asset('img/dilemme.png') }}" alt="jeu éducation financière Dilemme">
+                    <a href="{{ path("Dilemme") }}">Une initiation budgétaire ludique et éducative : le <span class="vert"> jeu DILEMME</span></a>
+                </div>
+            </div>
+        </div>
 
+    </section>
 
 {% endblock %}
