@@ -68,6 +68,9 @@ class Site
     #[ORM\OneToMany(targetEntity: PermananceSite::class, mappedBy: 'idSite')]
     private Collection $permananceSites;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $mail_site = null;
+
     public function __construct()
     {
         $this->permanences = new ArrayCollection();
@@ -287,6 +290,18 @@ class Site
                 $permananceSite->setIdSite(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMailSite(): ?string
+    {
+        return $this->mail_site;
+    }
+
+    public function setMailSite(?string $mail_site): static
+    {
+        $this->mail_site = $mail_site;
 
         return $this;
     }
