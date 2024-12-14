@@ -71,6 +71,9 @@ class Site
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $mail_site = null;
 
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $reftel = null;
+
     public function __construct()
     {
         $this->permanences = new ArrayCollection();
@@ -302,6 +305,18 @@ class Site
     public function setMailSite(?string $mail_site): static
     {
         $this->mail_site = $mail_site;
+
+        return $this;
+    }
+
+    public function getReftel(): ?string
+    {
+        return $this->reftel;
+    }
+
+    public function setReftel(?string $reftel): static
+    {
+        $this->reftel = $reftel;
 
         return $this;
     }

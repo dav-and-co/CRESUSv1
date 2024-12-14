@@ -34,8 +34,8 @@
             <p><strong>Code Postal :</strong> {{ selectedSite.cpSite }}</p>
             <p><strong>Ville :</strong> {{ selectedSite.villeSite }}</p>
             <br>
-            <p><strong>Téléphone :</strong> {{ selectedSite.telSite }}</p>
-            <p><strong>Mail :</strong> {{ selectedSite.mailSite }}</p>
+            <p><strong>Téléphone :</strong> <a href="{{ selectedSite.reftel }}">{{ selectedSite.telSite }}</a></p>
+            <p><strong>Mail :</strong> <a href="mailto:{{ selectedSite.mailSite }}">{{ selectedSite.mailSite }}</a></p>
             <h4>Permanences le </h4>
             <ul >
                 {% for permanence in selectedSite.permanences %}
