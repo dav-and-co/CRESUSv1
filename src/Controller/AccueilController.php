@@ -33,7 +33,7 @@ class AccueilController extends AbstractController
         $typedemande = $TypeDemandeRepository->findAll();
 
         // Rend la vue Twig en y passant données récupérées
-        return $this->render('gdpublic/page/Accueil.html.twig', [
+        return $this->render('gdPublic/page/Accueil.html.twig', [
             'typedemandes' => $typedemande
         ]);
     }
@@ -92,7 +92,7 @@ class AccueilController extends AbstractController
             return $this->redirectToRoute('noustrouver');
         }
         // affiche la vue Twig avec les paramètres
-        return $this->render('gdpublic/page/NousTrouver.html.twig', [
+        return $this->render('gdPublic/page/NousTrouver.html.twig', [
             'sites' => $sites,
             'selectedSite' => $selectedSite,
             'form' => $form->createView(),
@@ -106,7 +106,7 @@ class AccueilController extends AbstractController
     #[Route('/Benevole', name: 'Benevole')]
     public function gpBenevole(): response
     {
-        return $this->render('gdpublic/page/Benevole.html.twig' );
+        return $this->render('gdPublic/page/Benevole.html.twig' );
     }
 
     //-----------------------------------------------------------------------------------------------------------
@@ -116,7 +116,7 @@ class AccueilController extends AbstractController
     #[Route('/dilemme', name: 'Dilemme')]
     public function gpDilemme(): response
     {
-        return $this->render('gdpublic/page/Dilemme.html.twig' );
+        return $this->render('gdPublic/page/Dilemme.html.twig' );
     }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ class AccueilController extends AbstractController
     #[Route('/microcredit', name: 'Microcredit')]
     public function gpMicroCredit(): response
     {
-        return $this->render('gdpublic/page/Microcredit.html.twig' );
+        return $this->render('gdPublic/page/Microcredit.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
 // localhost/CresusV1/PCB/
@@ -133,7 +133,7 @@ class AccueilController extends AbstractController
     #[Route('/PCB', name: 'PCB')]
     public function gpPCB(): response
     {
-        return $this->render('gdpublic/page/PCB.html.twig' );
+        return $this->render('gdPublic/page/PCB.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
 // localhost/CresusV1/surendettement/
@@ -141,7 +141,7 @@ class AccueilController extends AbstractController
     #[Route('/surendettement', name: 'Surendettement')]
     public function gpSurendettement(): response
     {
-        return $this->render('gdpublic/page/Surendettement.html.twig' );
+        return $this->render('gdPublic/page/Surendettement.html.twig' );
     }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -150,7 +150,7 @@ class AccueilController extends AbstractController
     #[Route('/aider', name: 'Aider')]
     public function gpAider(): response
     {
-        return $this->render('gdpublic/page/Aider.html.twig' );
+        return $this->render('gdPublic/page/Aider.html.twig' );
     }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -159,7 +159,7 @@ class AccueilController extends AbstractController
     #[Route('/nous', name: 'nous')]
     public function gpNous(): response
     {
-        return $this->render('gdpublic/page/Nous.html.twig' );
+        return $this->render('gdPublic/page/Nous.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
 }

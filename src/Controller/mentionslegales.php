@@ -20,6 +20,6 @@ class mentionslegales extends AbstractController
     #[Route('/mentionslegales', name: 'mentionslegales')]
     public function legalMentions(): Response
     {
-        return $this->render('gdpublic/page/mentionslegales.html.twig');
+        return $this->render('gdPublic/page/mentionslegales.html.twig');
     }
 }
