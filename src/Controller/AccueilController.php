@@ -106,7 +106,7 @@ class AccueilController extends AbstractController
     #[Route('/Benevole', name: 'Benevole')]
     public function gpBenevole(): response
     {
-        return $this->render('gdPublic/page/Benevole.html.twig' );
+        return $this->render('gdPublic/page/benevole.html.twig' );
     }
 
     //-----------------------------------------------------------------------------------------------------------
