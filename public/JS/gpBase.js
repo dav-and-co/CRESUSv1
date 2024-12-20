@@ -5,7 +5,6 @@ let nav = document.querySelector('nav');
 // Chaque fois que l'utilisateur fait défiler la page, la fonction ci-dessous sera exécutée.
 window.addEventListener('scroll', () => {
     // Affiche "test" dans la console pour vérifier que l'événement de défilement est bien déclenché.
-    console.log("test");
 
     // Vérifie si la fenêtre a été défilée de plus de 20 pixels par rapport au haut de la page.
     if(window.scrollY > 20){
