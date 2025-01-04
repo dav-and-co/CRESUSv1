@@ -146,7 +146,7 @@ class AccueilController extends AbstractController
 
 //-----------------------------------------------------------------------------------------------------------
 // localhost/CresusV1/aider/
-    // function qui affiche les informations des différents types d'aides de l'assocation
+    // function qui affiche les informations des différents types d'aides de l'association
     #[Route('/aider', name: 'Aider')]
     public function gpAider(): response
     {
@@ -162,4 +162,36 @@ class AccueilController extends AbstractController
         return $this->render('gdPublic/page/Nous.html.twig' );
     }
 //-----------------------------------------------------------------------------------------------------------
+    // téléchargement du pdf
+    #[Route('/downloadPdf', name: 'downloadPdf')]
+    public function downloadPdf(): Response
+    {
+        // Chemin du fichier PDF
+        $filePath = './img/JUSTIFICATIFS.pdf';
+        $fileName = 'JUSTIFICATIFS pour DOSSIER DE SURENDETTEMENT.pdf';
+
+        // Vérifiez si le fichier existe
+        if (!file_exists($filePath)) {
+            throw $this->createNotFoundException('Le fichier demandé est introuvable.');
+        }
+
+        // Créez une réponse pour le téléchargement
+        return new Response(
+            file_get_contents($filePath),
+            200,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+            ]
+        );
+    }
+
+
+
+//-----------------------------------------------------------------------------------------------------------
+
+
+
+
+
 }
