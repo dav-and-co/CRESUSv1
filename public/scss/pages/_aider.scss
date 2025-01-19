@@ -2,7 +2,7 @@
   background-color: $fondPagesColor;
   padding: 20px;
   border-radius: 8px;
-  color: #29487d;
+  color: $textBleuColor;
   width: 90%;
   margin: 0 auto;
 
@@ -111,33 +111,33 @@
   }
 
   .bvert{
-    border: 2px solid #67B869;
+    border: 2px solid $vertBordure;
     border-radius: 8px;
   }
   .bbleu{
-    border: 2px solid #5E9CC8;
+    border: 2px solid $bleuBordure;
     border-radius: 8px;
   }
   .borange{
-    border: 2px solid #FBA154;
+    border: 2px solid $orangeBordure;
     border-radius: 8px;
   }
   .brouge{
-    border: 2px solid #DE6366;
+    border: 2px solid $rougeBordure;
     border-radius: 8px;
   }
 
   .vert{
-    color: #67B869;
+    color: $vertBordure;
   }
   .bleu{
-    color: #5E9CC8;
+    color: $bleuBordure;
   }
   .orange{
-    color: #FBA154;
+    color: $orangeBordure;
   }
   .rouge{
-    color: #DE6366;
+    color: $rougeBordure;
   }
   @media  screen and (max-width: 1024px) {
     .aider {

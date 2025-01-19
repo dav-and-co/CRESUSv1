@@ -26,6 +26,9 @@
     <!-- Lien vers une feuille de style CSS locale pour styliser la page, utilisée ici via Twig -->
     <link rel="stylesheet" href="{{ asset('style/gpStyle.css') }}">
 
+    <!-- Lien vers une la police de caractère raleway -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
     <!-- Lien vers une bibliothèque externe, FontAwesome, qui fournit des icônes, via un CDN (Content Delivery Network) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -45,15 +48,15 @@
             <li class="firstli"><a href="{{ path("Accueil") }}"> <img src="{{ asset('img/cresusgironde.png') }}" alt="logo de l association crésus"></a></li>
             <li><a class="headnav" href="{{ path("nous") }}">Présentation</a></li>
             <li><a href="{{ path("Aider") }}" class="headnav">Vous aider</a></li>
-                <li class="dropdown">
-                    <a class="headnav" href="#">Nos activités <i class="fa-solid fa-chevron-down"></i></a>
-                    <ul class=" dropdown-menu">
-                        <li><a href="{{ path("PCB") }}">Conseils budgétaires</a></li>
-                        <li><a href="{{ path("Dilemme") }}">Initiation financière</a></li>
-                        <li><a href="{{ path("Microcredit") }}">Microcrédit</a></li>
-                        <li><a href="{{ path("Surendettement") }}">Surendettement</a></li>
-                    </ul>
-                </li>
+            <li class="dropdown">
+                <a class="headnav" href="#">Nos activités <i class="fa-solid fa-chevron-down"></i></a>
+                <ul class=" dropdown-menu">
+                    <li><a href="{{ path("PCB") }}">Conseils budgétaires</a></li>
+                    <li><a href="{{ path("Dilemme") }}">éducation financière</a></li>
+                    <li><a href="{{ path("Microcredit") }}">Microcrédit</a></li>
+                    <li><a href="{{ path("Surendettement") }}">Surendettement</a></li>
+                </ul>
+            </li>
             <li><a class="headnav" href="{{ path("noustrouver") }}">Nous contacter</a></li>
             <li><a class="headnav" href="{{ path("Benevole") }}">Nous aider</a></li>
             <li><a class="headnav" href="{{ path("benevoleAccueil") }}">Connexion</a></li>
@@ -79,8 +82,8 @@
     {% endfor %}
 
 
-{% block main %}
-{% endblock %}
+    {% block main %}
+    {% endblock %}
 
 </main>
 
@@ -92,7 +95,7 @@
             <p>Siège social :</p>
             <p>24, allée Ernest de Boissière</p>
             <p>33 980  AUDENGE</p>
-            <p>Mail : cresusgironde@laposte.fr</p>
+            <p>Mail : <a href="mailto:cresusgironde@laposte.net" style="color: white; text-decoration: none;">cresusgironde@laposte.net</a></p>
         </article>
         <div class="t10">
             <img src="{{ asset('img/pcb.png') }}" alt="Point Conseil Budget">

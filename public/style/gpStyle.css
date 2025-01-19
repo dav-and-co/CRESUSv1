@@ -1,5 +1,4 @@
 @charset "UTF-8";
-/*basculer le scss en css*/
 /*     dans le terminal exécuter la ligne de commande     */
 /*     sass public/scss/gpstyles.scss:public/style/gpStyle.css --watch     */
 * {
@@ -8,7 +7,7 @@
   box-sizing: border-box;
   text-decoration: none;
   list-style-type: none;
-  font-family: "arial", sans-serif;
+  font-family: "raleway", sans-serif;
 }
 
 .bouton {
@@ -38,8 +37,8 @@
 
 .success-message {
   width: 100%;
-  color: white;
-  background-color: green;
+  color: #FFFFFF;
+  background-color: #00FF00;
   padding: 20px;
   font-size: 20px;
   text-align: center;
@@ -47,8 +46,8 @@
 
 .error-message {
   width: 100%;
-  color: white;
-  background-color: crimson;
+  color: #FFFFFF;
+  background-color: #dc143c;
   padding: 20px;
   font-size: 20px;
   text-align: center;
@@ -62,7 +61,7 @@ img {
 
 .msgerreur {
   text-align: center;
-  color: crimson;
+  color: #dc143c;
   font-size: 40px;
 }
 
@@ -113,7 +112,7 @@ header .firstli {
   min-width: 120px;
 }
 header .headnav {
-  font-family: "roboto", sans-serif;
+  font-family: "raleway", sans-serif;
   font-weight: bold;
   font-size: 1rem;
   color: black;
@@ -131,10 +130,10 @@ header .dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: white;
+  background-color: #FFFFFF;
   border-radius: 5px;
   width: 150px;
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   z-index: 1;
   padding: 5px 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -144,7 +143,7 @@ header .dropdown-menu {
 header .dropdown-menu li {
   padding: 3px 5px;
   line-height: 0.8;
-  justify-content: left;
+  justify-content: flex-start;
 }
 header .dropdown-menu li a {
   color: #333;
@@ -163,7 +162,7 @@ header .dropdown:hover .dropdown-menu {
   opacity: 1;
   transform: translateY(0);
 }
-header ul#hamb {
+header #hamb {
   display: none;
   width: 50px;
   padding: 0;
@@ -172,14 +171,14 @@ header ul#hamb {
   right: 10px;
   z-index: 3000;
 }
-header ul#hamb li {
+header #hamb li {
   margin: 5px 0;
   width: 100%;
   height: 2px;
   background-color: #000;
 }
 @media screen and (max-width: 768px) {
-  header ul#hamb {
+  header #hamb {
     display: block;
   }
   header .nav {
@@ -212,7 +211,7 @@ footer {
   line-height: 1.1;
 }
 footer .left {
-  color: white;
+  color: #FFFFFF;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -224,14 +223,14 @@ footer .left #gras {
 }
 footer .t20 {
   width: 20%;
-  color: white;
+  color: #FFFFFF;
   text-align: center;
 }
 footer .t10 {
   width: 10%;
 }
 footer a {
-  color: white;
+  color: #FFFFFF;
   padding: 5px;
 }
 @media screen and (max-width: 480px) {
@@ -297,7 +296,7 @@ footer a {
   margin: 10px 0;
 }
 .landingpage .accueil .textArriere li {
-  color: white;
+  color: #FFFFFF;
   list-style-type: circle;
   font-size: 14px;
   line-height: 1.5;
@@ -313,15 +312,15 @@ footer a {
   text-align: center;
 }
 .landingpage .accueil .textArriere2 p {
-  color: white;
+  color: #FFFFFF;
   font-size: 16px;
   font-weight: bold;
   line-height: 1.5;
   text-align: center;
 }
 .landingpage .accueil .bouton a {
-  background-color: white !important;
-  box-shadow: 5px 3px 10px -1px white;
+  background-color: #FFFFFF !important;
+  box-shadow: 5px 3px 10px -1px #FFFFFF;
   font-size: 1.1rem;
   padding: 20px 15px;
 }
@@ -423,7 +422,7 @@ footer a {
   background-color: #3263b5;
   color: #E8B436;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  font-family: "raleway", sans-serif;
   line-height: 1.6;
 }
 .nous h3 {
@@ -433,7 +432,7 @@ footer a {
   text-align: center;
 }
 .nous h4 {
-  color: #ffffff;
+  color: #FFFFFF;
   margin: 15px;
   text-align: left;
   font-weight: bold;
@@ -448,12 +447,12 @@ footer a {
   font-size: 20px;
 }
 .nous p {
-  color: #ffffff;
+  color: #FFFFFF;
   padding: 10px 0;
   text-align: justify;
 }
 .nous h4, .nous li {
-  color: #ffffff;
+  color: #FFFFFF;
   padding: 10px 0;
 }
 .nous h1, .nous h2 {
@@ -510,7 +509,7 @@ footer a {
   background-color: #f0f3f9;
   padding: 20px;
   border-radius: 8px;
-  color: #29487d;
+  color: #3263b5;
   width: 90%;
   margin: 0 auto;
 }
@@ -711,7 +710,7 @@ footer a {
   gap: 20px;
 }
 .dilemme .feature {
-  background-color: white;
+  background-color: #FFFFFF;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -788,7 +787,7 @@ footer a {
   text-align: center;
 }
 .dilemme .troisieme-article p {
-  color: white;
+  color: #FFFFFF;
   font-size: 15px;
   margin: 5px 0;
   text-align: left;
@@ -1078,7 +1077,7 @@ footer a {
 }
 .surendettement .carousel-control {
   background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  color: #FFFFFF;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
@@ -1152,7 +1151,7 @@ footer a {
 .contact .container {
   margin: 0 auto;
   padding: 20px;
-  background-color: white;
+  background-color: #FFFFFF;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -1208,13 +1207,13 @@ footer a {
   padding: 10px;
   border: 1px solid #E2EEF2;
   border-radius: 4px;
-  background-color: #F9F9F9;
+  background-color: #F9F9F9b;
   transition: border-color 0.3s ease;
 }
 .contact input[type=text]:focus,
 .contact input[type=email]:focus,
 .contact textarea:focus {
-  border-color: #bcd9e1;
+  border-color: #bcd9e1b;
 }
 .contact select {
   width: 100%;
@@ -1230,7 +1229,7 @@ footer a {
   background-color: #083847;
   border: none;
   border-radius: 4px;
-  color: white;
+  color: #FFFFFF;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -1272,20 +1271,20 @@ footer a {
   align-items: center;
   height: 40vh;
   margin: 0;
-  background-color: white;
+  background-color: #FFFFFF;
 }
 .security h1 {
   padding-top: 20px;
   margin: 50px auto;
 }
 .security .msgerreur {
-  color: crimson;
+  color: #dc143c;
   font-size: 20px;
 }
 .security formlog {
   width: 100%;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #bbb;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #f0f3f9;
@@ -1304,7 +1303,7 @@ footer a {
 .security input[type=password] {
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid #bbb;
   border-radius: 4px;
   width: 100%;
 }
@@ -1313,7 +1312,7 @@ footer a {
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  color: white;
+  color: #FFFFFF;
   background-color: #164681;
   border: none;
   border-radius: 4px;

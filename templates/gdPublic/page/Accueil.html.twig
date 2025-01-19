@@ -5,64 +5,64 @@
 {% endblock %}
 
 {% block main %}
-<div class="landingpage">
-    <section class="accueil">
-        <div>
-            <img src="{{ asset('img/mainsdecalees.jpg') }}" alt="solidarité" id="immArriere">
-        </div>
-        <article>
-            <div class="textArriere">
-                <h4>Votre situation financière va se dégrader, vous anticipez, vous avez besoin de conseils </h4>
-                <ul>
-                    <li>Un évènement imprévu survient dans votre vie : licenciement, divorce, maladie, accident, décès du conjoint…</li>
-                    <li>Vous savez que vos revenus vont diminuer : départ à la retraite, baisse des allocations…</li>
-                    <li>Vous savez que vos charges vont augmenter : augmentation de loyer, études d’un enfant, naissance d’un enfant…</li>
-                </ul>
-                <h4> Vous rencontrez des difficultés financières, votre situation se détériore</h4>
-                <ul>
-                    <li>Vous n'arrivez plus à rembourser vos dettes de charges et/ou vos remboursements de crédit…</li>
-                    <li>Vous êtes rentré dans une « spirale » en prenant un crédit pour en rembourser un autre…</li>
-                    <li>Votre banque a commencé à rejeter des prélèvements ou les impayés commencent à s’accumuler…</li>
-                </ul>
-                <h4> Vous n'êtes plus en mesure de régler l'ensemble de vos charges et de vos dettes, votre situation n'est plus gérable</h4>
-                <ul>
-                    <li>Vous êtes menacé d’expulsion…</li>
-                    <li>Vous n’arrivez plus à faire face à vos charges courantes…</li>
-                    <li>Des commissaires de justice vous harcèlent…</li>
-                </ul>
-                <h4> Vous avez besoin d'un microcrédit social</h4>
-                <ul>
-                    <li>Votre banque refuse votre demande…</li>
-                    <li>Vous êtes fichés à la Banque de France…</li>
-                    <li>Vous ne travaillez pas ou avez de petits revenus…</li>
-                </ul>
+    <div class="landingpage">
+        <section class="accueil">
+            <div>
+                <img src="{{ asset('img/mainsdecalees.jpg') }}" alt="solidarité" id="immArriere">
             </div>
-            <div class="textArriere2">
-                <h1>Crésus Gironde peut vous aider !</h1>
-
-                <p>Des bénévoles vous accueillent, vous écoutent, vous informent et peuvent vous accompagner.
-                    Avec vous, ils recherchent les solutions les plus adaptées à vos difficultés financières, sociales et juridiques</p>
-                <div class="bouton">
-                    <a href="{{ path("noustrouver") }}"> Nous contacter</a>
+            <article>
+                <div class="textArriere">
+                    <h4>Votre situation financière va se dégrader, vous anticipez, vous avez besoin de conseils </h4>
+                    <ul>
+                        <li>Un évènement imprévu survient dans votre vie : licenciement, divorce, maladie, accident, décès du conjoint…</li>
+                        <li>Vous savez que vos revenus vont diminuer : départ à la retraite, baisse des allocations…</li>
+                        <li>Vous savez que vos charges vont augmenter : augmentation de loyer, études d’un enfant, naissance d’un enfant…</li>
+                    </ul>
+                    <h4> Vous rencontrez des difficultés financières, votre situation se détériore</h4>
+                    <ul>
+                        <li>Vous n'arrivez plus à rembourser vos dettes de charges et/ou vos remboursements de crédit…</li>
+                        <li>Vous êtes rentré dans une « spirale » en prenant un crédit pour en rembourser un autre…</li>
+                        <li>Votre banque a commencé à rejeter des prélèvements ou les impayés commencent à s’accumuler…</li>
+                    </ul>
+                    <h4> Vous n'êtes plus en mesure de régler l'ensemble de vos charges et de vos dettes, votre situation n'est plus gérable</h4>
+                    <ul>
+                        <li>Vous êtes menacé d’expulsion…</li>
+                        <li>Vous n’arrivez plus à faire face à vos charges courantes…</li>
+                        <li>Des commissaires de justice vous harcèlent…</li>
+                    </ul>
+                    <h4> Vous avez besoin d'un microcrédit social</h4>
+                    <ul>
+                        <li>Votre banque refuse votre demande…</li>
+                        <li>Vous êtes fichés à la Banque de France…</li>
+                        <li>Vous ne travaillez pas ou avez de petits revenus…</li>
+                    </ul>
                 </div>
-            </div>
-        </article>
-    </section>
-    <section class="solutions">
-        <h1 >Nos solutions concrètes pour vous aider</h1>
-        <div class="lessolutions">
-            {% for typedemande in typedemandes %}
-                 {% if typedemande.id>1 %}
-                    <div class='activite'>
-                        <div>
-                            <img class="tailleimg" src="{{typedemande.imgPetit}}" alt="{{typedemande.libelleExterne}}"/>
-                        </div>
-                        <a href="{{ typedemande.chemin }}">{{ typedemande.libelleExterne }}</a>
+                <div class="textArriere2">
+                    <h1>Crésus Gironde peut vous aider !</h1>
+
+                    <p>Des bénévoles vous accueillent, vous écoutent, vous informent et peuvent vous accompagner.
+                        Avec vous, ils recherchent les solutions les plus adaptées à vos difficultés financières, sociales et juridiques</p>
+                    <div class="bouton">
+                        <a href="{{ path("noustrouver") }}"> Nous contacter</a>
                     </div>
-            {% endif %}
-            {% endfor %}
-        </div>
-    </section>
-</div>
+                </div>
+            </article>
+        </section>
+        <section class="solutions">
+            <h1 >Nos solutions concrètes pour vous aider</h1>
+            <div class="lessolutions">
+                {% for typedemande in typedemandes %}
+                    {% if typedemande.id>1 %}
+                        <div class='activite'>
+                            <div>
+                                <img class="tailleimg" src="{{typedemande.imgPetit}}" alt="{{typedemande.libelleExterne}}"/>
+                            </div>
+                            <a href="{{typedemande.chemin}}"> {{typedemande.libelleExterne}} </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+    </div>
 
 {% endblock %}

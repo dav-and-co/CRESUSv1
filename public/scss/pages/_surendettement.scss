@@ -1,5 +1,4 @@
 .surendettement {
-  $textNoirColor: #333;
   max-width: 90%;
   margin: 40px auto;
   padding: 20px;
@@ -103,7 +102,7 @@
 
   .carousel-control {
     background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
+    color: $blanc;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
@@ -136,7 +135,7 @@
   .dot {
     height: 12px;
     width: 12px;
-    background-color: #bbb;
+    background-color: $fondDot;
     border-radius: 50%;
     display: inline-block;
     cursor: pointer;
@@ -144,7 +143,7 @@
   }
 
   .dot.active {
-    background-color: #717171;
+    background-color: $fondDotActive;
   }
 
   @media screen and (max-width: 768px) {

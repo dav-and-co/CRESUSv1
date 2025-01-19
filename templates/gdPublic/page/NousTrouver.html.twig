@@ -6,118 +6,118 @@
 
 {% block main %}
 
-<h1 class="h1contact"> Demande de contact ou de rendez-vous </h1>
-<section class="contact">
-    <div class="container divcontact">
-        <h2>Sélectionnez un site</h2>
-        <!-- envoi du choix du site via un get - id du site -->
-        <form method="get" action="{{ path('noustrouver') }}">
-            <label for="site">Choisissez un site :</label>
-            <!-- select : menu déroulant -->
-            <select name="site" id="site">
-                <option value="">--Sélectionnez un site--</option>
-                # affichage nom des sites #
-                {% for site in sites %}
-                <option value="{{ site.id }}" {% if selectedSite and site.id == selectedSite.id %}selected{% endif %}>
-                    {{ site.nomSite }}
-                </option>
-                {% endfor %}
-            </select>
-            <!-- bouton de soumission -->
-            <button type="submit">Continuer avec ce site</button>
-        </form>
+    <h1 class="h1contact"> Demande de contact ou de rendez-vous </h1>
+    <section class="contact">
+        <div class="container divcontact">
+            <h2>Sélectionnez un site</h2>
+            <!-- envoi du choix du site via un get - id du site -->
+            <form method="get" action="{{ path('noustrouver') }}">
+                <label for="site">Choisissez un site :</label>
+                <!-- select : menu déroulant -->
+                <select name="site" id="site">
+                    <option value="">--Sélectionnez un site--</option>
+                    # affichage nom des sites #
+                    {% for site in sites %}
+                        <option value="{{ site.id }}" {% if selectedSite and site.id == selectedSite.id %}selected{% endif %}>
+                            {{ site.nomSite }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <!-- bouton de soumission -->
+                <button type="submit">Continuer avec ce site</button>
+            </form>
 
-        <!-- Détails du site sélectionné -->
-        {% if selectedSite is not null %}
-            <p><strong>Immeuble :</strong> {{ selectedSite.intituleSite }}</p>
-            <p><strong>Adresse :</strong> {{ selectedSite.adresse1Site }}</p>
-            <p><strong>Code Postal :</strong> {{ selectedSite.cpSite }}</p>
-            <p><strong>Ville :</strong> {{ selectedSite.villeSite }}</p>
-            <br>
-            <p><strong>Téléphone :</strong> <a href="{{ selectedSite.reftel }}">{{ selectedSite.telSite }}</a></p>
-            <p><strong>Mail :</strong> <a href="mailto:{{ selectedSite.mailSite }}">{{ selectedSite.mailSite }}</a></p>
-            <h4>Permanences le </h4>
-            <ul >
-                {% for permanence in selectedSite.permanences %}
-                    <li>
-                        {{ permanence.jour }}<br>
-                    </li>
-                {% else %}
-                    <li>Aucune permanence disponible pour ce site.</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </div>
-    <div class="map-container divcontact">
-        {% if selectedSite  is not null %}
-            {{ selectedSite.carteSite|raw}}
-        {% else %}
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d256598.9561077922!2d-0.6102622952859151!3d44.718698894017564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1723286994852!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        {% endif %}
-    </div>
-</section>
-
-{% if selectedSite %}
-    <section class="contact container">
-    <!-- Formulaire de saisie (affiché uniquement si un site est sélectionné) -->
-        <div class="form-container">
-            <h2>Formulaire à compléter afin d'être recontacté</h2>
-
-            {{ form_start(form) }}
-            <div class="form-container">
-                <div class="form-column">
-                    <div class="form-group">
-                        {{ form_label(form.nom_demandeur) }}
-                        {{ form_widget(form.nom_demandeur) }}
-                        {{ form_errors(form.nom_demandeur) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.prenom_demandeur) }}
-                        {{ form_widget(form.prenom_demandeur) }}
-                        {{ form_errors(form.prenom_demandeur) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.telephone_demandeur) }}
-                        {{ form_widget(form.telephone_demandeur) }}
-                        {{ form_errors(form.telephone_demandeur) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.mail_demandeur) }}
-                        {{ form_widget(form.mail_demandeur) }}
-                        {{ form_errors(form.mail_demandeur) }}
-                    </div>
-                </div>
-                <div class="form-column">
-                    <div class="form-group">
-                        {{ form_label(form.besoin_demandeur) }}
-                        <div>
-                            {{ form_widget(form.besoin_demandeur) }}
-                            {{ form_errors(form.besoin_demandeur) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_label(form.description_besoin) }}
-                        {{ form_widget(form.description_besoin) }}
-                        {{ form_errors(form.description_besoin) }}
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                {{ form_row(form.isGdpr) }}
-                {{ form_errors(form.isGdpr) }}
-            </div>
-            <div class="form-group">
-                {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-primary'} }) }}
-            </div>
-            <div>
-                <p class="petitp">Politique de confidentialité : Les informations personnelles recueillies à partir de ce formulaire sont réservées au strict usage de Crésus Gironde qui s’engage, par des moyens techniques et organisationnels, à les protéger et à les sécuriser. Elles ne peuvent pas être communiquées à des tiers sans votre autorisation expresse. Elles font l’objet d’un traitement informatique afin de permettre à Crésus Gironde de prendre contact avec vous dans le cadre de votre demande.</p>
-
-                <p class="petitp"> Conformément à la Loi « Informatique et Libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier ou effacer en nous adressant un mail à l'adresse : cresusgironde@laposte.fr</p>
-            </div>
-            {{ form_end(form) }}
+            <!-- Détails du site sélectionné -->
+            {% if selectedSite is not null %}
+                <p><strong>Immeuble :</strong> {{ selectedSite.intituleSite }}</p>
+                <p><strong>Adresse :</strong> {{ selectedSite.adresse1Site }}</p>
+                <p><strong>Code Postal :</strong> {{ selectedSite.cpSite }}</p>
+                <p><strong>Ville :</strong> {{ selectedSite.villeSite }}</p>
+                <br>
+                <p><strong>Téléphone :</strong> <a href="{{ selectedSite.reftel }}">{{ selectedSite.telSite }}</a></p>
+                <p><strong>Mail :</strong> <a href="mailto:{{ selectedSite.mailSite }}">{{ selectedSite.mailSite }}</a></p>
+                <h4>Permanences le </h4>
+                <ul >
+                    {% for permanence in selectedSite.permanences %}
+                        <li>
+                            {{ permanence.jour }}<br>
+                        </li>
+                    {% else %}
+                        <li>Aucune permanence disponible pour ce site.</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div class="map-container divcontact">
+            {% if selectedSite  is not null %}
+                {{ selectedSite.carteSite|raw}}
+            {% else %}
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d256598.9561077922!2d-0.6102622952859151!3d44.718698894017564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1723286994852!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            {% endif %}
         </div>
     </section>
-{% endif %}
+
+    {% if selectedSite %}
+        <section class="contact container">
+            <!-- Formulaire de saisie (affiché uniquement si un site est sélectionné) -->
+            <div class="form-container">
+                <h2>Formulaire à compléter afin d'être recontacté</h2>
+
+                {{ form_start(form) }}
+                <div class="form-container">
+                    <div class="form-column">
+                        <div class="form-group">
+                            {{ form_label(form.nom_demandeur) }}
+                            {{ form_widget(form.nom_demandeur) }}
+                            {{ form_errors(form.nom_demandeur) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.prenom_demandeur) }}
+                            {{ form_widget(form.prenom_demandeur) }}
+                            {{ form_errors(form.prenom_demandeur) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.telephone_demandeur) }}
+                            {{ form_widget(form.telephone_demandeur) }}
+                            {{ form_errors(form.telephone_demandeur) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.mail_demandeur) }}
+                            {{ form_widget(form.mail_demandeur) }}
+                            {{ form_errors(form.mail_demandeur) }}
+                        </div>
+                    </div>
+                    <div class="form-column">
+                        <div class="form-group">
+                            {{ form_label(form.besoin_demandeur) }}
+                            <div>
+                                {{ form_widget(form.besoin_demandeur) }}
+                                {{ form_errors(form.besoin_demandeur) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_label(form.description_besoin) }}
+                            {{ form_widget(form.description_besoin) }}
+                            {{ form_errors(form.description_besoin) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.isGdpr) }}
+                    {{ form_errors(form.isGdpr) }}
+                </div>
+                <div class="form-group">
+                    {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-primary'} }) }}
+                </div>
+                <div>
+                    <p class="petitp">Politique de confidentialité : Les informations personnelles recueillies à partir de ce formulaire sont réservées au strict usage de Crésus Gironde qui s’engage, par des moyens techniques et organisationnels, à les protéger et à les sécuriser. Elles ne peuvent pas être communiquées à des tiers sans votre autorisation expresse. Elles font l’objet d’un traitement informatique afin de permettre à Crésus Gironde de prendre contact avec vous dans le cadre de votre demande.</p>
+
+                    <p class="petitp"> Conformément à la Loi « Informatique et Libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier ou effacer en nous adressant un mail à l'adresse : cresusgironde@laposte.fr</p>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </section>
+    {% endif %}
 
 {% endblock %}

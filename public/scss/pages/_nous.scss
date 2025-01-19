@@ -2,7 +2,7 @@
     background-color: $textBleuColor;
     color: $textJauneColor;
     padding: 20px;
-    font-family: Arial, sans-serif;
+    font-family: 'raleway', sans-serif;
     line-height: 1.6;
 
     h3 {
@@ -13,7 +13,7 @@
     }
 
     h4{
-      color: #ffffff;
+      color: $blanc;
       margin: 15px;
       text-align: left;
       font-weight: bold;
@@ -31,13 +31,13 @@
     }
 
     p {
-      color: #ffffff;
+      color: $blanc;
       padding: 10px 0;
       text-align: justify;
     }
 
     h4, li {
-      color: #ffffff;
+      color: $blanc;
       padding: 10px 0;
     }
 

@@ -4,7 +4,7 @@
   box-sizing: border-box;
   text-decoration: none;
   list-style-type:none;
-  font-family: 'arial', sans-serif;
+  font-family: 'raleway', sans-serif;
 }
 
 .bouton{
@@ -32,8 +32,8 @@
 }
 .success-message {
   width: 100%;
-  color: white;
-  background-color: green;
+  color: $blanc;
+  background-color: $vert;
   padding: 20px;
   font-size: 20px;
   text-align: center;
@@ -41,8 +41,8 @@
 
 .error-message {
   width: 100%;
-  color: white;
-  background-color: crimson;
+  color: $blanc;
+  background-color: $rouge;
   padding: 20px;
   font-size: 20px;
   text-align: center;
@@ -55,7 +55,7 @@ img {
 
 .msgerreur{
   text-align: center;
-  color: crimson;
+  color: $rouge;
   font-size: 40px;
 }
 

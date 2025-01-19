@@ -65,7 +65,7 @@ footer{
   margin-top: 50px;
   line-height: 1.5;
   .left{
-    color: white;
+    color: $blanc;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -77,14 +77,14 @@ footer{
   }
   .t20{
     width: 20%;
-    color: white;
+    color: $blanc;
     text-align: center;
   }
   .t10{
     width: 10%;
   }
   a{
-    color: white;
+    color: $blanc;
     padding:5px;
   }
   p{

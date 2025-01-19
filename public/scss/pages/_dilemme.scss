@@ -5,7 +5,7 @@
   color: $textNoirColor;
 
   h2, h1 {
-    color: #E8B436;
+    color: $textJauneColor;
     font-size: 2rem;
     margin: 40px 0;
     text-align: center;
@@ -41,7 +41,7 @@
   }
 
   .feature {
-    background-color: white;
+    background-color: $blanc;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -63,7 +63,7 @@
   }
 
   .feature p {
-    color: #666;
+    color: $textGrisColor;
   }
 
   .image-container {
@@ -130,7 +130,7 @@
     text-align: center;
   }
   .troisieme-article p {
-    color: white;
+    color: $blanc;
     font-size: 15px;
     margin: 5px 0;
     text-align: left;

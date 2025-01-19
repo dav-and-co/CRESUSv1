@@ -32,6 +32,7 @@ class AccueilController extends AbstractController
          // récupère tous les articles en BDD
         $typedemande = $TypeDemandeRepository->findAll();
 
+
         // Rend la vue Twig en y passant données récupérées
         return $this->render('gdPublic/page/Accueil.html.twig', [
             'typedemandes' => $typedemande

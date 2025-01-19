@@ -12,7 +12,7 @@
       position: absolute;
       right: 0;
       width: 100%;
-      background-color: #5E6E99;
+      background-color: $fondAccueilColor;
       clip-path: polygon(55% 0, 100% 0, 100% 100%, 12% 100%);
       flex-direction: column;
       justify-content: space-evenly;
@@ -34,12 +34,12 @@
 
       h4 {
         font-size: 1.2rem;
-        color: #E8B436;
+        color: $textJauneColor;
         margin: 10px 0;
       }
 
       li {
-        color: white;
+        color: $blanc;
         list-style-type: circle;
         font-size: 14px;
         line-height : 1.5;
@@ -52,13 +52,13 @@
 
       h1 {
         font-size: 1.6rem;
-        color: #E8B436;
+        color: $textJauneColor;
         margin: 20px 0;
         text-align: center;
       }
 
       p {
-        color: white;
+        color: $blanc;
         font-size: 16px;
         font-weight: bold;
         line-height: 1.5;
@@ -67,8 +67,8 @@
     }
 
     .bouton a {
-      background-color: white !important;
-      box-shadow: 5px 3px 10px -1px white;
+      background-color: $blanc !important;
+      box-shadow: 5px 3px 10px -1px $blanc;
       font-size: 1.1rem;
       padding: 20px 15px;
     }
@@ -94,7 +94,7 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
-      background-color: #E2EEF2;
+      background-color: $fondNavColor;
       padding: 15px 15px;
       box-shadow: 5px 7px 18px -1px rgba(94, 110, 153, .4);
       border-radius: 500px;
@@ -104,7 +104,7 @@
       font-weight: bold;
       text-align: center;
       font-size: 1.1rem;
-      color: #E8B436;
+      color: $textJauneColor;
     }
 
     .tailleimg {

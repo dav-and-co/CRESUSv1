@@ -34,8 +34,8 @@
     left: 100%;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #0d6efd;
-    color: white;
+    background-color: $fondBenefBouton;
+    color: $blanc;
     padding: 2px 8px;
     border-radius: 5px;
     white-space: nowrap;
@@ -50,7 +50,7 @@
     top: 50%;
     transform: translateY(-50%);
     background-color: $footerColor;
-    color: white;
+    color: $blanc;
     padding: 2px 8px;
     border-radius: 5px;
     white-space: nowrap;

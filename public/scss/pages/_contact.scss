@@ -4,7 +4,7 @@
   margin: 20px 0;
   background-color: $fondNavColor;
   padding: 20px;
-  color: #333;
+  color: $textNoirColor;
 
   .divcontact {
     width: 50%;
@@ -17,19 +17,19 @@
   .container {
     margin: 0 auto;
     padding: 20px;
-    background-color: white;
+    background-color: $blanc;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   h3 {
-    color: #333;
+    color: $textNoirColor;
     margin-bottom: 20px;
   }
 
   h2 {
     width: 100%;
-    color: #333;
+    color: $textNoirColor;
     margin-bottom: 20px;
     text-align: center;
   }
@@ -75,7 +75,7 @@
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #333;
+    color: $textNoirColor;
   }
 
   input[type="text"],
@@ -83,16 +83,16 @@
   textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #E2EEF2;
+    border: 1px solid $fondNavColor;
     border-radius: 4px;
-    background-color: #F9F9F9;
+    background-color: $fondContactInput;
     transition: border-color 0.3s ease;
   }
 
   input[type="text"]:focus,
   input[type="email"]:focus,
   textarea:focus {
-    border-color: #bcd9e1;
+    border-color: $borderContactInputFocus;
   }
 
   select {
@@ -107,22 +107,22 @@
     width : 100%;
     padding: 10px 20px;
     margin-bottom: 20px;
-    background-color: #083847;
+    background-color: $fondContactBouton;
     border: none;
     border-radius: 4px;
-    color: white;
+    color: $blanc;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
 
   button[type="submit"]:hover {
-    background-color: #155870;
+    background-color: $fondContactBoutonHover;
   }
 
   .site-details {
     margin-top: 20px;
     padding: 15px;
-    background-color: #E2EEF2;
+    background-color: $fondNavColor;
     border-radius: 4px;
   }
 
@@ -153,6 +153,7 @@
     height: auto;
   }
 }
+
 
 
 

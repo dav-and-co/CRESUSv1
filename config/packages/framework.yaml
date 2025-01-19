@@ -3,11 +3,15 @@ framework:
     secret: '%env(APP_SECRET)%'
     #csrf_protection: true
 
-    # Note that the session will be started ONLY if you read or write from it.
-    session: true
+   # Note that the session will be started ONLY if you read or write from it.
+#    session: true
 
-    #esi: true
-    #fragments: true
+   #esi: true
+   #fragments: true
+
+    # Configuration des proxies de confiance
+ #   trusted_proxies: ['127.0.0.1', '::1', '%env(TRUSTED_PROXIES)%']
+ #   trusted_headers: ['X_FORWARDED_FOR', 'X_FORWARDED_HOST', 'X_FORWARDED_PORT', 'X_FORWARDED_PROTO']
 
 when@test:
     framework:

@@ -40,15 +40,15 @@
     color:$textBleuColor;
     margin-top: 20px;
     padding: 10px;
-    background-color: #adbdf3;
+    background-color: $fondToggle;
     border-left: 5px solid $textBleuColor;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
   }
 
   .toggle:hover {
-    background-color: #e0e7ee;
-    color: #29487d;
+    background-color: $fondToggleHover;
+    color: $textToggleHover;
   }
 
   .content {
