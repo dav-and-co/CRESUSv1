@@ -162,6 +162,7 @@ class AccueilController extends AbstractController
     {
         return $this->render('gdPublic/page/Nous.html.twig' );
     }
+
 //-----------------------------------------------------------------------------------------------------------
     // téléchargement du pdf
     #[Route('/downloadPdf', name: 'downloadPdf')]
@@ -187,10 +188,32 @@ class AccueilController extends AbstractController
         );
     }
 
+//-----------------------------------------------------------------------------------------------------------
+// téléchargement de la plaquette
+    #[Route('/downloadPlaquette', name: 'downloadPlaquette')]
+    public function downloadPlaquette(): Response
+    {
+        // Chemin du fichier PDF
+        $filePath = './img/depliant.pdf';
+        $fileName = 'Plaquette CRESUS Gironde.pdf';
 
+        // Vérifiez si le fichier existe
+        if (!file_exists($filePath)) {
+            throw $this->createNotFoundException('Le fichier demandé est introuvable.');
+        }
+
+        // Créez une réponse pour le téléchargement
+        return new Response(
+            file_get_contents($filePath),
+            200,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+            ]
+        );
+    }
 
 //-----------------------------------------------------------------------------------------------------------
-
 
 
 

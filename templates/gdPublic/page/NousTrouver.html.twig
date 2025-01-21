@@ -48,6 +48,7 @@
                 </ul>
             {% endif %}
         </div>
+
         <div class="map-container divcontact">
             {% if selectedSite  is not null %}
                 {{ selectedSite.carteSite|raw}}
@@ -56,6 +57,13 @@
             {% endif %}
         </div>
     </section>
+
+
+    <div>
+        <div class="bouton">
+            <a href="{{ path("downloadPlaquette") }}"> Télécharger la plaquette de CRESUS Gironde</a>
+        </div>
+    </div>
 
     {% if selectedSite %}
         <section class="contact container">
